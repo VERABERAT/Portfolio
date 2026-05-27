@@ -1,0 +1,1495 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Berat Erdoğan — Graphic Designer & Art Director</title>
+  <meta name="description" content="Berat Erdoğan — Grafik Tasarımcı ve Sanat Yönetmeni. Marka kimliği, ambalaj, kampanya, UI/UX, editöryal tasarım. Ankara, TR." />
+  <meta name="author" content="Berat Erdoğan" />
+  <meta name="theme-color" content="#F2F1EC" />
+  <meta name="robots" content="index, follow" />
+  <meta name="color-scheme" content="light dark" />
+
+  <script>
+    (function() {
+      try {
+        const theme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (theme === 'dark' || (!theme && systemPrefersDark)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+      try {
+        const lang = localStorage.getItem('lang');
+        if (lang) {
+          document.documentElement.setAttribute('lang', lang);
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Berat Erdoğan — Graphic Designer & Art Director" />
+  <meta property="og:description" content="Marka kimliği, ambalaj, kampanya, UI/UX, editöryal tasarım. 40+ proje, 8+ yıl deneyim." />
+  <meta property="og:image" content="/og.svg" />
+  <meta property="og:locale" content="tr_TR" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Berat Erdoğan — Graphic Designer & Art Director" />
+  <meta name="twitter:description" content="Portfolio of Berat Erdoğan — brand identity, packaging, UI/UX, editorial." />
+  <meta name="twitter:image" content="/og.svg" />
+
+  <!-- Favicon (inline SVG, no external request) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Ctext x='50%25' y='54%25' font-family='Archivo Black, Arial Black, sans-serif' font-size='44' font-weight='900' fill='%23FFE600' text-anchor='middle' dominant-baseline='middle'%3EB%3C/text%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="canonical" href="https://beraterdogan.vercel.app/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:    'var(--ink)',
+            paper:  'var(--paper)',
+            paper2: 'var(--paper2)',
+            yellow1:'var(--yellow-1)',
+            red1:   'var(--red-1)',
+            blue1:  'var(--blue-1)',
+          },
+          fontFamily: {
+            black: ['Archivo Black','system-ui','sans-serif'],
+            mono:  ['Space Mono','ui-monospace','monospace'],
+            sans:  ['Space Grotesk','ui-sans-serif','system-ui'],
+          },
+          borderWidth: {
+            '3':'3px','5':'5px','6':'6px','7':'7px',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --paper: #F2F1EC;
+      --paper2: #E8E6DD;
+      --ink: #000000;
+      --yellow-1: #FFE600;
+      --red-1: #FF2D00;
+      --blue-1: #1E3CFF;
+      color-scheme: light;
+    }
+    
+    html[data-theme="dark"] {
+      --paper: #0B0B0E;
+      --paper2: #18181C;
+      --ink: #FFFFFF;
+      --yellow-1: #FFE600;
+      --red-1: #FF2D00;
+      --blue-1: #1E3CFF;
+      color-scheme: dark;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --paper: #0B0B0E;
+        --paper2: #18181C;
+        --ink: #FFFFFF;
+        --yellow-1: #FFE600;
+        --red-1: #FF2D00;
+        --blue-1: #1E3CFF;
+        color-scheme: dark;
+      }
+    }
+
+    html, body { background: var(--paper); color: var(--ink); transition: background-color 0.15s ease, color 0.15s ease; }
+    body { font-family:'Space Grotesk', sans-serif; }
+    *, *::before, *::after { border-radius: 0 !important; }
+    ::selection { background: var(--ink); color: var(--yellow-1); }
+
+    .display { font-family:'Archivo Black', sans-serif; letter-spacing:-0.04em; line-height:0.86; text-transform:uppercase; }
+    .mono { font-family:'Space Mono', monospace; }
+
+    .brut { border:3px solid var(--ink); box-shadow: 8px 8px 0 0 var(--ink); }
+    .brut-sm { border:3px solid var(--ink); box-shadow: 4px 4px 0 0 var(--ink); }
+    .brut-hover { transition: transform 80ms steps(2), box-shadow 80ms steps(2); }
+    .brut-hover:hover { transform: translate(4px,4px); box-shadow: 0 0 0 0 var(--ink); }
+
+    .grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* Dark mode grid line adjustments */
+    html[data-theme="dark"] .grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+    }
+
+    .marquee-track { display:flex; gap:0; animation: m 28s linear infinite; }
+    @keyframes m { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+
+    .num { font-family:'Archivo Black'; font-feature-settings:"tnum"; }
+
+    .row-wrap { border-top: 3px solid var(--ink); }
+    .row-wrap:last-child { border-bottom: 3px solid var(--ink); }
+    .row { transition: background-color 80ms steps(2); }
+    .row:hover { background: var(--yellow-1); color: #000000; }
+    .row.open { background: var(--ink); color: var(--paper); }
+    .row.open .row-cat, .row.open .mono-time { color: var(--yellow-1); }
+    .row.open .row-arrow { transform: rotate(90deg); }
+    .row-arrow { display:inline-block; transition: transform 120ms steps(2); }
+
+    .preview { max-height:0; overflow:hidden; transition: max-height 350ms cubic-bezier(.2,.8,.2,1); border-top:0 solid var(--ink); }
+    .preview.open { max-height: 1600px; border-top:3px solid var(--ink); }
+    .preview-inner { padding: 1.25rem 1.25rem 2rem; }
+    @media (min-width: 768px) { .preview-inner { padding: 2rem 1.5rem 2.5rem; } }
+
+    /* AI badge / glow */
+    .ai-badge {
+      background: var(--ink); color: var(--yellow-1);
+      padding: 2px 8px; font-family:'Space Mono', monospace;
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      border:2px solid var(--ink); box-shadow: 3px 3px 0 0 var(--yellow-1);
+      animation: aiPulse 2.4s steps(8) infinite;
+    }
+    @keyframes aiPulse {
+      0%,100% { box-shadow: 3px 3px 0 0 var(--yellow-1); }
+      50%     { box-shadow: 3px 3px 0 0 var(--red-1); }
+    }
+    .row[data-type="ai"] { background-image: linear-gradient(90deg, transparent 0%, rgba(255,230,0,.15) 100%); }
+    .row[data-type="ai"]:hover { background: var(--yellow-1); color: #000000; }
+
+    /* Social mockup phone */
+    .phone { width:100%; aspect-ratio: 9/16; border:3px solid var(--ink); background: var(--paper); box-shadow: 6px 6px 0 0 var(--ink); overflow:hidden; }
+    .phone-bar { display:flex; justify-content:space-between; align-items:center; padding: 6px 10px; border-bottom:2px solid var(--ink); font-family:'Space Mono'; font-size:9px; text-transform:uppercase; }
+
+    /* Filter chips */
+    .chip-filter { border:3px solid var(--ink); padding: 6px 12px; font-family:'Space Mono'; font-size: 11px; text-transform:uppercase; letter-spacing:.12em; cursor:pointer; transition: transform 80ms steps(2), box-shadow 80ms steps(2); }
+    .chip-filter:hover { transform: translate(2px,2px); }
+    .chip-filter.active { background: var(--ink); color: var(--yellow-1); box-shadow: 4px 4px 0 0 var(--yellow-1); }
+
+    .blink { animation: blink 1s steps(2) infinite; }
+    @keyframes blink { 50% { opacity:0 } }
+
+    .star-spin { animation: spin 14s linear infinite; transform-origin: 50% 50%; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- TOP BAR -->
+  <div class="bg-ink text-paper border-b-3 border-ink select-none">
+    <div class="mono text-[11px] tracking-widest uppercase flex items-center justify-between px-4 md:px-6 py-2">
+      <div class="flex items-center gap-3">
+        <span class="inline-block w-2 h-2 bg-yellow1 blink"></span>
+        <span>● LIVE / PORTFOLIO V.04 — 2026</span>
+      </div>
+      <div class="hidden md:flex items-center gap-6">
+        <span data-tr="ANKARA · 41.0°N / 28.9°E" data-en="ANKARA · 41.0°N / 28.9°E">ANKARA · 41.0°N / 28.9°E</span>
+        <span data-tr="KUR. 2018" data-en="EST. 2018">KUR. 2018</span>
+        <span id="clock">--:--:--</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-1 font-bold">
+          <button id="lang-tr" class="hover:text-yellow1 cursor-pointer transition-colors underline">TR</button>
+          <span>/</span>
+          <button id="lang-en" class="hover:text-yellow1 cursor-pointer transition-colors">EN</button>
+        </div>
+        <span>|</span>
+        <button id="theme-toggle" class="hover:text-yellow1 cursor-pointer transition-colors font-bold">DARK MODE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 bg-paper border-b-3 border-ink select-none">
+    <div class="flex items-stretch justify-between">
+      <a href="#top" class="flex items-center gap-3 px-4 md:px-6 py-4 border-r-3 border-ink">
+        <span class="grid place-items-center w-10 h-10 bg-ink text-paper display text-xl">B</span>
+        <div class="leading-tight">
+          <div class="display text-base md:text-lg">BERAT&nbsp;ERDOĞAN</div>
+          <div class="mono text-[10px] uppercase tracking-widest" data-tr="Grafik Tasarımcı / Sanat Yönetmeni" data-en="Graphic Designer / Art Director">Grafik Tasarımcı / Sanat Yönetmeni</div>
+        </div>
+      </a>
+      <nav class="hidden md:flex">
+        <a href="#work"    class="mono text-xs uppercase tracking-widest px-5 flex items-center border-r-3 border-ink hover:bg-yellow1 cursor-pointer" data-tr="[01] İşler" data-en="[01] Work">[01] İşler</a>
+        <a href="#index"   class="mono text-xs uppercase tracking-widest px-5 flex items-center border-r-3 border-ink hover:bg-yellow1 cursor-pointer" data-tr="[02] Arşiv" data-en="[02] Index">[02] Arşiv</a>
+        <a href="#about"   class="mono text-xs uppercase tracking-widest px-5 flex items-center border-r-3 border-ink hover:bg-yellow1 cursor-pointer" data-tr="[03] Hakkında" data-en="[03] About">[03] Hakkında</a>
+        <a href="#contact" class="mono text-xs uppercase tracking-widest px-5 flex items-center hover:bg-yellow1 cursor-pointer" data-tr="[04] İletişim" data-en="[04] Contact">[04] İletişim</a>
+      </nav>
+      <!-- Mobile Menu Toggle -->
+      <button id="mobile-menu-toggle" class="flex md:hidden mono text-xs uppercase tracking-widest px-5 items-center border-r-3 border-ink hover:bg-yellow1 cursor-pointer">
+        [MENU]
+      </button>
+      <a href="#contact" class="bg-ink text-paper mono text-xs uppercase tracking-widest px-5 md:px-8 flex items-center hover:bg-yellow1 hover:text-ink cursor-pointer" data-tr="→ BANA ULAŞIN" data-en="→ HIRE ME">→ BANA ULAŞIN</a>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV OVERLAY -->
+  <div id="mobile-nav" class="hidden fixed top-[73px] left-0 right-0 bottom-0 z-40 bg-paper border-t-3 border-ink flex flex-col items-stretch select-none">
+    <a href="#work"    class="mobile-nav-link display text-3xl border-b-3 border-ink p-6 hover:bg-yellow1" data-tr="[01] İŞLER" data-en="[01] WORK">[01] İŞLER</a>
+    <a href="#index"   class="mobile-nav-link display text-3xl border-b-3 border-ink p-6 hover:bg-yellow1" data-tr="[02] ARŞİV" data-en="[02] INDEX">[02] ARŞİV</a>
+    <a href="#about"   class="mobile-nav-link display text-3xl border-b-3 border-ink p-6 hover:bg-yellow1" data-tr="[03] HAKKINDA" data-en="[03] ABOUT">[03] HAKKINDA</a>
+    <a href="#contact" class="mobile-nav-link display text-3xl border-b-3 border-ink p-6 hover:bg-yellow1" data-tr="[04] İLETİŞİM" data-en="[04] CONTACT">[04] İLETİŞİM</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="top" class="relative grid-bg border-b-3 border-ink">
+    <div class="grid grid-cols-12">
+      <!-- left column: meta -->
+      <aside class="col-span-12 md:col-span-3 border-r-3 border-ink p-5 md:p-7 bg-paper2">
+        <div class="mono text-[11px] uppercase tracking-widest mb-6" data-tr="// Dosya 001 — İndeks" data-en="// File 001 — Index">// Dosya 001 — İndeks</div>
+
+        <div class="space-y-5">
+          <div>
+            <div class="mono text-[10px] uppercase tracking-widest text-ink/60" data-tr="İsim" data-en="Name">İsim</div>
+            <div class="display text-xl">Berat E.</div>
+          </div>
+          <div>
+            <div class="mono text-[10px] uppercase tracking-widest text-ink/60" data-tr="Rol" data-en="Role">Rol</div>
+            <div class="display text-xl" data-tr="Sanat Yön. /<br/>Grafik Tas." data-en="Art Dir. /<br/>Graphic Des.">Sanat Yön. /<br/>Grafik Tas.</div>
+          </div>
+          <div>
+            <div class="mono text-[10px] uppercase tracking-widest text-ink/60" data-tr="Durum" data-en="Status">Durum</div>
+            <div class="inline-flex items-center gap-2 bg-ink text-yellow1 px-2 py-1 mono text-[11px] uppercase">
+              <span class="w-2 h-2 bg-yellow1 blink"></span> <span data-tr="Müsait · Q3 2026" data-en="Available · Q3 2026">Müsait · Q3 2026</span>
+            </div>
+          </div>
+          <div>
+            <div class="mono text-[10px] uppercase tracking-widest text-ink/60" data-tr="Seçilmiş Müşteriler" data-en="Selected Clients">Seçilmiş Müşteriler</div>
+            <ul class="display text-sm space-y-1 mt-1 font-bold">
+              <li>MIU MIU</li><li>ODEABANK</li><li>TETRA PAK</li><li>DERBY</li><li>AYTAÇ</li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+      <!-- right column: big type -->
+      <div class="col-span-12 md:col-span-9 p-5 md:p-10 relative">
+        <div class="flex items-center justify-between mono text-[11px] uppercase tracking-widest mb-8">
+          <span data-tr="★ Portfolyo 2018 — 2026" data-en="★ Portfolio 2018 — 2026">★ Portfolyo 2018 — 2026</span>
+          <span data-tr="Edisyon 04 / 40 Proje" data-en="Edition 04 / 40 Projects">Edisyon 04 / 40 Proje</span>
+        </div>
+
+        <h1 class="display text-[18vw] md:text-[12vw] leading-[0.82]">
+          <span data-tr="GRAFİK" data-en="GRAPHIC">GRAFİK</span><br/>
+          <span class="inline-flex items-center gap-3">
+            <span class="bg-ink text-paper px-3 -ml-1" data-tr="TASARIMCI" data-en="DESIGNER">TASARIMCI</span>
+          </span><br/>
+          <span class="text-ink" data-tr="&amp; SANAT" data-en="&amp; ART">&amp; SANAT</span><br/>
+          <span class="inline-flex items-center gap-4">
+            <span data-tr="YÖNETMENİ" data-en="DIRECTOR">YÖNETMENİ</span>
+            <span class="display text-ink">.</span>
+            <svg class="star-spin w-[10vw] h-[10vw] md:w-24 md:h-24 -ml-1" viewBox="0 0 100 100" fill="var(--yellow-1)" stroke="var(--ink)" stroke-width="3">
+              <path d="M50 2 L58 38 L96 42 L66 64 L78 98 L50 78 L22 98 L34 64 L4 42 L42 38 Z"/>
+            </svg>
+          </span>
+        </h1>
+
+        <div class="grid grid-cols-12 gap-4 md:gap-6 mt-10">
+          <div class="col-span-12 md:col-span-7">
+            <p class="text-lg md:text-2xl leading-snug max-w-[640px]" data-tr="<span class='bg-yellow1 px-1'>Markalar, ürünler ve kültürel projeler</span> için görsel kimlikler, kampanyalar ve dijital arayüzler tasarlıyorum. Tipografi, sistem ve kavramı merkeze koyan kaba bir tasarım pratiği." data-en="I design visual identities, campaigns, and digital interfaces for <span class='bg-yellow1 px-1'>brands, products, and cultural projects</span>. A raw design practice centering typography, systems, and concepts.">
+              <span class="bg-yellow1 px-1">Markalar, ürünler ve kültürel projeler</span> için görsel kimlikler, kampanyalar ve dijital arayüzler tasarlıyorum. Tipografi, sistem ve kavramı merkeze koyan kaba bir tasarım pratiği.
+            </p>
+          </div>
+          <div class="col-span-12 md:col-span-4 md:col-start-9 flex flex-col gap-3 self-end">
+            <a href="#work" class="brut brut-hover bg-yellow1 text-ink px-5 py-4 flex items-center justify-between mono text-xs uppercase tracking-widest cursor-pointer">
+              <span data-tr="► İşleri Gör" data-en="► View Work">► İşleri Gör</span><span>[01]</span>
+            </a>
+            <a href="#contact" class="brut brut-hover bg-paper text-ink px-5 py-4 flex items-center justify-between mono text-xs uppercase tracking-widest cursor-pointer">
+              <span data-tr="► İletişime Geç" data-en="► Get in Touch">► İletişime Geç</span><span>[04]</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- marquee -->
+    <div class="bg-ink text-paper border-t-3 border-ink overflow-hidden">
+      <div class="marquee-track whitespace-nowrap display text-5xl md:text-7xl py-3">
+        <span class="flex items-center gap-8 px-8">
+          <span>BRANDING</span><span class="text-yellow1">★</span>
+          <span>ART DIRECTION</span><span class="text-yellow1">★</span>
+          <span>TYPOGRAPHY</span><span class="text-yellow1">★</span>
+          <span>PACKAGING</span><span class="text-yellow1">★</span>
+          <span>UI / UX</span><span class="text-yellow1">★</span>
+          <span>EDITORIAL</span><span class="text-yellow1">★</span>
+          <span>CAMPAIGN</span><span class="text-yellow1">★</span>
+          <span>FMCG</span><span class="text-yellow1">★</span>
+        </span>
+        <span class="flex items-center gap-8 px-8" aria-hidden="true">
+          <span>BRANDING</span><span class="text-yellow1">★</span>
+          <span>ART DIRECTION</span><span class="text-yellow1">★</span>
+          <span>TYPOGRAPHY</span><span class="text-yellow1">★</span>
+          <span>PACKAGING</span><span class="text-yellow1">★</span>
+          <span>UI / UX</span><span class="text-yellow1">★</span>
+          <span>EDITORIAL</span><span class="text-yellow1">★</span>
+          <span>CAMPAIGN</span><span class="text-yellow1">★</span>
+          <span>FMCG</span><span class="text-yellow1">★</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELECTED WORK -->
+  <section id="work" class="border-b-3 border-ink">
+    <div class="px-4 md:px-6 py-6 md:py-8 border-b-3 border-ink flex items-end justify-between flex-wrap gap-4">
+      <div>
+        <div class="mono text-[11px] uppercase tracking-widest mb-2" data-tr="// Bölüm 02" data-en="// Section 02">// Bölüm 02</div>
+        <h2 class="display text-5xl md:text-8xl" data-tr="SEÇİLMİŞ<br/>İŞLER<span class='text-yellow1 bg-ink px-2 ml-2'>★</span>" data-en="SELECTED<br/>WORK<span class='text-yellow1 bg-ink px-2 ml-2'>★</span>">SEÇİLMİŞ<br/>İŞLER<span class="text-yellow1 bg-ink px-2 ml-2">★</span></h2>
+      </div>
+      <div class="mono text-xs uppercase max-w-xs" data-tr="Öne çıkan 06 proje · arşivdeki 40 projenin tamamı için kaydırın ↓" data-en="06 Projects featured · scroll for the full archive of 40 below ↓">
+        Öne çıkan 06 proje · arşivdeki 40 projenin tamamı için kaydırın ↓
+      </div>
+    </div>
+
+    <div class="grid grid-cols-12">
+      <!-- 01 VERA -->
+      <a href="#index" data-project-name="VERA" class="featured-work-card col-span-12 md:col-span-7 border-r-3 border-b-3 border-ink relative aspect-[16/10] md:aspect-[16/11] overflow-hidden cursor-pointer group bg-yellow1">
+        <div class="absolute inset-0" style="background: repeating-linear-gradient(45deg,var(--ink) 0 18px,var(--yellow-1) 18px 36px);"></div>
+        <div class="absolute inset-3 md:inset-5 bg-paper brut p-5 md:p-8 flex flex-col justify-between">
+          <div class="flex items-start justify-between mono text-[11px] uppercase tracking-widest">
+            <span data-tr="01 · MARKA KİMLİĞİ" data-en="01 · BRAND IDENTITY">01 · MARKA KİMLİĞİ</span><span>2025</span>
+          </div>
+          <div>
+            <div class="display text-[14vw] md:text-[10vw] leading-none">VERA</div>
+            <div class="mt-3 mono text-xs uppercase" data-tr="Bütüncül marka kimliği &amp; ambalaj sistemi" data-en="Comprehensive brand identity &amp; packaging system">Bütüncül marka kimliği &amp; ambalaj sistemi</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 02 FERM -->
+      <a href="#index" data-project-name="FERM" class="featured-work-card col-span-12 md:col-span-5 border-b-3 border-ink relative aspect-[16/10] md:aspect-[16/11] overflow-hidden cursor-pointer bg-ink text-paper">
+        <div class="absolute inset-3 md:inset-5 border-3 border-paper p-5 md:p-7 flex flex-col justify-between">
+          <div class="flex items-start justify-between mono text-[11px] uppercase tracking-widest">
+            <span data-tr="02 · AMBALAJ" data-en="02 · PACKAGING">02 · AMBALAJ</span><span>2025</span>
+          </div>
+          <div>
+            <div class="display text-7xl md:text-8xl leading-none text-yellow1">FERM<span class="text-paper">.</span></div>
+            <div class="mt-3 mono text-xs uppercase" data-tr="Fermente ürün serisi — sistem &amp; ambalaj" data-en="Fermented product series — system &amp; packaging">Fermente ürün serisi — sistem &amp; ambalaj</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 03 Smart Locker -->
+      <a href="#index" data-project-name="SMART LOCKER INTERFACE" class="featured-work-card col-span-12 md:col-span-4 border-r-3 border-b-3 border-ink relative aspect-[4/5] overflow-hidden cursor-pointer bg-paper">
+        <div class="absolute inset-3 md:inset-5 brut bg-paper2 p-5 md:p-6 flex flex-col justify-between">
+          <div class="flex items-start justify-between mono text-[11px] uppercase tracking-widest">
+            <span>03 · UI / UX</span><span>2024</span>
+          </div>
+          <div class="space-y-3">
+            <div class="grid grid-cols-3 gap-1">
+              <div class="aspect-square border-3 border-ink"></div>
+              <div class="aspect-square border-3 border-ink bg-yellow1"></div>
+              <div class="aspect-square border-3 border-ink"></div>
+              <div class="aspect-square border-3 border-ink bg-ink"></div>
+              <div class="aspect-square border-3 border-ink"></div>
+              <div class="aspect-square border-3 border-ink"></div>
+              <div class="aspect-square border-3 border-ink"></div>
+              <div class="aspect-square border-3 border-ink"></div>
+              <div class="aspect-square border-3 border-ink bg-yellow1"></div>
+            </div>
+            <div class="display text-3xl md:text-4xl leading-none">SMART<br/>LOCKER</div>
+            <div class="mono text-[11px] uppercase" data-tr="Arayüz konsepti" data-en="Interface concept">Arayüz konsepti</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 04 CANLANI -->
+      <a href="#index" data-project-name="CANLANI" class="featured-work-card col-span-12 md:col-span-4 border-r-3 border-b-3 border-ink relative aspect-[4/5] overflow-hidden cursor-pointer bg-red1 text-paper">
+        <div class="absolute inset-3 md:inset-5 border-3 border-paper p-5 md:p-6 flex flex-col justify-between">
+          <div class="flex items-start justify-between mono text-[11px] uppercase tracking-widest">
+            <span data-tr="04 · KAMPANYA" data-en="04 · CAMPAIGN">04 · KAMPANYA</span><span>2024</span>
+          </div>
+          <div class="display text-[20vw] md:text-[9vw] leading-[0.85]">
+            CAN<br/>LANI<span class="text-yellow1">!</span>
+          </div>
+          <div class="mono text-[11px] uppercase" data-tr="Kampanya görseli &amp; sanat yönetimi" data-en="Campaign visual &amp; art direction">Kampanya görseli &amp; sanat yönetimi</div>
+        </div>
+      </a>
+
+      <!-- 05 Decay -->
+      <a href="#index" data-project-name="DECAY CREATES LIFE" class="featured-work-card col-span-12 md:col-span-4 border-b-3 border-ink relative aspect-[4/5] overflow-hidden cursor-pointer bg-yellow1">
+        <div class="absolute inset-3 md:inset-5 brut bg-paper p-5 md:p-6 flex flex-col justify-between">
+          <div class="flex items-start justify-between mono text-[11px] uppercase tracking-widest">
+            <span>05 · EDITORIAL</span><span>2024</span>
+          </div>
+          <div>
+            <div class="display text-4xl md:text-5xl leading-none">DECAY<br/>CREATES<br/><span class="bg-ink text-paper px-1">LIFE</span></div>
+            <div class="mt-3 mono text-[11px] uppercase" data-tr="Editöryal &amp; tipografi serisi" data-en="Editorial &amp; typography series">Editöryal &amp; tipografi serisi</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 06 NutriPaw -->
+      <a href="#index" data-project-name="NUTRIPAW — ORGANIC PET FOOD" class="featured-work-card col-span-12 relative overflow-hidden cursor-pointer bg-ink text-paper">
+        <div class="grid grid-cols-12">
+          <div class="col-span-12 md:col-span-8 p-6 md:p-12 border-r-3 border-paper md:min-h-[420px] flex flex-col justify-between">
+            <div class="flex items-start justify-between mono text-[11px] uppercase tracking-widest">
+              <span>06 · FMCG BRAND IDENTITY</span><span>2024</span>
+            </div>
+            <div class="display text-[14vw] md:text-[10vw] leading-[0.86]">
+              NUTRI<br/><span class="text-yellow1">PAW</span><span class="text-paper">.</span>
+            </div>
+            <div class="mono text-xs uppercase max-w-xl mt-4" data-tr="Organik evcil hayvan maması — marka kimliği, ambalaj sistemi &amp; kampanya görselleri." data-en="Organic pet food — brand identity, packaging system &amp; campaign visuals.">
+              Organik evcil hayvan maması — marka kimliği, ambalaj sistemi &amp; kampanya görselleri.
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-4 p-6 md:p-10 flex flex-col justify-between">
+            <div class="space-y-3">
+              <div class="brut-sm bg-yellow1 text-ink px-2 py-1 mono text-[11px] uppercase inline-block">FMCG</div>
+              <div class="brut-sm bg-paper text-ink px-2 py-1 mono text-[11px] uppercase inline-block" data-tr="AMBALAJ" data-en="PACKAGING">AMBALAJ</div>
+              <div class="brut-sm bg-red1 text-paper px-2 py-1 mono text-[11px] uppercase inline-block" data-tr="KAMPANYA" data-en="CAMPAIGN">KAMPANYA</div>
+            </div>
+            <div>
+              <div class="brut-sm bg-yellow1 text-ink px-4 py-3 mono text-xs uppercase tracking-widest inline-flex items-center gap-3">
+                <span data-tr="► İNCELE" data-en="► READ CASE">► İNCELE</span> <span>→</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- INDEX / ARCHIVE -->
+  <section id="index" class="border-b-3 border-ink">
+    <div class="px-4 md:px-6 py-6 md:py-8 border-b-3 border-ink flex items-end justify-between flex-wrap gap-4 bg-yellow1">
+      <div>
+        <div class="mono text-[11px] uppercase tracking-widest mb-2" data-tr="// Bölüm 03" data-en="// Section 03">// Bölüm 03</div>
+        <h2 class="display text-5xl md:text-8xl" data-tr="İNDEKS /<br/>ARŞİV <span class='mono text-2xl md:text-4xl align-top'>[40]</span>" data-en="INDEX /<br/>ARCHIVE <span class='mono text-2xl md:text-4xl align-top'>[40]</span>">İNDEKS /<br/>ARŞİV <span class="mono text-2xl md:text-4xl align-top">[40]</span></h2>
+      </div>
+      <div class="mono text-xs uppercase max-w-sm" data-tr="Tüm projeler, kategori &amp; yıllarına göre listelenmiştir. Filtrele ↓" data-en="All projects listed by category & year. Filter ↓">
+        Tüm projeler, kategori &amp; yıllarına göre listelenmiştir. Filtrele ↓
+      </div>
+    </div>
+
+    <!-- filter -->
+    <div class="px-4 md:px-6 py-4 border-b-3 border-ink bg-paper flex flex-wrap items-center gap-2">
+      <span class="mono text-[11px] uppercase tracking-widest mr-2" data-tr="► FİLTRELE:" data-en="► FILTER:">► FİLTRELE:</span>
+      <button class="chip-filter active" data-filter="all" data-tr="TÜMÜ <span class='opacity-60'>[40]</span>" data-en="ALL <span class='opacity-60'>[40]</span>">TÜMÜ <span class="opacity-60">[40]</span></button>
+      <button class="chip-filter" data-filter="brand" data-tr="MARKA" data-en="BRAND">MARKA</button>
+      <button class="chip-filter" data-filter="ui">UI / UX</button>
+      <button class="chip-filter" data-filter="social" data-tr="SOSYAL" data-en="SOCIAL">SOSYAL</button>
+      <button class="chip-filter" data-filter="motion" data-tr="HAREKETLİ" data-en="MOTION">HAREKETLİ</button>
+      <button class="chip-filter" data-filter="ai" data-tr="<span class='inline-block w-2 h-2 bg-yellow1 border border-ink align-middle mr-1'></span>YAPAY ZEKA" data-en="<span class='inline-block w-2 h-2 bg-yellow1 border border-ink align-middle mr-1'></span>AI GENERATED">
+        <span class="inline-block w-2 h-2 bg-yellow1 border border-ink align-middle mr-1"></span>YAPAY ZEKA
+      </button>
+      <button class="chip-filter" data-filter="editorial" data-tr="EDİTÖRYAL" data-en="EDITORIAL">EDİTÖRYAL</button>
+      <button class="chip-filter" data-filter="packaging" data-tr="AMBALAJ" data-en="PACKAGING">AMBALAJ</button>
+    </div>
+
+    <!-- table head -->
+    <div class="hidden md:grid grid-cols-12 gap-2 px-5 py-3 mono text-[11px] uppercase tracking-widest bg-ink text-paper">
+      <div class="col-span-1">№</div>
+      <div class="col-span-5">PROJECT</div>
+      <div class="col-span-2">TAG</div>
+      <div class="col-span-2">CATEGORY</div>
+      <div class="col-span-1">YEAR</div>
+      <div class="col-span-1 text-right">+ / —</div>
+    </div>
+
+    <div id="projects-list"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="border-b-3 border-ink">
+    <div class="grid grid-cols-12">
+      <div class="col-span-12 md:col-span-7 border-r-3 border-ink p-6 md:p-12">
+        <div class="mono text-[11px] uppercase tracking-widest mb-4" data-tr="// Bölüm 04 — Hakkında" data-en="// Section 04 — About">// Bölüm 04 — Hakkında</div>
+        <h2 class="display text-5xl md:text-8xl leading-[0.86]" data-tr="FİKİRLERDEN<br/><span class='bg-ink text-paper px-2'>SİSTEMLER</span><br/>KURARIM<span class='text-yellow1'>.</span>" data-en="I MAKE<br/><span class='bg-ink text-paper px-2'>SYSTEMS</span><br/>OUT OF<br/>IDEAS<span class='text-yellow1'>.</span>">
+          FİKİRLERDEN<br/>
+          <span class="bg-ink text-paper px-2">SİSTEMLER</span><br/>
+          KURARIM<span class="text-yellow1">.</span>
+        </h2>
+
+        <div class="mt-10 max-w-2xl space-y-5 text-lg leading-snug">
+          <p data-tr="<span class='bg-yellow1 px-1'>Berat Erdoğan</span>; markalar, kültürel projeler ve ürünler için görsel kimlikler, kampanyalar ve dijital arayüzler tasarlayan bir grafik tasarımcı ve sanat yönetmenidir." data-en="<span class='bg-yellow1 px-1'>Berat Erdoğan</span> is a graphic designer and art director who designs visual identities, campaigns, and digital interfaces for brands, cultural projects, and products.">
+            <span class="bg-yellow1 px-1">Berat Erdoğan</span>; markalar, kültürel projeler ve ürünler için görsel kimlikler, kampanyalar ve dijital arayüzler tasarlayan bir grafik tasarımcı ve sanat yönetmenidir.
+          </p>
+          <p data-tr="Tipografiyi temel araç olarak kullanır; kaba estetiği, editöryal yapıyı ve sistematik düşünceyi merkezine alır. Her proje, <span class='underline decoration-4 decoration-yellow1'>içerik · biçim · bağlam</span> üçgeninde kurgulanır." data-en="He uses typography as his primary tool, focusing on raw aesthetics, editorial structures, and systematic thinking. Each project is constructed within the triangle of <span class='underline decoration-4 decoration-yellow1'>content · form · context</span>.">
+            Tipografiyi temel araç olarak kullanır; kaba estetiği, editöryal yapıyı ve sistematik düşünceyi merkezine alır. Her proje, <span class="underline decoration-4 decoration-yellow1">içerik · biçim · bağlam</span> üçgeninde kurgulanır.
+          </p>
+        </div>
+
+        <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div class="brut bg-paper p-4">
+            <div class="num text-5xl">08+</div>
+            <div class="mono text-[10px] uppercase tracking-widest mt-1" data-tr="Yıl Deneyim" data-en="Years Experience">Yıl Deneyim</div>
+          </div>
+          <div class="brut bg-yellow1 p-4">
+            <div class="num text-5xl">120+</div>
+            <div class="mono text-[10px] uppercase tracking-widest mt-1" data-tr="Tamamlanmış Proje" data-en="Completed Projects">Tamamlanmış Proje</div>
+          </div>
+          <div class="brut bg-paper p-4">
+            <div class="num text-5xl">40+</div>
+            <div class="mono text-[10px] uppercase tracking-widest mt-1" data-tr="Marka İş Birliği" data-en="Brand Collaborations">Marka İş Birliği</div>
+          </div>
+          <div class="brut bg-ink text-paper p-4">
+            <div class="num text-5xl text-yellow1">★★★</div>
+            <div class="mono text-[10px] uppercase tracking-widest mt-1" data-tr="Ödül / Basın" data-en="Awards / Press">Ödül / Basın</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 md:col-span-5 bg-paper2 p-6 md:p-10">
+        <div class="mono text-[11px] uppercase tracking-widest mb-5" data-tr="► UZMANLIK ALANLARI / 19" data-en="► EXPERTISE / 19">► UZMANLIK ALANLARI / 19</div>
+        <ul id="expertise" class="space-y-0"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="bg-yellow1 border-b-3 border-ink relative overflow-hidden">
+    <div class="absolute -top-10 -right-10 opacity-30 select-none pointer-events-none">
+      <svg class="star-spin w-[360px] h-[360px]" viewBox="0 0 100 100" fill="#000">
+        <path d="M50 2 L58 38 L96 42 L66 64 L78 98 L50 78 L22 98 L34 64 L4 42 L42 38 Z"/>
+      </svg>
+    </div>
+
+    <div class="relative p-6 md:p-12">
+      <div class="mono text-[11px] uppercase tracking-widest mb-4" data-tr="// Bölüm 05 — İletişim" data-en="// Section 05 — Contact">// Bölüm 05 — İletişim</div>
+      <h2 class="display text-[14vw] md:text-[10vw] leading-[0.85]" data-tr="YÜKSEK<br/><span class='bg-ink text-yellow1 px-3'>SESLİ</span><br/>BİR ŞEYLER<br/>YAPALIM<span class='text-ink'>.</span>" data-en="LET'S<br/><span class='bg-ink text-yellow1 px-3'>MAKE</span><br/>SOMETHING<br/>LOUD<span class='text-ink'>.</span>">
+        YÜKSEK<br/>
+        <span class="bg-ink text-yellow1 px-3">SESLİ</span><br/>
+        BİR ŞEYLER<br/>
+        YAPALIM<span class="text-ink">.</span>
+      </h2>
+
+      <div class="grid grid-cols-12 gap-4 md:gap-8 mt-10">
+        <div class="col-span-12 md:col-span-7 z-10">
+          <a href="mailto:hello@beraterdogan.com" class="brut brut-hover inline-flex items-center gap-4 bg-paper px-5 py-5 mono text-base md:text-2xl uppercase cursor-pointer">
+            ► HELLO@BERATERDOGAN.COM
+          </a>
+          <p class="mt-6 max-w-xl text-lg leading-snug" data-tr="Marka, kampanya, arayüz ya da editöryal projeniz için iş birliğine açığım. Yeni başlangıçlara <span class='bg-ink text-yellow1 px-1'>2026 Q3</span> itibariyle yer var." data-en="I am open to collaborations for brand, campaign, interface, or editorial projects. Availability for new projects starting <span class='bg-ink text-yellow1 px-1'>Q3 2026</span>.">
+            Marka, kampanya, arayüz ya da editöryal projeniz için iş birliğine açığım. Yeni başlangıçlara <span class="bg-ink text-yellow1 px-1">2026 Q3</span> itibariyle yer var.
+          </p>
+        </div>
+
+        <div class="col-span-12 md:col-span-4 md:col-start-9 flex flex-col gap-3 z-10">
+          <a href="https://www.behance.net/beraterdoan1" target="_blank" rel="noopener" class="brut brut-hover bg-ink text-paper px-5 py-4 flex items-center justify-between mono text-xs uppercase tracking-widest cursor-pointer">
+            ► BEHANCE <span>@beraterdoan1 ↗</span>
+          </a>
+          <a href="https://www.instagram.com/__bertab/?hl=tr" target="_blank" rel="noopener" class="brut brut-hover bg-paper text-ink px-5 py-4 flex items-center justify-between mono text-xs uppercase tracking-widest cursor-pointer">
+            ► INSTAGRAM <span>@__bertab ↗</span>
+          </a>
+          <a href="https://www.linkedin.com/in/berat-erdoğan-4a79801b3" target="_blank" rel="noopener" class="brut brut-hover bg-paper text-ink px-5 py-4 flex items-center justify-between mono text-xs uppercase tracking-widest cursor-pointer">
+            ► LINKEDIN <span>Berat Erdoğan ↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- BRUTALIST CONTACT FORM -->
+      <div class="mt-12 max-w-2xl bg-paper border-3 border-ink p-6 shadow-[8px_8px_0_0_rgba(0,0,0,1)] relative z-10">
+        <h3 class="display text-2xl mb-4" data-tr="MESAJ GÖNDER" data-en="SEND A MESSAGE">MESAJ GÖNDER</h3>
+        <form id="brutalist-contact-form" class="space-y-4" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex flex-col">
+              <label class="mono text-[10px] uppercase font-bold text-ink/65 mb-1" data-tr="ADINIZ" data-en="YOUR NAME">ADINIZ</label>
+              <input type="text" name="name" required class="bg-paper2 border-3 border-ink px-3 py-2 mono text-sm outline-none focus:bg-yellow1 focus:text-black transition-colors" />
+            </div>
+            <div class="flex flex-col">
+              <label class="mono text-[10px] uppercase font-bold text-ink/65 mb-1" data-tr="E-POSTA" data-en="EMAIL ADDRESS">E-POSTA</label>
+              <input type="email" name="email" required class="bg-paper2 border-3 border-ink px-3 py-2 mono text-sm outline-none focus:bg-yellow1 focus:text-black transition-colors" />
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <label class="mono text-[10px] uppercase font-bold text-ink/65 mb-1" data-tr="MESAJINIZ" data-en="YOUR MESSAGE">MESAJINIZ</label>
+            <textarea name="message" rows="4" required class="bg-paper2 border-3 border-ink px-3 py-2 mono text-sm outline-none focus:bg-yellow1 focus:text-black transition-colors resize-none"></textarea>
+          </div>
+          <div>
+            <button type="submit" class="brut bg-yellow1 text-ink px-6 py-3 display text-sm tracking-widest cursor-pointer select-none">
+              <span data-tr="GÖNDER ►" data-en="SUBMIT ►">GÖNDER ►</span>
+            </button>
+          </div>
+        </form>
+        <div id="form-status" class="hidden mt-4 p-3 border-3 border-ink bg-ink text-yellow1 mono text-xs uppercase"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink text-paper">
+    <div class="display text-[16vw] md:text-[14vw] leading-[0.78] px-4 md:px-6 py-8 md:py-12 border-b-3 border-paper">
+      BERAT&nbsp;ERDOĞAN<span class="text-yellow1">.</span>
+    </div>
+    <div class="px-4 md:px-6 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mono text-[11px] uppercase tracking-widest">
+      <div data-tr="© 2018 — 2026 / TÜM HAKLARI SAKLIDIR" data-en="© 2018 — 2026 / ALL RIGHTS RESERVED">© 2018 — 2026 / ALL RIGHTS RESERVED</div>
+      <div class="flex items-center gap-4">
+        <span data-tr="ANKARA'DA TASARLANDI &amp; KODLANDI" data-en="DESIGNED &amp; CODED IN ANKARA">DESIGNED &amp; CODED IN ANKARA</span>
+        <span class="w-2 h-2 bg-yellow1"></span>
+        <a href="#top" class="hover:text-yellow1 cursor-pointer" data-tr="↑ BAŞA DÖN" data-en="↑ BACK TO TOP">↑ BACK TO TOP</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Clock
+    const c = document.getElementById('clock');
+    const tick = () => {
+      const d = new Date();
+      const pad = (n) => String(n).padStart(2,'0');
+      c.textContent = `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+    };
+    tick(); setInterval(tick, 1000);
+
+    // Projects — type: still | social | motion | ai | ui
+    // f: filter group (brand/ui/social/motion/ai/editorial/packaging)
+    // desc: case description; tags: stack of badges
+    const projects = [
+      { t:"VERA", c:"Brand Identity", y:"2025", type:"still", f:["brand","packaging"],
+        desc:"Bütüncül marka kimliği ve ambalaj sistemi. Logo, tip sistemi, palet, üretim mockup'ları.",
+        tags:["Identity","Logo","Packaging","Guidelines"], cover:"#1E3CFF" },
+      { t:"FERM", c:"Packaging", y:"2025", type:"still", f:["brand","packaging"],
+        desc:"Fermente ürün serisi için organik tipografi ve ambalaj sistemi.",
+        tags:["Packaging","FMCG","Print"], cover:"#FF2D00" },
+      { t:"SMART LOCKER INTERFACE", c:"UI / UX", y:"2024", type:"ui", f:["ui"],
+        desc:"Akıllı kilit dolabı için dokunmatik ekran arayüz konsepti. Kullanıcı akışı + ekranlar.",
+        tags:["UI","Touchscreen","Flow"], cover:"#0B0B0E" },
+      { t:"CANLANI", c:"Campaign Visual", y:"2024", type:"motion", f:["motion"],
+        desc:"Kampanya filmi & key visual serisi. 6sn / 15sn / 30sn versiyonlar.",
+        tags:["Motion","Key Visual","Campaign"], cover:"#FF2D00" },
+      { t:"DECAY CREATES LIFE", c:"Editorial", y:"2024", type:"ai", f:["ai","editorial"],
+        desc:"AI üretimi görsellerle kurulmuş, bozulma ve yenilenme üzerine kavramsal editöryal seri.",
+        tags:["AI","Editorial","Concept"], cover:"#1B2E15", aiTool:"Midjourney v6 + Photoshop" },
+      { t:"NUTRIPAW — ORGANIC PET FOOD", c:"FMCG Branding", y:"2024", type:"still", f:["brand","packaging"],
+        desc:"Organik pet food markası için bütüncül kimlik, ambalaj sistemi ve kampanya görselleri.",
+        tags:["Identity","FMCG","Packaging","Campaign"], cover:"#3A2A0E" },
+      { t:"İMECE MARKET 2025 — PRODUCTION & FINANCE", c:"Brand System", y:"2025", type:"ui", f:["brand","ui"],
+        desc:"Üretim ve finans yönetim platformu için marka sistemi + dashboard arayüzü.",
+        tags:["System","Dashboard","Identity"], cover:"#062C2C" },
+      { t:"MENU DESIGN", c:"Editorial", y:"2024", type:"still", f:["editorial"],
+        desc:"Restoran menü tasarımı. Hiyerarşi, baskı ve baskı sonrası uygulamalar.",
+        tags:["Print","Editorial","Hierarchy"], cover:"#2A1A08" },
+      { t:"TYPOGRAPHY & DETAILS", c:"Typography", y:"2024", type:"still", f:["editorial"],
+        desc:"Tipografik detaylar, harf çiftleri ve baskı denemeleri.",
+        tags:["Typography","Detail"], cover:"#000000" },
+      { t:"KASTEN MEETS ANKARA", c:"Art Direction", y:"2023", type:"social", f:["social","brand"],
+        desc:"Ankara için hazırlanan kültürel kampanyanın Instagram serisi (carousel + reels).",
+        tags:["Social","Carousel","Reels"], cover:"#FFE600" },
+      { t:"MIU MIU", c:"Campaign Visual", y:"2023", type:"motion", f:["motion"],
+        desc:"Sezonluk kampanya için key visual ve motion edit'ler.",
+        tags:["Motion","Fashion","Campaign"], cover:"#3F2B1A" },
+      { t:"AYTAÇ", c:"FMCG Branding", y:"2023", type:"still", f:["brand","packaging"],
+        desc:"FMCG markası için ambalaj revizyonu ve görsel sistem.",
+        tags:["FMCG","Packaging"], cover:"#0A2E1F" },
+      { t:"ODEABANK", c:"Corporate Identity", y:"2023", type:"still", f:["brand"],
+        desc:"Kurumsal iletişim kampanyası. Baskı + dijital uygulamalar.",
+        tags:["Corporate","Identity"], cover:"#1A2B4D" },
+      { t:"DERBY", c:"Campaign Visual", y:"2023", type:"social", f:["social"],
+        desc:"Spor markası için sosyal medya kampanya serisi.",
+        tags:["Social","Sports","Campaign"], cover:"#4A1A1A" },
+      { t:"TETRA PAK", c:"Packaging", y:"2023", type:"still", f:["packaging","brand"],
+        desc:"Ambalaj görsel sistemleri ve marka uygulamaları.",
+        tags:["Packaging","Industrial"], cover:"#0B3B3A" },
+      { t:"LOSBERAT — MOBILE UI CONCEPT", c:"UI / UX", y:"2023", type:"ui", f:["ui"],
+        desc:"Sosyal mobil uygulama için arayüz konsepti. 24 ekran + akışlar.",
+        tags:["Mobile","UI","Prototype"], cover:"#101015" },
+      { t:"YATAK / MATTRESS CAMPAIGN VISUAL", c:"Campaign Visual", y:"2023", type:"ai", f:["ai","motion"],
+        desc:"AI destekli ürün görselleştirme. Stüdyo çekimi olmadan kampanya key visual'leri.",
+        tags:["AI","Product","Campaign"], cover:"#2A1F4D", aiTool:"Midjourney + Photoshop" },
+      { t:"1 MAYIS EMEK VE DAYANIŞMA GÜNÜ", c:"Social Media", y:"2023", type:"social", f:["social"],
+        desc:"Kurumsal hesap için 1 Mayıs Instagram serisi.",
+        tags:["Social","Editorial","Day"], cover:"#FFE600" },
+      { t:"EKİBİN DİJİTAL AYAK İZLERİ", c:"Digital Communication", y:"2022", type:"social", f:["social"],
+        desc:"Ekip içi dijital iletişim için seri tasarım çalışması.",
+        tags:["Social","Internal"], cover:"#3A2A17" },
+      { t:"CORPORATE SOCIAL MEDIA DESIGNS", c:"Social Media", y:"2022", type:"social", f:["social"],
+        desc:"Aylık kurumsal sosyal medya tasarım sistemi.",
+        tags:["Social","System"], cover:"#1B2E15" },
+      { t:"BRAND IDENTITY APPLICATIONS", c:"Brand System", y:"2022", type:"still", f:["brand"],
+        desc:"Çeşitli markalar için kimlik uygulamaları.",
+        tags:["Identity","Applications"], cover:"#1F1F25" },
+      { t:"MOBILE APP INTERFACE CONCEPTS", c:"UI / UX", y:"2022", type:"ui", f:["ui"],
+        desc:"Çeşitli mobil uygulama arayüz konseptleri.",
+        tags:["Mobile","UI"], cover:"#0E1F0A" },
+      { t:"CAMPAIGN KEY VISUALS", c:"Campaign Visual", y:"2022", type:"still", f:["brand"],
+        desc:"Çeşitli markalar için kampanya key visual derlemesi.",
+        tags:["Campaign","Visual"], cover:"#2A1140" },
+      { t:"DIGITAL COMMUNICATION DESIGNS", c:"Digital Communication", y:"2022", type:"social", f:["social"],
+        desc:"Dijital iletişim tasarımı derlemesi.",
+        tags:["Digital","Comm"], cover:"#1A1140" },
+      { t:"PACKAGING & FMCG BRAND WORKS", c:"Packaging", y:"2022", type:"still", f:["packaging"],
+        desc:"FMCG ve ambalaj derlemesi.",
+        tags:["FMCG","Packaging"], cover:"#3A1010" },
+      { t:"UI / UX INTERFACE CONCEPTS", c:"UI / UX", y:"2022", type:"ui", f:["ui"],
+        desc:"Çeşitli arayüz konseptleri.",
+        tags:["UI","Concept"], cover:"#062C2C" },
+      { t:"EDITORIAL TYPOGRAPHY POSTERS", c:"Editorial", y:"2022", type:"ai", f:["ai","editorial"],
+        desc:"AI destekli editöryal poster serisi. Tipografi + yapay görsel.",
+        tags:["AI","Poster","Type"], cover:"#000000", aiTool:"Midjourney + InDesign" },
+      { t:"PRODUCT PRESENTATION MOCKUPS", c:"Art Direction", y:"2021", type:"still", f:["brand"],
+        desc:"Ürün sunum mockup'ları.",
+        tags:["Mockup","Product"], cover:"#1F1606" },
+      { t:"CREATIVE DIRECTION STUDIES", c:"Creative Direction", y:"2021", type:"ai", f:["ai"],
+        desc:"AI yardımıyla görsel kavramsal çalışmalar.",
+        tags:["AI","Concept","Direction"], cover:"#4A1A1A", aiTool:"Midjourney v5" },
+      { t:"BRAND GUIDELINE & GRID SYSTEMS", c:"Brand System", y:"2021", type:"still", f:["brand"],
+        desc:"Marka kılavuzları ve grid sistemleri.",
+        tags:["Guidelines","Grid"], cover:"#101015" },
+      { t:"SOCIAL MEDIA CAMPAIGN DESIGNS", c:"Social Media", y:"2021", type:"social", f:["social"],
+        desc:"Sosyal medya kampanyaları.",
+        tags:["Social","Campaign"], cover:"#FF2D00" },
+      { t:"VISUAL IDENTITY EXPLORATIONS", c:"Brand Identity", y:"2021", type:"still", f:["brand"],
+        desc:"Kimlik keşif çalışmaları.",
+        tags:["Identity","Exploration"], cover:"#0B0B0E" },
+      { t:"ART DIRECTION PROJECTS", c:"Art Direction", y:"2021", type:"motion", f:["motion"],
+        desc:"Sanat yönetimi projeleri ve motion edit'ler.",
+        tags:["Direction","Motion"], cover:"#2A1A08" },
+      { t:"CREATIVE ADVERTISING VISUALS", c:"Advertising", y:"2020", type:"still", f:["brand"],
+        desc:"Reklam görselleri derlemesi.",
+        tags:["Advertising","Visual"], cover:"#1A1140" },
+      { t:"POSTER & PRINT DESIGN WORKS", c:"Print", y:"2020", type:"still", f:["editorial"],
+        desc:"Poster ve baskı işleri.",
+        tags:["Print","Poster"], cover:"#000000" },
+      { t:"INTERFACE & DASHBOARD CONCEPTS", c:"UI / UX", y:"2020", type:"ui", f:["ui"],
+        desc:"Dashboard ve arayüz konseptleri.",
+        tags:["UI","Dashboard"], cover:"#062C2C" },
+      { t:"CORPORATE BRANDING SYSTEMS", c:"Corporate Identity", y:"2020", type:"still", f:["brand"],
+        desc:"Kurumsal markalama sistemleri.",
+        tags:["Corporate","System"], cover:"#1F1F25" },
+      { t:"PACKAGING MOCKUP SERIES", c:"Packaging", y:"2020", type:"still", f:["packaging"],
+        desc:"Ambalaj mockup serisi.",
+        tags:["Packaging","Mockup"], cover:"#3A2A0E" },
+      { t:"DIGITAL BRAND COMMUNICATION", c:"Digital Communication", y:"2019", type:"social", f:["social"],
+        desc:"Dijital marka iletişimi.",
+        tags:["Digital","Brand"], cover:"#1A2B4D" },
+      { t:"EXPERIMENTAL TYPOGRAPHY WORKS", c:"Typography", y:"2018", type:"ai", f:["ai","editorial"],
+        desc:"Deneysel AI tipografi serisi. Kavramsal harf araştırmaları.",
+        tags:["AI","Typography","Experimental"], cover:"#000000", aiTool:"Stable Diffusion + Procreate" },
+    ];
+
+    const TYPE_LABEL = {
+      still:   { txt:"STILL",  bg:"bg-paper text-ink border-ink" },
+      ui:      { txt:"UI/UX",  bg:"bg-paper2 text-ink border-ink" },
+      social:  { txt:"SOCIAL", bg:"bg-blue1 text-paper border-ink" },
+      motion:  { txt:"MOTION", bg:"bg-red1 text-paper border-ink" },
+      ai:      { txt:"AI",     bg:"bg-yellow1 text-ink border-ink" },
+    };
+
+    const filterTranslations = {
+      all: { tr: "TÜMÜ <span class='opacity-60'>[40]</span>", en: "ALL <span class='opacity-60'>[40]</span>" },
+      brand: { tr: "MARKA", en: "BRAND" },
+      ui: { tr: "UI / UX", en: "UI / UX" },
+      social: { tr: "SOSYAL", en: "SOCIAL" },
+      motion: { tr: "HAREKETLİ", en: "MOTION" },
+      ai: { tr: "<span class='inline-block w-2 h-2 bg-yellow1 border border-ink align-middle mr-1'></span>YAPAY ZEKA", en: "<span class='inline-block w-2 h-2 bg-yellow1 border border-ink align-middle mr-1'></span>AI GENERATED" },
+      editorial: { tr: "EDİTÖRYAL", en: "EDITORIAL" },
+      packaging: { tr: "AMBALAJ", en: "PACKAGING" }
+    };
+
+    const translations = {
+      categories: {
+        "Brand Identity": { tr: "Marka Kimliği", en: "Brand Identity" },
+        "Packaging": { tr: "Ambalaj Tasarımı", en: "Packaging Design" },
+        "UI / UX": { tr: "UI / UX Tasarımı", en: "UI / UX Design" },
+        "Campaign Visual": { tr: "Kampanya Görseli", en: "Campaign Visual" },
+        "Editorial": { tr: "Editöryal", en: "Editorial" },
+        "FMCG Branding": { tr: "FMCG Markalama", en: "FMCG Branding" },
+        "Brand System": { tr: "Marka Sistemi", en: "Brand System" },
+        "Typography": { tr: "Tipografi", en: "Typography" },
+        "Art Direction": { tr: "Sanat Yönetimi", en: "Art Direction" },
+        "Corporate Identity": { tr: "Kurumsal Kimlik", en: "Corporate Identity" },
+        "Social Media": { tr: "Sosyal Medya", en: "Social Media" },
+        "Digital Communication": { tr: "Dijital İletişim", en: "Digital Communication" },
+        "Brand Guideline": { tr: "Marka Kılavuzu", en: "Brand Guideline" },
+        "Creative Direction": { tr: "Kreatif Direktörlük", en: "Creative Direction" },
+        "Advertising": { tr: "Reklam", en: "Advertising" },
+        "Print": { tr: "Baskı Tasarımı", en: "Print Design" },
+        "Typography & Details": { tr: "Tipografi ve Detaylar", en: "Typography & Details" },
+        "FMCG Brand Identity": { tr: "FMCG Marka Kimliği", en: "FMCG Brand Identity" }
+      },
+      tags: {
+        "Identity": { tr: "Kimlik", en: "Identity" },
+        "Logo": { tr: "Logo", en: "Logo" },
+        "Packaging": { tr: "Ambalaj", en: "Packaging" },
+        "Guidelines": { tr: "Kılavuz", en: "Guidelines" },
+        "Print": { tr: "Baskı", en: "Print" },
+        "FMCG": { tr: "FMCG", en: "FMCG" },
+        "UI": { tr: "Arayüz", en: "UI" },
+        "Touchscreen": { tr: "Dokunmatik Ekran", en: "Touchscreen" },
+        "Flow": { tr: "Akış", en: "Flow" },
+        "Motion": { tr: "Hareket", en: "Motion" },
+        "Key Visual": { tr: "Ana Görsel", en: "Key Visual" },
+        "Campaign": { tr: "Kampanya", en: "Campaign" },
+        "AI": { tr: "Yapay Zeka", en: "AI" },
+        "Editorial": { tr: "Editöryal", en: "Editorial" },
+        "Concept": { tr: "Konsept", en: "Concept" },
+        "System": { tr: "Sistem", en: "System" },
+        "Dashboard": { tr: "Panel", en: "Dashboard" },
+        "Hierarchy": { tr: "Hiyerarşi", en: "Hierarchy" },
+        "Detail": { tr: "Detay", en: "Detail" },
+        "Typography": { tr: "Tipografi", en: "Typography" },
+        "Social": { tr: "Sosyal", en: "Social" },
+        "Carousel": { tr: "Carousel", en: "Carousel" },
+        "Reels": { tr: "Reels", en: "Reels" },
+        "Fashion": { tr: "Moda", en: "Fashion" },
+        "Corporate": { tr: "Kurumsal", en: "Corporate" },
+        "Sports": { tr: "Spor", en: "Sports" },
+        "Industrial": { tr: "Endüstriyel", en: "Industrial" },
+        "Mobile": { tr: "Mobil", en: "Mobile" },
+        "Prototype": { tr: "Prototip", en: "Prototype" },
+        "Product": { tr: "Ürün", en: "Product" },
+        "Internal": { tr: "İç İletişim", en: "Internal" },
+        "Poster": { tr: "Poster", en: "Poster" },
+        "Type": { tr: "Yazı", en: "Type" },
+        "Mockup": { tr: "Mockup", en: "Mockup" },
+        "Direction": { tr: "Yönelim", en: "Direction" },
+        "Grid": { tr: "Grid", en: "Grid" },
+        "Exploration": { tr: "Keşif", en: "Exploration" },
+        "Advertising": { tr: "Reklam", en: "Advertising" },
+        "Visual": { tr: "Görsel", en: "Visual" },
+        "Digital": { tr: "Dijital", en: "Digital" },
+        "Comm": { tr: "İletişim", en: "Comm" },
+        "Brand": { tr: "Marka", en: "Brand" },
+        "Experimental": { tr: "Deneysel", en: "Experimental" }
+      },
+      descriptions: {
+        "Bütüncül marka kimliği ve ambalaj sistemi. Logo, tip sistemi, palet, üretim mockup'ları.": {
+          tr: "Bütüncül marka kimliği ve ambalaj sistemi. Logo, tip sistemi, palet, üretim mockup'ları.",
+          en: "Comprehensive brand identity and packaging system. Logo, type system, palette, production mockups."
+        },
+        "Fermente ürün serisi için organik tipografi ve ambalaj sistemi.": {
+          tr: "Fermente ürün serisi için organik tipografi ve ambalaj sistemi.",
+          en: "Organic typography and packaging system for fermented product series."
+        },
+        "Akıllı kilit dolabı için dokunmatik ekran arayüz konsepti. Kullanıcı akışı + ekranlar.": {
+          tr: "Akıllı kilit dolabı için dokunmatik ekran arayüz konsepti. Kullanıcı akışı + ekranlar.",
+          en: "Touchscreen interface concept for smart locker. User flow + screens."
+        },
+        "Kampanya filmi & key visual serisi. 6sn / 15sn / 30sn versiyonlar.": {
+          tr: "Kampanya filmi & key visual serisi. 6sn / 15sn / 30sn versiyonlar.",
+          en: "Campaign film & key visual series. 6s / 15s / 30s versions."
+        },
+        "AI üretimi görsellerle kurulmuş, bozulma ve yenilenme üzerine kavramsal editöryal seri.": {
+          tr: "AI üretimi görsellerle kurulmuş, bozulma ve yenilenme üzerine kavramsal editöryal seri.",
+          en: "Conceptual editorial series on decay and renewal, constructed with AI-generated images."
+        },
+        "Organik pet food markası için bütüncül kimlik, ambalaj sistemi ve kampanya görselleri.": {
+          tr: "Organik pet food markası için bütüncül kimlik, ambalaj sistemi ve kampanya görselleri.",
+          en: "Comprehensive identity, packaging system, and campaign visuals for organic pet food brand."
+        },
+        "Organic pet food — brand identity, packaging system & campaign visuals.": {
+          tr: "Organik evcil hayvan maması — marka kimliği, ambalaj sistemi ve kampanya görselleri.",
+          en: "Organic pet food — brand identity, packaging system & campaign visuals."
+        },
+        "Üretim ve finans yönetim platformu için marka sistemi + dashboard arayüzü.": {
+          tr: "Üretim ve finans yönetim platformu için marka sistemi + dashboard arayüzü.",
+          en: "Brand system + dashboard interface for production and financial management platform."
+        },
+        "Restoran menü tasarımı. Hiyerarşi, baskı ve baskı sonrası uygulamalar.": {
+          tr: "Restoran menü tasarımı. Hiyerarşi, baskı ve baskı sonrası uygulamalar.",
+          en: "Restaurant menu design. Hierarchy, print and post-press applications."
+        },
+        "Tipografik detaylar, harf çiftleri ve baskı denemeleri.": {
+          tr: "Tipografik detaylar, harf çiftleri ve baskı denemeleri.",
+          en: "Typographic details, letter pairs, and print tests."
+        },
+        "Ankara için hazırlanan kültürel kampanyanın Instagram serisi (carousel + reels).": {
+          tr: "Ankara için hazırlanan kültürel kampanyanın Instagram serisi (carousel + reels).",
+          en: "Instagram series (carousel + reels) of the cultural campaign prepared for Ankara."
+        },
+        "Sezonluk kampanya için key visual ve motion edit'ler.": {
+          tr: "Sezonluk kampanya için key visual ve motion edit'ler.",
+          en: "Key visual and motion edits for the seasonal campaign."
+        },
+        "FMCG markası için ambalaj revizyonu ve görsel sistem.": {
+          tr: "FMCG markası için ambalaj revizyonu ve görsel sistem.",
+          en: "Packaging revision and visual system for the FMCG brand."
+        },
+        "Kurumsal iletişim kampanyası. Baskı + dijital uygulamalar.": {
+          tr: "Kurumsal iletişim kampanyası. Baskı + dijital uygulamalar.",
+          en: "Corporate communication campaign. Print + digital applications."
+        },
+        "Spor markası için sosyal medya kampanya serisi.": {
+          tr: "Spor markası için sosyal medya kampanya serisi.",
+          en: "Social media campaign series for the sports brand."
+        },
+        "Ambalaj görsel sistemleri ve marka uygulamaları.": {
+          tr: "Ambalaj görsel sistemleri ve marka uygulamaları.",
+          en: "Packaging visual systems and brand applications."
+        },
+        "Sosyal mobil uygulama için arayüz konsepti. 24 ekran + akışlar.": {
+          tr: "Sosyal mobil uygulama için arayüz konsepti. 24 ekran + akışlar.",
+          en: "Interface concept for social mobile app. 24 screens + flows."
+        },
+        "AI destekli ürün görselleştirme. Stüdyo çekimi olmadan kampanya key visual'leri.": {
+          tr: "AI destekli ürün görselleştirme. Stüdyo çekimi olmadan kampanya key visual'leri.",
+          en: "AI-assisted product visualization. Campaign key visuals without studio shooting."
+        },
+        "Kurumsal hesap için 1 Mayıs Instagram serisi.": {
+          tr: "Kurumsal hesap için 1 Mayıs Instagram serisi.",
+          en: "May 1st Instagram series for corporate account."
+        },
+        "Ekip içi dijital iletişim için seri tasarım çalışması.": {
+          tr: "Ekip içi dijital iletişim için seri tasarım çalışması.",
+          en: "Series design work for internal digital communication."
+        },
+        "Aylık kurumsal sosyal medya tasarım sistemi.": {
+          tr: "Aylık kurumsal sosyal medya tasarım sistemi.",
+          en: "Monthly corporate social media design system."
+        },
+        "Çeşitli markalar için kimlik uygulamaları.": {
+          tr: "Çeşitli markalar için kimlik uygulamaları.",
+          en: "Identity applications for various brands."
+        },
+        "Çeşitli mobil uygulama arayüz konseptleri.": {
+          tr: "Çeşitli mobil uygulama arayüz konseptleri.",
+          en: "Various mobile app interface concepts."
+        },
+        "Çeşitli markalar için kampanya key visual derlemesi.": {
+          tr: "Çeşitli markalar için kampanya key visual derlemesi.",
+          en: "Campaign key visual compilation for various brands."
+        },
+        "Dijital iletişim tasarımı derlemesi.": {
+          tr: "Dijital iletişim tasarımı derlemesi.",
+          en: "Digital communication design compilation."
+        },
+        "FMCG ve ambalaj derlemesi.": {
+          tr: "FMCG ve ambalaj derlemesi.",
+          en: "FMCG and packaging compilation."
+        },
+        "Çeşitli arayüz konseptleri.": {
+          tr: "Çeşitli arayüz konseptleri.",
+          en: "Various interface concepts."
+        },
+        "AI destekli editöryal poster serisi. Tipografi + yapay görsel.": {
+          tr: "AI destekli editöryal poster serisi. Tipografi + yapay görsel.",
+          en: "AI-supported editorial poster series. Typography + generated visual."
+        },
+        "Ürün sunum mockup'ları.": {
+          tr: "Ürün sunum mockup'ları.",
+          en: "Product presentation mockups."
+        },
+        "AI yardımıyla görsel kavramsal çalışmalar.": {
+          tr: "AI yardımıyla görsel kavramsal çalışmalar.",
+          en: "Visual conceptual works using AI."
+        },
+        "Marka kılavuzları ve grid sistemleri.": {
+          tr: "Marka kılavuzları ve grid sistemleri.",
+          en: "Brand guidelines and grid systems."
+        },
+        "Sosyal medya kampanyaları.": {
+          tr: "Sosyal medya kampanyaları.",
+          en: "Social media campaigns."
+        },
+        "Kimlik keşif çalışmaları.": {
+          tr: "Kimlik keşif çalışmaları.",
+          en: "Identity exploration studies."
+        },
+        "Sanat yönetimi projeleri ve motion edit'ler.": {
+          tr: "Sanat yönetimi projeleri ve motion edit'ler.",
+          en: "Art direction projects and motion edits."
+        },
+        "Reklam görselleri derlemesi.": {
+          tr: "Reklam görselleri derlemesi.",
+          en: "Advertising visuals compilation."
+        },
+        "Poster ve baskı işleri.": {
+          tr: "Poster ve baskı işleri.",
+          en: "Poster and print works."
+        },
+        "Dashboard ve arayüz konseptleri.": {
+          tr: "Dashboard ve arayüz konseptleri.",
+          en: "Dashboard and interface concepts."
+        },
+        "Kurumsal markalama sistemleri.": {
+          tr: "Kurumsal markalama sistemleri.",
+          en: "Corporate branding systems."
+        },
+        "Ambalaj mockup serisi.": {
+          tr: "Ambalaj mockup serisi.",
+          en: "Packaging mockup series."
+        },
+        "Dijital marka iletişimi.": {
+          tr: "Dijital marka iletişimi.",
+          en: "Digital brand communication."
+        },
+        "Deneysel AI tipografi serisi. Kavramsal harf araştırmaları.": {
+          tr: "Deneysel AI tipografi serisi. Kavramsal harf araştırmaları.",
+          en: "Experimental AI typography series. Conceptual letter research."
+        }
+      }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'tr';
+    let currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+    function tText(key, type) {
+      if (translations[type] && translations[type][key]) {
+        return translations[type][key][currentLang];
+      }
+      return key;
+    }
+
+    const list = document.getElementById('projects-list');
+
+    function buildPreview(p) {
+      const slug = p.t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+      const tagsHtml = p.tags.map(t => `<span class="brut-sm bg-paper text-ink px-2 py-1 mono text-[10px] uppercase">${tText(t, 'tags')}</span>`).join('');
+
+      let media = '';
+      if (p.type === 'social') {
+        // 3 phone mockups with onerror fallback
+        media = `
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            ${[1,2,3].map(i => `
+              <div class="phone">
+                <div class="phone-bar"><span>● BERAT.DESIGN</span><span>•••</span></div>
+                <div class="aspect-square border-b-2 border-ink relative" style="background:${p.cover};">
+                  <img src="images/${slug}-${i}.jpg" alt="${p.t}" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                  <div class="hidden absolute inset-0 bg-ink/20"></div>
+                  <div class="absolute inset-3 border-3 border-paper p-3 flex flex-col justify-between">
+                    <div class="mono text-[9px] uppercase text-paper font-bold">POST ${i} / 3</div>
+                    <div class="display text-paper text-2xl md:text-3xl leading-none">${p.t.split(' ').slice(0,2).join('<br/>')}</div>
+                  </div>
+                </div>
+                <div class="px-2 py-2 mono text-[9px] uppercase flex items-center justify-between font-bold">
+                  <span>♥ 1.2K · 💬 48</span><span>${p.y}</span>
+                </div>
+              </div>
+            `).join('')}
+          </div>`;
+      } else if (p.type === 'motion') {
+        // video template with onerror
+        media = `
+          <div class="brut bg-ink text-paper aspect-video relative overflow-hidden" style="background:${p.cover};">
+            <video src="images/${slug}.mp4" class="w-full h-full object-cover hidden" controls onerror="this.style.display='none';"></video>
+            <div class="absolute inset-0 grid place-items-center">
+              <button class="brut bg-yellow1 text-ink px-6 py-4 mono text-xs uppercase tracking-widest flex items-center gap-3 cursor-pointer" onclick="const v = this.parentElement.previousElementSibling; v.classList.remove('hidden'); v.play(); this.parentElement.style.display='none';">
+                <span class="inline-block w-0 h-0 border-l-[14px] border-l-ink border-y-[10px] border-y-transparent"></span>
+                <span data-tr="► VİDEOYU OYNAT" data-en="► PLAY MOTION REEL">► VİDEOYU OYNAT</span>
+              </button>
+            </div>
+            <div class="absolute bottom-3 left-3 mono text-[10px] uppercase text-paper">00:00 / 00:24 · 1080p</div>
+            <div class="absolute top-3 right-3 mono text-[10px] uppercase text-paper bg-red1 px-2 py-1 border-2 border-paper">● REC</div>
+          </div>
+          <div class="mt-4 grid grid-cols-4 gap-2">
+            ${[1,2,3,4].map(i => `
+              <div class="aspect-video border-3 border-ink relative overflow-hidden" style="background:${p.cover}; filter: hue-rotate(${i*30}deg);">
+                <img src="images/${slug}-frame-${i}.jpg" alt="frame" class="w-full h-full object-cover" onerror="this.style.display='none';">
+              </div>`).join('')}
+          </div>`;
+      } else if (p.type === 'ai') {
+        // AI image templates with onerror fallbacks
+        media = `
+          <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-12 md:col-span-8">
+              <div class="brut aspect-video relative overflow-hidden" style="background: linear-gradient(135deg, ${p.cover} 0%, #000 100%);">
+                <img src="images/${slug}.jpg" alt="${p.t}" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none';">
+                <div class="absolute inset-0 p-5 flex flex-col justify-between bg-ink/30">
+                  <div class="flex items-center justify-between">
+                    <span class="ai-badge">★ AI GENERATED</span>
+                    <span class="mono text-[10px] uppercase text-paper">SEED · 4096</span>
+                  </div>
+                  <div class="display text-paper text-4xl md:text-6xl leading-none">${p.t}</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 md:col-span-4 bg-ink text-yellow1 p-5 brut-sm">
+              <div class="mono text-[10px] uppercase tracking-widest mb-3" data-tr="► YAPAY ZEKA GİRDİSİ" data-en="► AI PROMPT">► YAPAY ZEKA GİRDİSİ</div>
+              <p class="mono text-xs leading-relaxed text-paper">
+                "${tText(p.desc, 'descriptions')}"
+              </p>
+              <div class="border-t-2 border-paper/30 mt-4 pt-3 mono text-[10px] uppercase">
+                Tool: <span class="text-yellow1">${p.aiTool || 'Midjourney v6'}</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3">
+            ${[1,2,3,4].map(i => `
+              <div class="brut-sm aspect-square relative overflow-hidden" style="background: linear-gradient(${45+i*30}deg, ${p.cover}, #000);">
+                <img src="images/${slug}-v${i}.jpg" alt="ai variant" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none';">
+                <div class="absolute bottom-1 left-1 mono text-[9px] uppercase text-paper bg-ink px-1">V${i}</div>
+              </div>`).join('')}
+          </div>`;
+      } else if (p.type === 'ui') {
+        // UI templates with onerror
+        media = `
+          <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-12 md:col-span-7">
+              <div class="brut aspect-[16/10] p-4 relative" style="background:${p.cover};">
+                <img src="images/${slug}.jpg" alt="${p.t}" class="absolute inset-0 w-full h-full object-cover hidden" onerror="this.style.display='none';">
+                <div class="bg-paper h-full brut-sm p-4 flex flex-col gap-3 relative z-10">
+                  <div class="flex items-center gap-2 border-b-3 border-ink pb-2">
+                    <div class="w-3 h-3 bg-red1 border-2 border-ink"></div>
+                    <div class="w-3 h-3 bg-yellow1 border-2 border-ink"></div>
+                    <div class="w-3 h-3 bg-paper2 border-2 border-ink"></div>
+                    <div class="mono text-[10px] ml-2 font-bold">${p.t}</div>
+                  </div>
+                  <div class="grid grid-cols-3 gap-2 flex-1">
+                    <div class="bg-ink"></div><div class="bg-paper2"></div><div class="bg-yellow1"></div>
+                    <div class="bg-paper2"></div><div class="bg-ink"></div><div class="bg-paper2"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-6 md:col-span-2">
+              <div class="phone" style="background:${p.cover};">
+                <img src="images/${slug}-mobile.jpg" alt="mobile ui" class="w-full h-full object-cover" onerror="this.style.display='none';">
+              </div>
+            </div>
+            <div class="col-span-6 md:col-span-3 space-y-2">
+              <div class="brut-sm aspect-video relative overflow-hidden" style="background:${p.cover};">
+                <img src="images/${slug}-side-1.jpg" alt="ui visual" class="w-full h-full object-cover" onerror="this.style.display='none';">
+              </div>
+              <div class="brut-sm aspect-video bg-yellow1"></div>
+              <div class="brut-sm aspect-video bg-ink"></div>
+            </div>
+          </div>`;
+      } else {
+        // still / packaging templates with onerror
+        media = `
+          <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-12 md:col-span-8 brut aspect-[16/10] relative overflow-hidden" style="background:${p.cover};">
+              <img src="images/${slug}.jpg" alt="${p.t}" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+              <div class="hidden absolute inset-0 flex flex-col justify-center items-center p-5 text-center text-paper bg-ink/80">
+                <span class="display text-2xl mb-2 font-bold">${p.t}</span>
+                <span class="mono text-xs opacity-65 font-bold">images/${slug}.jpg not found</span>
+              </div>
+            </div>
+            <div class="col-span-6 md:col-span-4 brut aspect-[16/10] relative overflow-hidden" style="background:${p.cover}; filter:saturate(.5) brightness(.7);">
+              <img src="images/${slug}-2.jpg" alt="${p.t}" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none';">
+            </div>
+            <div class="col-span-4 md:col-span-4 brut aspect-square bg-yellow1"></div>
+            <div class="col-span-4 md:col-span-4 brut aspect-square" style="background:${p.cover};"></div>
+            <div class="col-span-4 md:col-span-4 brut aspect-square bg-ink"></div>
+          </div>`;
+      }
+
+      const isTR = currentLang === 'tr';
+      const imageHint = `<div class="mono text-[10px] uppercase text-ink/50 mt-4">${isTR ? `► images/${slug}.jpg yüklendiğinde otomatik gözükecek` : `► Automatically loads once images/${slug}.jpg is uploaded`}</div>`;
+      const openCaseTxt = isTR ? '► DETAYLARI AÇ ↗' : '► OPEN CASE ↗';
+      const categoryTxt = isTR ? 'KATEGORİ' : 'CATEGORY';
+      const yearTxt = isTR ? 'YIL' : 'YEAR';
+
+      return `
+        <div class="preview-inner bg-paper2">
+          <div class="grid grid-cols-12 gap-4 md:gap-6 mb-5">
+            <div class="col-span-12 md:col-span-8">
+              <div class="display text-3xl md:text-5xl leading-none">${p.t}</div>
+              <p class="mt-3 text-base md:text-lg max-w-2xl">${tText(p.desc, 'descriptions')}</p>
+              <div class="flex flex-wrap gap-2 mt-4">${tagsHtml}</div>
+            </div>
+            <div class="col-span-12 md:col-span-4 md:text-right">
+              <div class="mono text-[10px] uppercase tracking-widest text-ink/60">${categoryTxt}</div>
+              <div class="display text-lg mt-1">${tText(p.c, 'categories')}</div>
+              <div class="mono text-[10px] uppercase tracking-widest mt-3 text-ink/60">${yearTxt}</div>
+              <div class="display text-lg mt-1">${p.y}</div>
+              <a href="#" class="brut brut-hover inline-flex items-center gap-2 bg-ink text-paper px-4 py-2 mono text-[11px] uppercase tracking-widest mt-4 cursor-pointer">${openCaseTxt}</a>
+            </div>
+          </div>
+          ${media}
+          ${imageHint}
+        </div>`;
+    }
+
+    function toggleRow(btn, prev, prevContent, p) {
+      const isOpen = btn.classList.contains('open');
+      // close other open rows
+      document.querySelectorAll('#projects-list .row.open').forEach(r => {
+        if (r !== btn) {
+          r.classList.remove('open');
+          r.parentElement.querySelector('.preview').classList.remove('open');
+          r.querySelector('.row-arrow').textContent = '+';
+        }
+      });
+      if (isOpen) {
+        btn.classList.remove('open');
+        prev.classList.remove('open');
+        btn.querySelector('.row-arrow').textContent = '+';
+      } else {
+        prevContent.innerHTML = buildPreview(p);
+        btn.classList.add('open');
+        prev.classList.add('open');
+        btn.querySelector('.row-arrow').textContent = '—';
+      }
+    }
+
+    function renderProjects() {
+      // Remember which row was open before rendering
+      let openProjectName = null;
+      const openBtn = document.querySelector('#projects-list .row.open');
+      if (openBtn) {
+        const rowWrap = openBtn.closest('.row-wrap');
+        openProjectName = rowWrap ? rowWrap.dataset.name : null;
+      }
+
+      list.innerHTML = '';
+      projects.forEach((p, i) => {
+        const n = String(i + 1).padStart(2, '0');
+        const filters = p.f.join(' ');
+
+        const wrap = document.createElement('div');
+        wrap.className = 'row-wrap';
+        wrap.dataset.filters = filters;
+        wrap.dataset.name = p.t;
+
+        const t = TYPE_LABEL[p.type];
+        const isAI = p.type === 'ai';
+        const aiBadge = isAI ? `<span class="ai-badge ml-2 align-middle">★ AI</span>` : '';
+
+        wrap.innerHTML = `
+          <button type="button" class="row w-full grid grid-cols-12 gap-2 items-center px-5 py-5 md:py-6 cursor-pointer text-left bg-paper" data-type="${p.type}">
+            <div class="col-span-2 md:col-span-1 mono text-xs mono-time font-bold">${n}</div>
+            <div class="col-span-10 md:col-span-5 display text-lg md:text-2xl leading-tight">
+              ${p.t}${aiBadge}
+            </div>
+            <div class="col-span-6 md:col-span-2">
+              <span class="inline-block border-2 px-2 py-[3px] mono text-[10px] uppercase tracking-widest ${t.bg} font-bold">${t.txt}</span>
+            </div>
+            <div class="col-span-6 md:col-span-2 row-cat mono text-[11px] uppercase tracking-widest font-bold">${tText(p.c, 'categories')}</div>
+            <div class="col-span-6 md:col-span-1 mono text-xs mono-time font-bold">${p.y}</div>
+            <div class="col-span-6 md:col-span-1 text-right mono text-2xl"><span class="row-arrow">+</span></div>
+          </button>
+          <div class="preview"><div class="preview-content"></div></div>`;
+
+        list.appendChild(wrap);
+
+        const btn = wrap.querySelector('.row');
+        const prev = wrap.querySelector('.preview');
+        const prevContent = wrap.querySelector('.preview-content');
+
+        btn.addEventListener('click', () => {
+          toggleRow(btn, prev, prevContent, p);
+        });
+
+        // Restore open state
+        if (p.t === openProjectName) {
+          prevContent.innerHTML = buildPreview(p);
+          btn.classList.add('open');
+          prev.classList.add('open');
+          btn.querySelector('.row-arrow').textContent = '—';
+        }
+      });
+    }
+
+    // Filter chips
+    document.querySelectorAll('.chip-filter').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.chip-filter').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const f = chip.dataset.filter;
+        document.querySelectorAll('#projects-list .row-wrap').forEach(w => {
+          const tags = w.dataset.filters || '';
+          w.style.display = (f === 'all' || tags.split(' ').includes(f)) ? '' : 'none';
+        });
+      });
+    });
+
+    // Expertise
+    const expertise = [
+      "BRANDING","VISUAL IDENTITY","UI / UX DESIGN","SOCIAL MEDIA DESIGN",
+      "PACKAGING DESIGN","FMCG BRAND DESIGN","TYPOGRAPHY","EDITORIAL DESIGN",
+      "ART DIRECTION","CREATIVE DIRECTION","CAMPAIGN VISUAL DESIGN","CORPORATE IDENTITY",
+      "MOBILE INTERFACE DESIGN","PRODUCT MOCKUP DESIGN","DIGITAL COMMUNICATION","ADVERTISING VISUAL",
+      "POSTER DESIGN","PRINT DESIGN","BRAND STRATEGY VISUALS"
+    ];
+    const expertiseTranslations = {
+      "BRANDING": { tr: "MARKA YÖNETİMİ", en: "BRANDING" },
+      "VISUAL IDENTITY": { tr: "GÖRSEL KİMLİK", en: "VISUAL IDENTITY" },
+      "UI / UX DESIGN": { tr: "UI / UX TASARIMI", en: "UI / UX DESIGN" },
+      "SOCIAL MEDIA DESIGN": { tr: "SOSYAL MEDYA TASARIMI", en: "SOCIAL MEDIA DESIGN" },
+      "PACKAGING DESIGN": { tr: "AMBALAJ TASARIMI", en: "PACKAGING DESIGN" },
+      "FMCG BRAND DESIGN": { tr: "HIZLI TÜKETİM MARKALAMA", en: "FMCG BRAND DESIGN" },
+      "TYPOGRAPHY": { tr: "TİPOGRAFİ", en: "TYPOGRAPHY" },
+      "EDITORIAL DESIGN": { tr: "EDİTÖRYAL TASARIM", en: "EDITORIAL DESIGN" },
+      "ART DIRECTION": { tr: "SANAT YÖNETİMİ", en: "ART DIRECTION" },
+      "CREATIVE DIRECTION": { tr: "KREATİF DİREKTÖRLÜK", en: "CREATIVE DIRECTION" },
+      "CAMPAIGN VISUAL DESIGN": { tr: "KAMPANYA GÖRSEL TASARIMI", en: "CAMPAIGN VISUAL DESIGN" },
+      "CORPORATE IDENTITY": { tr: "KURUMSAL KİMLİK", en: "CORPORATE IDENTITY" },
+      "MOBILE INTERFACE DESIGN": { tr: "MOBİL ARAYÜZ TASARIMI", en: "MOBILE INTERFACE DESIGN" },
+      "PRODUCT MOCKUP DESIGN": { tr: "ÜRÜN MOCKUP TASARIMI", en: "PRODUCT MOCKUP DESIGN" },
+      "DIGITAL COMMUNICATION": { tr: "DİJİTAL İLETİŞİM", en: "DIGITAL COMMUNICATION" },
+      "ADVERTISING VISUAL": { tr: "REKLAM GÖRSELİ", en: "ADVERTISING VISUAL" },
+      "POSTER DESIGN": { tr: "AFİŞ TASARIMI", en: "POSTER DESIGN" },
+      "PRINT DESIGN": { tr: "BASKI TASARIMI", en: "PRINT DESIGN" },
+      "BRAND STRATEGY VISUALS": { tr: "MARKA STRATEJİSİ GÖRSELLERİ", en: "BRAND STRATEGY VISUALS" }
+    };
+
+    const exp = document.getElementById('expertise');
+    function renderExpertise() {
+      exp.innerHTML = '';
+      expertise.forEach((e, i) => {
+        const n = String(i+1).padStart(2,'0');
+        const li = document.createElement('li');
+        li.className = 'flex items-center justify-between border-b-3 border-ink py-3 hover:bg-yellow1 cursor-default';
+        const txt = expertiseTranslations[e] ? expertiseTranslations[e][currentLang] : e;
+        li.innerHTML = `<span class="flex items-center gap-3"><span class="mono text-[11px]">${n}</span><span class="display text-base md:text-lg">${txt}</span></span><span class="mono text-[11px]">●</span>`;
+        exp.appendChild(li);
+      });
+    }
+
+    // Language & Theme togglers
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+      document.documentElement.setAttribute('lang', lang);
+
+      const trBtn = document.getElementById('lang-tr');
+      const enBtn = document.getElementById('lang-en');
+      if (lang === 'tr') {
+        trBtn.classList.add('underline');
+        enBtn.classList.remove('underline');
+      } else {
+        enBtn.classList.add('underline');
+        trBtn.classList.remove('underline');
+      }
+
+      // Translate static annotated elements
+      document.querySelectorAll('[data-tr]').forEach(el => {
+        const txt = el.getAttribute(`data-${lang}`);
+        if (txt) el.innerHTML = txt;
+      });
+
+      // Translate filter chips
+      document.querySelectorAll('.chip-filter').forEach(chip => {
+        const filter = chip.dataset.filter;
+        if (filterTranslations[filter]) {
+          chip.innerHTML = filterTranslations[filter][lang];
+        }
+      });
+
+      // Re-render components
+      renderProjects();
+      renderExpertise();
+    }
+
+    function setTheme(theme) {
+      currentTheme = theme;
+      localStorage.setItem('theme', theme);
+      document.documentElement.setAttribute('data-theme', theme);
+
+      const toggleBtn = document.getElementById('theme-toggle');
+      if (theme === 'dark') {
+        toggleBtn.textContent = 'LIGHT MODE';
+      } else {
+        toggleBtn.textContent = 'DARK MODE';
+      }
+    }
+
+    document.getElementById('lang-tr').addEventListener('click', () => setLanguage('tr'));
+    document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
+
+    // Listen for OS theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('theme')) {
+        setTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+
+    // Mobile hamburger menu toggle
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    mobileMenuToggle.addEventListener('click', () => {
+      const isOpen = !mobileNav.classList.contains('hidden');
+      if (isOpen) {
+        mobileNav.classList.add('hidden');
+        mobileMenuToggle.textContent = '[MENU]';
+      } else {
+        mobileNav.classList.remove('hidden');
+        mobileMenuToggle.textContent = '[CLOSE]';
+      }
+    });
+
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.add('hidden');
+        mobileMenuToggle.textContent = '[MENU]';
+      });
+    });
+
+    // Smooth scroll and auto expand from featured works
+    document.querySelectorAll('.featured-work-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        const projectName = card.dataset.projectName;
+        const targetRowWrap = document.querySelector(`#projects-list .row-wrap[data-name="${projectName}"]`);
+        
+        if (targetRowWrap) {
+          // Reset filters
+          document.querySelector('.chip-filter[data-filter="all"]').click();
+
+          const rowBtn = targetRowWrap.querySelector('.row');
+          const rowPreview = targetRowWrap.querySelector('.preview');
+          const previewContent = targetRowWrap.querySelector('.preview-content');
+          const p = projects.find(proj => proj.t === projectName);
+
+          if (p) {
+            targetRowWrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            if (!rowBtn.classList.contains('open')) {
+              setTimeout(() => {
+                toggleRow(rowBtn, rowPreview, previewContent, p);
+              }, 400);
+            }
+          }
+        }
+      });
+    });
+
+    // Brutalist contact form logic
+    const contactForm = document.getElementById('brutalist-contact-form');
+    const formStatus = document.getElementById('form-status');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(contactForm);
+      formStatus.classList.remove('hidden');
+      formStatus.textContent = currentLang === 'tr' ? 'GÖNDERİLİYOR...' : 'SENDING...';
+      formStatus.className = 'mt-4 p-3 border-3 border-ink bg-ink text-yellow1 mono text-xs uppercase';
+
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          formStatus.textContent = currentLang === 'tr' ? '✓ BAŞARIYLA GÖNDERİLDİ! EN KISA SÜREDE DÖNECEĞİM.' : '✓ SENT SUCCESSFULLY! I WILL GET BACK TO YOU SOON.';
+          formStatus.className = 'mt-4 p-3 border-3 border-ink bg-green-600 text-white font-bold mono text-xs uppercase';
+          contactForm.reset();
+        } else {
+          formStatus.textContent = currentLang === 'tr' ? 'HATA OLUŞTU. LÜTFEN TEKRAR DENEYİN.' : 'ERROR OCCURRED. PLEASE TRY AGAIN.';
+          formStatus.className = 'mt-4 p-3 border-3 border-ink bg-red-600 text-white font-bold mono text-xs uppercase';
+        }
+      })
+      .catch(() => {
+        formStatus.textContent = currentLang === 'tr' ? 'BAĞLANTI HATA ALDI. İLETİŞİM KONTROL EDİN.' : 'CONNECTION ERROR. PLEASE TRY AGAIN.';
+        formStatus.className = 'mt-4 p-3 border-3 border-ink bg-red-600 text-white font-bold mono text-xs uppercase';
+      });
+    });
+
+    // Initialize Page states
+    setLanguage(currentLang);
+    setTheme(currentTheme);
+
+  </script>
+</body>
+</html>
