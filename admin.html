@@ -199,6 +199,33 @@
             <input type="text" id="form-aitool" placeholder="Midjourney v6 + Photoshop" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1" />
           </div>
 
+          <!-- PROJECT MEDIA UPLOADER SECTION (FORM INTEGRATED) -->
+          <div id="project-form-media-section" class="col-span-12 border-t border-ink/20 pt-4 mt-2">
+            <h3 class="display text-lg mb-2">PROJECT MEDIA (PROJE GÖRSEL VE VİDEOLARI)</h3>
+            <p class="mono text-[11px] text-ink/70 mb-3 leading-relaxed">
+              Bu projenin görsel ve videolarını doğrudan buradan seçip GitHub'a yükleyebilirsiniz. Dosya adı proje başlığına göre otomatik olarak belirlenecektir.
+            </p>
+            <div class="grid grid-cols-12 gap-3 bg-paper p-4 border-2 border-ink">
+              <div class="col-span-12 md:col-span-6 flex flex-col col-span-12">
+                <label class="font-bold mb-1">SELECT FILE (DOSYA SEÇ)</label>
+                <input type="file" id="form-media-file" class="bg-paper2 border-2 border-ink px-2 py-1 outline-none font-bold text-xs" />
+              </div>
+              <div class="col-span-12 md:col-span-6 flex flex-col col-span-12">
+                <label class="font-bold mb-1">ASSET TYPE (DOSYA TÜRÜ)</label>
+                <select id="form-media-asset-type" class="bg-paper2 border-2 border-ink px-2 py-1.5 outline-none font-bold">
+                  <!-- Will be populated dynamically -->
+                </select>
+              </div>
+              <div class="col-span-12 flex justify-between items-center mt-2 flex-wrap gap-2">
+                <span class="mono text-[10px] text-ink/60 font-bold">TARGET FILENAME (HEDEF DOSYA ADI): <b id="form-media-filename-preview" class="bg-ink text-yellow1 px-2 py-0.5">-</b></span>
+                <button type="button" id="btn-form-media-upload" class="brut-sm bg-ink text-yellow1 font-bold px-4 py-2 cursor-pointer select-none">
+                  🚀 UPLOAD ASSET TO GITHUB
+                </button>
+              </div>
+              <div id="form-media-status" class="col-span-12 hidden p-2 border-2 border-ink bg-ink text-yellow1 text-[10px] uppercase font-bold text-center"></div>
+            </div>
+          </div>
+
           <div class="col-span-12 mt-2">
             <button type="submit" class="brut bg-ink text-yellow1 font-bold px-6 py-3 display text-xs tracking-wider cursor-pointer select-none">
               💾 SAVE PROJECT ITEM
@@ -1004,12 +1031,91 @@
       });
     }
 
+    function updateFormMediaUploader() {
+      const titleInput = document.getElementById('form-t');
+      const typeInput = document.getElementById('form-type');
+      const assetTypeSelect = document.getElementById('form-media-asset-type');
+      const filenamePreview = document.getElementById('form-media-filename-preview');
+
+      const title = titleInput.value.trim();
+      if (!title) {
+        assetTypeSelect.innerHTML = '<option value="">-- LÜTFEN ÖNCE PROJE BAŞLIĞI YAZIN --</option>';
+        filenamePreview.textContent = '-';
+        return;
+      }
+
+      const slug = title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+      const type = typeInput.value;
+      const currentSelectedVal = assetTypeSelect.value;
+
+      let files = [];
+      if (type === 'social') {
+        files = [
+          { name: `${slug}-1.jpg`, desc: 'Görsel 1 / Post 1' },
+          { name: `${slug}-2.jpg`, desc: 'Görsel 2 / Post 2' },
+          { name: `${slug}-3.jpg`, desc: 'Görsel 3 / Post 3' }
+        ];
+      } else if (type === 'motion') {
+        files = [
+          { name: `${slug}.mp4`, desc: 'Ana Video (.mp4)' },
+          { name: `${slug}-frame-1.jpg`, desc: 'Detay Görseli 1' },
+          { name: `${slug}-frame-2.jpg`, desc: 'Detay Görseli 2' },
+          { name: `${slug}-frame-3.jpg`, desc: 'Detay Görseli 3' },
+          { name: `${slug}-frame-4.jpg`, desc: 'Detay Görseli 4' }
+        ];
+      } else if (type === 'ai') {
+        files = [
+          { name: `${slug}.jpg`, desc: 'Kapak Görseli' },
+          { name: `${slug}-v1.jpg`, desc: 'Varyasyon 1' },
+          { name: `${slug}-v2.jpg`, desc: 'Varyasyon 2' },
+          { name: `${slug}-v3.jpg`, desc: 'Varyasyon 3' },
+          { name: `${slug}-v4.jpg`, desc: 'Varyasyon 4' }
+        ];
+      } else if (type === 'ui') {
+        files = [
+          { name: `${slug}.jpg`, desc: 'Kapak Görseli' },
+          { name: `${slug}-1.jpg`, desc: 'Detay Görseli 1' },
+          { name: `${slug}-2.jpg`, desc: 'Detay Görseli 2' },
+          { name: `${slug}-3.jpg`, desc: 'Detay Görseli 3' },
+          { name: `${slug}-4.jpg`, desc: 'Detay Görseli 4' },
+          { name: `${slug}-mobile.jpg`, desc: 'Mobil Görseli' },
+          { name: `${slug}-side-1.jpg`, desc: 'Yan Sütun Görseli' }
+        ];
+      } else { // still
+        files = [
+          { name: `${slug}.jpg`, desc: 'Kapak Görseli' },
+          { name: `${slug}-1.jpg`, desc: 'Detay Görseli 1' },
+          { name: `${slug}-2.jpg`, desc: 'Detay Görseli 2' },
+          { name: `${slug}-3.jpg`, desc: 'Detay Görseli 3' },
+          { name: `${slug}-4.jpg`, desc: 'Detay Görseli 4' }
+        ];
+      }
+
+      assetTypeSelect.innerHTML = '';
+      files.forEach(f => {
+        const opt = document.createElement('option');
+        opt.value = f.name;
+        opt.textContent = `${f.name} (${f.desc})`;
+        if (f.name === currentSelectedVal) {
+          opt.selected = true;
+        }
+        assetTypeSelect.appendChild(opt);
+      });
+
+      if (assetTypeSelect.value) {
+        filenamePreview.textContent = assetTypeSelect.value;
+      } else {
+        filenamePreview.textContent = '-';
+      }
+    }
+
     document.getElementById('btn-add-project').addEventListener('click', () => {
       projectForm.reset();
       document.getElementById('edit-index').value = '';
       document.getElementById('editor-title').textContent = 'ADD NEW PROJECT';
       editorContainer.classList.remove('hidden');
       editorContainer.scrollIntoView({ behavior: 'smooth' });
+      updateFormMediaUploader();
     });
 
     document.getElementById('btn-cancel-edit').addEventListener('click', () => {
@@ -1025,6 +1131,109 @@
       } else {
         aiField.classList.add('hidden');
       }
+      updateFormMediaUploader();
+    });
+
+    document.getElementById('form-t').addEventListener('input', updateFormMediaUploader);
+    document.getElementById('form-media-asset-type').addEventListener('change', () => {
+      document.getElementById('form-media-filename-preview').textContent = document.getElementById('form-media-asset-type').value;
+    });
+
+    document.getElementById('btn-form-media-upload').addEventListener('click', () => {
+      const status = document.getElementById('form-media-status');
+      status.classList.remove('hidden', 'bg-red-600', 'bg-green-600');
+      status.className = 'col-span-12 p-2 border-2 border-ink bg-ink text-yellow1 text-[10px] uppercase font-bold text-center';
+      status.textContent = 'DOSYA HAZIRLANIYOR...';
+
+      const token = document.getElementById('gh-token').value.trim();
+      const repo = document.getElementById('gh-repo').value.trim();
+      const branch = document.getElementById('gh-branch').value.trim();
+      const fileInput = document.getElementById('form-media-file');
+      const filename = document.getElementById('form-media-asset-type').value;
+
+      if (!token || !repo) {
+        status.textContent = 'HATA: GITHUB TOKEN VEYA REPO BİLGİSİ EKSİK. LÜTFEN "PUBLISH & SYNC" SEKMESİNDE DOLDURUN.';
+        status.classList.add('bg-red-600', 'text-white');
+        return;
+      }
+
+      if (!fileInput.files || fileInput.files.length === 0) {
+        status.textContent = 'HATA: LÜTFEN BİR DOSYA SEÇİN.';
+        status.classList.add('bg-red-600', 'text-white');
+        return;
+      }
+
+      if (!filename || filename.startsWith('--')) {
+        status.textContent = 'HATA: LÜTFEN ÖNCE PROJE BAŞLIĞI YAZIN VE GEÇERLİ BİR DOSYA SEÇİN.';
+        status.classList.add('bg-red-600', 'text-white');
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+
+      reader.onload = async function(event) {
+        try {
+          status.textContent = 'GITHUB BAĞLANTISI KONTROL EDİLİYOR...';
+          const arrayBuffer = event.target.result;
+          
+          const uint8 = new Uint8Array(arrayBuffer);
+          let binaryStr = '';
+          for (let i = 0; i < uint8.length; i++) {
+            binaryStr += String.fromCharCode(uint8[i]);
+          }
+          const base64Content = btoa(binaryStr);
+
+          const getUrl = `https://api.github.com/repos/${repo}/contents/images/${filename}?ref=${branch}`;
+          const getRes = await fetch(getUrl, {
+            headers: {
+              'Authorization': `token ${token}`,
+              'Accept': 'application/vnd.github.v3+json'
+            }
+          });
+
+          let sha = null;
+          if (getRes.ok) {
+            const fileData = await getRes.json();
+            sha = fileData.sha;
+          }
+
+          status.textContent = 'DOSYA GITHUB REPOSUNA AKTARILIYOR (BASE64)...';
+          const putUrl = `https://api.github.com/repos/${repo}/contents/images/${filename}`;
+          
+          const bodyObj = {
+            message: `cms: upload media asset ${filename}`,
+            content: base64Content,
+            branch: branch
+          };
+          if (sha) {
+            bodyObj.sha = sha;
+          }
+
+          const putRes = await fetch(putUrl, {
+            method: 'PUT',
+            headers: {
+              'Authorization': `token ${token}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bodyObj)
+          });
+
+          if (putRes.ok) {
+            status.textContent = `✓ '${filename}' BAŞARIYLA YÜKLENDİ! GÜNCELLEME VERCEL'DE YAYINLANIYOR.`;
+            status.className = 'col-span-12 p-2 border-2 border-ink bg-green-600 text-white text-[10px] uppercase font-bold text-center';
+            fileInput.value = '';
+          } else {
+            const errData = await putRes.json();
+            throw new Error(errData.message || 'PUT failed.');
+          }
+        } catch (err) {
+          status.textContent = 'YÜKLEME HATASI: ' + err.message.toUpperCase();
+          status.classList.add('bg-red-600', 'text-white');
+        }
+      };
+
+      reader.readAsArrayBuffer(file);
     });
 
     projectForm.addEventListener('submit', (e) => {
@@ -1118,6 +1327,7 @@
 
       editorContainer.classList.remove('hidden');
       editorContainer.scrollIntoView({ behavior: 'smooth' });
+      updateFormMediaUploader();
     };
 
     window.deleteProject = function(origIdx) {
