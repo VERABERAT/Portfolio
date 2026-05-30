@@ -170,6 +170,13 @@
             <label class="font-bold mb-1">COVER COLOR HEX (KAPAK RENK KODU)</label>
             <input type="text" id="form-cover" required placeholder="#1E3CFF" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold" />
           </div>
+          <div class="col-span-12 md:col-span-4 flex flex-col">
+            <label class="font-bold mb-1">IMAGE RENDER (GÖRSEL HİZALAMA)</label>
+            <select id="form-fit" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold">
+              <option value="cover">COVER / FILL (KIRPIP DOLDUR - Varsayılan)</option>
+              <option value="contain">CONTAIN / FIT (ORANTILI SIĞDIR)</option>
+            </select>
+          </div>
 
           <div class="col-span-12 flex flex-col">
             <label class="font-bold mb-1">FILTER CLASSIFICATION (FİLTRELER - Boşlukla ayırın)</label>
@@ -243,13 +250,17 @@
       <div class="brut bg-paper p-5 space-y-4">
         <div class="flex justify-between items-center border-b-2 border-ink pb-3 flex-wrap gap-3">
           <h2 class="display text-2xl">PROJECT LISTINGS (<span id="project-count">0</span>)</h2>
-          <div class="flex gap-2">
+          <div class="flex items-center gap-2 flex-wrap">
             <input type="text" id="search-input" placeholder="🔍 SEARCH..." class="bg-paper2 border-2 border-ink px-3 py-1.5 mono text-xs outline-none focus:bg-yellow1 font-bold" />
             <button id="btn-add-project" class="brut-sm bg-yellow1 text-ink font-bold px-4 py-1.5 mono text-xs cursor-pointer select-none">
               + ADD NEW
             </button>
+            <button id="btn-publish-direct" class="brut-sm bg-green-600 text-white font-bold px-4 py-1.5 mono text-xs cursor-pointer select-none">
+              🚀 PUBLISH TO LIVE SITE
+            </button>
           </div>
         </div>
+        <div id="publish-direct-status" class="hidden p-2 border-2 border-ink bg-ink text-yellow1 text-[10px] uppercase font-bold text-center"></div>
 
         <div class="overflow-x-auto">
           <table class="w-full border-collapse border-3 border-ink mono text-xs">
@@ -1256,6 +1267,7 @@
       const type = document.getElementById('form-type').value;
       const c = document.getElementById('form-c').value.trim();
       const cover = document.getElementById('form-cover').value.trim();
+      const fit = document.getElementById('form-fit').value;
       const f = document.getElementById('form-f').value.trim().split(/\s+/);
       const desc_tr = document.getElementById('form-desc-tr').value.trim();
       const desc_en = document.getElementById('form-desc-en').value.trim();
@@ -1265,7 +1277,7 @@
       const aiTool = document.getElementById('form-aitool').value.trim();
 
       const projectItem = {
-        t, c, y, type, f, cover,
+        t, c, y, type, f, cover, fit,
         desc: desc_tr,
         tags: tags_tr
       };
@@ -1310,6 +1322,7 @@
       document.getElementById('form-type').value = p.type;
       document.getElementById('form-c').value = p.c;
       document.getElementById('form-cover').value = p.cover;
+      document.getElementById('form-fit').value = p.fit || 'cover';
       document.getElementById('form-f').value = p.f.join(' ');
 
       let trDesc = p.desc;
@@ -1840,19 +1853,19 @@
       }
     });
 
-    document.getElementById('btn-github-commit-all').addEventListener('click', async () => {
-      const status = document.getElementById('gh-status-all');
-      status.classList.remove('hidden', 'bg-red-600', 'bg-green-600');
-      status.className = 'p-2 border-2 border-ink bg-ink text-yellow1 text-[10px] uppercase';
-      status.textContent = 'CONNECTING TO GITHUB API...';
+    async function publishToGithub(statusElement) {
+      statusElement.classList.remove('hidden', 'bg-red-600', 'bg-green-600');
+      statusElement.className = 'p-2 border-2 border-ink bg-ink text-yellow1 text-[10px] uppercase font-bold text-center';
+      statusElement.textContent = 'CONNECTING TO GITHUB API...';
+      statusElement.classList.remove('hidden');
 
       const token = document.getElementById('gh-token').value.trim();
       const repo = document.getElementById('gh-repo').value.trim();
       const branch = document.getElementById('gh-branch').value.trim();
 
       if (!token || !repo || !branch) {
-        status.textContent = 'ERROR: MISSING CREDENTIALS (TOKEN, REPO, OR BRANCH).';
-        status.classList.add('bg-red-600', 'text-white');
+        statusElement.textContent = 'HATA: GITHUB TOKEN VEYA REPO BİLGİSİ EKSİK. LÜTFEN BİLGİLERİ DOLDURUN.';
+        statusElement.classList.add('bg-red-600', 'text-white');
         return;
       }
 
@@ -1861,10 +1874,10 @@
       localStorage.setItem('gh_branch', branch);
 
       try {
-        status.textContent = 'COMPILING STATIC CODE...';
+        statusElement.textContent = 'STATİK SAYFA DERLENİYOR (COMPILING)...';
         const updatedHtml = await generateUpdatedHtml();
 
-        status.textContent = 'FETCHING EXISTING FILE SHA...';
+        statusElement.textContent = 'MEVCUT DOSYA BİLGİLERİ ALINIYOR (SHA)...';
         const getUrl = `https://api.github.com/repos/${repo}/contents/index.html?ref=${branch}`;
         const getRes = await fetch(getUrl, {
           headers: {
@@ -1880,7 +1893,7 @@
         const fileData = await getRes.json();
         const sha = fileData.sha;
 
-        status.textContent = 'COMMITING UPDATES TO REPO...';
+        statusElement.textContent = 'YENİ DEĞİŞİKLİKLER REPOYA İŞLENİYOR (COMMITTING)...';
         const putUrl = `https://api.github.com/repos/${repo}/contents/index.html`;
         
         const utf8Bytes = new TextEncoder().encode(updatedHtml);
@@ -1905,16 +1918,25 @@
         });
 
         if (putRes.ok) {
-          status.textContent = '✓ SUCCESSFULLY COMMITTED! SITE IS REDEPLOYING ON VERCEL.';
-          status.className = 'p-2 border-2 border-ink bg-green-600 text-white text-[10px] uppercase font-bold';
+          statusElement.textContent = '✓ BAŞARIYLA YAYINLANDI! SİTE VERCEL ÜZERİNDE GÜNCELLENİYOR (15sn)...';
+          statusElement.className = 'p-2 border-2 border-ink bg-green-600 text-white text-[10px] uppercase font-bold text-center';
         } else {
           const errData = await putRes.json();
           throw new Error(errData.message || 'GitHub PUT failed.');
         }
-      } catch (e) {
-        status.textContent = 'ERROR: ' + e.message.toUpperCase();
-        status.className = 'p-2 border-2 border-ink bg-red-600 text-white text-[10px] uppercase font-bold';
+      } catch (err) {
+        statusElement.textContent = 'HATA: ' + err.message.toUpperCase();
+        statusElement.classList.add('bg-red-600', 'text-white');
       }
+    }
+
+    document.getElementById('btn-github-commit-all').addEventListener('click', () => {
+      publishToGithub(document.getElementById('gh-status-all'));
+    });
+
+    document.getElementById('btn-publish-direct').addEventListener('click', () => {
+      publishToGithub(document.getElementById('publish-direct-status'));
+    });
     });
 
     // Password Change Handler
