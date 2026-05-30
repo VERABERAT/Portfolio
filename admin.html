@@ -75,6 +75,29 @@
 </head>
 <body class="min-h-screen pb-20">
 
+  <!-- PASSWORD PROTECTION OVERLAY -->
+  <div id="password-gate" class="fixed inset-0 z-[20000] bg-ink flex flex-col items-center justify-center p-4">
+    <div class="brut bg-paper p-6 max-w-sm w-full space-y-4 text-ink">
+      <h2 class="display text-xl border-b-2 border-ink pb-2">CMS ACCESS LOCKED</h2>
+      <p class="mono text-[11px] text-ink/75 leading-relaxed">
+        Bu yönetim paneline sadece yetkili kişiler erişebilir. Lütfen giriş şifrenizi yazın (Varsayılan şifre: <b>berat2026</b>).
+      </p>
+      <div class="flex flex-col mono text-xs">
+        <label class="font-bold mb-1">PASSWORD (PANEL ŞİFRESİ)</label>
+        <input type="password" id="gate-password-input" class="bg-paper2 border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold text-sm" />
+      </div>
+      <button id="btn-submit-password" class="w-full brut bg-ink text-yellow1 font-bold py-3 text-xs uppercase tracking-wider cursor-pointer">
+        🔐 UNLOCK DASHBOARD
+      </button>
+      <div id="gate-error" class="hidden p-2 border-2 border-ink bg-red-600 text-white text-[10px] uppercase font-bold text-center">
+        HATALI ŞİFRE!
+      </div>
+      <div class="text-center pt-2">
+        <a href="index.html" class="mono text-[10px] uppercase underline text-ink/60 hover:text-red1">← BACK TO PORTFOLIO</a>
+      </div>
+    </div>
+  </div>
+
   <!-- TOP BAR -->
   <div class="bg-ink text-paper border-b-3 border-ink">
     <div class="mono text-[11px] tracking-widest uppercase flex items-center justify-between px-4 md:px-6 py-2">
@@ -532,7 +555,7 @@
     <!-- 6. PUBLISH & SYNC TAB PANEL -->
     <section id="panel-publish" class="tab-panel grid grid-cols-12 gap-6 md:gap-10 hidden">
       
-      <!-- Actions Box -->
+      <!-- Actions & Password Box Column -->
       <div class="col-span-12 lg:col-span-6 space-y-6">
         <div class="brut bg-paper2 p-6 space-y-4">
           <h2 class="display text-2xl border-b border-ink pb-2">LOCAL CMS CONTROLS</h2>
@@ -551,6 +574,31 @@
               📥 YENİ INDEX.HTML DOSYASI İNDİR
             </button>
           </div>
+        </div>
+
+        <div class="brut bg-paper2 p-6 space-y-4">
+          <h2 class="display text-2xl border-b border-ink pb-2">CHANGE PANEL PASSWORD</h2>
+          <p class="mono text-xs text-ink/75 leading-relaxed">
+            Yönetim paneline giriş şifrenizi (varsayılan şifre: <b>berat2026</b>) buradan değiştirebilirsiniz.
+          </p>
+          
+          <form id="password-change-form" class="space-y-3 mono text-xs">
+            <div class="flex flex-col">
+              <label class="font-bold mb-1">CURRENT PASSWORD (MEVCUT ŞİFRE)</label>
+              <input type="password" id="pw-current" required class="bg-paper border-2 border-ink px-2 py-1.5 outline-none focus:bg-yellow1" />
+            </div>
+            <div class="flex flex-col">
+              <label class="font-bold mb-1">NEW PASSWORD (YENİ ŞİFRE)</label>
+              <input type="password" id="pw-new" required class="bg-paper border-2 border-ink px-2 py-1.5 outline-none focus:bg-yellow1" />
+            </div>
+            <div class="flex flex-col">
+              <label class="font-bold mb-1">CONFIRM NEW PASSWORD (YENİ ŞİFRE TEKRAR)</label>
+              <input type="password" id="pw-confirm" required class="bg-paper border-2 border-ink px-2 py-1.5 outline-none focus:bg-yellow1" />
+            </div>
+            <button type="submit" class="w-full brut bg-ink text-yellow1 font-bold py-3 text-xs uppercase tracking-wider cursor-pointer select-none">
+              🔒 UPDATE PASSWORD
+            </button>
+          </form>
         </div>
       </div>
 
@@ -587,6 +635,55 @@
   </main>
 
   <script>
+    // ----------------------------------------------------
+    // PASSWORD PROTECTION SYSTEM
+    // ----------------------------------------------------
+    const DEFAULT_PASS_HASH = "67a5eaa8bce0215b943493d139e34a6475312f68ad3ca963275059cbeb2dd008"; // hash of 'berat2026'
+
+    async function sha256(message) {
+      const msgBuffer = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function checkPasswordGate() {
+      const gate = document.getElementById('password-gate');
+      const input = document.getElementById('gate-password-input');
+      const error = document.getElementById('gate-error');
+      
+      if (sessionStorage.getItem('cms_unlocked') === 'true') {
+        gate.classList.add('hidden');
+        return;
+      }
+
+      // Keep gate visible, focus input
+      input.focus();
+
+      async function attemptUnlock() {
+        const password = input.value;
+        const hash = await sha256(password);
+        const savedHash = localStorage.getItem('portfolio_admin_hash') || DEFAULT_PASS_HASH;
+
+        if (hash === savedHash) {
+          sessionStorage.setItem('cms_unlocked', 'true');
+          gate.classList.add('hidden');
+          error.classList.add('hidden');
+        } else {
+          error.classList.remove('hidden');
+          input.value = '';
+          input.focus();
+        }
+      }
+
+      document.getElementById('btn-submit-password').addEventListener('click', attemptUnlock);
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') attemptUnlock();
+      });
+    }
+
+    checkPasswordGate();
+
     // System Theme Settings
     let currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     function setTheme(theme) {
@@ -1371,7 +1468,6 @@
           status.textContent = 'GITHUB BAĞLANTISI KONTROL EDİLİYOR...';
           const arrayBuffer = event.target.result;
           
-          // Encode arrayBuffer into Base64 supporting binary
           const uint8 = new Uint8Array(arrayBuffer);
           let binaryStr = '';
           for (let i = 0; i < uint8.length; i++) {
@@ -1379,7 +1475,6 @@
           }
           const base64Content = btoa(binaryStr);
 
-          // Get file SHA if already exists to override
           const getUrl = `https://api.github.com/repos/${repo}/contents/images/${filename}?ref=${branch}`;
           const getRes = await fetch(getUrl, {
             headers: {
@@ -1584,6 +1679,43 @@
         status.textContent = 'ERROR: ' + e.message.toUpperCase();
         status.className = 'p-2 border-2 border-ink bg-red-600 text-white text-[10px] uppercase font-bold';
       }
+    });
+
+    // Password Change Handler
+    const passwordForm = document.getElementById('password-change-form');
+    passwordForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const current = document.getElementById('pw-current').value;
+      const newPw = document.getElementById('pw-new').value;
+      const confirmPw = document.getElementById('pw-confirm').value;
+
+      const savedHash = localStorage.getItem('portfolio_admin_hash') || DEFAULT_PASS_HASH;
+      const currentHash = await sha256(current);
+
+      if (currentHash !== savedHash) {
+        alert('HATA: Mevcut şifreniz yanlış!');
+        return;
+      }
+
+      if (newPw !== confirmPw) {
+        alert('HATA: Yeni şifre ve onay şifresi uyuşmuyor!');
+        return;
+      }
+
+      if (newPw.length < 4) {
+        alert('HATA: Yeni şifre en az 4 karakter olmalıdır!');
+        return;
+      }
+
+      const newHash = await sha256(newPw);
+      localStorage.setItem('portfolio_admin_hash', newHash);
+      
+      document.getElementById('pw-current').value = '';
+      document.getElementById('pw-new').value = '';
+      document.getElementById('pw-confirm').value = '';
+
+      alert('✓ Şifreniz başarıyla güncellendi! Bir sonraki girişinizde aktif olacaktır.');
     });
 
     // Render lists on startup
