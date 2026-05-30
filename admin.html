@@ -209,6 +209,11 @@
             <input type="text" id="form-aitool" placeholder="Midjourney v6 + Photoshop" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1" />
           </div>
 
+          <div class="col-span-12 flex flex-col">
+            <label class="font-bold mb-1">BEHANCE PROJECT URL (BEHANCE PROJE LİNKİ - Opsiyonel)</label>
+            <input type="text" id="form-behance" placeholder="https://www.behance.net/gallery/215582963/VERA" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1" />
+          </div>
+
           <!-- PROJECT MEDIA UPLOADER SECTION (FORM INTEGRATED) -->
           <div id="project-form-media-section" class="col-span-12 border-t border-ink/20 pt-4 mt-2">
             <h3 class="display text-lg mb-2">PROJECT MEDIA (PROJE GÖRSEL VE VİDEOLARI)</h3>
@@ -1382,6 +1387,7 @@
       const tags_tr = document.getElementById('form-tags-tr').value.split(',').map(tag => tag.trim()).filter(Boolean);
       const tags_en = document.getElementById('form-tags-en').value.split(',').map(tag => tag.trim()).filter(Boolean);
       const aiTool = document.getElementById('form-aitool').value.trim();
+      const behance = document.getElementById('form-behance').value.trim();
 
       const projectItem = {
         t, c, y, type, f, cover, fit,
@@ -1391,6 +1397,9 @@
 
       if (type === 'ai' && aiTool) {
         projectItem.aiTool = aiTool;
+      }
+      if (behance) {
+        projectItem.behance = behance;
       }
 
       translationsDict.descriptions[desc_tr] = { tr: desc_tr, en: desc_en };
@@ -1455,6 +1464,7 @@
         aiField.classList.add('hidden');
         document.getElementById('form-aitool').value = '';
       }
+      document.getElementById('form-behance').value = p.behance || '';
 
       editorContainer.classList.remove('hidden');
       editorContainer.scrollIntoView({ behavior: 'smooth' });

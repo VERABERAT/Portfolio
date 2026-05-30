@@ -1349,13 +1349,31 @@
 
     const list = document.getElementById('projects-list');
 
+    function getBehanceId(url) {
+      if (!url) return null;
+      const m = url.match(/\/gallery\/(\d+)/) || url.match(/\/project\/(\d+)/) || url.match(/behance\.net\/gallery\/(\d+)/) || url.match(/^(\d+)$/);
+      return m ? m[1] : null;
+    }
+
     function buildPreview(p) {
       const slug = p.t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
       const fitClass = p.fit === 'cover' ? 'object-cover' : 'object-contain bg-paper';
       const tagsHtml = p.tags.map(t => `<span class="brut-sm bg-paper text-ink px-2 py-1 mono text-[10px] uppercase">${tText(t, 'tags')}</span>`).join('');
 
       let media = '';
-      if (p.type === 'social') {
+      const behanceId = getBehanceId(p.behance);
+      if (behanceId) {
+        const isTR = currentLang === 'tr';
+        media = `
+          <div class="brut bg-paper overflow-hidden relative w-full mb-4">
+            <iframe src="https://www.behance.net/embed/project/${behanceId}?shared=1&clientId=behance" class="w-full h-[70vh] md:h-[80vh] border-0 bg-paper" allowfullscreen lazyload></iframe>
+          </div>
+          <div class="text-center pt-2">
+            <a href="${p.behance}" target="_blank" class="inline-block brut bg-ink text-yellow1 hover:bg-yellow1 hover:text-ink font-bold px-6 py-3 mono text-xs uppercase tracking-wider transition-colors">
+              ${isTR ? '🚀 BEHANCE\'DE TAM BOYUTLU GÖR ↗' : '🚀 VIEW FULL SIZE ON BEHANCE ↗'}
+            </a>
+          </div>`;
+      } else if (p.type === 'social') {
         // 3 phone mockups with onerror fallback
         media = `
           <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
