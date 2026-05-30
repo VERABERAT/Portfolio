@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://beraterdogan.vercel.app/sitemap.xml
+Sitemap: https://beraterdogan.studio/sitemap.xml
