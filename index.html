@@ -1848,14 +1848,78 @@
       el.textContent = String(total).padStart(6,'0');
     })();
 
-    // ---- NOW PLAYING (statik, düzenlenebilir) ----
-    // Spotify API için backend gerekir; burası elle güncellenebilir bir alan.
-    const NOW_PLAYING = { track: "Bonobo — Kerala", state: "RECENTLY PLAYED" };
+    // ---- NOW PLAYING (Spotify Track Cycling) ----
+    const TRACKS = [
+      { track: "Bonobo — Kerala", state: "NOW PLAYING" },
+      { track: "Four Tet — Two Thousand and Seventeen", state: "RECENTLY PLAYED" },
+      { track: "Jamie xx — Loud Places", state: "NOW PLAYING" },
+      { track: "Caribou — Odessa", state: "RECENTLY PLAYED" },
+      { track: "Burial — Archangel", state: "NOW PLAYING" },
+      { track: "Jon Hopkins — Emerald Rush", state: "NOW PLAYING" },
+      { track: "Aphex Twin — Alberto Balsalm", state: "RECENTLY PLAYED" },
+      { track: "Bicep — Glue", state: "NOW PLAYING" },
+      { track: "Boards of Canada — Dayvan Cowboy", state: "RECENTLY PLAYED" },
+      { track: "Tycho — Awake", state: "NOW PLAYING" },
+      { track: "Floating Points — Bias", state: "RECENTLY PLAYED" },
+      { track: "Nicolas Jaar — Mi Mujer", state: "NOW PLAYING" },
+      { track: "Kaytranada — 10%", state: "NOW PLAYING" },
+      { track: "Peggy Gou — Starry Night", state: "RECENTLY PLAYED" },
+      { track: "Fred again.. — Marea (We've Lost Dancing)", state: "NOW PLAYING" },
+      { track: "Modeselektor — Rusty Nails", state: "RECENTLY PLAYED" },
+      { track: "Overmono — So U Kno", state: "NOW PLAYING" },
+      { track: "Massive Attack — Teardrop", state: "RECENTLY PLAYED" },
+      { track: "Portishead — Roads", state: "RECENTLY PLAYED" },
+      { track: "Moderat — Bad Kingdom", state: "NOW PLAYING" }
+    ];
+
     (function() {
       const t = document.getElementById('np-track');
       const s = document.getElementById('np-state');
-      if (t) t.textContent = NOW_PLAYING.track;
-      if (s) s.textContent = NOW_PLAYING.state;
+      const eq = document.querySelector('.eq');
+      if (!t || !s) return;
+
+      let currentIndex = Math.floor(Math.random() * TRACKS.length);
+
+      function updateTrack() {
+        const item = TRACKS[currentIndex];
+        
+        t.style.opacity = '0';
+        s.style.opacity = '0';
+        
+        setTimeout(() => {
+          t.textContent = item.track;
+          s.textContent = item.state;
+          
+          if (item.state === 'NOW PLAYING') {
+            s.className = 'text-yellow1 shrink-0';
+            if (eq) {
+              eq.querySelectorAll('span').forEach(bar => {
+                bar.style.animationPlayState = 'running';
+                bar.style.opacity = '1';
+              });
+            }
+          } else {
+            s.className = 'text-paper/60 shrink-0';
+            if (eq) {
+              eq.querySelectorAll('span').forEach(bar => {
+                bar.style.animationPlayState = 'paused';
+                bar.style.opacity = '0.3';
+              });
+            }
+          }
+          
+          t.style.opacity = '1';
+          s.style.opacity = '1';
+        }, 300);
+
+        currentIndex = (currentIndex + 1) % TRACKS.length;
+      }
+
+      t.style.transition = 'opacity 0.3s ease';
+      s.style.transition = 'opacity 0.3s ease';
+
+      updateTrack();
+      setInterval(updateTrack, 10000); // Cycles every 10 seconds
     })();
 
     // ---- EASTER EGG: Konami code ----
