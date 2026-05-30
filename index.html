@@ -91,7 +91,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -105,14 +105,15 @@
             yellow1:'var(--yellow-1)',
             red1:   'var(--red-1)',
             blue1:  'var(--blue-1)',
+            border1:'var(--border)',
           },
           fontFamily: {
-            black: ['Archivo Black','system-ui','sans-serif'],
-            mono:  ['Space Mono','ui-monospace','monospace'],
-            sans:  ['Space Grotesk','ui-sans-serif','system-ui'],
+            display: ['Playfair Display','Georgia','serif'],
+            mono:    ['Space Mono','ui-monospace','monospace'],
+            sans:    ['Inter','ui-sans-serif','system-ui','sans-serif'],
           },
           borderWidth: {
-            '3':'3px','5':'5px','6':'6px','7':'7px',
+            '1': '1px', '3':'1px','5':'1px','6':'1px','7':'1px',
           }
         }
       }
@@ -121,49 +122,53 @@
 
   <style>
     :root {
-      --paper: #F2F1EC;
-      --paper2: #E8E6DD;
-      --ink: #000000;
-      --yellow-1: #FFE600;
-      --red-1: #FF2D00;
-      --blue-1: #1E3CFF;
+      --paper: #FAF9F6;
+      --paper2: #F0EDE4;
+      --ink: #121212;
+      --yellow-1: #C5A880;
+      --red-1: #9E2A2B;
+      --blue-1: #2A4B7C;
+      --border: rgba(18, 18, 18, 0.08);
       color-scheme: light;
     }
     
     html[data-theme="dark"] {
-      --paper: #0B0B0E;
-      --paper2: #18181C;
-      --ink: #FFFFFF;
-      --yellow-1: #FFE600;
-      --red-1: #FF2D00;
-      --blue-1: #1E3CFF;
+      --paper: #0A0A0B;
+      --paper2: #151518;
+      --ink: #F3F4F6;
+      --yellow-1: #D4AF37;
+      --red-1: #E07A5F;
+      --blue-1: #81A1C1;
+      --border: rgba(243, 244, 246, 0.08);
       color-scheme: dark;
     }
 
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
-        --paper: #0B0B0E;
-        --paper2: #18181C;
-        --ink: #FFFFFF;
-        --yellow-1: #FFE600;
-        --red-1: #FF2D00;
-        --blue-1: #1E3CFF;
+        --paper: #0A0A0B;
+        --paper2: #151518;
+        --ink: #F3F4F6;
+        --yellow-1: #D4AF37;
+        --red-1: #E07A5F;
+        --blue-1: #81A1C1;
+        --border: rgba(243, 244, 246, 0.08);
         color-scheme: dark;
       }
     }
 
     html, body { background: var(--paper); color: var(--ink); transition: background-color 0.15s ease, color 0.15s ease; overflow-x: hidden; }
-    body { font-family:'Space Grotesk', sans-serif; padding-bottom: 42px; }
+    body { font-family:'Inter', sans-serif; padding-bottom: 42px; }
     *, *::before, *::after { box-sizing: border-box; border-radius: 0 !important; }
-    ::selection { background: var(--ink); color: var(--yellow-1); }
+    ::selection { background: var(--yellow-1); color: #000000; }
 
-    .display { font-family:'Archivo Black', sans-serif; letter-spacing:-0.04em; line-height:0.86; text-transform:uppercase; }
+    .display { font-family:'Playfair Display', serif; font-weight: 500; letter-spacing:-0.02em; }
     .mono { font-family:'Space Mono', monospace; }
 
-    .brut { border:3px solid var(--ink); box-shadow: 8px 8px 0 0 var(--ink); }
-    .brut-sm { border:3px solid var(--ink); box-shadow: 4px 4px 0 0 var(--ink); }
-    .brut-hover { transition: transform 80ms steps(2), box-shadow 80ms steps(2); }
-    .brut-hover:hover { transform: translate(4px,4px); box-shadow: 0 0 0 0 var(--ink); }
+    .brut { border: 1px solid var(--border); box-shadow: none; }
+    .brut-sm { border: 1px solid var(--border); box-shadow: none; }
+    .brut-hover { transition: background-color 0.2s ease, border-color 0.2s ease; }
+    .brut-hover:hover { background-color: var(--paper2); }
+    .border-ink { border-color: var(--border) !important; }
 
     .grid-bg {
       background-image:
@@ -184,17 +189,17 @@
 
     .num { font-family:'Archivo Black'; font-feature-settings:"tnum"; }
 
-    .row-wrap { border-top: 3px solid var(--ink); }
-    .row-wrap:last-child { border-bottom: 3px solid var(--ink); }
-    .row { transition: background-color 80ms steps(2); }
-    .row:hover { background: var(--yellow-1); color: #000000; }
-    .row.open { background: var(--ink); color: var(--paper); }
-    .row.open .row-cat, .row.open .mono-time { color: var(--yellow-1); }
+    .row-wrap { border-top: 1px solid var(--border); }
+    .row-wrap:last-child { border-bottom: 1px solid var(--border); }
+    .row { transition: background-color 0.2s ease, color 0.2s ease; }
+    .row:hover { background: var(--paper2); }
+    .row.open { background: var(--paper2); color: var(--ink); }
+    .row.open .row-cat, .row.open .mono-time { opacity: 0.6; }
     .row.open .row-arrow { transform: rotate(90deg); }
-    .row-arrow { display:inline-block; transition: transform 120ms steps(2); }
+    .row-arrow { display:inline-block; transition: transform 0.2s ease; }
 
-    .preview { max-height:0; overflow:hidden; transition: max-height 350ms cubic-bezier(.2,.8,.2,1); border-top:0 solid var(--ink); }
-    .preview.open { max-height: 1600px; border-top:3px solid var(--ink); }
+    .preview { max-height:0; overflow:hidden; transition: max-height 350ms cubic-bezier(.2,.8,.2,1); border-top:0 solid var(--border); }
+    .preview.open { max-height: 2000px; border-top:1px solid var(--border); }
     .preview-inner { padding: 1.25rem 1.25rem 2rem; }
     @media (min-width: 768px) { .preview-inner { padding: 2rem 1.5rem 2.5rem; } }
 
@@ -218,9 +223,9 @@
     .phone-bar { display:flex; justify-content:space-between; align-items:center; padding: 6px 10px; border-bottom:2px solid var(--ink); font-family:'Space Mono'; font-size:9px; text-transform:uppercase; }
 
     /* Filter chips */
-    .chip-filter { border:3px solid var(--ink); padding: 6px 12px; font-family:'Space Mono'; font-size: 11px; text-transform:uppercase; letter-spacing:.12em; cursor:pointer; transition: transform 80ms steps(2), box-shadow 80ms steps(2); }
-    .chip-filter:hover { transform: translate(2px,2px); }
-    .chip-filter.active { background: var(--ink); color: var(--yellow-1); box-shadow: 4px 4px 0 0 var(--yellow-1); }
+    .chip-filter { border: 1px solid var(--border); padding: 6px 16px; font-family:'Space Mono', monospace; font-size: 10px; text-transform:uppercase; letter-spacing:.12em; cursor:pointer; transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+    .chip-filter:hover { background-color: var(--paper2); border-color: var(--ink); }
+    .chip-filter.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
     .blink { animation: blink 1s steps(2) infinite; }
     @keyframes blink { 50% { opacity:0 } }
@@ -228,32 +233,23 @@
     .star-spin { animation: spin 14s linear infinite; transform-origin: 50% 50%; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ===== CUSTOM CURSOR ===== */
-    @media (hover:hover) and (pointer:fine) {
-      * { cursor: none !important; }
-      .cursor-dot, .cursor-ring { position: fixed; top:0; left:0; z-index:9999; pointer-events:none; mix-blend-mode: difference; }
-      .cursor-dot { width:8px; height:8px; background:#FFE600; transform: translate(-50%,-50%); }
-      .cursor-ring { width:36px; height:36px; border:3px solid #fff; transform: translate(-50%,-50%); transition: width .15s steps(3), height .15s steps(3), background-color .15s steps(3); }
-      .cursor-ring.hot { width:64px; height:64px; background:#FFE600; border-color:#FFE600; }
-    }
-
     /* ===== PRELOADER ===== */
-    #preloader { position: fixed; inset:0; z-index:10000; background:#000; color:#FFE600; display:flex; flex-direction:column; justify-content:space-between; padding: 2rem; transition: transform .6s cubic-bezier(.7,0,.3,1); }
+    #preloader { position: fixed; inset:0; z-index:10000; background: var(--paper); color: var(--ink); display:flex; flex-direction:column; justify-content:space-between; padding: 2rem; transition: transform .6s cubic-bezier(.7,0,.3,1); }
     #preloader.done { transform: translateY(-100%); }
-    #preloader .pl-count { font-family:'Archivo Black'; font-size: 28vw; line-height:.8; text-align:right; }
-    #preloader .pl-name { font-family:'Archivo Black'; font-size: clamp(2rem,7vw,6rem); text-transform:uppercase; letter-spacing:-.03em; }
-    .pl-bar { position: absolute; top:0; left:0; height:6px; background:#FFE600; width:0%; transition: width 0.08s ease; }
+    #preloader .pl-count { font-family:'Playfair Display', serif; font-size: 28vw; line-height:.8; text-align:right; }
+    #preloader .pl-name { font-family:'Playfair Display', serif; font-size: clamp(2rem,7vw,6rem); text-transform:uppercase; letter-spacing:-.03em; }
+    .pl-bar { position: absolute; top:0; left:0; height:6px; background: var(--ink); width:0%; transition: width 0.08s ease; }
 
 
     /* ===== HOVER IMAGE PREVIEW ===== */
-    #hover-preview { position: fixed; z-index:9000; width: 320px; aspect-ratio:4/3; border:3px solid var(--ink); box-shadow:8px 8px 0 0 var(--ink); pointer-events:none; opacity:0; transform: translate(-50%,-50%) scale(.9); transition: opacity .15s steps(2), transform .15s steps(2); overflow:hidden; }
+    #hover-preview { position: fixed; z-index:9000; width: 320px; aspect-ratio:4/3; border:1px solid var(--border); pointer-events:none; opacity:0; transform: translate(-50%,-50%) scale(.9); transition: opacity 0.2s ease, transform 0.2s ease; overflow:hidden; }
     #hover-preview.show { opacity:1; transform: translate(-50%,-50%) scale(1); }
-    #hover-preview .hp-label { position:absolute; bottom:0; left:0; right:0; background:#000; color:#FFE600; font-family:'Space Mono'; font-size:11px; text-transform:uppercase; padding:6px 10px; letter-spacing:.1em; }
+    #hover-preview .hp-label { position:absolute; bottom:0; left:0; right:0; background: var(--ink); color: var(--paper); font-family:'Space Mono', monospace; font-size:10px; text-transform:uppercase; padding:6px 10px; letter-spacing:.1em; }
 
     /* ===== NOW PLAYING / STATUS STRIP ===== */
-    #status-strip { position: fixed; bottom:0; left:0; right:0; z-index:40; background:#000; color:#F2F1EC; border-top:3px solid #FFE600; font-family:'Space Mono'; font-size:11px; text-transform:uppercase; letter-spacing:.08em; }
+    #status-strip { position: fixed; bottom:0; left:0; right:0; z-index:40; background: var(--paper); color: var(--ink); border-top:1px solid var(--border); font-family:'Space Mono', monospace; font-size:10px; text-transform:uppercase; letter-spacing:.08em; }
     .eq { display:inline-flex; align-items:flex-end; gap:2px; height:14px; }
-    .eq span { width:3px; background:#FFE600; animation: eq .9s steps(4) infinite; }
+    .eq span { width:3px; background: var(--ink); animation: eq .9s steps(4) infinite; }
     .eq span:nth-child(2){ animation-delay:.2s } .eq span:nth-child(3){ animation-delay:.4s } .eq span:nth-child(4){ animation-delay:.1s }
     @keyframes eq { 0%,100%{ height:4px } 50%{ height:14px } }
 
@@ -277,9 +273,7 @@
     </div>
   </div>
 
-  <!-- CUSTOM CURSOR -->
-  <div class="cursor-ring" id="cursor-ring"></div>
-  <div class="cursor-dot" id="cursor-dot"></div>
+
 
   <!-- HOVER IMAGE PREVIEW -->
   <div id="hover-preview"><div class="hp-label"></div></div>
@@ -571,8 +565,8 @@
   </section>
 
   <!-- INDEX / ARCHIVE -->
-  <section id="index" class="border-b-3 border-ink">
-    <div class="px-4 md:px-6 py-6 md:py-8 border-b-3 border-ink flex items-end justify-between flex-wrap gap-4 bg-yellow1">
+  <section id="index" class="border-b-1 border-border1">
+    <div class="px-4 md:px-6 py-6 md:py-8 border-b-1 border-border1 flex items-end justify-between flex-wrap gap-4 bg-paper2">
       <div>
         <div class="mono text-[11px] uppercase tracking-widest mb-2" data-tr="// Bölüm 03" data-en="// Section 03">// Bölüm 03</div>
         <h2 class="display text-5xl md:text-8xl" data-tr="İNDEKS /<br/>ARŞİV <span class='mono text-2xl md:text-4xl align-top'>[40]</span>" data-en="INDEX /<br/>ARCHIVE <span class='mono text-2xl md:text-4xl align-top'>[40]</span>">İNDEKS /<br/>ARŞİV <span class="mono text-2xl md:text-4xl align-top">[40]</span></h2>
@@ -583,18 +577,13 @@
     </div>
 
     <!-- filter -->
-    <div class="px-4 md:px-6 py-4 border-b-3 border-ink bg-paper flex flex-wrap items-center gap-2">
+    <div class="px-4 md:px-6 py-4 border-b-1 border-border1 bg-paper flex flex-wrap items-center gap-2">
       <span class="mono text-[11px] uppercase tracking-widest mr-2" data-tr="► FİLTRELE:" data-en="► FILTER:">► FİLTRELE:</span>
-      <button class="chip-filter active" data-filter="all" data-tr="TÜMÜ <span class='opacity-60'>[40]</span>" data-en="ALL <span class='opacity-60'>[40]</span>">TÜMÜ <span class="opacity-60">[40]</span></button>
-      <button class="chip-filter" data-filter="brand" data-tr="MARKA" data-en="BRAND">MARKA</button>
-      <button class="chip-filter" data-filter="ui">UI / UX</button>
-      <button class="chip-filter" data-filter="social" data-tr="SOSYAL" data-en="SOCIAL">SOSYAL</button>
-      <button class="chip-filter" data-filter="motion" data-tr="HAREKETLİ" data-en="MOTION">HAREKETLİ</button>
-      <button class="chip-filter" data-filter="ai" data-tr="<span class='inline-block w-2 h-2 bg-yellow1 border border-ink align-middle mr-1'></span>YAPAY ZEKA" data-en="<span class='inline-block w-2 h-2 bg-yellow1 border border-ink align-middle mr-1'></span>AI GENERATED">
-        <span class="inline-block w-2 h-2 bg-yellow1 border border-ink align-middle mr-1"></span>YAPAY ZEKA
-      </button>
-      <button class="chip-filter" data-filter="editorial" data-tr="EDİTÖRYAL" data-en="EDITORIAL">EDİTÖRYAL</button>
-      <button class="chip-filter" data-filter="packaging" data-tr="AMBALAJ" data-en="PACKAGING">AMBALAJ</button>
+      <button class="chip-filter active" data-filter="all" data-tr="TÜMÜ" data-en="ALL">TÜMÜ</button>
+      <button class="chip-filter" data-filter="ui" data-tr="UI / UX" data-en="UI / UX">UI / UX</button>
+      <button class="chip-filter" data-filter="motion" data-tr="MOTION" data-en="MOTION">MOTION</button>
+      <button class="chip-filter" data-filter="print" data-tr="POSTER &amp; BASKI" data-en="POSTER &amp; PRINT">POSTER &amp; BASKI</button>
+      <button class="chip-filter" data-filter="social" data-tr="SOSYAL MEDYA" data-en="SOCIAL MEDIA">SOSYAL MEDYA</button>
     </div>
 
     <!-- table head -->
@@ -658,7 +647,7 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="bg-yellow1 border-b-3 border-ink relative overflow-hidden">
+  <section id="contact" class="bg-paper2 border-b-1 border-border1 relative overflow-hidden">
     <div class="absolute -top-10 -right-10 opacity-30 select-none pointer-events-none">
       <svg class="star-spin w-[360px] h-[360px]" viewBox="0 0 100 100" fill="#000">
         <path d="M50 2 L58 38 L96 42 L66 64 L78 98 L50 78 L22 98 L34 64 L4 42 L42 38 Z"/>
@@ -1690,14 +1679,11 @@
     };
 
     const filterTranslations = {
-      all: { tr: "TÜMÜ <span class='opacity-60'>[40]</span>", en: "ALL <span class='opacity-60'>[40]</span>" },
-      brand: { tr: "MARKA", en: "BRAND" },
+      all: { tr: "TÜMÜ", en: "ALL" },
       ui: { tr: "UI / UX", en: "UI / UX" },
-      social: { tr: "SOSYAL", en: "SOCIAL" },
       motion: { tr: "HAREKETLİ", en: "MOTION" },
-      ai: { tr: "<span class='inline-block w-2 h-2 bg-yellow1 border border-ink align-middle mr-1'></span>YAPAY ZEKA", en: "<span class='inline-block w-2 h-2 bg-yellow1 border border-ink align-middle mr-1'></span>AI GENERATED" },
-      editorial: { tr: "EDİTÖRYAL", en: "EDITORIAL" },
-      packaging: { tr: "AMBALAJ", en: "PACKAGING" }
+      print: { tr: "POSTER & BASKI", en: "POSTER & PRINT" },
+      social: { tr: "SOSYAL MEDYA", en: "SOCIAL MEDIA" }
     };
 
     const translations = {
@@ -2232,8 +2218,16 @@
         chip.classList.add('active');
         const f = chip.dataset.filter;
         document.querySelectorAll('#projects-list .row-wrap').forEach(w => {
-          const tags = w.dataset.filters || '';
-          w.style.display = (f === 'all' || tags.split(' ').includes(f)) ? '' : 'none';
+          const tags = (w.dataset.filters || '').split(' ');
+          let matches = false;
+          if (f === 'all') {
+            matches = true;
+          } else if (f === 'print') {
+            matches = tags.includes('brand') || tags.includes('packaging') || tags.includes('editorial') || tags.includes('ai');
+          } else {
+            matches = tags.includes(f);
+          }
+          w.style.display = matches ? '' : 'none';
         });
       });
     });
@@ -2283,6 +2277,10 @@
       });
 
       // Translate filter chips
+      if (typeof projects !== 'undefined') {
+        filterTranslations.all.tr = `TÜMÜ <span class="opacity-40">[${projects.length}]</span>`;
+        filterTranslations.all.en = `ALL <span class="opacity-40">[${projects.length}]</span>`;
+      }
       document.querySelectorAll('.chip-filter').forEach(chip => {
         const filter = chip.dataset.filter;
         if (filterTranslations[filter]) {
@@ -2439,22 +2437,7 @@
       }
     })();
 
-    // ---- CUSTOM CURSOR ----
-    (function() {
-      if (!matchMedia('(hover:hover) and (pointer:fine)').matches) return;
-      const dot = document.getElementById('cursor-dot');
-      const ring = document.getElementById('cursor-ring');
-      if (!dot || !ring) return;
-      let mx = 0, my = 0, rx = 0, ry = 0;
-      addEventListener('mousemove', e => {
-        mx = e.clientX; my = e.clientY;
-        dot.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
-      });
-      (function loop(){ rx += (mx-rx)*0.2; ry += (my-ry)*0.2; ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`; requestAnimationFrame(loop); })();
-      const hot = 'a, button, .row, .chip-filter, [role="button"]';
-      addEventListener('mouseover', e => { if (e.target.closest(hot)) ring.classList.add('hot'); });
-      addEventListener('mouseout',  e => { if (e.target.closest(hot)) ring.classList.remove('hot'); });
-    })();
+
 
     // ---- HOVER IMAGE PREVIEW (project rows) ----
     (function() {
