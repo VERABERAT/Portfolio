@@ -173,8 +173,8 @@
           <div class="col-span-12 md:col-span-4 flex flex-col">
             <label class="font-bold mb-1">IMAGE RENDER (GÖRSEL HİZALAMA)</label>
             <select id="form-fit" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold">
-              <option value="cover">COVER / FILL (KIRPIP DOLDUR - Varsayılan)</option>
-              <option value="contain">CONTAIN / FIT (ORANTILI SIĞDIR)</option>
+              <option value="contain" selected>CONTAIN / FIT (ORANTILI SIĞDIR - Varsayılan)</option>
+              <option value="cover">COVER / FILL (KIRPIP DOLDUR)</option>
             </select>
           </div>
 
@@ -1322,7 +1322,7 @@
       document.getElementById('form-type').value = p.type;
       document.getElementById('form-c').value = p.c;
       document.getElementById('form-cover').value = p.cover;
-      document.getElementById('form-fit').value = p.fit || 'cover';
+      document.getElementById('form-fit').value = p.fit || 'contain';
       document.getElementById('form-f').value = p.f.join(' ');
 
       let trDesc = p.desc;

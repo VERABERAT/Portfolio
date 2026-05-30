@@ -1351,7 +1351,7 @@
 
     function buildPreview(p) {
       const slug = p.t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-      const fitClass = p.fit === 'contain' ? 'object-contain bg-paper' : 'object-cover';
+      const fitClass = p.fit === 'cover' ? 'object-cover' : 'object-contain bg-paper';
       const tagsHtml = p.tags.map(t => `<span class="brut-sm bg-paper text-ink px-2 py-1 mono text-[10px] uppercase">${tText(t, 'tags')}</span>`).join('');
 
       let media = '';
