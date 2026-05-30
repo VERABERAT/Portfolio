@@ -1465,9 +1465,15 @@
             <div class="col-span-6 md:col-span-4 brut aspect-[16/10] relative overflow-hidden" style="background:${p.cover}; filter:saturate(.5) brightness(.7);">
               <img src="images/${slug}-2.jpg" alt="${p.t}" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none';">
             </div>
-            <div class="col-span-4 md:col-span-4 brut aspect-square bg-yellow1"></div>
-            <div class="col-span-4 md:col-span-4 brut aspect-square" style="background:${p.cover};"></div>
-            <div class="col-span-4 md:col-span-4 brut aspect-square bg-ink"></div>
+            <div class="col-span-4 md:col-span-4 brut aspect-square relative overflow-hidden bg-yellow1">
+              <img src="images/${slug}-1.jpg" alt="${p.t}" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none';">
+            </div>
+            <div class="col-span-4 md:col-span-4 brut aspect-square relative overflow-hidden" style="background:${p.cover};">
+              <img src="images/${slug}-3.jpg" alt="${p.t}" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none';">
+            </div>
+            <div class="col-span-4 md:col-span-4 brut aspect-square relative overflow-hidden bg-ink">
+              <img src="images/${slug}-4.jpg" alt="${p.t}" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none';">
+            </div>
           </div>`;
       }
 
