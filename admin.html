@@ -206,7 +206,12 @@
               Bu projenin görsel ve videolarını doğrudan buradan seçip GitHub'a yükleyebilirsiniz. Dosya adı proje başlığına göre otomatik olarak belirlenecektir.
             </p>
             <div class="grid grid-cols-12 gap-3 bg-paper p-4 border-2 border-ink">
-              <div class="col-span-12 md:col-span-6 flex flex-col col-span-12">
+              <div class="col-span-12 flex flex-col">
+                <label class="font-bold mb-1">GITHUB PERSONAL ACCESS TOKEN (PAT)</label>
+                <input type="password" id="form-media-token" placeholder="ghp_..." class="bg-paper2 border-2 border-ink px-2 py-1.5 outline-none focus:bg-yellow1 font-mono text-xs" />
+                <span class="text-[9px] text-ink/60 mt-1">Dosya yükleyebilmek için GitHub Token bilginizi girin (Sadece bu tarayıcıda saklanır).</span>
+              </div>
+              <div class="col-span-12 md:col-span-6 flex flex-col">
                 <label class="font-bold mb-1">SELECT FILE (DOSYA SEÇ)</label>
                 <input type="file" id="form-media-file" class="bg-paper2 border-2 border-ink px-2 py-1 outline-none font-bold text-xs" />
               </div>
@@ -521,6 +526,12 @@
           </p>
 
           <div class="space-y-4">
+            <div class="flex flex-col">
+              <label class="font-bold mb-1">GITHUB PERSONAL ACCESS TOKEN (PAT)</label>
+              <input type="password" id="tab-media-token" placeholder="ghp_..." class="bg-paper border-2 border-ink px-2 py-1.5 outline-none focus:bg-yellow1 font-mono text-xs" />
+              <span class="text-[9px] text-ink/60 mt-1">Dosya yükleyebilmek için GitHub Token bilginizi girin (Sadece bu tarayıcıda saklanır).</span>
+            </div>
+
             <div class="flex flex-col">
               <label class="font-bold mb-1">SELECT LOCAL FILE (DOSYA SEÇ)</label>
               <input type="file" id="media-file-input" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold text-xs" />
@@ -1746,9 +1757,24 @@
     // ----------------------------------------------------
     // TAB 6: PUBLISH & SYNC ACTION HANDLERS
     // ----------------------------------------------------
-    document.getElementById('gh-token').value = localStorage.getItem('gh_token') || '';
+    const savedToken = localStorage.getItem('gh_token') || '';
+    document.getElementById('gh-token').value = savedToken;
+    document.getElementById('form-media-token').value = savedToken;
+    document.getElementById('tab-media-token').value = savedToken;
+
     document.getElementById('gh-repo').value = localStorage.getItem('gh_repo') || 'VERABERAT/Portfolio';
     document.getElementById('gh-branch').value = localStorage.getItem('gh_branch') || 'main';
+
+    function syncToken(value) {
+      localStorage.setItem('gh_token', value);
+      document.getElementById('gh-token').value = value;
+      document.getElementById('form-media-token').value = value;
+      document.getElementById('tab-media-token').value = value;
+    }
+
+    document.getElementById('gh-token').addEventListener('input', (e) => syncToken(e.target.value.trim()));
+    document.getElementById('form-media-token').addEventListener('input', (e) => syncToken(e.target.value.trim()));
+    document.getElementById('tab-media-token').addEventListener('input', (e) => syncToken(e.target.value.trim()));
 
     document.getElementById('btn-save-all').addEventListener('click', () => {
       localStorage.setItem('portfolio_projects', JSON.stringify(projects));
