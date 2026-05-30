@@ -48,6 +48,47 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="canonical" href="https://beraterdogan.vercel.app/" />
 
+  <!-- Structured Data: Person (Google'ın seni kişi olarak tanıması için) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Berat Erdoğan",
+    "alternateName": "Berat Erdogan",
+    "jobTitle": ["Graphic Designer", "Art Director"],
+    "description": "Grafik Tasarımcı ve Sanat Yönetmeni. Marka kimliği, ambalaj, kampanya, UI/UX ve editöryal tasarım.",
+    "url": "https://beraterdogan.vercel.app/",
+    "image": "https://beraterdogan.vercel.app/og.svg",
+    "email": "mailto:hello@beraterdogan.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ankara",
+      "addressCountry": "TR"
+    },
+    "knowsAbout": [
+      "Branding", "Visual Identity", "Art Direction", "Typography",
+      "Packaging Design", "UI/UX Design", "Editorial Design", "Campaign Visuals", "FMCG Branding"
+    ],
+    "sameAs": [
+      "https://www.behance.net/beraterdoan1",
+      "https://www.instagram.com/__bertab/",
+      "https://www.linkedin.com/in/berat-erdoğan-4a79801b3"
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Berat Erdoğan — Portfolio",
+    "url": "https://beraterdogan.vercel.app/",
+    "inLanguage": "tr-TR",
+    "author": { "@type": "Person", "name": "Berat Erdoğan" }
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -112,7 +153,7 @@
     }
 
     html, body { background: var(--paper); color: var(--ink); transition: background-color 0.15s ease, color 0.15s ease; }
-    body { font-family:'Space Grotesk', sans-serif; }
+    body { font-family:'Space Grotesk', sans-serif; padding-bottom: 42px; }
     *, *::before, *::after { border-radius: 0 !important; }
     ::selection { background: var(--ink); color: var(--yellow-1); }
 
@@ -187,12 +228,60 @@
     .star-spin { animation: spin 14s linear infinite; transform-origin: 50% 50%; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
+    /* ===== CUSTOM CURSOR ===== */
+    @media (hover:hover) and (pointer:fine) {
+      * { cursor: none !important; }
+      .cursor-dot, .cursor-ring { position: fixed; top:0; left:0; z-index:9999; pointer-events:none; mix-blend-mode: difference; }
+      .cursor-dot { width:8px; height:8px; background:#FFE600; transform: translate(-50%,-50%); }
+      .cursor-ring { width:36px; height:36px; border:3px solid #fff; transform: translate(-50%,-50%); transition: width .15s steps(3), height .15s steps(3), background-color .15s steps(3); }
+      .cursor-ring.hot { width:64px; height:64px; background:#FFE600; border-color:#FFE600; }
+    }
+
+    /* ===== PRELOADER ===== */
+    #preloader { position: fixed; inset:0; z-index:10000; background:#000; color:#FFE600; display:flex; flex-direction:column; justify-content:space-between; padding: 2rem; transition: transform .6s cubic-bezier(.7,0,.3,1); }
+    #preloader.done { transform: translateY(-100%); }
+    #preloader .pl-count { font-family:'Archivo Black'; font-size: 28vw; line-height:.8; text-align:right; }
+    #preloader .pl-name { font-family:'Archivo Black'; font-size: clamp(2rem,7vw,6rem); text-transform:uppercase; letter-spacing:-.03em; }
+    .pl-bar { height:6px; background:#FFE600; width:0%; }
+
+    /* ===== HOVER IMAGE PREVIEW ===== */
+    #hover-preview { position: fixed; z-index:9000; width: 320px; aspect-ratio:4/3; border:3px solid var(--ink); box-shadow:8px 8px 0 0 var(--ink); pointer-events:none; opacity:0; transform: translate(-50%,-50%) scale(.9); transition: opacity .15s steps(2), transform .15s steps(2); overflow:hidden; }
+    #hover-preview.show { opacity:1; transform: translate(-50%,-50%) scale(1); }
+    #hover-preview .hp-label { position:absolute; bottom:0; left:0; right:0; background:#000; color:#FFE600; font-family:'Space Mono'; font-size:11px; text-transform:uppercase; padding:6px 10px; letter-spacing:.1em; }
+
+    /* ===== NOW PLAYING / STATUS STRIP ===== */
+    #status-strip { position: fixed; bottom:0; left:0; right:0; z-index:40; background:#000; color:#F2F1EC; border-top:3px solid #FFE600; font-family:'Space Mono'; font-size:11px; text-transform:uppercase; letter-spacing:.08em; }
+    .eq { display:inline-flex; align-items:flex-end; gap:2px; height:14px; }
+    .eq span { width:3px; background:#FFE600; animation: eq .9s steps(4) infinite; }
+    .eq span:nth-child(2){ animation-delay:.2s } .eq span:nth-child(3){ animation-delay:.4s } .eq span:nth-child(4){ animation-delay:.1s }
+    @keyframes eq { 0%,100%{ height:4px } 50%{ height:14px } }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; }
     }
   </style>
 </head>
 <body class="min-h-screen">
+
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="flex items-start justify-between mono text-xs uppercase tracking-widest">
+      <span>BERAT ERDOĞAN © 2026</span>
+      <span>LOADING PORTFOLIO…</span>
+    </div>
+    <div class="pl-name">GRAPHIC<br/>DESIGNER<br/>&amp; ART<br/>DIRECTOR<span style="color:#fff">.</span></div>
+    <div>
+      <div class="pl-count"><span id="pl-num">0</span><span style="color:#fff">%</span></div>
+      <div class="pl-bar" id="pl-bar"></div>
+    </div>
+  </div>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="cursor-ring" id="cursor-ring"></div>
+  <div class="cursor-dot" id="cursor-dot"></div>
+
+  <!-- HOVER IMAGE PREVIEW -->
+  <div id="hover-preview"><div class="hp-label"></div></div>
 
   <!-- TOP BAR -->
   <div class="bg-ink text-paper border-b-3 border-ink select-none">
@@ -514,37 +603,37 @@
     <div class="grid grid-cols-12">
       <div class="col-span-12 md:col-span-7 border-r-3 border-ink p-6 md:p-12">
         <div class="mono text-[11px] uppercase tracking-widest mb-4" data-tr="// Bölüm 04 — Hakkında" data-en="// Section 04 — About">// Bölüm 04 — Hakkında</div>
-        <h2 class="display text-5xl md:text-8xl leading-[0.86]" data-tr="FİKİRLERDEN<br/><span class='bg-ink text-paper px-2'>SİSTEMLER</span><br/>KURARIM<span class='text-yellow1'>.</span>" data-en="I MAKE<br/><span class='bg-ink text-paper px-2'>SYSTEMS</span><br/>OUT OF<br/>IDEAS<span class='text-yellow1'>.</span>">
+        <h2 id="about-heading" class="display text-5xl md:text-8xl leading-[0.86]" data-tr="FİKİRLERDEN<br/><span class='bg-ink text-paper px-2'>SİSTEMLER</span><br/>KURARIM<span class='text-yellow1'>.</span>" data-en="I MAKE<br/><span class='bg-ink text-paper px-2'>SYSTEMS</span><br/>OUT OF<br/>IDEAS<span class='text-yellow1'>.</span>">
           FİKİRLERDEN<br/>
           <span class="bg-ink text-paper px-2">SİSTEMLER</span><br/>
           KURARIM<span class="text-yellow1">.</span>
         </h2>
 
         <div class="mt-10 max-w-2xl space-y-5 text-lg leading-snug">
-          <p data-tr="<span class='bg-yellow1 px-1'>Berat Erdoğan</span>; markalar, kültürel projeler ve ürünler için görsel kimlikler, kampanyalar ve dijital arayüzler tasarlayan bir grafik tasarımcı ve sanat yönetmenidir." data-en="<span class='bg-yellow1 px-1'>Berat Erdoğan</span> is a graphic designer and art director who designs visual identities, campaigns, and digital interfaces for brands, cultural projects, and products.">
+          <p id="about-bio-p1" data-tr="<span class='bg-yellow1 px-1'>Berat Erdoğan</span>; markalar, kültürel projeler ve ürünler için görsel kimlikler, kampanyalar ve dijital arayüzler tasarlayan bir grafik tasarımcı ve sanat yönetmenidir." data-en="<span class='bg-yellow1 px-1'>Berat Erdoğan</span> is a graphic designer and art director who designs visual identities, campaigns, and digital interfaces for brands, cultural projects, and products.">
             <span class="bg-yellow1 px-1">Berat Erdoğan</span>; markalar, kültürel projeler ve ürünler için görsel kimlikler, kampanyalar ve dijital arayüzler tasarlayan bir grafik tasarımcı ve sanat yönetmenidir.
           </p>
-          <p data-tr="Tipografiyi temel araç olarak kullanır; kaba estetiği, editöryal yapıyı ve sistematik düşünceyi merkezine alır. Her proje, <span class='underline decoration-4 decoration-yellow1'>içerik · biçim · bağlam</span> üçgeninde kurgulanır." data-en="He uses typography as his primary tool, focusing on raw aesthetics, editorial structures, and systematic thinking. Each project is constructed within the triangle of <span class='underline decoration-4 decoration-yellow1'>content · form · context</span>.">
+          <p id="about-bio-p2" data-tr="Tipografiyi temel araç olarak kullanır; kaba estetiği, editöryal yapıyı ve sistematik düşünceyi merkezine alır. Her proje, <span class='underline decoration-4 decoration-yellow1'>içerik · biçim · bağlam</span> üçgeninde kurgulanır." data-en="He uses typography as his primary tool, focusing on raw aesthetics, editorial structures, and systematic thinking. Each project is constructed within the triangle of <span class='underline decoration-4 decoration-yellow1'>content · form · context</span>.">
             Tipografiyi temel araç olarak kullanır; kaba estetiği, editöryal yapıyı ve sistematik düşünceyi merkezine alır. Her proje, <span class="underline decoration-4 decoration-yellow1">içerik · biçim · bağlam</span> üçgeninde kurgulanır.
           </p>
         </div>
 
         <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="brut bg-paper p-4">
-            <div class="num text-5xl">08+</div>
-            <div class="mono text-[10px] uppercase tracking-widest mt-1" data-tr="Yıl Deneyim" data-en="Years Experience">Yıl Deneyim</div>
+            <div class="num text-5xl" id="counter-1-val">08+</div>
+            <div class="mono text-[10px] uppercase tracking-widest mt-1" id="counter-1-label" data-tr="Yıl Deneyim" data-en="Years Experience">Yıl Deneyim</div>
           </div>
           <div class="brut bg-yellow1 p-4">
-            <div class="num text-5xl">120+</div>
-            <div class="mono text-[10px] uppercase tracking-widest mt-1" data-tr="Tamamlanmış Proje" data-en="Completed Projects">Tamamlanmış Proje</div>
+            <div class="num text-5xl" id="counter-2-val">120+</div>
+            <div class="mono text-[10px] uppercase tracking-widest mt-1" id="counter-2-label" data-tr="Tamamlanmış Proje" data-en="Completed Projects">Tamamlanmış Proje</div>
           </div>
           <div class="brut bg-paper p-4">
-            <div class="num text-5xl">40+</div>
-            <div class="mono text-[10px] uppercase tracking-widest mt-1" data-tr="Marka İş Birliği" data-en="Brand Collaborations">Marka İş Birliği</div>
+            <div class="num text-5xl" id="counter-3-val">40+</div>
+            <div class="mono text-[10px] uppercase tracking-widest mt-1" id="counter-3-label" data-tr="Marka İş Birliği" data-en="Brand Collaborations">Marka İş Birliği</div>
           </div>
           <div class="brut bg-ink text-paper p-4">
-            <div class="num text-5xl text-yellow1">★★★</div>
-            <div class="mono text-[10px] uppercase tracking-widest mt-1" data-tr="Ödül / Basın" data-en="Awards / Press">Ödül / Basın</div>
+            <div class="num text-5xl text-yellow1" id="counter-4-val">★★★</div>
+            <div class="mono text-[10px] uppercase tracking-widest mt-1" id="counter-4-label" data-tr="Ödül / Basın" data-en="Awards / Press">Ödül / Basın</div>
           </div>
         </div>
       </div>
@@ -566,7 +655,7 @@
 
     <div class="relative p-6 md:p-12">
       <div class="mono text-[11px] uppercase tracking-widest mb-4" data-tr="// Bölüm 05 — İletişim" data-en="// Section 05 — Contact">// Bölüm 05 — İletişim</div>
-      <h2 class="display text-[14vw] md:text-[10vw] leading-[0.85]" data-tr="YÜKSEK<br/><span class='bg-ink text-yellow1 px-3'>SESLİ</span><br/>BİR ŞEYLER<br/>YAPALIM<span class='text-ink'>.</span>" data-en="LET'S<br/><span class='bg-ink text-yellow1 px-3'>MAKE</span><br/>SOMETHING<br/>LOUD<span class='text-ink'>.</span>">
+      <h2 id="contact-heading" class="display text-[14vw] md:text-[10vw] leading-[0.85]" data-tr="YÜKSEK<br/><span class='bg-ink text-yellow1 px-3'>SESLİ</span><br/>BİR ŞEYLER<br/>YAPALIM<span class='text-ink'>.</span>" data-en="LET'S<br/><span class='bg-ink text-yellow1 px-3'>MAKE</span><br/>SOMETHING<br/>LOUD<span class='text-ink'>.</span>">
         YÜKSEK<br/>
         <span class="bg-ink text-yellow1 px-3">SESLİ</span><br/>
         BİR ŞEYLER<br/>
@@ -575,22 +664,22 @@
 
       <div class="grid grid-cols-12 gap-4 md:gap-8 mt-10">
         <div class="col-span-12 md:col-span-7 z-10">
-          <a href="mailto:hello@beraterdogan.com" class="brut brut-hover inline-flex items-center gap-4 bg-paper px-5 py-5 mono text-base md:text-2xl uppercase cursor-pointer">
+          <a id="contact-email" href="mailto:hello@beraterdogan.com" class="brut brut-hover inline-flex items-center gap-4 bg-paper px-5 py-5 mono text-base md:text-2xl uppercase cursor-pointer">
             ► HELLO@BERATERDOGAN.COM
           </a>
-          <p class="mt-6 max-w-xl text-lg leading-snug" data-tr="Marka, kampanya, arayüz ya da editöryal projeniz için iş birliğine açığım. Yeni başlangıçlara <span class='bg-ink text-yellow1 px-1'>2026 Q3</span> itibariyle yer var." data-en="I am open to collaborations for brand, campaign, interface, or editorial projects. Availability for new projects starting <span class='bg-ink text-yellow1 px-1'>Q3 2026</span>.">
+          <p id="contact-avail" class="mt-6 max-w-xl text-lg leading-snug" data-tr="Marka, kampanya, arayüz ya da editöryal projeniz için iş birliğine açığım. Yeni başlangıçlara <span class='bg-ink text-yellow1 px-1'>2026 Q3</span> itibariyle yer var." data-en="I am open to collaborations for brand, campaign, interface, or editorial projects. Availability for new projects starting <span class='bg-ink text-yellow1 px-1'>Q3 2026</span>.">
             Marka, kampanya, arayüz ya da editöryal projeniz için iş birliğine açığım. Yeni başlangıçlara <span class="bg-ink text-yellow1 px-1">2026 Q3</span> itibariyle yer var.
           </p>
         </div>
 
         <div class="col-span-12 md:col-span-4 md:col-start-9 flex flex-col gap-3 z-10">
-          <a href="https://www.behance.net/beraterdoan1" target="_blank" rel="noopener" class="brut brut-hover bg-ink text-paper px-5 py-4 flex items-center justify-between mono text-xs uppercase tracking-widest cursor-pointer">
+          <a id="social-behance" href="https://www.behance.net/beraterdoan1" target="_blank" rel="noopener" class="brut brut-hover bg-ink text-paper px-5 py-4 flex items-center justify-between mono text-xs uppercase tracking-widest cursor-pointer">
             ► BEHANCE <span>@beraterdoan1 ↗</span>
           </a>
-          <a href="https://www.instagram.com/__bertab/?hl=tr" target="_blank" rel="noopener" class="brut brut-hover bg-paper text-ink px-5 py-4 flex items-center justify-between mono text-xs uppercase tracking-widest cursor-pointer">
+          <a id="social-instagram" href="https://www.instagram.com/__bertab/?hl=tr" target="_blank" rel="noopener" class="brut brut-hover bg-paper text-ink px-5 py-4 flex items-center justify-between mono text-xs uppercase tracking-widest cursor-pointer">
             ► INSTAGRAM <span>@__bertab ↗</span>
           </a>
-          <a href="https://www.linkedin.com/in/berat-erdoğan-4a79801b3" target="_blank" rel="noopener" class="brut brut-hover bg-paper text-ink px-5 py-4 flex items-center justify-between mono text-xs uppercase tracking-widest cursor-pointer">
+          <a id="social-linkedin" href="https://www.linkedin.com/in/berat-erdoğan-4a79801b3" target="_blank" rel="noopener" class="brut brut-hover bg-paper text-ink px-5 py-4 flex items-center justify-between mono text-xs uppercase tracking-widest cursor-pointer">
             ► LINKEDIN <span>Berat Erdoğan ↗</span>
           </a>
         </div>
@@ -629,18 +718,33 @@
 
   <!-- FOOTER -->
   <footer class="bg-ink text-paper">
-    <div class="display text-[16vw] md:text-[14vw] leading-[0.78] px-4 md:px-6 py-8 md:py-12 border-b-3 border-paper">
+    <div class="display text-[11vw] md:text-[14vw] leading-[0.78] px-4 md:px-6 py-8 md:py-12 border-b-3 border-paper overflow-hidden whitespace-nowrap">
       BERAT&nbsp;ERDOĞAN<span class="text-yellow1">.</span>
     </div>
     <div class="px-4 md:px-6 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mono text-[11px] uppercase tracking-widest">
       <div data-tr="© 2018 — 2026 / TÜM HAKLARI SAKLIDIR" data-en="© 2018 — 2026 / ALL RIGHTS RESERVED">© 2018 — 2026 / ALL RIGHTS RESERVED</div>
       <div class="flex items-center gap-4">
         <span data-tr="ANKARA'DA TASARLANDI &amp; KODLANDI" data-en="DESIGNED &amp; CODED IN ANKARA">DESIGNED &amp; CODED IN ANKARA</span>
-        <span class="w-2 h-2 bg-yellow1"></span>
+        <a href="admin.html" class="w-2 h-2 bg-yellow1 inline-block hover:bg-red1 transition-colors" title="Admin Portal"></a>
         <a href="#top" class="hover:text-yellow1 cursor-pointer" data-tr="↑ BAŞA DÖN" data-en="↑ BACK TO TOP">↑ BACK TO TOP</a>
       </div>
     </div>
   </footer>
+
+  <!-- STATUS STRIP (now playing + visitor counter) -->
+  <div id="status-strip">
+    <div class="flex items-center justify-between px-4 md:px-6 py-2 gap-4">
+      <div class="flex items-center gap-3 min-w-0">
+        <span class="eq"><span></span><span></span><span></span><span></span></span>
+        <span class="text-yellow1 shrink-0" id="np-state">RECENTLY PLAYED</span>
+        <span class="truncate" id="np-track">—</span>
+      </div>
+      <div class="flex items-center gap-3 shrink-0">
+        <span class="hidden sm:inline opacity-60">YOU ARE VISITOR</span>
+        <span class="text-yellow1">#<span id="visitor-num">000000</span></span>
+      </div>
+    </div>
+  </div>
 
   <script>
     // Clock
@@ -655,7 +759,7 @@
     // Projects — type: still | social | motion | ai | ui
     // f: filter group (brand/ui/social/motion/ai/editorial/packaging)
     // desc: case description; tags: stack of badges
-    const projects = [
+    const defaultProjects = [
       { t:"VERA", c:"Brand Identity", y:"2025", type:"still", f:["brand","packaging"],
         desc:"Bütüncül marka kimliği ve ambalaj sistemi. Logo, tip sistemi, palet, üretim mockup'ları.",
         tags:["Identity","Logo","Packaging","Guidelines"], cover:"#1E3CFF" },
@@ -777,6 +881,186 @@
         desc:"Deneysel AI tipografi serisi. Kavramsal harf araştırmaları.",
         tags:["AI","Typography","Experimental"], cover:"#000000", aiTool:"Stable Diffusion + Procreate" },
     ];
+
+    // Default Profile Config
+    const defaultProfile = {
+      aboutHeading: {
+        tr: "FİKİRLERDEN<br/>\n          <span class=\"bg-ink text-paper px-2\">SİSTEMLER</span><br/>\n          KURARIM<span class=\"text-yellow1\">.</span>",
+        en: "I MAKE<br/>\n          <span class=\"bg-ink text-paper px-2\">SYSTEMS</span><br/>\n          OUT OF<br/>\n          IDEAS<span class=\"text-yellow1\">.</span>"
+      },
+      aboutBioP1: {
+        tr: "<span class=\"bg-yellow1 px-1\">Berat Erdoğan</span>; markalar, kültürel projeler ve ürünler için görsel kimlikler, kampanyalar ve dijital arayüzler tasarlayan bir grafik tasarımcı ve sanat yönetmenidir.",
+        en: "<span class=\"bg-yellow1 px-1\">Berat Erdoğan</span> is a graphic designer and art director who designs visual identities, campaigns, and digital interfaces for brands, cultural projects, and products."
+      },
+      aboutBioP2: {
+        tr: "Tipografiyi temel araç olarak kullanır; kaba estetiği, editöryal yapıyı ve sistematik düşünceyi merkezine alır. Her proje, <span class=\"underline decoration-4 decoration-yellow1\">içerik · biçim · bağlam</span> üçgeninde kurgulanır.",
+        en: "He uses typography as his primary tool, focusing on raw aesthetics, editorial structures, and systematic thinking. Each project is constructed within the triangle of <span class=\"underline decoration-4 decoration-yellow1\">content · form · context</span>."
+      },
+      counters: [
+        { val: "08+", label: { tr: "Yıl Deneyim", en: "Years Experience" } },
+        { val: "120+", label: { tr: "Tamamlanmış Proje", en: "Completed Projects" } },
+        { val: "40+", label: { tr: "Marka İş Birliği", en: "Brand Collaborations" } },
+        { val: "★★★", label: { tr: "Ödül / Basın", en: "Awards / Press" } }
+      ],
+      contactHeading: {
+        tr: "YÜKSEK<br/>\n        <span class=\"bg-ink text-yellow1 px-3\">SESLİ</span><br/>\n        BİR ŞEYLER<br/>\n        YAPALIM<span class=\"text-ink\">.</span>",
+        en: "LET'S<br/>\n        <span class=\"bg-ink text-yellow1 px-3\">MAKE</span><br/>\n        SOMETHING<br/>\n        LOUD<span class=\"text-ink\">.</span>"
+      },
+      email: "hello@beraterdogan.com",
+      availability: {
+        tr: "Marka, kampanya, arayüz ya da editöryal projeniz için iş birliğine açığım. Yeni başlangıçlara <span class=\"bg-ink text-yellow1 px-1\">2026 Q3</span> itibariyle yer var.",
+        en: "I am open to collaborations for brand, campaign, interface, or editorial projects. Availability for new projects starting <span class=\"bg-ink text-yellow1 px-1\">Q3 2026</span>."
+      },
+      socials: {
+        behance: { label: "@beraterdoan1", url: "https://www.behance.net/beraterdoan1" },
+        instagram: { label: "@__bertab", url: "https://www.instagram.com/__bertab/?hl=tr" },
+        linkedin: { label: "Berat Erdoğan", url: "https://www.linkedin.com/in/berat-erdoğan-4a79801b3" }
+      }
+    };
+
+    // Default Expertise Config
+    const defaultExpertise = [
+      { tr: "MARKA YÖNETİMİ", en: "BRANDING" },
+      { tr: "GÖRSEL KİMLİK", en: "VISUAL IDENTITY" },
+      { tr: "UI / UX TASARIMI", en: "UI / UX DESIGN" },
+      { tr: "SOSYAL MEDYA TASARIMI", en: "SOCIAL MEDIA DESIGN" },
+      { tr: "AMBALAJ TASARIMI", en: "PACKAGING DESIGN" },
+      { tr: "HIZLI TÜKETİM MARKALAMA", en: "FMCG BRAND DESIGN" },
+      { tr: "TİPOGRAFİ", en: "TYPOGRAPHY" },
+      { tr: "EDİTÖRYAL TASARIM", en: "EDITORIAL DESIGN" },
+      { tr: "SANAT YÖNETİMİ", en: "ART DIRECTION" },
+      { tr: "KREATİF DİREKTÖRLÜK", en: "CREATIVE DIRECTION" },
+      { tr: "KAMPANYA GÖRSEL TASARIMI", en: "CAMPAIGN VISUAL DESIGN" },
+      { tr: "KURUMSAL KİMLİK", en: "CORPORATE IDENTITY" },
+      { tr: "MOBİL ARAYÜZ TASARIMI", en: "MOBILE INTERFACE DESIGN" },
+      { tr: "ÜRÜN MOCKUP TASARIMI", en: "PRODUCT MOCKUP DESIGN" },
+      { tr: "DİJİTAL İLETİŞİM", en: "DIGITAL COMMUNICATION" },
+      { tr: "REKLAM GÖRSELİ", en: "ADVERTISING VISUAL" },
+      { tr: "AFİŞ TASARIMI", en: "POSTER DESIGN" },
+      { tr: "BASKI TASARIMI", en: "PRINT DESIGN" },
+      { tr: "MARKA STRATEJİSİ GÖRSELLERİ", en: "BRAND STRATEGY VISUALS" }
+    ];
+
+    let projects = [];
+    try {
+      const stored = localStorage.getItem('portfolio_projects');
+      if (stored) {
+        projects = JSON.parse(stored);
+      } else {
+        projects = [...defaultProjects];
+      }
+    } catch (e) {
+      projects = [...defaultProjects];
+    }
+
+    let profile = {};
+    try {
+      const storedProfile = localStorage.getItem('portfolio_profile');
+      if (storedProfile) {
+        profile = JSON.parse(storedProfile);
+      } else {
+        profile = Object.assign({}, defaultProfile);
+      }
+    } catch (e) {
+      profile = Object.assign({}, defaultProfile);
+    }
+
+    let expertise = [];
+    try {
+      const storedExp = localStorage.getItem('portfolio_expertise');
+      if (storedExp) {
+        expertise = JSON.parse(storedExp);
+      } else {
+        expertise = [...defaultExpertise];
+      }
+    } catch (e) {
+      expertise = [...defaultExpertise];
+    }
+
+    function applyProfileConfig() {
+      // About Heading
+      const abH = document.getElementById('about-heading');
+      if (abH) {
+        abH.setAttribute('data-tr', profile.aboutHeading.tr);
+        abH.setAttribute('data-en', profile.aboutHeading.en);
+        abH.innerHTML = currentLang === 'tr' ? profile.aboutHeading.tr : profile.aboutHeading.en;
+      }
+      
+      // Bio P1
+      const abB1 = document.getElementById('about-bio-p1');
+      if (abB1) {
+        abB1.setAttribute('data-tr', profile.aboutBioP1.tr);
+        abB1.setAttribute('data-en', profile.aboutBioP1.en);
+        abB1.innerHTML = currentLang === 'tr' ? profile.aboutBioP1.tr : profile.aboutBioP1.en;
+      }
+
+      // Bio P2
+      const abB2 = document.getElementById('about-bio-p2');
+      if (abB2) {
+        abB2.setAttribute('data-tr', profile.aboutBioP2.tr);
+        abB2.setAttribute('data-en', profile.aboutBioP2.en);
+        abB2.innerHTML = currentLang === 'tr' ? profile.aboutBioP2.tr : profile.aboutBioP2.en;
+      }
+
+      // Counters
+      profile.counters.forEach((c, idx) => {
+        const valEl = document.getElementById(`counter-${idx+1}-val`);
+        const lblEl = document.getElementById(`counter-${idx+1}-label`);
+        if (valEl) valEl.innerHTML = c.val;
+        if (lblEl) {
+          lblEl.setAttribute('data-tr', c.label.tr);
+          lblEl.setAttribute('data-en', c.label.en);
+          lblEl.innerHTML = currentLang === 'tr' ? c.label.tr : c.label.en;
+        }
+      });
+
+      // Contact Heading
+      const cnH = document.getElementById('contact-heading');
+      if (cnH) {
+        cnH.setAttribute('data-tr', profile.contactHeading.tr);
+        cnH.setAttribute('data-en', profile.contactHeading.en);
+        cnH.innerHTML = currentLang === 'tr' ? profile.contactHeading.tr : profile.contactHeading.en;
+      }
+
+      // Email
+      const emailEl = document.getElementById('contact-email');
+      if (emailEl) {
+        emailEl.setAttribute('href', `mailto:${profile.email}`);
+        emailEl.innerHTML = `► ${profile.email.toUpperCase()}`;
+      }
+
+      // Availability Text
+      const avEl = document.getElementById('contact-avail');
+      if (avEl) {
+        avEl.setAttribute('data-tr', profile.availability.tr);
+        avEl.setAttribute('data-en', profile.availability.en);
+        avEl.innerHTML = currentLang === 'tr' ? profile.availability.tr : profile.availability.en;
+      }
+
+      // Socials
+      const behanceEl = document.getElementById('social-behance');
+      if (behanceEl) {
+        behanceEl.setAttribute('href', profile.socials.behance.url);
+        behanceEl.innerHTML = `► BEHANCE <span>${profile.socials.behance.label} ↗</span>`;
+      }
+      const instagramEl = document.getElementById('social-instagram');
+      if (instagramEl) {
+        instagramEl.setAttribute('href', profile.socials.instagram.url);
+        instagramEl.innerHTML = `► INSTAGRAM <span>${profile.socials.instagram.label} ↗</span>`;
+      }
+      const linkedinEl = document.getElementById('social-linkedin');
+      if (linkedinEl) {
+        linkedinEl.setAttribute('href', profile.socials.linkedin.url);
+        linkedinEl.innerHTML = `► LINKEDIN <span>${profile.socials.linkedin.label} ↗</span>`;
+      }
+    }
+
+    // Ctrl+Shift+A shortcut to open admin panel
+    window.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
+        window.location.href = 'admin.html';
+      }
+    });
 
     const TYPE_LABEL = {
       still:   { txt:"STILL",  bg:"bg-paper text-ink border-ink" },
@@ -1030,6 +1314,16 @@
         }
       }
     };
+
+    try {
+      const storedDict = localStorage.getItem('translations_dict');
+      if (storedDict) {
+        const localDict = JSON.parse(storedDict);
+        if (localDict.categories) Object.assign(translations.categories, localDict.categories);
+        if (localDict.tags) Object.assign(translations.tags, localDict.tags);
+        if (localDict.descriptions) Object.assign(translations.descriptions, localDict.descriptions);
+      }
+    } catch(e) {}
 
     let currentLang = localStorage.getItem('lang') || 'tr';
     let currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -1296,47 +1590,26 @@
       });
     });
 
-    // Expertise
-    const expertise = [
-      "BRANDING","VISUAL IDENTITY","UI / UX DESIGN","SOCIAL MEDIA DESIGN",
-      "PACKAGING DESIGN","FMCG BRAND DESIGN","TYPOGRAPHY","EDITORIAL DESIGN",
-      "ART DIRECTION","CREATIVE DIRECTION","CAMPAIGN VISUAL DESIGN","CORPORATE IDENTITY",
-      "MOBILE INTERFACE DESIGN","PRODUCT MOCKUP DESIGN","DIGITAL COMMUNICATION","ADVERTISING VISUAL",
-      "POSTER DESIGN","PRINT DESIGN","BRAND STRATEGY VISUALS"
-    ];
-    const expertiseTranslations = {
-      "BRANDING": { tr: "MARKA YÖNETİMİ", en: "BRANDING" },
-      "VISUAL IDENTITY": { tr: "GÖRSEL KİMLİK", en: "VISUAL IDENTITY" },
-      "UI / UX DESIGN": { tr: "UI / UX TASARIMI", en: "UI / UX DESIGN" },
-      "SOCIAL MEDIA DESIGN": { tr: "SOSYAL MEDYA TASARIMI", en: "SOCIAL MEDIA DESIGN" },
-      "PACKAGING DESIGN": { tr: "AMBALAJ TASARIMI", en: "PACKAGING DESIGN" },
-      "FMCG BRAND DESIGN": { tr: "HIZLI TÜKETİM MARKALAMA", en: "FMCG BRAND DESIGN" },
-      "TYPOGRAPHY": { tr: "TİPOGRAFİ", en: "TYPOGRAPHY" },
-      "EDITORIAL DESIGN": { tr: "EDİTÖRYAL TASARIM", en: "EDITORIAL DESIGN" },
-      "ART DIRECTION": { tr: "SANAT YÖNETİMİ", en: "ART DIRECTION" },
-      "CREATIVE DIRECTION": { tr: "KREATİF DİREKTÖRLÜK", en: "CREATIVE DIRECTION" },
-      "CAMPAIGN VISUAL DESIGN": { tr: "KAMPANYA GÖRSEL TASARIMI", en: "CAMPAIGN VISUAL DESIGN" },
-      "CORPORATE IDENTITY": { tr: "KURUMSAL KİMLİK", en: "CORPORATE IDENTITY" },
-      "MOBILE INTERFACE DESIGN": { tr: "MOBİL ARAYÜZ TASARIMI", en: "MOBILE INTERFACE DESIGN" },
-      "PRODUCT MOCKUP DESIGN": { tr: "ÜRÜN MOCKUP TASARIMI", en: "PRODUCT MOCKUP DESIGN" },
-      "DIGITAL COMMUNICATION": { tr: "DİJİTAL İLETİŞİM", en: "DIGITAL COMMUNICATION" },
-      "ADVERTISING VISUAL": { tr: "REKLAM GÖRSELİ", en: "ADVERTISING VISUAL" },
-      "POSTER DESIGN": { tr: "AFİŞ TASARIMI", en: "POSTER DESIGN" },
-      "PRINT DESIGN": { tr: "BASKI TASARIMI", en: "PRINT DESIGN" },
-      "BRAND STRATEGY VISUALS": { tr: "MARKA STRATEJİSİ GÖRSELLERİ", en: "BRAND STRATEGY VISUALS" }
-    };
-
     const exp = document.getElementById('expertise');
     function renderExpertise() {
       exp.innerHTML = '';
-      expertise.forEach((e, i) => {
+      expertise.forEach((item, i) => {
         const n = String(i+1).padStart(2,'0');
         const li = document.createElement('li');
         li.className = 'flex items-center justify-between border-b-3 border-ink py-3 hover:bg-yellow1 cursor-default';
-        const txt = expertiseTranslations[e] ? expertiseTranslations[e][currentLang] : e;
+        const txt = currentLang === 'tr' ? item.tr : item.en;
         li.innerHTML = `<span class="flex items-center gap-3"><span class="mono text-[11px]">${n}</span><span class="display text-base md:text-lg">${txt}</span></span><span class="mono text-[11px]">●</span>`;
         exp.appendChild(li);
       });
+
+      // Update expertise counts in heading dynamically
+      const titleEl = exp.previousElementSibling;
+      if (titleEl) {
+        const count = expertise.length;
+        titleEl.setAttribute('data-tr', `► UZMANLIK ALANLARI / ${count}`);
+        titleEl.setAttribute('data-en', `► EXPERTISE / ${count}`);
+        titleEl.innerHTML = currentLang === 'tr' ? `► UZMANLIK ALANLARI / ${count}` : `► EXPERTISE / ${count}`;
+      }
     }
 
     // Language & Theme togglers
@@ -1372,6 +1645,7 @@
       // Re-render components
       renderProjects();
       renderExpertise();
+      applyProfileConfig();
     }
 
     function setTheme(theme) {
@@ -1489,6 +1763,125 @@
     // Initialize Page states
     setLanguage(currentLang);
     setTheme(currentTheme);
+
+    /* ========================================================
+       NEW FEATURES — cursor / preloader / hover / counter / easter egg
+    ======================================================== */
+
+    // ---- PRELOADER (0 → 100 counter) ----
+    (function() {
+      const pre = document.getElementById('preloader');
+      const num = document.getElementById('pl-num');
+      const bar = document.getElementById('pl-bar');
+      if (!pre) return;
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) { pre.classList.add('done'); return; }
+      document.body.style.overflow = 'hidden';
+      let n = 0;
+      const iv = setInterval(() => {
+        n += Math.floor(Math.random()*8) + 3;
+        if (n >= 100) { n = 100; clearInterval(iv); finish(); }
+        num.textContent = n;
+        bar.style.width = n + '%';
+      }, 80);
+      function finish() {
+        setTimeout(() => {
+          pre.classList.add('done');
+          document.body.style.overflow = '';
+        }, 350);
+      }
+    })();
+
+    // ---- CUSTOM CURSOR ----
+    (function() {
+      if (!matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+      const dot = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+      if (!dot || !ring) return;
+      let mx = 0, my = 0, rx = 0, ry = 0;
+      addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        dot.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
+      });
+      (function loop(){ rx += (mx-rx)*0.2; ry += (my-ry)*0.2; ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`; requestAnimationFrame(loop); })();
+      const hot = 'a, button, .row, .chip-filter, [role="button"]';
+      addEventListener('mouseover', e => { if (e.target.closest(hot)) ring.classList.add('hot'); });
+      addEventListener('mouseout',  e => { if (e.target.closest(hot)) ring.classList.remove('hot'); });
+    })();
+
+    // ---- HOVER IMAGE PREVIEW (project rows) ----
+    (function() {
+      if (!matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+      const hp = document.getElementById('hover-preview');
+      const label = hp.querySelector('.hp-label');
+      let active = null;
+      function slug(t){ return t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+      document.querySelectorAll('#projects-list .row').forEach((row, i) => {
+        const wrap = row.closest('.row-wrap');
+        const name = wrap?.dataset.name || row.querySelector('.display')?.textContent.trim() || '';
+        const p = projects[i];
+        row.addEventListener('mouseenter', () => {
+          if (row.classList.contains('open')) return;
+          const cover = p?.cover || '#000';
+          hp.style.background = `linear-gradient(135deg, ${cover}, #000)`;
+          label.textContent = `${String(i+1).padStart(2,'0')} · ${name}`;
+          hp.classList.add('show');
+          active = row;
+        });
+        row.addEventListener('mouseleave', () => { hp.classList.remove('show'); active = null; });
+      });
+      addEventListener('mousemove', e => {
+        if (!active) return;
+        hp.style.left = (e.clientX + 180) + 'px';
+        hp.style.top  = e.clientY + 'px';
+      });
+    })();
+
+    // ---- VISITOR COUNTER ----
+    (function() {
+      const el = document.getElementById('visitor-num');
+      if (!el) return;
+      const BASE = 14820; // başlangıç tabanı
+      let v = parseInt(localStorage.getItem('visitCount') || '0', 10);
+      if (!sessionStorage.getItem('counted')) { v += 1; localStorage.setItem('visitCount', v); sessionStorage.setItem('counted','1'); }
+      const total = BASE + v;
+      el.textContent = String(total).padStart(6,'0');
+    })();
+
+    // ---- NOW PLAYING (statik, düzenlenebilir) ----
+    // Spotify API için backend gerekir; burası elle güncellenebilir bir alan.
+    const NOW_PLAYING = { track: "Bonobo — Kerala", state: "RECENTLY PLAYED" };
+    (function() {
+      const t = document.getElementById('np-track');
+      const s = document.getElementById('np-state');
+      if (t) t.textContent = NOW_PLAYING.track;
+      if (s) s.textContent = NOW_PLAYING.state;
+    })();
+
+    // ---- EASTER EGG: Konami code ----
+    (function() {
+      const seq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+      let idx = 0;
+      addEventListener('keydown', e => {
+        const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+        idx = (k === seq[idx]) ? idx + 1 : (k === seq[0] ? 1 : 0);
+        if (idx === seq.length) { idx = 0; partyMode(); }
+      });
+      function partyMode() {
+        document.documentElement.animate(
+          [{ filter:'hue-rotate(0deg)' }, { filter:'hue-rotate(360deg)' }],
+          { duration: 1600, iterations: 3 }
+        );
+        const egg = document.createElement('div');
+        egg.style.cssText = 'position:fixed;inset:0;z-index:10001;display:grid;place-items:center;pointer-events:none;';
+        egg.innerHTML = `<div style="font-family:'Archivo Black';font-size:12vw;color:#FFE600;-webkit-text-stroke:4px #000;text-transform:uppercase;animation:eggpop .5s steps(4)">★ DESIGN IS POWER ★</div>`;
+        document.body.appendChild(egg);
+        setTimeout(() => egg.remove(), 2200);
+        console.log('%c★ You found the easter egg. — Berat', 'background:#000;color:#FFE600;font-size:16px;padding:8px 14px;font-family:monospace');
+      }
+    })();
+    const eggStyle = document.createElement('style');
+    eggStyle.textContent = '@keyframes eggpop{0%{transform:scale(0) rotate(-8deg)}100%{transform:scale(1) rotate(0)}}';
+    document.head.appendChild(eggStyle);
 
   </script>
 </body>
