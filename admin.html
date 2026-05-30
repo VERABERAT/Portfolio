@@ -92,8 +92,11 @@
       <div id="gate-error" class="hidden p-2 border-2 border-ink bg-red-600 text-white text-[10px] uppercase font-bold text-center">
         HATALI ŞİFRE!
       </div>
-      <div class="text-center pt-2">
+      <div class="text-center pt-2 flex flex-col items-center gap-2">
         <a href="index.html" class="mono text-[10px] uppercase underline text-ink/60 hover:text-red1">← BACK TO PORTFOLIO</a>
+        <button id="btn-reset-password-gate" class="mono text-[9px] uppercase underline text-red-600 hover:text-red-800 cursor-pointer">
+          🔐 RESET PASSWORD TO DEFAULT
+        </button>
       </div>
     </div>
   </div>
@@ -822,6 +825,15 @@
       document.getElementById('btn-submit-password').addEventListener('click', attemptUnlock);
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') attemptUnlock();
+      });
+
+      document.getElementById('btn-reset-password-gate').addEventListener('click', () => {
+        if (confirm('Şifreyi varsayılan şifreye ("berat2026") sıfırlamak istiyor musunuz?')) {
+          localStorage.removeItem('portfolio_admin_hash');
+          alert('Şifre varsayılana sıfırlandı! Şifre: berat2026');
+          input.value = 'berat2026';
+          attemptUnlock();
+        }
       });
     }
 
