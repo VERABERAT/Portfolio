@@ -594,7 +594,7 @@
           </div>
 
           <div class="bg-paper2 p-3 border border-ink/40 text-[10px] leading-relaxed text-ink/70">
-            💡 <b>YEREL ÇALIŞMA NOTU:</b> Eğer yerelde çalışıyorsanız, dosyaları tarayıcıdan yüklemek yerine direkt bilgisayarınızdaki <code>PortfolioWeb Sitesi/images/</code> klasörüne yukarıdaki isimlerle kaydetmeniz yeterlidir.
+            💡 <b>YEREL ÇALIŞMA NOTU:</b> Eğer yerelde çalışıyorsanız, dosyaları tarayıcıdan yüklemek yerine direkt bilgisayarınızdaki <code>PortfolioWeb Sitesi/images/[proje-slug]/</code> klasörüne yukarıdaki isimlerle kaydetmeniz yeterlidir.
           </div>
         </div>
 
@@ -688,6 +688,16 @@
     // PASSWORD PROTECTION SYSTEM
     // ----------------------------------------------------
     const DEFAULT_PASS_HASH = "67a5eaa8bce0215b943493d139e34a6475312f68ad3ca963275059cbeb2dd008"; // default hash
+
+    function getSlugFromFilename(filename) {
+      let base = filename.replace(/\.[^/.]+$/, "");
+      if (/-frame-\d+$/.test(base)) return base.replace(/-frame-\d+$/, "");
+      if (/-side-\d+$/.test(base)) return base.replace(/-side-\d+$/, "");
+      if (/-mobile$/.test(base)) return base.slice(0, -7);
+      if (/-v\d+$/.test(base)) return base.replace(/-v\d+$/, "");
+      if (/-\d+$/.test(base)) return base.replace(/-\d+$/, "");
+      return base;
+    }
 
     async function sha256(ascii) {
       function rightRotate(value, amount) {
@@ -1290,7 +1300,8 @@
           }
           const base64Content = btoa(binaryStr);
 
-          const getUrl = `https://api.github.com/repos/${repo}/contents/images/${filename}?ref=${branch}`;
+          const slug = getSlugFromFilename(filename);
+          const getUrl = `https://api.github.com/repos/${repo}/contents/images/${slug}/${filename}?ref=${branch}`;
           const getRes = await fetch(getUrl, {
             headers: {
               'Authorization': `token ${token}`,
@@ -1305,7 +1316,7 @@
           }
 
           status.textContent = 'DOSYA GITHUB REPOSUNA AKTARILIYOR (BASE64)...';
-          const putUrl = `https://api.github.com/repos/${repo}/contents/images/${filename}`;
+          const putUrl = `https://api.github.com/repos/${repo}/contents/images/${slug}/${filename}`;
           
           const bodyObj = {
             message: `cms: upload media asset ${filename}`,
@@ -1793,7 +1804,8 @@
           }
           const base64Content = btoa(binaryStr);
 
-          const getUrl = `https://api.github.com/repos/${repo}/contents/images/${filename}?ref=${branch}`;
+          const slug = getSlugFromFilename(filename);
+          const getUrl = `https://api.github.com/repos/${repo}/contents/images/${slug}/${filename}?ref=${branch}`;
           const getRes = await fetch(getUrl, {
             headers: {
               'Authorization': `token ${token}`,
@@ -1808,7 +1820,7 @@
           }
 
           status.textContent = 'DOSYA GITHUB REPOSUNA AKTARILIYOR (BASE64)...';
-          const putUrl = `https://api.github.com/repos/${repo}/contents/images/${filename}`;
+          const putUrl = `https://api.github.com/repos/${repo}/contents/images/${slug}/${filename}`;
           
           const bodyObj = {
             message: `cms: upload media asset ${filename}`,
