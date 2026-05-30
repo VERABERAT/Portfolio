@@ -772,185 +772,788 @@
     // f: filter group (brand/ui/social/motion/ai/editorial/packaging)
     // desc: case description; tags: stack of badges
     const defaultProjects = [
-      { t:"VERA", c:"Brand Identity", y:"2025", type:"still", f:["brand","packaging"],
-        desc:"Bütüncül marka kimliği ve ambalaj sistemi. Logo, tip sistemi, palet, üretim mockup'ları.",
-        tags:["Identity","Logo","Packaging","Guidelines"], cover:"#1E3CFF" },
-      { t:"FERM", c:"Packaging", y:"2025", type:"still", f:["brand","packaging"],
-        desc:"Fermente ürün serisi için organik tipografi ve ambalaj sistemi.",
-        tags:["Packaging","FMCG","Print"], cover:"#FF2D00" },
-      { t:"SMART LOCKER INTERFACE", c:"UI / UX", y:"2024", type:"ui", f:["ui"],
-        desc:"Akıllı kilit dolabı için dokunmatik ekran arayüz konsepti. Kullanıcı akışı + ekranlar.",
-        tags:["UI","Touchscreen","Flow"], cover:"#0B0B0E" },
-      { t:"CANLANI", c:"Campaign Visual", y:"2024", type:"motion", f:["motion"],
-        desc:"Kampanya filmi & key visual serisi. 6sn / 15sn / 30sn versiyonlar.",
-        tags:["Motion","Key Visual","Campaign"], cover:"#FF2D00" },
-      { t:"DECAY CREATES LIFE", c:"Editorial", y:"2024", type:"ai", f:["ai","editorial"],
-        desc:"AI üretimi görsellerle kurulmuş, bozulma ve yenilenme üzerine kavramsal editöryal seri.",
-        tags:["AI","Editorial","Concept"], cover:"#1B2E15", aiTool:"Midjourney v6 + Photoshop" },
-      { t:"NUTRIPAW — ORGANIC PET FOOD", c:"FMCG Branding", y:"2024", type:"still", f:["brand","packaging"],
-        desc:"Organik pet food markası için bütüncül kimlik, ambalaj sistemi ve kampanya görselleri.",
-        tags:["Identity","FMCG","Packaging","Campaign"], cover:"#3A2A0E" },
-      { t:"İMECE MARKET 2025 — PRODUCTION & FINANCE", c:"Brand System", y:"2025", type:"ui", f:["brand","ui"],
-        desc:"Üretim ve finans yönetim platformu için marka sistemi + dashboard arayüzü.",
-        tags:["System","Dashboard","Identity"], cover:"#062C2C" },
-      { t:"MENU DESIGN", c:"Editorial", y:"2024", type:"still", f:["editorial"],
-        desc:"Restoran menü tasarımı. Hiyerarşi, baskı ve baskı sonrası uygulamalar.",
-        tags:["Print","Editorial","Hierarchy"], cover:"#2A1A08" },
-      { t:"TYPOGRAPHY & DETAILS", c:"Typography", y:"2024", type:"still", f:["editorial"],
-        desc:"Tipografik detaylar, harf çiftleri ve baskı denemeleri.",
-        tags:["Typography","Detail"], cover:"#000000" },
-      { t:"KASTEN MEETS ANKARA", c:"Art Direction", y:"2023", type:"social", f:["social","brand"],
-        desc:"Ankara için hazırlanan kültürel kampanyanın Instagram serisi (carousel + reels).",
-        tags:["Social","Carousel","Reels"], cover:"#FFE600" },
-      { t:"MIU MIU", c:"Campaign Visual", y:"2023", type:"motion", f:["motion"],
-        desc:"Sezonluk kampanya için key visual ve motion edit'ler.",
-        tags:["Motion","Fashion","Campaign"], cover:"#3F2B1A" },
-      { t:"AYTAÇ", c:"FMCG Branding", y:"2023", type:"still", f:["brand","packaging"],
-        desc:"FMCG markası için ambalaj revizyonu ve görsel sistem.",
-        tags:["FMCG","Packaging"], cover:"#0A2E1F" },
-      { t:"ODEABANK", c:"Corporate Identity", y:"2023", type:"still", f:["brand"],
-        desc:"Kurumsal iletişim kampanyası. Baskı + dijital uygulamalar.",
-        tags:["Corporate","Identity"], cover:"#1A2B4D" },
-      { t:"DERBY", c:"Campaign Visual", y:"2023", type:"social", f:["social"],
-        desc:"Spor markası için sosyal medya kampanya serisi.",
-        tags:["Social","Sports","Campaign"], cover:"#4A1A1A" },
-      { t:"TETRA PAK", c:"Packaging", y:"2023", type:"still", f:["packaging","brand"],
-        desc:"Ambalaj görsel sistemleri ve marka uygulamaları.",
-        tags:["Packaging","Industrial"], cover:"#0B3B3A" },
-      { t:"LOSBERAT — MOBILE UI CONCEPT", c:"UI / UX", y:"2023", type:"ui", f:["ui"],
-        desc:"Sosyal mobil uygulama için arayüz konsepti. 24 ekran + akışlar.",
-        tags:["Mobile","UI","Prototype"], cover:"#101015" },
-      { t:"YATAK / MATTRESS CAMPAIGN VISUAL", c:"Campaign Visual", y:"2023", type:"ai", f:["ai","motion"],
-        desc:"AI destekli ürün görselleştirme. Stüdyo çekimi olmadan kampanya key visual'leri.",
-        tags:["AI","Product","Campaign"], cover:"#2A1F4D", aiTool:"Midjourney + Photoshop" },
-      { t:"1 MAYIS EMEK VE DAYANIŞMA GÜNÜ", c:"Social Media", y:"2023", type:"social", f:["social"],
-        desc:"Kurumsal hesap için 1 Mayıs Instagram serisi.",
-        tags:["Social","Editorial","Day"], cover:"#FFE600" },
-      { t:"EKİBİN DİJİTAL AYAK İZLERİ", c:"Digital Communication", y:"2022", type:"social", f:["social"],
-        desc:"Ekip içi dijital iletişim için seri tasarım çalışması.",
-        tags:["Social","Internal"], cover:"#3A2A17" },
-      { t:"CORPORATE SOCIAL MEDIA DESIGNS", c:"Social Media", y:"2022", type:"social", f:["social"],
-        desc:"Aylık kurumsal sosyal medya tasarım sistemi.",
-        tags:["Social","System"], cover:"#1B2E15" },
-      { t:"BRAND IDENTITY APPLICATIONS", c:"Brand System", y:"2022", type:"still", f:["brand"],
-        desc:"Çeşitli markalar için kimlik uygulamaları.",
-        tags:["Identity","Applications"], cover:"#1F1F25" },
-      { t:"MOBILE APP INTERFACE CONCEPTS", c:"UI / UX", y:"2022", type:"ui", f:["ui"],
-        desc:"Çeşitli mobil uygulama arayüz konseptleri.",
-        tags:["Mobile","UI"], cover:"#0E1F0A" },
-      { t:"CAMPAIGN KEY VISUALS", c:"Campaign Visual", y:"2022", type:"still", f:["brand"],
-        desc:"Çeşitli markalar için kampanya key visual derlemesi.",
-        tags:["Campaign","Visual"], cover:"#2A1140" },
-      { t:"DIGITAL COMMUNICATION DESIGNS", c:"Digital Communication", y:"2022", type:"social", f:["social"],
-        desc:"Dijital iletişim tasarımı derlemesi.",
-        tags:["Digital","Comm"], cover:"#1A1140" },
-      { t:"PACKAGING & FMCG BRAND WORKS", c:"Packaging", y:"2022", type:"still", f:["packaging"],
-        desc:"FMCG ve ambalaj derlemesi.",
-        tags:["FMCG","Packaging"], cover:"#3A1010" },
-      { t:"UI / UX INTERFACE CONCEPTS", c:"UI / UX", y:"2022", type:"ui", f:["ui"],
-        desc:"Çeşitli arayüz konseptleri.",
-        tags:["UI","Concept"], cover:"#062C2C" },
-      { t:"EDITORIAL TYPOGRAPHY POSTERS", c:"Editorial", y:"2022", type:"ai", f:["ai","editorial"],
-        desc:"AI destekli editöryal poster serisi. Tipografi + yapay görsel.",
-        tags:["AI","Poster","Type"], cover:"#000000", aiTool:"Midjourney + InDesign" },
-      { t:"PRODUCT PRESENTATION MOCKUPS", c:"Art Direction", y:"2021", type:"still", f:["brand"],
-        desc:"Ürün sunum mockup'ları.",
-        tags:["Mockup","Product"], cover:"#1F1606" },
-      { t:"CREATIVE DIRECTION STUDIES", c:"Creative Direction", y:"2021", type:"ai", f:["ai"],
-        desc:"AI yardımıyla görsel kavramsal çalışmalar.",
-        tags:["AI","Concept","Direction"], cover:"#4A1A1A", aiTool:"Midjourney v5" },
-      { t:"BRAND GUIDELINE & GRID SYSTEMS", c:"Brand System", y:"2021", type:"still", f:["brand"],
-        desc:"Marka kılavuzları ve grid sistemleri.",
-        tags:["Guidelines","Grid"], cover:"#101015" },
-      { t:"SOCIAL MEDIA CAMPAIGN DESIGNS", c:"Social Media", y:"2021", type:"social", f:["social"],
-        desc:"Sosyal medya kampanyaları.",
-        tags:["Social","Campaign"], cover:"#FF2D00" },
-      { t:"VISUAL IDENTITY EXPLORATIONS", c:"Brand Identity", y:"2021", type:"still", f:["brand"],
-        desc:"Kimlik keşif çalışmaları.",
-        tags:["Identity","Exploration"], cover:"#0B0B0E" },
-      { t:"ART DIRECTION PROJECTS", c:"Art Direction", y:"2021", type:"motion", f:["motion"],
-        desc:"Sanat yönetimi projeleri ve motion edit'ler.",
-        tags:["Direction","Motion"], cover:"#2A1A08" },
-      { t:"CREATIVE ADVERTISING VISUALS", c:"Advertising", y:"2020", type:"still", f:["brand"],
-        desc:"Reklam görselleri derlemesi.",
-        tags:["Advertising","Visual"], cover:"#1A1140" },
-      { t:"POSTER & PRINT DESIGN WORKS", c:"Print", y:"2020", type:"still", f:["editorial"],
-        desc:"Poster ve baskı işleri.",
-        tags:["Print","Poster"], cover:"#000000" },
-      { t:"INTERFACE & DASHBOARD CONCEPTS", c:"UI / UX", y:"2020", type:"ui", f:["ui"],
-        desc:"Dashboard ve arayüz konseptleri.",
-        tags:["UI","Dashboard"], cover:"#062C2C" },
-      { t:"CORPORATE BRANDING SYSTEMS", c:"Corporate Identity", y:"2020", type:"still", f:["brand"],
-        desc:"Kurumsal markalama sistemleri.",
-        tags:["Corporate","System"], cover:"#1F1F25" },
-      { t:"PACKAGING MOCKUP SERIES", c:"Packaging", y:"2020", type:"still", f:["packaging"],
-        desc:"Ambalaj mockup serisi.",
-        tags:["Packaging","Mockup"], cover:"#3A2A0E" },
-      { t:"DIGITAL BRAND COMMUNICATION", c:"Digital Communication", y:"2019", type:"social", f:["social"],
-        desc:"Dijital marka iletişimi.",
-        tags:["Digital","Brand"], cover:"#1A2B4D" },
-      { t:"EXPERIMENTAL TYPOGRAPHY WORKS", c:"Typography", y:"2018", type:"ai", f:["ai","editorial"],
-        desc:"Deneysel AI tipografi serisi. Kavramsal harf araştırmaları.",
-        tags:["AI","Typography","Experimental"], cover:"#000000", aiTool:"Stable Diffusion + Procreate" },
+      {
+          "t": "VERA",
+          "c": "Brand Identity",
+          "y": "2025",
+          "type": "still",
+          "f": [
+            "brand",
+            "packaging"
+          ],
+          "cover": "#1E3CFF",
+          "fit": "contain",
+          "desc": "Bütüncül marka kimliği ve ambalaj sistemi. Logo, tip sistemi, palet, üretim mockup'ları.",
+          "tags": [
+            "Identity",
+            "Logo",
+            "Packaging",
+            "Guidelines"
+          ],
+          "behance": "https://www.behance.net/gallery/246607835/VERA-Condensed-Bold-Display-Typeface"
+        },
+        {
+          "t": "FERM",
+          "c": "Packaging",
+          "y": "2025",
+          "type": "still",
+          "f": [
+            "brand",
+            "packaging"
+          ],
+          "desc": "Fermente ürün serisi için organik tipografi ve ambalaj sistemi.",
+          "tags": [
+            "Packaging",
+            "FMCG",
+            "Print"
+          ],
+          "cover": "#FF2D00"
+        },
+        {
+          "t": "SMART LOCKER INTERFACE",
+          "c": "UI / UX",
+          "y": "2024",
+          "type": "ui",
+          "f": [
+            "ui"
+          ],
+          "desc": "Akıllı kilit dolabı için dokunmatik ekran arayüz konsepti. Kullanıcı akışı + ekranlar.",
+          "tags": [
+            "UI",
+            "Touchscreen",
+            "Flow"
+          ],
+          "cover": "#0B0B0E"
+        },
+        {
+          "t": "CANLANI",
+          "c": "Campaign Visual",
+          "y": "2024",
+          "type": "motion",
+          "f": [
+            "motion"
+          ],
+          "desc": "Kampanya filmi & key visual serisi. 6sn / 15sn / 30sn versiyonlar.",
+          "tags": [
+            "Motion",
+            "Key Visual",
+            "Campaign"
+          ],
+          "cover": "#FF2D00"
+        },
+        {
+          "t": "DECAY CREATES LIFE",
+          "c": "Editorial",
+          "y": "2024",
+          "type": "ai",
+          "f": [
+            "ai",
+            "editorial"
+          ],
+          "desc": "AI üretimi görsellerle kurulmuş, bozulma ve yenilenme üzerine kavramsal editöryal seri.",
+          "tags": [
+            "AI",
+            "Editorial",
+            "Concept"
+          ],
+          "cover": "#1B2E15",
+          "aiTool": "Midjourney v6 + Photoshop"
+        },
+        {
+          "t": "NUTRIPAW — ORGANIC PET FOOD",
+          "c": "FMCG Branding",
+          "y": "2024",
+          "type": "still",
+          "f": [
+            "brand",
+            "packaging"
+          ],
+          "desc": "Organik pet food markası için bütüncül kimlik, ambalaj sistemi ve kampanya görselleri.",
+          "tags": [
+            "Identity",
+            "FMCG",
+            "Packaging",
+            "Campaign"
+          ],
+          "cover": "#3A2A0E"
+        },
+        {
+          "t": "İMECE MARKET 2025 — PRODUCTION & FINANCE",
+          "c": "Brand System",
+          "y": "2025",
+          "type": "ui",
+          "f": [
+            "brand",
+            "ui"
+          ],
+          "desc": "Üretim ve finans yönetim platformu için marka sistemi + dashboard arayüzü.",
+          "tags": [
+            "System",
+            "Dashboard",
+            "Identity"
+          ],
+          "cover": "#062C2C"
+        },
+        {
+          "t": "MENU DESIGN",
+          "c": "Editorial",
+          "y": "2024",
+          "type": "still",
+          "f": [
+            "editorial"
+          ],
+          "desc": "Restoran menü tasarımı. Hiyerarşi, baskı ve baskı sonrası uygulamalar.",
+          "tags": [
+            "Print",
+            "Editorial",
+            "Hierarchy"
+          ],
+          "cover": "#2A1A08"
+        },
+        {
+          "t": "TYPOGRAPHY & DETAILS",
+          "c": "Typography",
+          "y": "2024",
+          "type": "still",
+          "f": [
+            "editorial"
+          ],
+          "desc": "Tipografik detaylar, harf çiftleri ve baskı denemeleri.",
+          "tags": [
+            "Typography",
+            "Detail"
+          ],
+          "cover": "#000000"
+        },
+        {
+          "t": "KASTEN MEETS ANKARA",
+          "c": "Art Direction",
+          "y": "2023",
+          "type": "social",
+          "f": [
+            "social",
+            "brand"
+          ],
+          "desc": "Ankara için hazırlanan kültürel kampanyanın Instagram serisi (carousel + reels).",
+          "tags": [
+            "Social",
+            "Carousel",
+            "Reels"
+          ],
+          "cover": "#FFE600"
+        },
+        {
+          "t": "MIU MIU",
+          "c": "Campaign Visual",
+          "y": "2023",
+          "type": "motion",
+          "f": [
+            "motion"
+          ],
+          "desc": "Sezonluk kampanya için key visual ve motion edit'ler.",
+          "tags": [
+            "Motion",
+            "Fashion",
+            "Campaign"
+          ],
+          "cover": "#3F2B1A"
+        },
+        {
+          "t": "AYTAÇ",
+          "c": "FMCG Branding",
+          "y": "2023",
+          "type": "still",
+          "f": [
+            "brand",
+            "packaging"
+          ],
+          "desc": "FMCG markası için ambalaj revizyonu ve görsel sistem.",
+          "tags": [
+            "FMCG",
+            "Packaging"
+          ],
+          "cover": "#0A2E1F"
+        },
+        {
+          "t": "ODEABANK",
+          "c": "Corporate Identity",
+          "y": "2023",
+          "type": "still",
+          "f": [
+            "brand"
+          ],
+          "desc": "Kurumsal iletişim kampanyası. Baskı + dijital uygulamalar.",
+          "tags": [
+            "Corporate",
+            "Identity"
+          ],
+          "cover": "#1A2B4D"
+        },
+        {
+          "t": "DERBY",
+          "c": "Campaign Visual",
+          "y": "2023",
+          "type": "social",
+          "f": [
+            "social"
+          ],
+          "desc": "Spor markası için sosyal medya kampanya serisi.",
+          "tags": [
+            "Social",
+            "Sports",
+            "Campaign"
+          ],
+          "cover": "#4A1A1A"
+        },
+        {
+          "t": "TETRA PAK",
+          "c": "Packaging",
+          "y": "2023",
+          "type": "still",
+          "f": [
+            "packaging",
+            "brand"
+          ],
+          "desc": "Ambalaj görsel sistemleri ve marka uygulamaları.",
+          "tags": [
+            "Packaging",
+            "Industrial"
+          ],
+          "cover": "#0B3B3A"
+        },
+        {
+          "t": "LOSBERAT — MOBILE UI CONCEPT",
+          "c": "UI / UX",
+          "y": "2023",
+          "type": "ui",
+          "f": [
+            "ui"
+          ],
+          "desc": "Sosyal mobil uygulama için arayüz konsepti. 24 ekran + akışlar.",
+          "tags": [
+            "Mobile",
+            "UI",
+            "Prototype"
+          ],
+          "cover": "#101015"
+        },
+        {
+          "t": "YATAK / MATTRESS CAMPAIGN VISUAL",
+          "c": "Campaign Visual",
+          "y": "2023",
+          "type": "ai",
+          "f": [
+            "ai",
+            "motion"
+          ],
+          "desc": "AI destekli ürün görselleştirme. Stüdyo çekimi olmadan kampanya key visual'leri.",
+          "tags": [
+            "AI",
+            "Product",
+            "Campaign"
+          ],
+          "cover": "#2A1F4D",
+          "aiTool": "Midjourney + Photoshop"
+        },
+        {
+          "t": "1 MAYIS EMEK VE DAYANIŞMA GÜNÜ",
+          "c": "Social Media",
+          "y": "2023",
+          "type": "social",
+          "f": [
+            "social"
+          ],
+          "desc": "Kurumsal hesap için 1 Mayıs Instagram serisi.",
+          "tags": [
+            "Social",
+            "Editorial",
+            "Day"
+          ],
+          "cover": "#FFE600"
+        },
+        {
+          "t": "EKİBİN DİJİTAL AYAK İZLERİ",
+          "c": "Digital Communication",
+          "y": "2022",
+          "type": "social",
+          "f": [
+            "social"
+          ],
+          "desc": "Ekip içi dijital iletişim için seri tasarım çalışması.",
+          "tags": [
+            "Social",
+            "Internal"
+          ],
+          "cover": "#3A2A17"
+        },
+        {
+          "t": "CORPORATE SOCIAL MEDIA DESIGNS",
+          "c": "Social Media",
+          "y": "2022",
+          "type": "social",
+          "f": [
+            "social"
+          ],
+          "desc": "Aylık kurumsal sosyal medya tasarım sistemi.",
+          "tags": [
+            "Social",
+            "System"
+          ],
+          "cover": "#1B2E15"
+        },
+        {
+          "t": "BRAND IDENTITY APPLICATIONS",
+          "c": "Brand System",
+          "y": "2022",
+          "type": "still",
+          "f": [
+            "brand"
+          ],
+          "desc": "Çeşitli markalar için kimlik uygulamaları.",
+          "tags": [
+            "Identity",
+            "Applications"
+          ],
+          "cover": "#1F1F25"
+        },
+        {
+          "t": "MOBILE APP INTERFACE CONCEPTS",
+          "c": "UI / UX",
+          "y": "2022",
+          "type": "ui",
+          "f": [
+            "ui"
+          ],
+          "desc": "Çeşitli mobil uygulama arayüz konseptleri.",
+          "tags": [
+            "Mobile",
+            "UI"
+          ],
+          "cover": "#0E1F0A"
+        },
+        {
+          "t": "CAMPAIGN KEY VISUALS",
+          "c": "Campaign Visual",
+          "y": "2022",
+          "type": "still",
+          "f": [
+            "brand"
+          ],
+          "desc": "Çeşitli markalar için kampanya key visual derlemesi.",
+          "tags": [
+            "Campaign",
+            "Visual"
+          ],
+          "cover": "#2A1140"
+        },
+        {
+          "t": "DIGITAL COMMUNICATION DESIGNS",
+          "c": "Digital Communication",
+          "y": "2022",
+          "type": "social",
+          "f": [
+            "social"
+          ],
+          "desc": "Dijital iletişim tasarımı derlemesi.",
+          "tags": [
+            "Digital",
+            "Comm"
+          ],
+          "cover": "#1A1140"
+        },
+        {
+          "t": "PACKAGING & FMCG BRAND WORKS",
+          "c": "Packaging",
+          "y": "2022",
+          "type": "still",
+          "f": [
+            "packaging"
+          ],
+          "desc": "FMCG ve ambalaj derlemesi.",
+          "tags": [
+            "FMCG",
+            "Packaging"
+          ],
+          "cover": "#3A1010"
+        },
+        {
+          "t": "UI / UX INTERFACE CONCEPTS",
+          "c": "UI / UX",
+          "y": "2022",
+          "type": "ui",
+          "f": [
+            "ui"
+          ],
+          "desc": "Çeşitli arayüz konseptleri.",
+          "tags": [
+            "UI",
+            "Concept"
+          ],
+          "cover": "#062C2C"
+        },
+        {
+          "t": "EDITORIAL TYPOGRAPHY POSTERS",
+          "c": "Editorial",
+          "y": "2022",
+          "type": "ai",
+          "f": [
+            "ai",
+            "editorial"
+          ],
+          "desc": "AI destekli editöryal poster serisi. Tipografi + yapay görsel.",
+          "tags": [
+            "AI",
+            "Poster",
+            "Type"
+          ],
+          "cover": "#000000",
+          "aiTool": "Midjourney + InDesign"
+        },
+        {
+          "t": "PRODUCT PRESENTATION MOCKUPS",
+          "c": "Art Direction",
+          "y": "2021",
+          "type": "still",
+          "f": [
+            "brand"
+          ],
+          "desc": "Ürün sunum mockup'ları.",
+          "tags": [
+            "Mockup",
+            "Product"
+          ],
+          "cover": "#1F1606"
+        },
+        {
+          "t": "CREATIVE DIRECTION STUDIES",
+          "c": "Creative Direction",
+          "y": "2021",
+          "type": "ai",
+          "f": [
+            "ai"
+          ],
+          "desc": "AI yardımıyla görsel kavramsal çalışmalar.",
+          "tags": [
+            "AI",
+            "Concept",
+            "Direction"
+          ],
+          "cover": "#4A1A1A",
+          "aiTool": "Midjourney v5"
+        },
+        {
+          "t": "BRAND GUIDELINE & GRID SYSTEMS",
+          "c": "Brand System",
+          "y": "2021",
+          "type": "still",
+          "f": [
+            "brand"
+          ],
+          "desc": "Marka kılavuzları ve grid sistemleri.",
+          "tags": [
+            "Guidelines",
+            "Grid"
+          ],
+          "cover": "#101015"
+        },
+        {
+          "t": "SOCIAL MEDIA CAMPAIGN DESIGNS",
+          "c": "Social Media",
+          "y": "2021",
+          "type": "social",
+          "f": [
+            "social"
+          ],
+          "desc": "Sosyal medya kampanyaları.",
+          "tags": [
+            "Social",
+            "Campaign"
+          ],
+          "cover": "#FF2D00"
+        },
+        {
+          "t": "VISUAL IDENTITY EXPLORATIONS",
+          "c": "Brand Identity",
+          "y": "2021",
+          "type": "still",
+          "f": [
+            "brand"
+          ],
+          "desc": "Kimlik keşif çalışmaları.",
+          "tags": [
+            "Identity",
+            "Exploration"
+          ],
+          "cover": "#0B0B0E"
+        },
+        {
+          "t": "ART DIRECTION PROJECTS",
+          "c": "Art Direction",
+          "y": "2021",
+          "type": "motion",
+          "f": [
+            "motion"
+          ],
+          "desc": "Sanat yönetimi projeleri ve motion edit'ler.",
+          "tags": [
+            "Direction",
+            "Motion"
+          ],
+          "cover": "#2A1A08"
+        },
+        {
+          "t": "CREATIVE ADVERTISING VISUALS",
+          "c": "Advertising",
+          "y": "2020",
+          "type": "still",
+          "f": [
+            "brand"
+          ],
+          "desc": "Reklam görselleri derlemesi.",
+          "tags": [
+            "Advertising",
+            "Visual"
+          ],
+          "cover": "#1A1140"
+        },
+        {
+          "t": "POSTER & PRINT DESIGN WORKS",
+          "c": "Print",
+          "y": "2020",
+          "type": "still",
+          "f": [
+            "editorial"
+          ],
+          "desc": "Poster ve baskı işleri.",
+          "tags": [
+            "Print",
+            "Poster"
+          ],
+          "cover": "#000000"
+        },
+        {
+          "t": "INTERFACE & DASHBOARD CONCEPTS",
+          "c": "UI / UX",
+          "y": "2020",
+          "type": "ui",
+          "f": [
+            "ui"
+          ],
+          "desc": "Dashboard ve arayüz konseptleri.",
+          "tags": [
+            "UI",
+            "Dashboard"
+          ],
+          "cover": "#062C2C"
+        },
+        {
+          "t": "CORPORATE BRANDING SYSTEMS",
+          "c": "Corporate Identity",
+          "y": "2020",
+          "type": "still",
+          "f": [
+            "brand"
+          ],
+          "desc": "Kurumsal markalama sistemleri.",
+          "tags": [
+            "Corporate",
+            "System"
+          ],
+          "cover": "#1F1F25"
+        },
+        {
+          "t": "PACKAGING MOCKUP SERIES",
+          "c": "Packaging",
+          "y": "2020",
+          "type": "still",
+          "f": [
+            "packaging"
+          ],
+          "desc": "Ambalaj mockup serisi.",
+          "tags": [
+            "Packaging",
+            "Mockup"
+          ],
+          "cover": "#3A2A0E"
+        },
+        {
+          "t": "DIGITAL BRAND COMMUNICATION",
+          "c": "Digital Communication",
+          "y": "2019",
+          "type": "social",
+          "f": [
+            "social"
+          ],
+          "desc": "Dijital marka iletişimi.",
+          "tags": [
+            "Digital",
+            "Brand"
+          ],
+          "cover": "#1A2B4D"
+        },
+        {
+          "t": "EXPERIMENTAL TYPOGRAPHY WORKS",
+          "c": "Typography",
+          "y": "2018",
+          "type": "ai",
+          "f": [
+            "ai",
+            "editorial"
+          ],
+          "desc": "Deneysel AI tipografi serisi. Kavramsal harf araştırmaları.",
+          "tags": [
+            "AI",
+            "Typography",
+            "Experimental"
+          ],
+          "cover": "#000000",
+          "aiTool": "Stable Diffusion + Procreate"
+        }
     ];
 
     // Default Profile Config
     const defaultProfile = {
-      aboutHeading: {
-        tr: "FİKİRLERDEN<br/>\n          <span class=\"bg-ink text-paper px-2\">SİSTEMLER</span><br/>\n          KURARIM<span class=\"text-yellow1\">.</span>",
-        en: "I MAKE<br/>\n          <span class=\"bg-ink text-paper px-2\">SYSTEMS</span><br/>\n          OUT OF<br/>\n          IDEAS<span class=\"text-yellow1\">.</span>"
-      },
-      aboutBioP1: {
-        tr: "<span class=\"bg-yellow1 px-1\">Berat Erdoğan</span>; markalar, kültürel projeler ve ürünler için görsel kimlikler, kampanyalar ve dijital arayüzler tasarlayan bir grafik tasarımcı ve sanat yönetmenidir.",
-        en: "<span class=\"bg-yellow1 px-1\">Berat Erdoğan</span> is a graphic designer and art director who designs visual identities, campaigns, and digital interfaces for brands, cultural projects, and products."
-      },
-      aboutBioP2: {
-        tr: "Tipografiyi temel araç olarak kullanır; kaba estetiği, editöryal yapıyı ve sistematik düşünceyi merkezine alır. Her proje, <span class=\"underline decoration-4 decoration-yellow1\">içerik · biçim · bağlam</span> üçgeninde kurgulanır.",
-        en: "He uses typography as his primary tool, focusing on raw aesthetics, editorial structures, and systematic thinking. Each project is constructed within the triangle of <span class=\"underline decoration-4 decoration-yellow1\">content · form · context</span>."
-      },
-      counters: [
-        { val: "08+", label: { tr: "Yıl Deneyim", en: "Years Experience" } },
-        { val: "120+", label: { tr: "Tamamlanmış Proje", en: "Completed Projects" } },
-        { val: "40+", label: { tr: "Marka İş Birliği", en: "Brand Collaborations" } },
-        { val: "★★★", label: { tr: "Ödül / Basın", en: "Awards / Press" } }
-      ],
-      contactHeading: {
-        tr: "YÜKSEK<br/>\n        <span class=\"bg-ink text-yellow1 px-3\">SESLİ</span><br/>\n        BİR ŞEYLER<br/>\n        YAPALIM<span class=\"text-ink\">.</span>",
-        en: "LET'S<br/>\n        <span class=\"bg-ink text-yellow1 px-3\">MAKE</span><br/>\n        SOMETHING<br/>\n        LOUD<span class=\"text-ink\">.</span>"
-      },
-      email: "hello@beraterdogan.com",
-      availability: {
-        tr: "Marka, kampanya, arayüz ya da editöryal projeniz için iş birliğine açığım. Yeni başlangıçlara <span class=\"bg-ink text-yellow1 px-1\">2026 Q3</span> itibariyle yer var.",
-        en: "I am open to collaborations for brand, campaign, interface, or editorial projects. Availability for new projects starting <span class=\"bg-ink text-yellow1 px-1\">Q3 2026</span>."
-      },
-      socials: {
-        behance: { label: "@beraterdoan1", url: "https://www.behance.net/beraterdoan1" },
-        instagram: { label: "@__bertab", url: "https://www.instagram.com/__bertab/?hl=tr" },
-        linkedin: { label: "Berat Erdoğan", url: "https://www.linkedin.com/in/berat-erdoğan-4a79801b3" }
-      }
+      "aboutHeading": {
+          "tr": "FİKİRLERDEN<br/>\n          <span class=\"bg-ink text-paper px-2\">SİSTEMLER</span><br/>\n          KURARIM<span class=\"text-yellow1\">.</span>",
+          "en": "I MAKE<br/>\n          <span class=\"bg-ink text-paper px-2\">SYSTEMS</span><br/>\n          OUT OF<br/>\n          IDEAS<span class=\"text-yellow1\">.</span>"
+        },
+        "aboutBioP1": {
+          "tr": "<span class=\"bg-yellow1 px-1\">Berat Erdoğan</span>; markalar, kültürel projeler ve ürünler için görsel kimlikler, kampanyalar ve dijital arayüzler tasarlayan bir grafik tasarımcı ve sanat yönetmenidir.",
+          "en": "<span class=\"bg-yellow1 px-1\">Berat Erdoğan</span> is a graphic designer and art director who designs visual identities, campaigns, and digital interfaces for brands, cultural projects, and products."
+        },
+        "aboutBioP2": {
+          "tr": "Tipografiyi temel araç olarak kullanır; kaba estetiği, editöryal yapıyı ve sistematik düşünceyi merkezine alır. Her proje, <span class=\"underline decoration-4 decoration-yellow1\">içerik · biçim · bağlam</span> üçgeninde kurgulanır.",
+          "en": "He uses typography as his primary tool, focusing on raw aesthetics, editorial structures, and systematic thinking. Each project is constructed within the triangle of <span class=\"underline decoration-4 decoration-yellow1\">content · form · context</span>."
+        },
+        "counters": [
+          {
+            "val": "01+",
+            "label": {
+              "tr": "Yıl Deneyim",
+              "en": "Years Experience"
+            }
+          },
+          {
+            "val": "12+",
+            "label": {
+              "tr": "Tamamlanmış Proje",
+              "en": "Completed Projects"
+            }
+          },
+          {
+            "val": "5+",
+            "label": {
+              "tr": "Marka İş Birliği",
+              "en": "Brand Collaborations"
+            }
+          },
+          {
+            "val": "★★★",
+            "label": {
+              "tr": "Ödül / Basın",
+              "en": "Awards / Press"
+            }
+          }
+        ],
+        "contactHeading": {
+          "tr": "YÜKSEK<br/>\n        <span class=\"bg-ink text-yellow1 px-3\">SESLİ</span><br/>\n        BİR ŞEYLER<br/>\n        YAPALIM<span class=\"text-ink\">.</span>",
+          "en": "LET'S<br/>\n        <span class=\"bg-ink text-yellow1 px-3\">MAKE</span><br/>\n        SOMETHING<br/>\n        LOUD<span class=\"text-ink\">.</span>"
+        },
+        "email": "hello@beraterdogan.com",
+        "availability": {
+          "tr": "Marka, kampanya, arayüz ya da editöryal projeniz için iş birliğine açığım. Yeni başlangıçlara <span class=\"bg-ink text-yellow1 px-1\">2026 Q3</span> itibariyle yer var.",
+          "en": "I am open to collaborations for brand, campaign, interface, or editorial projects. Availability for new projects starting <span class=\"bg-ink text-yellow1 px-1\">Q3 2026</span>."
+        },
+        "socials": {
+          "behance": {
+            "label": "@beraterdoan1",
+            "url": "https://www.behance.net/beraterdoan1"
+          },
+          "instagram": {
+            "label": "@__bertab",
+            "url": "https://www.instagram.com/__bertab/?hl=tr"
+          },
+          "linkedin": {
+            "label": "Berat Erdoğan",
+            "url": "https://www.linkedin.com/in/berat-erdoğan-4a79801b3"
+          }
+        }
     };
 
     // Default Expertise Config
     const defaultExpertise = [
-      { tr: "MARKA YÖNETİMİ", en: "BRANDING" },
-      { tr: "GÖRSEL KİMLİK", en: "VISUAL IDENTITY" },
-      { tr: "UI / UX TASARIMI", en: "UI / UX DESIGN" },
-      { tr: "SOSYAL MEDYA TASARIMI", en: "SOCIAL MEDIA DESIGN" },
-      { tr: "AMBALAJ TASARIMI", en: "PACKAGING DESIGN" },
-      { tr: "HIZLI TÜKETİM MARKALAMA", en: "FMCG BRAND DESIGN" },
-      { tr: "TİPOGRAFİ", en: "TYPOGRAPHY" },
-      { tr: "EDİTÖRYAL TASARIM", en: "EDITORIAL DESIGN" },
-      { tr: "SANAT YÖNETİMİ", en: "ART DIRECTION" },
-      { tr: "KREATİF DİREKTÖRLÜK", en: "CREATIVE DIRECTION" },
-      { tr: "KAMPANYA GÖRSEL TASARIMI", en: "CAMPAIGN VISUAL DESIGN" },
-      { tr: "KURUMSAL KİMLİK", en: "CORPORATE IDENTITY" },
-      { tr: "MOBİL ARAYÜZ TASARIMI", en: "MOBILE INTERFACE DESIGN" },
-      { tr: "ÜRÜN MOCKUP TASARIMI", en: "PRODUCT MOCKUP DESIGN" },
-      { tr: "DİJİTAL İLETİŞİM", en: "DIGITAL COMMUNICATION" },
-      { tr: "REKLAM GÖRSELİ", en: "ADVERTISING VISUAL" },
-      { tr: "AFİŞ TASARIMI", en: "POSTER DESIGN" },
-      { tr: "BASKI TASARIMI", en: "PRINT DESIGN" },
-      { tr: "MARKA STRATEJİSİ GÖRSELLERİ", en: "BRAND STRATEGY VISUALS" }
+      {
+          "tr": "MARKA YÖNETİMİ",
+          "en": "BRANDING"
+        },
+        {
+          "tr": "GÖRSEL KİMLİK",
+          "en": "VISUAL IDENTITY"
+        },
+        {
+          "tr": "UI / UX TASARIMI",
+          "en": "UI / UX DESIGN"
+        },
+        {
+          "tr": "SOSYAL MEDYA TASARIMI",
+          "en": "SOCIAL MEDIA DESIGN"
+        },
+        {
+          "tr": "AMBALAJ TASARIMI",
+          "en": "PACKAGING DESIGN"
+        },
+        {
+          "tr": "TİPOGRAFİ",
+          "en": "TYPOGRAPHY"
+        },
+        {
+          "tr": "EDİTÖRYAL TASARIM",
+          "en": "EDITORIAL DESIGN"
+        },
+        {
+          "tr": "SANAT YÖNETİMİ",
+          "en": "ART DIRECTION"
+        },
+        {
+          "tr": "KREATİF DİREKTÖRLÜK",
+          "en": "CREATIVE DIRECTION"
+        },
+        {
+          "tr": "KAMPANYA GÖRSEL TASARIMI",
+          "en": "CAMPAIGN VISUAL DESIGN"
+        },
+        {
+          "tr": "KURUMSAL KİMLİK",
+          "en": "CORPORATE IDENTITY"
+        },
+        {
+          "tr": "MOBİL ARAYÜZ TASARIMI",
+          "en": "MOBILE INTERFACE DESIGN"
+        },
+        {
+          "tr": "ÜRÜN MOCKUP TASARIMI",
+          "en": "PRODUCT MOCKUP DESIGN"
+        },
+        {
+          "tr": "DİJİTAL İLETİŞİM",
+          "en": "DIGITAL COMMUNICATION"
+        },
+        {
+          "tr": "REKLAM GÖRSELİ",
+          "en": "ADVERTISING VISUAL"
+        },
+        {
+          "tr": "AFİŞ TASARIMI",
+          "en": "POSTER DESIGN"
+        },
+        {
+          "tr": "BASKI TASARIMI",
+          "en": "PRINT DESIGN"
+        },
+        {
+          "tr": "MARKA STRATEJİSİ GÖRSELLERİ",
+          "en": "BRAND STRATEGY VISUALS"
+        }
     ];
 
     let projects = [];
