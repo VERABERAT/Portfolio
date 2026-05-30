@@ -80,7 +80,7 @@
     <div class="brut bg-paper p-6 max-w-sm w-full space-y-4 text-ink">
       <h2 class="display text-xl border-b-2 border-ink pb-2">CMS ACCESS LOCKED</h2>
       <p class="mono text-[11px] text-ink/75 leading-relaxed">
-        Bu yönetim paneline sadece yetkili kişiler erişebilir. Lütfen giriş şifrenizi yazın (Varsayılan şifre: <b>berat2026</b>).
+        Bu yönetim paneline sadece yetkili kişiler erişebilir. Lütfen giriş şifrenizi yazın.
       </p>
       <div class="flex flex-col mono text-xs">
         <label class="font-bold mb-1">PASSWORD (PANEL ŞİFRESİ)</label>
@@ -628,7 +628,7 @@
         <div class="brut bg-paper2 p-6 space-y-4">
           <h2 class="display text-2xl border-b border-ink pb-2">CHANGE PANEL PASSWORD</h2>
           <p class="mono text-xs text-ink/75 leading-relaxed">
-            Yönetim paneline giriş şifrenizi (varsayılan şifre: <b>berat2026</b>) buradan değiştirebilirsiniz.
+            Yönetim paneline giriş şifrenizi buradan değiştirebilirsiniz.
           </p>
           
           <form id="password-change-form" class="space-y-3 mono text-xs">
@@ -687,13 +687,97 @@
     // ----------------------------------------------------
     // PASSWORD PROTECTION SYSTEM
     // ----------------------------------------------------
-    const DEFAULT_PASS_HASH = "67a5eaa8bce0215b943493d139e34a6475312f68ad3ca963275059cbeb2dd008"; // hash of 'berat2026'
+    const DEFAULT_PASS_HASH = "67a5eaa8bce0215b943493d139e34a6475312f68ad3ca963275059cbeb2dd008"; // default hash
 
-    async function sha256(message) {
-      const msgBuffer = new TextEncoder().encode(message);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    async function sha256(ascii) {
+      function rightRotate(value, amount) {
+        return (value >>> amount) | (value << (32 - amount));
+      }
+      
+      const mathPow = Math.pow;
+      const maxWord = mathPow(2, 32);
+      let result = '';
+      const words = [];
+      const asciiLength = ascii.length * 8;
+      
+      // Calculate constants (once)
+      if (!sha256.h_init) {
+        sha256.h_init = [];
+        sha256.k_init = [];
+        let primeCounter = 0;
+        const isPrime = {};
+        for (let candidate = 2; primeCounter < 64; candidate++) {
+          if (!isPrime[candidate]) {
+            for (let i = 0; i < 313; i += candidate) {
+              isPrime[i] = true;
+            }
+            sha256.h_init[primeCounter] = (mathPow(candidate, .5) * maxWord) | 0;
+            sha256.k_init[primeCounter++] = (mathPow(candidate, 1 / 3) * maxWord) | 0;
+          }
+        }
+      }
+
+      // Copy the initial hash values for this calculation
+      const hash = [...sha256.h_init];
+      const k = sha256.k_init;
+      
+      ascii += '\x80';
+      while (ascii.length % 64 - 56) ascii += '\x00';
+      
+      for (let i = 0; i < ascii.length; i++) {
+        const j = ascii.charCodeAt(i);
+        if (j >> 8) return ''; // pure ASCII only
+        words[i >> 2] |= j << ((3 - i) % 4 * 8);
+      }
+      words[words.length] = ((asciiLength / maxWord) | 0);
+      words[words.length] = (asciiLength | 0);
+      
+      let w = [];
+      let a, b, c, d, e, f, g, h;
+      for (let i = 0; i < words.length; i += 16) {
+        a = hash[0]; b = hash[1]; c = hash[2]; d = hash[3];
+        e = hash[4]; f = hash[5]; g = hash[6]; h = hash[7];
+        for (let j = 0; j < 64; j++) {
+          if (j < 16) {
+            w[j] = words[i + j];
+          } else {
+            const s0 = rightRotate(w[j - 15], 7) ^ rightRotate(w[j - 15], 18) ^ (w[j - 15] >>> 3);
+            const s1 = rightRotate(w[j - 2], 17) ^ rightRotate(w[j - 2], 19) ^ (w[j - 2] >>> 10);
+            w[j] = (w[j - 16] + s0 + w[j - 7] + s1) | 0;
+          }
+          
+          const temp1 = (h + (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25)) +
+            ((e & f) ^ (~e & g)) + k[j] + (w[j] || 0)) | 0;
+          const temp2 = ((rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22)) +
+            ((a & b) ^ (a & c) ^ (b & c))) | 0;
+          
+          h = g;
+          g = f;
+          f = e;
+          e = (d + temp1) | 0;
+          d = c;
+          c = b;
+          b = a;
+          a = (temp1 + temp2) | 0;
+        }
+        
+        hash[0] = (hash[0] + a) | 0;
+        hash[1] = (hash[1] + b) | 0;
+        hash[2] = (hash[2] + c) | 0;
+        hash[3] = (hash[3] + d) | 0;
+        hash[4] = (hash[4] + e) | 0;
+        hash[5] = (hash[5] + f) | 0;
+        hash[6] = (hash[6] + g) | 0;
+        hash[7] = (hash[7] + h) | 0;
+      }
+      
+      for (let i = 0; i < 8; i++) {
+        for (let j = 3; j + 1; j--) {
+          const b = (hash[i] >> (j * 8)) & 255;
+          result += ((b < 16) ? '0' : '') + b.toString(16);
+        }
+      }
+      return result;
     }
 
     async function checkPasswordGate() {
