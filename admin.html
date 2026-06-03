@@ -1013,10 +1013,10 @@
         en: "He uses typography as his primary tool, focusing on raw aesthetics, editorial structures, and systematic thinking. Each project is constructed within the triangle of <span class=\"underline decoration-4 decoration-yellow1\">content · form · context</span>."
       },
       counters: [
-        { val: "08+", label: { tr: "Yıl Deneyim", en: "Years Experience" } },
-        { val: "120+", label: { tr: "Tamamlanmış Proje", en: "Completed Projects" } },
-        { val: "40+", label: { tr: "Marka İş Birliği", en: "Brand Collaborations" } },
-        { val: "★★★", label: { tr: "Ödül / Basın", en: "Awards / Press" } }
+        { val: "03+", label: { tr: "Yıl Deneyim", en: "Years Experience" } },
+        { val: "30+", label: { tr: "Tamamlanmış Proje", en: "Completed Projects" } },
+        { val: "15+", label: { tr: "Marka İş Birliği", en: "Brand Collaborations" } },
+        { val: "★", label: { tr: "Ödül / Basın", en: "Awards / Press" } }
       ],
       contactHeading: {
         tr: "YÜKSEK<br/>\n        <span class=\"bg-ink text-yellow1 px-3\">SESLİ</span><br/>\n        BİR ŞEYLER<br/>\n        YAPALIM<span class=\"text-ink\">.</span>",
@@ -1078,7 +1078,10 @@
 
       try {
         const storedProf = localStorage.getItem('portfolio_profile');
-        profile = storedProf ? JSON.parse(storedProf) : JSON.parse(JSON.stringify(defaultProfile));
+        profile = storedProf ? JSON.parse(storedProf) : null;
+        if (!profile || !profile.counters || profile.counters[0]?.val === "08+") {
+          profile = JSON.parse(JSON.stringify(defaultProfile));
+        }
       } catch (e) { profile = JSON.parse(JSON.stringify(defaultProfile)); }
 
       try {

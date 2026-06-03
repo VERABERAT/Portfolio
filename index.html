@@ -835,10 +835,10 @@
       "aboutBioP1": { "tr": "<strong>Berat Erdoğan</strong>; markalar, kültürel projeler ve ürünler için görsel kimlikler, kampanyalar ve dijital arayüzler tasarlayan bir grafik tasarımcı ve sanat yönetmenidir.", "en": "<strong>Berat Erdoğan</strong> is a graphic designer and art director who designs visual identities, campaigns, and digital interfaces for brands, cultural projects, and products." },
       "aboutBioP2": { "tr": "Tipografiyi temel araç olarak kullanır; kaba estetiği, editöryal yapıyı ve sistematik düşünceyi merkezine alır.", "en": "He uses typography as his primary tool, focusing on raw aesthetics, editorial structures, and systematic thinking." },
       "counters": [
-        { "val": "08+", "label": { "tr": "Yıl Deneyim", "en": "Years Experience" } },
-        { "val": "120+", "label": { "tr": "Tamamlanmış Proje", "en": "Completed Projects" } },
-        { "val": "40+", "label": { "tr": "Marka İş Birliği", "en": "Brand Collaborations" } },
-        { "val": "★★★", "label": { "tr": "Ödül / Basın", "en": "Awards / Press" } }
+        { "val": "03+", "label": { "tr": "Yıl Deneyim", "en": "Years Experience" } },
+        { "val": "30+", "label": { "tr": "Tamamlanmış Proje", "en": "Completed Projects" } },
+        { "val": "15+", "label": { "tr": "Marka İş Birliği", "en": "Brand Collaborations" } },
+        { "val": "★", "label": { "tr": "Ödül / Basın", "en": "Awards / Press" } }
       ],
       "contactHeading": { "tr": "BİRLİKTE YÜKSEK SESLİ BİR ŞEYLER YAPALIM.", "en": "LET'S MAKE SOMETHING LOUD." },
       "email": "hello@beraterdogan.com",
@@ -854,9 +854,9 @@
       { "tr":"MARKA YÖNETİMİ","en":"BRANDING" },
       { "tr":"GÖRSEL KİMLİK","en":"VISUAL IDENTITY" },
       { "tr":"UI / UX TASARIMI","en":"UI / UX DESIGN" },
-      { "tr":"SOSYAL MEDYA TASARIMI","en":"SOCIAL MEDIA DESIGN" },
       { "tr":"AMBALAJ TASARIMI","en":"PACKAGING DESIGN" },
       { "tr":"TİPOGRAFİ","en":"TYPOGRAPHY" },
+      { "tr":"SOSYAL MEDYA TASARIMI","en":"SOCIAL MEDIA DESIGN" },
       { "tr":"EDİTÖRYAL TASARIM","en":"EDITORIAL DESIGN" },
       { "tr":"SANAT YÖNETİMİ","en":"ART DIRECTION" },
       { "tr":"KREATİF DİREKTÖRLÜK","en":"CREATIVE DIRECTION" },
@@ -867,7 +867,14 @@
 
     let projects = [], profile = {}, expertise = [];
     try { projects  = JSON.parse(localStorage.getItem('portfolio_projects'))  || [...defaultProjects]; } catch(e) { projects  = [...defaultProjects]; }
-    try { profile   = JSON.parse(localStorage.getItem('portfolio_profile'))   || {...defaultProfile};   } catch(e) { profile   = {...defaultProfile}; }
+    try {
+      const storedProf = localStorage.getItem('portfolio_profile');
+      profile = storedProf ? JSON.parse(storedProf) : null;
+      if (!profile || !profile.counters || profile.counters[0]?.val === "08+") {
+        profile = {...defaultProfile};
+        localStorage.setItem('portfolio_profile', JSON.stringify(defaultProfile));
+      }
+    } catch(e) { profile = {...defaultProfile}; }
     try { expertise = JSON.parse(localStorage.getItem('portfolio_expertise')) || [...defaultExpertise]; } catch(e) { expertise = [...defaultExpertise]; }
 
     const lang = (localStorage.getItem('portfolio_lang') || 'tr');
