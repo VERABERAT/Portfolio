@@ -1943,6 +1943,8 @@
         throw new Error('Failed to load local index.html file structure. Make sure you are running a localhost server.');
       }
       let htmlText = await res.text();
+      // Normalize line endings to avoid CRLF mismatch on Windows / git checkouts
+      htmlText = htmlText.replace(/\r\n/g, '\n');
 
       // 1. Compile defaultProjects
       let formattedProjects = '\n      ' + JSON.stringify(projects, null, 2).replace(/\n/g, '\n      ').substring(1).slice(0, -1).trim() + '\n    ';
@@ -1954,7 +1956,7 @@
 
       // 3. Replace defaultExpertise
       let formattedExpertise = '\n      ' + JSON.stringify(expertise, null, 2).replace(/\n/g, '\n      ').substring(1).slice(0, -1).trim() + '\n    ';
-      htmlText = replaceSegment(htmlText, 'const defaultExpertise = [', '];\n\n    let projects = [];', formattedExpertise);
+      htmlText = replaceSegment(htmlText, 'const defaultExpertise = [', '];\n\n    let projects = [], profile = {}, expertise = [];', formattedExpertise);
 
       return htmlText;
     }
