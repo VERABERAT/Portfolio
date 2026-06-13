@@ -268,74 +268,7 @@
   <!-- ============================================================
        REUSABLE HAND-DRAWN DOODLES
        ============================================================ -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <defs>
-      <!-- sun with face -->
-      <g id="d-sun">
-        <circle class="doodle" cx="100" cy="100" r="42"/>
-        <path class="doodle" d="M88 96 q4 6 8 0 M112 96 q4 6 8 0 M86 118 q14 12 28 0"/>
-        <path class="doodle" d="M100 40 v-22 M100 182 v-22 M40 100 h-22 M182 100 h-22
-          M58 58 l-15 -15 M142 58 l15 -15 M58 142 l-15 15 M142 142 l15 15"/>
-      </g>
-      <!-- sprout from ground -->
-      <g id="d-sprout">
-        <path class="doodle" d="M40 150 q60 -10 120 0"/>
-        <path class="doodle" d="M100 150 q-2 -40 0 -60"/>
-        <path class="doodle" d="M100 96 q-34 -2 -40 -30 q30 -4 40 26"/>
-        <path class="doodle" d="M100 104 q34 -2 40 -30 q-30 -4 -40 26"/>
-      </g>
-      <!-- flower with roots (forest card) -->
-      <g id="d-flower">
-        <path class="doodle doodle--thin" d="M30 130 q70 -8 140 2"/>
-        <path class="doodle doodle--thin" d="M100 132 q4 -22 -2 -40"/>
-        <path class="doodle doodle--thin" d="M70 70 q-10 -22 14 -30 q22 6 16 28 q22 -10 30 12 q-6 22 -28 16 q14 20 -8 30 q-22 -6 -16 -28 q-22 10 -30 -12 q8 -22 28 -16z"/>
-        <path class="doodle doodle--thin" d="M98 134 q-26 6 -40 22 M102 134 q24 8 36 24"/>
-      </g>
-      <!-- heart pierced by arrow (sky card) -->
-      <g id="d-heart">
-        <path class="doodle" d="M100 150 C60 118 56 86 74 74 q22 -14 26 14 q4 -28 26 -14 c18 12 14 44 -26 76z"/>
-        <path class="doodle" d="M48 60 L150 150 M150 150 l2 -22 M150 150 l-22 2 M48 60 l-16 4 M48 60 l4 -16"/>
-      </g>
-      <!-- bag with sleepy face (navy card) -->
-      <g id="d-bag">
-        <path class="doodle" d="M55 95 L150 88 L158 150 L60 156 Z"/>
-        <path class="doodle" d="M92 95 q12 -34 28 -2"/>
-        <path class="doodle" d="M92 118 q5 5 10 0 M120 116 q5 5 10 0 M96 134 q14 10 28 -2"/>
-      </g>
-      <!-- mountain / tent shelter -->
-      <g id="d-tent">
-        <path class="doodle" d="M40 150 L100 60 L160 150 Z"/>
-        <path class="doodle" d="M100 60 L100 150 M78 150 q22 -40 44 0"/>
-      </g>
-      <!-- eye -->
-      <g id="d-eye">
-        <path class="doodle" d="M40 100 q60 -52 120 0 q-60 52 -120 0z"/>
-        <circle class="doodle" cx="100" cy="100" r="18"/>
-      </g>
-      <!-- letterform Aa (typography) -->
-      <g id="d-type">
-        <path class="doodle" d="M55 150 L85 60 L115 150 M66 122 h38"/>
-        <path class="doodle" d="M150 110 q-20 -14 -28 4 q-8 18 8 24 q18 6 20 -14 v-20 M150 104 v46"/>
-      </g>
-      <!-- spark / asterisk -->
-      <g id="d-spark">
-        <path class="doodle" d="M100 50 v100 M50 100 h100 M64 64 l72 72 M136 64 l-72 72"/>
-      </g>
-      <!-- cloud -->
-      <g id="d-cloud">
-        <path class="doodle" d="M60 130 q-26 0 -22 -22 q2 -18 22 -14 q4 -26 32 -22 q22 2 22 24 q24 -6 28 16 q4 18 -18 18z"/>
-      </g>
-      <!-- box / package -->
-      <g id="d-box">
-        <path class="doodle" d="M55 80 L100 64 L145 80 L145 138 L100 156 L55 138 Z"/>
-        <path class="doodle" d="M55 80 L100 98 L145 80 M100 98 V156"/>
-      </g>
-      <!-- wave / signal (campaign) -->
-      <g id="d-wave">
-        <path class="doodle" d="M40 120 q15 -45 30 0 q15 45 30 0 q15 -45 30 0 q15 45 30 0"/>
-      </g>
-    </defs>
-  </svg>
+<!-- doodle <defs> injected at runtime by doodles.js (injectDoodleDefs) -->
 
   <main>
     <!-- ============ HERO ============ -->
@@ -410,99 +343,40 @@
     <a href="#contact" data-target="contact"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-heart"/></svg>yaz</a>
   </nav>
 
+  <script src="doodles.js"></script>
+  <script src="data.js"></script>
   <script>
     /* ============================================================
-       CONTENT — sade, elle kurulmuş (grug entry mantığı)
-       Her proje: bir renk + bir doodle + kısa söz.
+       DATA — loaded from data.js (window.PORTFOLIO), overridden by
+       localStorage "portfolio_data" for live in-browser admin preview.
        ============================================================ */
-    const projects = [
-      { t:"vera", c:"display typeface", y:"2025", color:"navy",   doodle:"d-type",
-        desc:"sıkışık, kalın, keskin köşeli display tipografi. dikkat ister, dikkat alır.",
-        tags:["typography","type design","display"], link:"https://www.behance.net/gallery/246607835/VERA-Condensed-Bold-Display-Typeface" },
-      { t:"ferm", c:"ambalaj", y:"2025", color:"forest", doodle:"d-sprout",
-        desc:"fermente ürün serisi için organik tipografi ve canlı bir ambalaj sistemi.",
-        tags:["packaging","fmcg","print"], link:"https://www.behance.net/gallery/244632009/FERM-360-Brand-Ecosystem-Web-UIUX-Design" },
-      { t:"nutripaw", c:"fmcg branding", y:"2024", color:"yellow", doodle:"d-box",
-        desc:"organik pet food markası için bütüncül kimlik, ambalaj ve kampanya.",
-        tags:["identity","packaging","campaign"], link:"#" },
-      { t:"smart locker", c:"ui / ux", y:"2024", color:"sky", doodle:"d-eye",
-        desc:"akıllı kilit dolabı için dokunmatik arayüz konsepti. akış + ekranlar.",
-        tags:["ui","touchscreen","flow"], link:"#" },
-      { t:"canlanı", c:"kampanya", y:"2024", color:"mint", doodle:"d-wave",
-        desc:"kampanya filmi ve key visual serisi. 6sn / 15sn / 30sn versiyonlar.",
-        tags:["motion","key visual","campaign"], link:"#" },
-      { t:"decay creates life", c:"editöryal", y:"2024", color:"forest", doodle:"d-flower",
-        desc:"bozulma ve yenilenme üzerine kavramsal seri. ai görseller + photoshop.",
-        tags:["ai","editorial","concept"], link:"#" },
-      { t:"imece market", c:"marka sistemi", y:"2025", color:"navy", doodle:"d-box",
-        desc:"üretim & finans platformu için marka sistemi ve dashboard arayüzü.",
-        tags:["system","dashboard","identity"], link:"#" },
-      { t:"miu miu", c:"kampanya", y:"2023", color:"yellow", doodle:"d-spark",
-        desc:"sezonluk kampanya için key visual ve motion kurgular.",
-        tags:["motion","fashion","campaign"], link:"#" },
-      { t:"kasten meets ankara", c:"sanat yönetimi", y:"2023", color:"sky", doodle:"d-tent",
-        desc:"ankara için kültürel kampanyanın instagram serisi — carousel + reels.",
-        tags:["social","carousel","reels"], link:"#" },
-      { t:"odeabank", c:"kurumsal kimlik", y:"2023", color:"mint", doodle:"d-cloud",
-        desc:"kurumsal iletişim kampanyası. baskı + dijital uygulamalar.",
-        tags:["corporate","identity"], link:"#" }
-    ];
-
-    const profile = {
-      aboutH: "statik markayla motion arasına köprü kurarım.",
-      bio: [
-        "<b>berat erdoğan</b> — statik markalama ile motion arasındaki boşluğu kapatan bir görsel tasarımcı. midjourney ve firefly gibi generative ai araçlarını kreatif akışa entegre ederek üretimi hızlandırır.",
-        "konsept geliştirmeden sosyal medya adaptasyonuna kadar uçtan uca kampanya tasarımı. teknik hassasiyet + modern, tipografik estetik. az sözle çok şey."
-      ],
-      skills: ["brand identity","motion graphics","social media","typography","figma","after effects","midjourney","firefly"],
-      counters: [
-        { v:"03+", l:"yıl deneyim" },
-        { v:"04",  l:"ajans / stüdyo" },
-        { v:"%40", l:"ai ile hız" },
-        { v:"★",   l:"full-time'a açık" }
-      ],
-      contactH: "birlikte basit ama güçlü bir şey yapalım.",
-      email: "losberat@icloud.com",
-      avail: "görsel tasarım, marka, motion ya da sosyal medya projen için açığım. <mark>full-time</mark> ve remote çalışmaya hazırım.",
-      socials: {
-        behance:   "https://www.behance.net/beraterdoan1",
-        instagram: "https://www.instagram.com/__bertab/?hl=tr",
-        linkedin:  "https://www.linkedin.com/in/beraterdogan"
-      }
-    };
-
-    const experience = [
-      { role:"visual designer", org:"kasten kolektif", date:"ara 2024 — ara 2025", doodle:"d-tent",
-        note:"büyük ölçekli sergiler için görsel kimlik adaptasyonu. 20+ baskı &amp; dijital varlık, ai ile %40 daha hızlı üretim." },
-      { role:"visual designer", org:"yup agency", date:"haz — eyl 2024", doodle:"d-wave",
-        note:"sosyal medya kampanyaları (%20 etkileşim artışı), motion grafik ve kısa video (reels / shorts)." },
-      { role:"brand designer · freelance", org:"tus bodrum", date:"2023", doodle:"d-spark",
-        note:"sıfırdan görsel kimlik: logo, renk paleti, tipografi kuralları ve sezonluk sosyal medya dili." },
-      { role:"digital designer", org:"notivent app", date:"haz — eki 2023", doodle:"d-box",
-        note:"mobil uygulama lansmanı için görsel strateji ve app store tanıtım varlıkları." }
-    ];
-
+    injectDoodleDefs();
+    let DATA = window.PORTFOLIO ? JSON.parse(JSON.stringify(window.PORTFOLIO)) : { projects: [], profile: {}, experience: [] };
+    try { const ov = localStorage.getItem('portfolio_data'); if (ov) DATA = JSON.parse(ov); } catch (e) {}
+    const projects = DATA.projects || [];
+    const profile = DATA.profile || {};
+    const experience = DATA.experience || [];
     /* ------------ RENDER: project cards ------------ */
     const work = document.getElementById('work');
     work.innerHTML = projects.map((p, i) => {
       const num = String(i + 1).padStart(2, '0');
-      const cta = (p.link && p.link !== '#')
-        ? `<a class="card__cta" href="${p.link}" target="_blank" rel="noopener">behance'de gör →</a>` : '';
+      const slug = p.slug || p.t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      const href = 'project.html?p=' + encodeURIComponent(slug);
       return `
       <section class="card" data-c="${p.color}">
         <div class="card__top">
           <span class="brand">berat.</span>
           <span class="meta">${p.y} <span class="dot"></span></span>
         </div>
-        <div class="card__art">
+        <a class="card__art" href="${href}" aria-label="${p.t} projesini aç">
           <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#${p.doodle}"/></svg>
-        </div>
+        </a>
         <div class="card__text reveal">
           <div class="proj__num">${num} · ${p.c}</div>
-          <h2 class="proj__title">${p.t}</h2>
+          <h2 class="proj__title"><a href="${href}">${p.t}</a></h2>
           <p class="body">${p.desc}</p>
-          <div class="tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
-          ${cta}
+          <div class="tags">${(p.tags || []).map(t => `<span>${t}</span>`).join('')}</div>
+          <a class="card__cta" href="${href}">projeyi gör →</a>
         </div>
       </section>`;
     }).join('');

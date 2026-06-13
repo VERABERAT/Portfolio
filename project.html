@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>proje — berat.</title>
+  <meta name="description" content="berat erdoğan portfolyo projesi." />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23FFD93D'/%3E%3Ctext x='50%25' y='62%25' font-family='Shantell Sans, Comic Sans MS, cursive' font-size='44' font-weight='700' fill='%232B2B2B' text-anchor='middle'%3Eb%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --hand: 'Shantell Sans', 'Comic Sans MS', 'Segoe Print', cursive;
+      --yellow:#FFD93D; --yellow-ink:#2B2B2B;
+      --navy:#1B1B3A;   --navy-ink:#E8924A;
+      --mint:#AEEBD0;   --mint-ink:#8B2E2E;
+      --sky:#6BC5F0;    --sky-ink:#1B2B4A;
+      --forest:#1B4D3E; --forest-ink:#EDE5B6;
+      --cream:#F3EFE6;  --cream-ink:#2B2B2B;
+      --ease:cubic-bezier(.34,1.2,.64,1);
+      --pad-x:clamp(22px,6vw,80px);
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html { -webkit-font-smoothing:antialiased; scroll-behavior:smooth; }
+    body { font-family:var(--hand); background:var(--cream); color:var(--cream-ink); line-height:1.5; overflow-x:hidden; }
+    a { color:inherit; text-decoration:none; }
+    svg, img, video, iframe { display:block; max-width:100%; }
+    body::before { content:""; position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:.04; mix-blend-mode:multiply;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    .doodle { fill:none; stroke:currentColor; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; }
+    .doodle--thin { stroke-width:3; }
+
+    /* top bar */
+    .bar { position:sticky; top:0; z-index:100; display:flex; align-items:center; justify-content:space-between;
+      padding:16px var(--pad-x); background:var(--cream); border-bottom:2.5px solid var(--cream-ink); font-weight:700; }
+    .bar a.back { display:inline-flex; align-items:center; gap:8px; transition:gap .3s var(--ease); }
+    .bar a.back:hover { gap:14px; }
+    .bar .brand { font-weight:800; }
+
+    /* hero band in project colour */
+    .phero { padding:clamp(40px,8vh,90px) var(--pad-x); }
+    .phero[data-c="yellow"]{background:var(--yellow);color:var(--yellow-ink);}
+    .phero[data-c="navy"]  {background:var(--navy);color:var(--navy-ink);}
+    .phero[data-c="mint"]  {background:var(--mint);color:var(--mint-ink);}
+    .phero[data-c="sky"]   {background:var(--sky);color:var(--sky-ink);}
+    .phero[data-c="forest"]{background:var(--forest);color:var(--forest-ink);}
+    .phero[data-c="cream"] {background:var(--cream);color:var(--cream-ink);}
+    .phero__grid { display:grid; grid-template-columns:1fr 280px; gap:40px; align-items:center; max-width:1200px; margin:0 auto; }
+    .phero__meta { font-size:15px; font-weight:700; opacity:.85; margin-bottom:10px; }
+    .phero__title { font-size:clamp(44px,9vw,104px); font-weight:800; line-height:.95; letter-spacing:-.03em; text-transform:lowercase; }
+    .phero__desc { font-size:clamp(18px,2.6vw,24px); font-weight:500; max-width:48ch; margin-top:18px; }
+    .phero__tags { display:flex; flex-wrap:wrap; gap:8px 10px; margin-top:22px; }
+    .phero__tags span { font-size:13px; font-weight:700; padding:5px 12px; border:2px solid currentColor; border-radius:999px; }
+    .phero__cta { display:inline-flex; align-items:center; gap:10px; margin-top:26px; font-size:18px; font-weight:800;
+      border-bottom:3px solid currentColor; padding-bottom:4px; transition:gap .3s var(--ease); }
+    .phero__cta:hover { gap:18px; }
+    .phero__art svg { width:100%; height:auto; }
+    @media (max-width:760px){ .phero__grid{ grid-template-columns:1fr; } .phero__art{ order:-1; max-width:200px; } }
+
+    /* media gallery */
+    .gallery { max-width:1100px; margin:0 auto; padding:clamp(40px,8vh,90px) var(--pad-x); display:flex; flex-direction:column; gap:clamp(28px,5vw,56px); }
+    .gallery__head { font-size:clamp(22px,4vw,34px); font-weight:800; text-transform:lowercase; }
+    .shot { border:3px solid var(--cream-ink); border-radius:14px; overflow:hidden; background:#0001; }
+    .shot img, .shot video { width:100%; height:auto; }
+    .shot .embed { position:relative; width:100%; aspect-ratio:16/9; }
+    .shot .embed iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+    .empty { border:3px dashed var(--cream-ink); border-radius:14px; padding:48px 28px; text-align:center; font-weight:600; opacity:.7; }
+
+    /* prev / next + footer */
+    .pnav { max-width:1100px; margin:0 auto; padding:0 var(--pad-x) clamp(50px,8vh,90px); display:flex; justify-content:space-between; gap:16px; }
+    .pnav a { display:flex; flex-direction:column; gap:4px; font-weight:800; font-size:clamp(18px,3vw,26px); text-transform:lowercase; transition:transform .3s var(--ease); max-width:46%; }
+    .pnav a small { font-size:13px; font-weight:700; opacity:.6; text-transform:uppercase; }
+    .pnav a.next { text-align:right; align-items:flex-end; }
+    .pnav a:hover { transform:translateY(-3px); }
+    .pfoot { border-top:2.5px solid var(--cream-ink); padding:28px var(--pad-x); text-align:center; font-weight:700; }
+    .pfoot a { border-bottom:2px solid currentColor; }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <a class="back" href="index.html#work">← tüm işler</a>
+    <a class="brand" href="index.html">berat.</a>
+  </header>
+
+  <main id="app"><!-- rendered by JS --></main>
+
+  <script src="doodles.js"></script>
+  <script src="data.js"></script>
+  <script>
+    injectDoodleDefs();
+
+    /* shared data (same override logic as index.html) */
+    let DATA = window.PORTFOLIO ? JSON.parse(JSON.stringify(window.PORTFOLIO)) : { projects: [] };
+    try { const ov = localStorage.getItem('portfolio_data'); if (ov) DATA = JSON.parse(ov); } catch (e) {}
+    const projects = DATA.projects || [];
+
+    const slugify = (s) => (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    const getSlug = (p) => p.slug || slugify(p.t);
+
+    const params = new URLSearchParams(location.search);
+    const want = params.get('p');
+    const idx = projects.findIndex(p => getSlug(p) === want);
+    const p = projects[idx];
+    const app = document.getElementById('app');
+
+    function embedUrl(src) {
+      try {
+        const u = new URL(src, location.href);
+        if (/youtu\.be$/.test(u.hostname)) return 'https://www.youtube.com/embed' + u.pathname;
+        if (/youtube\.com$/.test(u.hostname.replace('www.',''))) {
+          const id = u.searchParams.get('v'); if (id) return 'https://www.youtube.com/embed/' + id;
+          return src;
+        }
+        if (/vimeo\.com$/.test(u.hostname.replace('www.',''))) {
+          const id = u.pathname.split('/').filter(Boolean).pop(); if (id) return 'https://player.vimeo.com/video/' + id;
+        }
+      } catch (e) {}
+      return src;
+    }
+
+    function mediaHTML(m) {
+      if (!m || !m.src) return '';
+      if (m.type === 'video') return `<figure class="shot"><video src="${m.src}" controls playsinline preload="metadata"></video></figure>`;
+      if (m.type === 'embed') return `<figure class="shot"><div class="embed"><iframe src="${embedUrl(m.src)}" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></figure>`;
+      return `<figure class="shot"><img src="${m.src}" alt="${(p && p.t) || ''} görsel" loading="lazy"></figure>`;
+    }
+
+    if (!p) {
+      document.title = 'proje bulunamadı — berat.';
+      app.innerHTML = `<section class="gallery"><div class="empty">böyle bir proje bulunamadı.<br><a href="index.html#work" style="border-bottom:2px solid currentColor">← tüm işlere dön</a></div></section>`;
+    } else {
+      document.title = p.t + ' — berat.';
+      const media = (p.media || []).map(mediaHTML).join('');
+      const ext = (p.link && p.link !== '#')
+        ? `<a class="phero__cta" href="${p.link}" target="_blank" rel="noopener">behance'de tam dosya →</a>` : '';
+      const galleryBlock = media
+        ? `<section class="gallery"><div class="gallery__head">görseller</div>${media}</section>`
+        : `<section class="gallery"><div class="empty">bu proje için görsel/video yakında eklenecek.${(p.link && p.link !== '#') ? `<br><a href="${p.link}" target="_blank" rel="noopener" style="border-bottom:2px solid currentColor">behance'de gör →</a>` : ''}</div></section>`;
+
+      // prev / next (wrap around)
+      const prev = projects[(idx - 1 + projects.length) % projects.length];
+      const next = projects[(idx + 1) % projects.length];
+      const pnav = projects.length > 1 ? `
+        <nav class="pnav">
+          <a class="prev" href="project.html?p=${encodeURIComponent(getSlug(prev))}"><small>← önceki</small>${prev.t}</a>
+          <a class="next" href="project.html?p=${encodeURIComponent(getSlug(next))}"><small>sonraki →</small>${next.t}</a>
+        </nav>` : '';
+
+      app.innerHTML = `
+        <section class="phero" data-c="${p.color || 'cream'}">
+          <div class="phero__grid">
+            <div>
+              <div class="phero__meta">${p.c || ''} · ${p.y || ''}</div>
+              <h1 class="phero__title">${p.t}</h1>
+              <p class="phero__desc">${p.desc || ''}</p>
+              <div class="phero__tags">${(p.tags || []).map(t => `<span>${t}</span>`).join('')}</div>
+              ${ext}
+            </div>
+            <div class="phero__art"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#${p.doodle || 'd-spark'}"/></svg></div>
+          </div>
+        </section>
+        ${galleryBlock}
+        ${pnav}
+        <footer class="pfoot">© <span id="y"></span> berat erdoğan · <a href="index.html">ana sayfa</a></footer>`;
+      document.getElementById('y').textContent = new Date().getFullYear();
+    }
+  </script>
+</body>
+</html>
