@@ -3,2107 +3,577 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Admin Dashboard — Portfolio Control Panel</title>
   <meta name="robots" content="noindex, nofollow" />
-
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Ctext x='50%25' y='54%25' font-family='Archivo Black, Arial Black, sans-serif' font-size='44' font-weight='900' fill='%23FFE600' text-anchor='middle' dominant-baseline='middle'%3EA%3C/text%3E%3C/svg%3E" />
-  
+  <title>admin — berat.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            ink:    'var(--ink)',
-            paper:  'var(--paper)',
-            paper2: 'var(--paper2)',
-            yellow1:'var(--yellow-1)',
-            red1:   'var(--red-1)',
-            blue1:  'var(--blue-1)',
-          },
-          fontFamily: {
-            black: ['Archivo Black','system-ui','sans-serif'],
-            mono:  ['Space Mono','ui-monospace','monospace'],
-            sans:  ['Space Grotesk','ui-sans-serif','system-ui'],
-          },
-          borderWidth: {
-            '3':'3px','5':'5px',
-          }
-        }
-      }
-    }
-  </script>
-
+  <link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --paper: #F2F1EC;
-      --paper2: #E8E6DD;
-      --ink: #000000;
-      --yellow-1: #FFE600;
-      --red-1: #FF2D00;
-      --blue-1: #1E3CFF;
-      color-scheme: light;
+      --hand:'Shantell Sans','Comic Sans MS',cursive;
+      --mono:'Space Mono',ui-monospace,monospace;
+      --cream:#F3EFE6; --ink:#2B2B2B; --line:#2B2B2B;
+      --yellow:#FFD93D; --navy:#1B1B3A; --mint:#AEEBD0; --sky:#6BC5F0; --forest:#1B4D3E;
+      --ok:#1B7A4B; --err:#B33;
     }
-    
-    html[data-theme="dark"] {
-      --paper: #0B0B0E;
-      --paper2: #18181C;
-      --ink: #FFFFFF;
-      --yellow-1: #FFE600;
-      --red-1: #FF2D00;
-      --blue-1: #1E3CFF;
-      color-scheme: dark;
-    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:var(--hand); background:var(--cream); color:var(--ink); line-height:1.45; }
+    h1,h2,h3 { font-weight:800; letter-spacing:-.01em; }
+    a { color:inherit; }
+    button { font:inherit; cursor:pointer; }
+    input, textarea, select { font-family:var(--mono); font-size:13px; }
+    .mono { font-family:var(--mono); }
 
-    html, body { background: var(--paper); color: var(--ink); }
-    body { font-family:'Space Grotesk', sans-serif; }
-    *, *::before, *::after { border-radius: 0 !important; }
-    ::selection { background: var(--ink); color: var(--yellow-1); }
+    /* gate */
+    .gate { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
+    .gate__box { width:100%; max-width:360px; border:3px solid var(--line); border-radius:16px; padding:30px; background:#fff; }
+    .gate__box h1 { font-size:32px; margin-bottom:6px; }
+    .gate__box p { font-size:13px; opacity:.7; margin-bottom:18px; }
 
-    .display { font-family:'Archivo Black', sans-serif; letter-spacing:-0.04em; line-height:0.86; text-transform:uppercase; }
-    .mono { font-family:'Space Mono', monospace; }
+    /* layout */
+    .wrap { max-width:1000px; margin:0 auto; padding:24px 18px 80px; }
+    header.top { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
+    header.top h1 { font-size:34px; }
+    .nav { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:22px; border-bottom:3px solid var(--line); }
+    .nav button { padding:10px 16px; border:0; background:none; font-weight:800; font-size:15px; border-bottom:4px solid transparent; margin-bottom:-3px; opacity:.55; }
+    .nav button.active { opacity:1; border-bottom-color:var(--ink); }
 
-    .brut { border:3px solid var(--ink); box-shadow: 6px 6px 0 0 var(--ink); }
-    .brut-sm { border:3px solid var(--ink); box-shadow: 3px 3px 0 0 var(--ink); }
-    .brut-hover { transition: transform 80ms steps(2), box-shadow 80ms steps(2); }
-    .brut-hover:hover { transform: translate(3px,3px); box-shadow: 0 0 0 0 var(--ink); }
+    .panel { display:none; }
+    .panel.active { display:block; }
+
+    .row { border:2.5px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:12px; background:#fff; }
+    .row__head { display:flex; align-items:center; gap:10px; }
+    .row__head .grip { font-family:var(--mono); font-size:12px; opacity:.5; }
+    .row__head .ttl { font-weight:800; font-size:18px; flex:1; }
+    .row__head .mini { width:34px; height:34px; flex:0 0 34px; }
+    .row__head .mini svg { width:100%; height:100%; }
+    .doodle { fill:none; stroke:currentColor; stroke-width:6; stroke-linecap:round; stroke-linejoin:round; }
+    .doodle--thin { stroke-width:5; }
+    .pill { font-family:var(--mono); font-size:10px; text-transform:uppercase; border:2px solid var(--line); border-radius:999px; padding:2px 8px; }
+
+    .field { display:flex; flex-direction:column; gap:4px; margin-bottom:10px; }
+    .field > label { font-weight:700; font-size:13px; }
+    .field input, .field textarea, .field select { border:2px solid var(--line); border-radius:8px; padding:8px 10px; background:var(--cream); outline:none; }
+    .field input:focus, .field textarea:focus, .field select:focus { background:var(--yellow); }
+    .field textarea { min-height:70px; resize:vertical; }
+    .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .grid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+    @media (max-width:640px){ .grid2,.grid3 { grid-template-columns:1fr; } }
+
+    .btn { border:2.5px solid var(--line); border-radius:9px; padding:9px 14px; font-weight:800; font-size:13px; background:#fff; }
+    .btn:hover { background:var(--yellow); }
+    .btn--ink { background:var(--ink); color:var(--cream); }
+    .btn--ink:hover { background:#000; color:var(--yellow); }
+    .btn--sm { padding:5px 10px; font-size:12px; border-width:2px; }
+    .btn--danger:hover { background:#fdd; border-color:var(--err); color:var(--err); }
+    .btns { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+
+    .swatches { display:flex; gap:6px; flex-wrap:wrap; }
+    .swatch { width:30px; height:30px; border-radius:50%; border:2px solid var(--line); cursor:pointer; }
+    .swatch.sel { outline:3px solid var(--ink); outline-offset:2px; }
+    .swatch[data-v=yellow]{background:var(--yellow);} .swatch[data-v=navy]{background:var(--navy);}
+    .swatch[data-v=mint]{background:var(--mint);} .swatch[data-v=sky]{background:var(--sky);}
+    .swatch[data-v=forest]{background:var(--forest);} .swatch[data-v=cream]{background:var(--cream);}
+
+    .doodlepick { display:flex; gap:6px; flex-wrap:wrap; }
+    .doodlepick button { width:42px; height:42px; border:2px solid var(--line); border-radius:8px; background:#fff; padding:5px; }
+    .doodlepick button.sel { outline:3px solid var(--ink); outline-offset:1px; background:var(--yellow); }
+    .doodlepick svg { width:100%; height:100%; }
+
+    .media-row { display:grid; grid-template-columns:110px 1fr auto; gap:8px; align-items:center; margin-bottom:8px; }
+    @media (max-width:640px){ .media-row { grid-template-columns:1fr; } }
+
+    .status { font-family:var(--mono); font-size:12px; padding:8px 12px; border-radius:8px; margin-top:10px; display:none; white-space:pre-wrap; }
+    .status.show { display:block; }
+    .status.ok { background:#dff4e7; color:var(--ok); border:2px solid var(--ok); }
+    .status.err { background:#fde3e3; color:var(--err); border:2px solid var(--err); }
+    .status.info { background:#eef; color:#335; border:2px solid #99c; }
+
+    .hint { font-size:12px; opacity:.7; font-family:var(--mono); }
+    .editor { border:3px dashed var(--line); border-radius:14px; padding:16px; margin-bottom:14px; background:#fffdf6; }
+    .editor h3 { font-size:20px; margin-bottom:12px; }
+    .toolbar { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:14px; }
   </style>
 </head>
-<body class="min-h-screen pb-20">
+<body>
 
-  <!-- PASSWORD PROTECTION OVERLAY -->
-  <div id="password-gate" class="fixed inset-0 z-[20000] bg-ink flex flex-col items-center justify-center p-4">
-    <div class="brut bg-paper p-6 max-w-sm w-full space-y-4 text-ink">
-      <h2 class="display text-xl border-b-2 border-ink pb-2">CMS ACCESS LOCKED</h2>
-      <p class="mono text-[11px] text-ink/75 leading-relaxed">
-        Bu yönetim paneline sadece yetkili kişiler erişebilir. Lütfen giriş şifrenizi yazın.
-      </p>
-      <div class="flex flex-col mono text-xs">
-        <label class="font-bold mb-1">PASSWORD (PANEL ŞİFRESİ)</label>
-        <input type="password" id="gate-password-input" class="bg-paper2 border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold text-sm" />
+  <!-- ===== GATE ===== -->
+  <div class="gate" id="gate">
+    <div class="gate__box">
+      <h1>berat<span style="color:var(--err)">.</span> admin</h1>
+      <p id="gateMsg">parola gir</p>
+      <div class="field"><input type="password" id="gatePass" placeholder="parola" autocomplete="current-password" /></div>
+      <div class="btns">
+        <button class="btn btn--ink" id="gateBtn" style="flex:1">gir</button>
       </div>
-      <button id="btn-submit-password" class="w-full brut bg-ink text-yellow1 font-bold py-3 text-xs uppercase tracking-wider cursor-pointer">
-        🔐 UNLOCK DASHBOARD
-      </button>
-      <div id="gate-error" class="hidden p-2 border-2 border-ink bg-red-600 text-white text-[10px] uppercase font-bold text-center">
-        HATALI ŞİFRE!
-      </div>
-      <div class="text-center pt-2 flex flex-col items-center gap-2">
-        <a href="index.html" class="mono text-[10px] uppercase underline text-ink/60 hover:text-red1">← BACK TO PORTFOLIO</a>
-        <button id="btn-reset-password-gate" class="mono text-[9px] uppercase underline text-red-600 hover:text-red-800 cursor-pointer">
-          🔐 RESET PASSWORD TO DEFAULT
-        </button>
-      </div>
+      <p class="hint" style="margin-top:12px">parolayı unuttuysan: bu tarayıcıda <a href="#" id="gateReset" style="border-bottom:1px solid">sıfırla</a> (tüm yerel düzenlemeler silinir).</p>
     </div>
   </div>
 
-  <!-- TOP BAR -->
-  <div class="bg-ink text-paper border-b-3 border-ink">
-    <div class="mono text-[11px] tracking-widest uppercase flex items-center justify-between px-4 md:px-6 py-2">
-      <div class="flex items-center gap-3">
-        <span class="inline-block w-2 h-2 bg-yellow1 blink"></span>
-        <span>● PORTFOLIO CMS V.02 — CONTROLS</span>
+  <!-- ===== APP ===== -->
+  <div class="wrap" id="app" style="display:none">
+    <header class="top">
+      <h1>içerik yönetimi</h1>
+      <div class="btns">
+        <a class="btn btn--sm" href="index.html" target="_blank">↗ siteyi gör</a>
+        <button class="btn btn--sm" id="btnRevert">↺ kayıtlıya dön</button>
       </div>
-      <div class="flex items-center gap-4">
-        <a href="index.html" class="hover:text-yellow1 transition-colors font-bold">← VIEW WEBSITE</a>
-        <span>|</span>
-        <button id="theme-toggle" class="hover:text-yellow1 cursor-pointer transition-colors font-bold">DARK MODE</button>
+    </header>
+
+    <nav class="nav" id="nav">
+      <button data-tab="projects" class="active">projeler</button>
+      <button data-tab="profile">profil</button>
+      <button data-tab="experience">deneyim</button>
+      <button data-tab="publish">kaydet & yayınla</button>
+    </nav>
+
+    <!-- PROJECTS -->
+    <section class="panel active" id="tab-projects">
+      <div class="toolbar">
+        <button class="btn btn--ink" id="btnAddProject">+ yeni proje</button>
+        <span class="hint" id="projCount"></span>
       </div>
-    </div>
+      <div id="projectEditor"></div>
+      <div id="projectList"></div>
+    </section>
+
+    <!-- PROFILE -->
+    <section class="panel" id="tab-profile">
+      <div id="profileForm"></div>
+      <div class="btns"><button class="btn btn--ink" id="btnSaveProfile">profili kaydet (yerel)</button></div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="panel" id="tab-experience">
+      <div class="toolbar"><button class="btn btn--ink" id="btnAddExp">+ yeni deneyim</button></div>
+      <div id="expList"></div>
+    </section>
+
+    <!-- PUBLISH -->
+    <section class="panel" id="tab-publish">
+      <div class="editor">
+        <h3>1 · yerel kaydet</h3>
+        <p class="hint">değişiklikleri bu tarayıcıda anında önizlemek için. siteyi açtığında bu veriyi görürsün (henüz herkese açık değil).</p>
+        <div class="btns"><button class="btn btn--ink" id="btnLocalSave">💾 yerel kaydet</button></div>
+        <div class="status" id="localStatus"></div>
+      </div>
+
+      <div class="editor">
+        <h3>2 · data.js indir</h3>
+        <p class="hint">güncel veriyi <b>data.js</b> olarak indir, repodaki dosyayla değiştirip elle commit'leyebilirsin.</p>
+        <div class="btns"><button class="btn" id="btnDownload">⬇ data.js indir</button></div>
+      </div>
+
+      <div class="editor">
+        <h3>3 · github'a yayınla (otomatik deploy)</h3>
+        <p class="hint">github token'ınla <b>data.js</b> doğrudan repoya yazılır, vercel otomatik deploy eder. token sadece bu tarayıcıda saklanır.</p>
+        <div class="grid3">
+          <div class="field"><label>owner</label><input id="ghOwner" value="VERABERAT" /></div>
+          <div class="field"><label>repo</label><input id="ghRepo" value="Portfolio" /></div>
+          <div class="field"><label>branch</label><input id="ghBranch" value="main" /></div>
+        </div>
+        <div class="field"><label>github token (PAT)</label><input id="ghToken" placeholder="ghp_..." autocomplete="off" spellcheck="false" /></div>
+        <div class="btns"><button class="btn btn--ink" id="btnPublish">🚀 data.js'i github'a yayınla</button></div>
+        <div class="status" id="publishStatus"></div>
+      </div>
+    </section>
   </div>
 
-  <header class="p-6 md:p-10 border-b-3 border-ink bg-yellow1 text-ink">
-    <h1 class="display text-4xl md:text-7xl leading-none">PORTFOLIO<br/>CMS PANEL</h1>
-    <p class="mono text-xs uppercase mt-3 tracking-widest font-bold">PROJE, BİYOGRAFİ VE İÇERİK KONTROL PANELİ</p>
-  </header>
-
-  <!-- TAB NAVIGATION -->
-  <nav class="border-b-3 border-ink flex flex-wrap bg-paper2 font-bold select-none">
-    <button onclick="switchTab('projects')" id="tab-projects" class="tab-btn px-6 py-4 display text-xs border-r-3 border-ink bg-yellow1 text-ink cursor-pointer outline-none">PROJECTS</button>
-    <button onclick="switchTab('profile')" id="tab-profile" class="tab-btn px-6 py-4 display text-xs border-r-3 border-ink hover:bg-yellow1/25 text-ink cursor-pointer outline-none">ABOUT & PROFILE</button>
-    <button onclick="switchTab('expertise')" id="tab-expertise" class="tab-btn px-6 py-4 display text-xs border-r-3 border-ink hover:bg-yellow1/25 text-ink cursor-pointer outline-none">EXPERTISE LIST</button>
-    <button onclick="switchTab('contact')" id="tab-contact" class="tab-btn px-6 py-4 display text-xs border-r-3 border-ink hover:bg-yellow1/25 text-ink cursor-pointer outline-none">CONTACTS & SOCIALS</button>
-    <button onclick="switchTab('media')" id="tab-media" class="tab-btn px-6 py-4 display text-xs border-r-3 border-ink hover:bg-yellow1/25 text-ink cursor-pointer outline-none">MEDIA UPLOADER</button>
-    <button onclick="switchTab('publish')" id="tab-publish" class="tab-btn px-6 py-4 display text-xs hover:bg-yellow1/25 text-ink cursor-pointer outline-none">PUBLISH & SYNC</button>
-  </nav>
-
-  <main class="max-w-7xl mx-auto p-4 md:p-8">
-
-    <!-- 1. PROJECTS TAB PANEL -->
-    <section id="panel-projects" class="tab-panel space-y-6">
-      
-      <!-- Form Container (Project Editor Form) -->
-      <div id="editor-container" class="brut bg-paper2 p-6 space-y-4 hidden">
-        <div class="flex justify-between items-center border-b-2 border-ink pb-3 mb-4">
-          <h2 class="display text-2xl" id="editor-title">ADD NEW PROJECT</h2>
-          <button id="btn-cancel-edit" class="mono text-xs font-bold text-red1 hover:underline cursor-pointer">[CANCEL]</button>
-        </div>
-
-        <form id="project-form" class="grid grid-cols-12 gap-4 mono text-xs">
-          <input type="hidden" id="edit-index" value="" />
-          
-          <div class="col-span-12 md:col-span-8 flex flex-col">
-            <label class="font-bold mb-1">PROJECT TITLE (PROJE BAŞLIĞI)</label>
-            <input type="text" id="form-t" required class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold" />
-          </div>
-          <div class="col-span-12 md:col-span-4 flex flex-col">
-            <label class="font-bold mb-1">YEAR (YIL)</label>
-            <input type="text" id="form-y" required placeholder="2025" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold" />
-          </div>
-
-          <div class="col-span-12 md:col-span-4 flex flex-col">
-            <label class="font-bold mb-1">TYPE (TÜR)</label>
-            <select id="form-type" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold">
-              <option value="still">STILL (DURAĞAN)</option>
-              <option value="ui">UI/UX (ARAYÜZ)</option>
-              <option value="social">SOCIAL (SOSYAL MEDYA)</option>
-              <option value="motion">MOTION (HAREKETLİ)</option>
-              <option value="ai">AI (YAPAY ZEKA)</option>
-            </select>
-          </div>
-          <div class="col-span-12 md:col-span-4 flex flex-col">
-            <label class="font-bold mb-1">MAIN CATEGORY (KATEGORİ)</label>
-            <input type="text" id="form-c" required placeholder="Brand Identity" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1" />
-          </div>
-          <div class="col-span-12 md:col-span-4 flex flex-col">
-            <label class="font-bold mb-1">COVER COLOR HEX (KAPAK RENK KODU)</label>
-            <input type="text" id="form-cover" required placeholder="#1E3CFF" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold" />
-          </div>
-          <div class="col-span-12 md:col-span-4 flex flex-col">
-            <label class="font-bold mb-1">IMAGE RENDER (GÖRSEL HİZALAMA)</label>
-            <select id="form-fit" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold">
-              <option value="contain" selected>CONTAIN / FIT (ORANTILI SIĞDIR - Varsayılan)</option>
-              <option value="cover">COVER / FILL (KIRPIP DOLDUR)</option>
-            </select>
-          </div>
-
-          <div class="col-span-12 flex flex-col">
-            <label class="font-bold mb-1">FILTER CLASSIFICATION (FİLTRELER - Boşlukla ayırın)</label>
-            <input type="text" id="form-f" required placeholder="brand packaging" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1" />
-          </div>
-
-          <div class="col-span-12 md:col-span-6 flex flex-col">
-            <label class="font-bold mb-1">DESCRIPTION TR (TÜRKÇE AÇIKLAMA)</label>
-            <textarea id="form-desc-tr" required rows="3" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 resize-none"></textarea>
-          </div>
-          <div class="col-span-12 md:col-span-6 flex flex-col">
-            <label class="font-bold mb-1">DESCRIPTION EN (İNGİLİZCE AÇIKLAMA)</label>
-            <textarea id="form-desc-en" required rows="3" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 resize-none"></textarea>
-          </div>
-
-          <div class="col-span-12 md:col-span-6 flex flex-col">
-            <label class="font-bold mb-1">TAGS TR (TÜRKÇE ETİKETLER - Virgülle ayırın)</label>
-            <input type="text" id="form-tags-tr" placeholder="Kimlik, Logo, Ambalaj" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1" />
-          </div>
-          <div class="col-span-12 md:col-span-6 flex flex-col">
-            <label class="font-bold mb-1">TAGS EN (İNGİLİZCE ETİKETLER - Virgülle ayırın)</label>
-            <input type="text" id="form-tags-en" placeholder="Identity, Logo, Packaging" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1" />
-          </div>
-
-          <div class="col-span-12 flex flex-col" id="ai-tool-field">
-            <label class="font-bold mb-1">AI TOOL (YAPAY ZEKA PROGRAMI - Opsiyonel)</label>
-            <input type="text" id="form-aitool" placeholder="Midjourney v6 + Photoshop" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1" />
-          </div>
-
-          <div class="col-span-12 flex flex-col">
-            <label class="font-bold mb-1">BEHANCE PROJECT URL (BEHANCE PROJE LİNKİ - Opsiyonel)</label>
-            <input type="text" id="form-behance" placeholder="https://www.behance.net/gallery/215582963/VERA" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1" />
-          </div>
-
-          <!-- PROJECT MEDIA UPLOADER SECTION (FORM INTEGRATED) -->
-          <div id="project-form-media-section" class="col-span-12 border-t border-ink/20 pt-4 mt-2">
-            <h3 class="display text-lg mb-2">PROJECT MEDIA (PROJE GÖRSEL VE VİDEOLARI)</h3>
-            <p class="mono text-[11px] text-ink/70 mb-3 leading-relaxed">
-              Bu projenin görsel ve videolarını doğrudan buradan seçip GitHub'a yükleyebilirsiniz. Dosya adı proje başlığına göre otomatik olarak belirlenecektir.
-            </p>
-            <div class="grid grid-cols-12 gap-3 bg-paper p-4 border-2 border-ink">
-              <div class="col-span-12 flex flex-col">
-                <label class="font-bold mb-1">GITHUB PERSONAL ACCESS TOKEN (PAT)</label>
-                <input type="text" id="form-media-token" placeholder="ghp_..." autocomplete="off" spellcheck="false" class="bg-paper2 border-2 border-ink px-2 py-1.5 outline-none focus:bg-yellow1 font-mono text-xs" />
-                <span class="text-[9px] text-ink/60 mt-1">Dosya yükleyebilmek için GitHub Token bilginizi girin (Sadece bu tarayıcıda saklanır).</span>
-              </div>
-              <div class="col-span-12 md:col-span-6 flex flex-col">
-                <label class="font-bold mb-1">SELECT FILE (DOSYA SEÇ)</label>
-                <input type="file" id="form-media-file" class="bg-paper2 border-2 border-ink px-2 py-1 outline-none font-bold text-xs" />
-              </div>
-              <div class="col-span-12 md:col-span-6 flex flex-col col-span-12">
-                <label class="font-bold mb-1">ASSET TYPE (DOSYA TÜRÜ)</label>
-                <select id="form-media-asset-type" class="bg-paper2 border-2 border-ink px-2 py-1.5 outline-none font-bold">
-                  <!-- Will be populated dynamically -->
-                </select>
-              </div>
-              <div class="col-span-12 flex justify-between items-center mt-2 flex-wrap gap-2">
-                <span class="mono text-[10px] text-ink/60 font-bold">TARGET FILENAME (HEDEF DOSYA ADI): <b id="form-media-filename-preview" class="bg-ink text-yellow1 px-2 py-0.5">-</b></span>
-                <button type="button" id="btn-form-media-upload" class="brut-sm bg-ink text-yellow1 font-bold px-4 py-2 cursor-pointer select-none">
-                  🚀 UPLOAD ASSET TO GITHUB
-                </button>
-              </div>
-              <div id="form-media-status" class="col-span-12 hidden p-2 border-2 border-ink bg-ink text-yellow1 text-[10px] uppercase font-bold text-center"></div>
-            </div>
-          </div>
-
-          <div class="col-span-12 mt-2">
-            <button type="submit" class="brut bg-ink text-yellow1 font-bold px-6 py-3 display text-xs tracking-wider cursor-pointer select-none">
-              💾 SAVE PROJECT ITEM
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <!-- Project List Card -->
-      <div class="brut bg-paper p-5 space-y-4">
-        <div class="flex justify-between items-center border-b-2 border-ink pb-3 flex-wrap gap-3">
-          <h2 class="display text-2xl">PROJECT LISTINGS (<span id="project-count">0</span>)</h2>
-          <div class="flex items-center gap-2 flex-wrap">
-            <input type="text" id="search-input" placeholder="🔍 SEARCH..." class="bg-paper2 border-2 border-ink px-3 py-1.5 mono text-xs outline-none focus:bg-yellow1 font-bold" />
-            <button id="btn-add-project" class="brut-sm bg-yellow1 text-ink font-bold px-4 py-1.5 mono text-xs cursor-pointer select-none">
-              + ADD NEW
-            </button>
-            <button id="btn-publish-direct" class="brut-sm bg-green-600 text-white font-bold px-4 py-1.5 mono text-xs cursor-pointer select-none">
-              🚀 PUBLISH TO LIVE SITE
-            </button>
-          </div>
-        </div>
-        <div id="publish-direct-status" class="hidden p-2 border-2 border-ink bg-ink text-yellow1 text-[10px] uppercase font-bold text-center"></div>
-
-        <div class="overflow-x-auto">
-          <table class="w-full border-collapse border-3 border-ink mono text-xs">
-            <thead>
-              <tr class="bg-ink text-paper uppercase border-b-3 border-ink">
-                <th class="p-3 text-left w-12">№</th>
-                <th class="p-3 text-left">TITLE</th>
-                <th class="p-3 text-left">CATEGORY</th>
-                <th class="p-3 text-center w-16">YEAR</th>
-                <th class="p-3 text-center w-20">TYPE</th>
-                <th class="p-3 text-center w-40">ORDER / ACTIONS</th>
-              </tr>
-            </thead>
-            <tbody id="project-table-rows" class="divide-y-2 divide-ink bg-paper2">
-              <!-- Dynamically populated -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. PROFILE TAB PANEL -->
-    <section id="panel-profile" class="tab-panel space-y-6 hidden">
-      <form id="profile-form" class="brut bg-paper2 p-6 space-y-6 mono text-xs">
-        <h2 class="display text-2xl border-b-2 border-ink pb-3 mb-4">ABOUT ME & BIOGRAPHY SETTINGS</h2>
-
-        <div class="grid grid-cols-12 gap-6">
-          <div class="col-span-12 md:col-span-6 flex flex-col">
-            <label class="font-bold mb-1">ABOUT TITLE TR (HAKKINDA BAŞLIĞI - HTML tags allowed)</label>
-            <textarea id="profile-heading-tr" required rows="3" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 resize-none font-bold"></textarea>
-          </div>
-          <div class="col-span-12 md:col-span-6 flex flex-col">
-            <label class="font-bold mb-1">ABOUT TITLE EN (ENGLISH HEADING - HTML tags allowed)</label>
-            <textarea id="profile-heading-en" required rows="3" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 resize-none font-bold"></textarea>
-          </div>
-
-          <div class="col-span-12 md:col-span-6 flex flex-col">
-            <label class="font-bold mb-1">BIOGRAPHY PARAGRAPH 1 TR (BİYOGRAFİ PARAGRAF 1)</label>
-            <textarea id="profile-biop1-tr" required rows="4" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 resize-none"></textarea>
-          </div>
-          <div class="col-span-12 md:col-span-6 flex flex-col">
-            <label class="font-bold mb-1">BIOGRAPHY PARAGRAPH 1 EN (ENGLISH BIO 1)</label>
-            <textarea id="profile-biop1-en" required rows="4" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 resize-none"></textarea>
-          </div>
-
-          <div class="col-span-12 md:col-span-6 flex flex-col">
-            <label class="font-bold mb-1">BIOGRAPHY PARAGRAPH 2 TR (BİYOGRAFİ PARAGRAF 2)</label>
-            <textarea id="profile-biop2-tr" required rows="4" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 resize-none"></textarea>
-          </div>
-          <div class="col-span-12 md:col-span-6 flex flex-col">
-            <label class="font-bold mb-1">BIOGRAPHY PARAGRAPH 2 EN (ENGLISH BIO 2)</label>
-            <textarea id="profile-biop2-en" required rows="4" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 resize-none"></textarea>
-          </div>
-        </div>
-
-        <h3 class="display text-lg border-t-2 border-b-2 border-ink py-2 my-6">METRIC STATISTICS COUNTERS</h3>
-        <div class="grid grid-cols-12 gap-4">
-          <!-- Counter 1 -->
-          <div class="col-span-12 md:col-span-3 border border-ink/40 p-4 bg-paper space-y-2">
-            <label class="font-bold block border-b border-ink/20 pb-1">COUNTER 1</label>
-            <div class="flex flex-col">
-              <label class="text-[9px]">VALUE (DEĞER)</label>
-              <input type="text" id="counter-1-val" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-            <div class="flex flex-col">
-              <label class="text-[9px]">LABEL TR (ETİKET TR)</label>
-              <input type="text" id="counter-1-lbl-tr" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-            <div class="flex flex-col">
-              <label class="text-[9px]">LABEL EN (ETİKET EN)</label>
-              <input type="text" id="counter-1-lbl-en" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-          </div>
-          
-          <!-- Counter 2 -->
-          <div class="col-span-12 md:col-span-3 border border-ink/40 p-4 bg-paper space-y-2">
-            <label class="font-bold block border-b border-ink/20 pb-1">COUNTER 2</label>
-            <div class="flex flex-col">
-              <label class="text-[9px]">VALUE (DEĞER)</label>
-              <input type="text" id="counter-2-val" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-            <div class="flex flex-col">
-              <label class="text-[9px]">LABEL TR (ETİKET TR)</label>
-              <input type="text" id="counter-2-lbl-tr" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-            <div class="flex flex-col">
-              <label class="text-[9px]">LABEL EN (ETİKET EN)</label>
-              <input type="text" id="counter-2-lbl-en" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-          </div>
-
-          <!-- Counter 3 -->
-          <div class="col-span-12 md:col-span-3 border border-ink/40 p-4 bg-paper space-y-2">
-            <label class="font-bold block border-b border-ink/20 pb-1">COUNTER 3</label>
-            <div class="flex flex-col">
-              <label class="text-[9px]">VALUE (DEĞER)</label>
-              <input type="text" id="counter-3-val" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-            <div class="flex flex-col">
-              <label class="text-[9px]">LABEL TR (ETİKET TR)</label>
-              <input type="text" id="counter-3-lbl-tr" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-            <div class="flex flex-col">
-              <label class="text-[9px]">LABEL EN (ETİKET EN)</label>
-              <input type="text" id="counter-3-lbl-en" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-          </div>
-
-          <!-- Counter 4 -->
-          <div class="col-span-12 md:col-span-3 border border-ink/40 p-4 bg-paper space-y-2">
-            <label class="font-bold block border-b border-ink/20 pb-1">COUNTER 4</label>
-            <div class="flex flex-col">
-              <label class="text-[9px]">VALUE (DEĞER)</label>
-              <input type="text" id="counter-4-val" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-            <div class="flex flex-col">
-              <label class="text-[9px]">LABEL TR (ETİKET TR)</label>
-              <input type="text" id="counter-4-lbl-tr" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-            <div class="flex flex-col">
-              <label class="text-[9px]">LABEL EN (ETİKET EN)</label>
-              <input type="text" id="counter-4-lbl-en" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-          </div>
-        </div>
-
-        <div class="pt-4">
-          <button type="submit" class="brut bg-ink text-yellow1 font-bold px-6 py-3 display text-xs tracking-wider cursor-pointer select-none">
-            💾 SAVE PROFILE & COUNTERS
-          </button>
-        </div>
-      </form>
-    </section>
-
-    <!-- 3. EXPERTISE PANEL -->
-    <section id="panel-expertise" class="tab-panel space-y-6 hidden">
-      <div class="grid grid-cols-12 gap-6">
-        
-        <!-- Add Expertise Tag -->
-        <div class="col-span-12 md:col-span-4 brut bg-paper2 p-6 space-y-4 mono text-xs">
-          <h2 class="display text-xl border-b border-ink pb-2" id="exp-form-title">ADD EXPERTISE</h2>
-          <form id="exp-form" class="space-y-4">
-            <input type="hidden" id="exp-edit-index" value="" />
-            <div class="flex flex-col">
-              <label class="font-bold mb-1">EXPERTISE TITLE TR (UZMANLIK TR)</label>
-              <input type="text" id="form-exp-tr" required placeholder="GÖRSEL KİMLİK" class="bg-paper border border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold text-xs" />
-            </div>
-            <div class="flex flex-col">
-              <label class="font-bold mb-1">EXPERTISE TITLE EN (EXPERTISE EN)</label>
-              <input type="text" id="form-exp-en" required placeholder="VISUAL IDENTITY" class="bg-paper border border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold text-xs" />
-            </div>
-            <div class="flex gap-2">
-              <button type="submit" id="btn-exp-submit" class="brut-sm bg-yellow1 text-ink px-4 py-2 font-bold cursor-pointer">
-                ADD TO LIST
-              </button>
-              <button type="button" id="btn-exp-cancel" class="hidden text-red1 font-bold underline cursor-pointer">
-                CANCEL
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <!-- Expertise Listing Table -->
-        <div class="col-span-12 md:col-span-8 brut bg-paper p-5 space-y-4">
-          <h2 class="display text-2xl border-b-2 border-ink pb-2">EXPERTISE LIST (<span id="expertise-count">0</span>)</h2>
-          
-          <table class="w-full border-collapse border-3 border-ink mono text-xs">
-            <thead>
-              <tr class="bg-ink text-paper uppercase border-b-3 border-ink">
-                <th class="p-3 text-left w-12">№</th>
-                <th class="p-3 text-left">TURKISH TITLE</th>
-                <th class="p-3 text-left">ENGLISH TITLE</th>
-                <th class="p-3 text-center w-36">ACTIONS</th>
-              </tr>
-            </thead>
-            <tbody id="expertise-table-rows" class="divide-y-2 divide-ink bg-paper2">
-              <!-- Dynamic Rows -->
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 4. CONTACTS TAB PANEL -->
-    <section id="panel-contact" class="tab-panel space-y-6 hidden">
-      <form id="contact-form" class="brut bg-paper2 p-6 space-y-6 mono text-xs">
-        <h2 class="display text-2xl border-b-2 border-ink pb-3 mb-4">CONTACT & SOCIAL MEDIA SETTINGS</h2>
-
-        <div class="grid grid-cols-12 gap-6">
-          <div class="col-span-12 md:col-span-6 flex flex-col">
-            <label class="font-bold mb-1">CONTACT TITLE TR (İLETİŞİM BAŞLIĞI - HTML tags allowed)</label>
-            <textarea id="contact-heading-tr" required rows="3" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 resize-none font-bold"></textarea>
-          </div>
-          <div class="col-span-12 md:col-span-6 flex flex-col">
-            <label class="font-bold mb-1">CONTACT TITLE EN (ENGLISH HEADING - HTML tags allowed)</label>
-            <textarea id="contact-heading-en" required rows="3" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 resize-none font-bold"></textarea>
-          </div>
-
-          <div class="col-span-12 md:col-span-4 flex flex-col">
-            <label class="font-bold mb-1">EMAIL ADDRESS (E-POSTA ADRESİ)</label>
-            <input type="email" id="contact-email-input" required placeholder="hello@beraterdogan.com" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold" />
-          </div>
-          
-          <div class="col-span-12 md:col-span-8 flex flex-col">
-            <label class="font-bold mb-1">AVAILABILITY ANNOUNCEMENT TR (İŞ BİRLİĞİ DURUMU TR - HTML allowed)</label>
-            <input type="text" id="contact-avail-tr" required class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1" />
-          </div>
-          <div class="col-span-12 flex flex-col">
-            <label class="font-bold mb-1">AVAILABILITY ANNOUNCEMENT EN (ENGLISH AVAILABILITY - HTML allowed)</label>
-            <input type="text" id="contact-avail-en" required class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1" />
-          </div>
-        </div>
-
-        <h3 class="display text-lg border-t-2 border-b-2 border-ink py-2 my-6">SOCIAL MEDIA ACCOUNTS & LINKS</h3>
-        <div class="grid grid-cols-12 gap-6">
-          <!-- Behance -->
-          <div class="col-span-12 md:col-span-4 border border-ink/40 p-4 bg-paper space-y-2">
-            <label class="font-bold block border-b border-ink/20 pb-1">BEHANCE</label>
-            <div class="flex flex-col">
-              <label class="text-[9px]">USER/HANDLE (KULLANICI ADI)</label>
-              <input type="text" id="social-behance-lbl" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-            <div class="flex flex-col">
-              <label class="text-[9px]">PROFILE URL (LİNK)</label>
-              <input type="url" id="social-behance-url" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-          </div>
-
-          <!-- Instagram -->
-          <div class="col-span-12 md:col-span-4 border border-ink/40 p-4 bg-paper space-y-2">
-            <label class="font-bold block border-b border-ink/20 pb-1">INSTAGRAM</label>
-            <div class="flex flex-col">
-              <label class="text-[9px]">USER/HANDLE (KULLANICI ADI)</label>
-              <input type="text" id="social-instagram-lbl" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-            <div class="flex flex-col">
-              <label class="text-[9px]">PROFILE URL (LİNK)</label>
-              <input type="url" id="social-instagram-url" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-          </div>
-
-          <!-- LinkedIn -->
-          <div class="col-span-12 md:col-span-4 border border-ink/40 p-4 bg-paper space-y-2">
-            <label class="font-bold block border-b border-ink/20 pb-1">LINKEDIN</label>
-            <div class="flex flex-col">
-              <label class="text-[9px]">LABEL/NAME (GÖRÜNEN AD)</label>
-              <input type="text" id="social-linkedin-lbl" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-            <div class="flex flex-col">
-              <label class="text-[9px]">PROFILE URL (LİNK)</label>
-              <input type="url" id="social-linkedin-url" class="bg-paper2 border border-ink px-2 py-1" />
-            </div>
-          </div>
-        </div>
-
-        <div class="pt-4">
-          <button type="submit" class="brut bg-ink text-yellow1 font-bold px-6 py-3 display text-xs tracking-wider cursor-pointer select-none">
-            💾 SAVE CONTACT & SOCIALS
-          </button>
-        </div>
-      </form>
-    </section>
-
-    <!-- 5. MEDIA UPLOADER PANEL -->
-    <section id="panel-media" class="tab-panel space-y-6 hidden">
-      <div class="grid grid-cols-12 gap-6">
-        
-        <!-- Upload Form -->
-        <div class="col-span-12 lg:col-span-6 brut bg-paper2 p-6 space-y-4 mono text-xs">
-          <h2 class="display text-2xl border-b-2 border-ink pb-3 mb-4">MEDIA ASSET UPLOADER</h2>
-          <p class="leading-relaxed text-ink/75">
-            Görsel veya video dosyalarınızı doğrudan GitHub repounuzun <b>images/</b> klasörüne yükleyin. Siteniz Vercel üzerinde otomatik güncellenecektir.
-          </p>
-
-          <div class="space-y-4">
-            <div class="flex flex-col">
-              <label class="font-bold mb-1">GITHUB PERSONAL ACCESS TOKEN (PAT)</label>
-              <input type="text" id="tab-media-token" placeholder="ghp_..." autocomplete="off" spellcheck="false" class="bg-paper border-2 border-ink px-2 py-1.5 outline-none focus:bg-yellow1 font-mono text-xs" />
-              <span class="text-[9px] text-ink/60 mt-1">Dosya yükleyebilmek için GitHub Token bilginizi girin (Sadece bu tarayıcıda saklanır).</span>
-            </div>
-
-            <div class="flex flex-col">
-              <label class="font-bold mb-1">SELECT LOCAL FILE (DOSYA SEÇ)</label>
-              <input type="file" id="media-file-input" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold text-xs" />
-            </div>
-
-            <div class="flex flex-col">
-              <label class="font-bold mb-1">TARGET FILENAME IN REPO (GITHUB HEDEF DOSYA ADI)</label>
-              <input type="text" id="media-target-name" placeholder="örneğin: projem-1.jpg" class="bg-paper border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold" />
-              <span class="text-[10px] text-ink/60 mt-1">Uzantıyı (.jpg, .png, .mp4 vb.) doğru yazdığınızdan emin olun.</span>
-            </div>
-
-            <div class="border-t border-ink/20 pt-4">
-              <button type="button" id="btn-upload-to-github" class="w-full brut bg-ink text-yellow1 font-bold py-3 text-xs uppercase tracking-wider cursor-pointer select-none">
-                🚀 UPLOAD DIRECTLY TO GITHUB
-              </button>
-            </div>
-
-            <div id="media-upload-status" class="hidden p-2 border-2 border-ink bg-ink text-yellow1 text-[10px] uppercase"></div>
-          </div>
-        </div>
-
-        <!-- Project Media Reference Helper -->
-        <div class="col-span-12 lg:col-span-6 brut bg-paper p-6 space-y-4 mono text-xs">
-          <h2 class="display text-2xl border-b-2 border-ink pb-3 mb-4">ASSET NAMING HELPER</h2>
-          <p class="leading-relaxed text-ink/75">
-            Dosyaların sitede görünebilmesi için projenizin türüne göre doğru isimlendirilmesi gerekir. Aşağıdan projeyi seçerek gereken isimleri görün:
-          </p>
-
-          <div class="flex flex-col">
-            <label class="font-bold mb-1">SELECT PROJECT (PROJE SEÇİN)</label>
-            <select id="media-project-select" class="bg-paper2 border-2 border-ink px-3 py-2 outline-none focus:bg-yellow1 font-bold">
-              <option value="">-- PROJE SEÇİN --</option>
-              <!-- Populated dynamically -->
-            </select>
-          </div>
-
-          <div id="media-suggestions-box" class="hidden space-y-3">
-            <div class="p-3 bg-yellow1/15 border-2 border-ink">
-              <span class="font-bold block uppercase mb-1">PROJE SLUG KODU:</span>
-              <code id="media-project-slug" class="bg-ink text-yellow1 px-2 py-0.5 text-xs font-bold font-mono"></code>
-            </div>
-            
-            <div class="space-y-2">
-              <span class="font-bold block uppercase">GEREKEN DOSYA ADLARI (Seçmek için tıklayın):</span>
-              <ul id="media-suggestions-list" class="space-y-1">
-                <!-- Suggestion items -->
-              </ul>
-            </div>
-          </div>
-
-          <div class="bg-paper2 p-3 border border-ink/40 text-[10px] leading-relaxed text-ink/70">
-            💡 <b>YEREL ÇALIŞMA NOTU:</b> Eğer yerelde çalışıyorsanız, dosyaları tarayıcıdan yüklemek yerine direkt bilgisayarınızdaki <code>PortfolioWeb Sitesi/images/[proje-slug]/</code> klasörüne yukarıdaki isimlerle kaydetmeniz yeterlidir.
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 6. PUBLISH & SYNC TAB PANEL -->
-    <section id="panel-publish" class="tab-panel grid grid-cols-12 gap-6 md:gap-10 hidden">
-      
-      <!-- Actions & Password Box Column -->
-      <div class="col-span-12 lg:col-span-6 space-y-6">
-        <div class="brut bg-paper2 p-6 space-y-4">
-          <h2 class="display text-2xl border-b border-ink pb-2">LOCAL CMS CONTROLS</h2>
-          <p class="mono text-xs text-ink/75 leading-relaxed">
-            Yaptığınız tüm değişiklikleri yerel tarayıcınızda görmek için <b>LOCAL SAVE</b> yapın. Değişiklikleri kalıcı yapmak veya yayınlamak için <b>EXPORT index.html</b> veya <b>GITHUB DIRECT SYNC</b> sekmelerini kullanın.
-          </p>
-          
-          <div class="flex flex-col gap-2">
-            <button id="btn-save-all" class="brut bg-yellow1 text-ink font-bold py-3 text-xs uppercase tracking-wider cursor-pointer select-none">
-              💾 LOCAL SAVE (TÜMÜNÜ KAYDET)
-            </button>
-            <button id="btn-reset-all" class="brut bg-red1 text-paper font-bold py-3 text-xs uppercase tracking-wider cursor-pointer select-none">
-              ⚠️ DEFAULT AYARLARA DÖNÜŞ YAP
-            </button>
-            <button id="btn-export-full-html" class="brut bg-blue1 text-paper font-bold py-3 text-xs uppercase tracking-wider cursor-pointer select-none">
-              📥 YENİ INDEX.HTML DOSYASI İNDİR
-            </button>
-          </div>
-        </div>
-
-        <div class="brut bg-paper2 p-6 space-y-4">
-          <h2 class="display text-2xl border-b border-ink pb-2">CHANGE PANEL PASSWORD</h2>
-          <p class="mono text-xs text-ink/75 leading-relaxed">
-            Yönetim paneline giriş şifrenizi buradan değiştirebilirsiniz.
-          </p>
-          
-          <form id="password-change-form" class="space-y-3 mono text-xs">
-            <div class="flex flex-col">
-              <label class="font-bold mb-1">CURRENT PASSWORD (MEVCUT ŞİFRE)</label>
-              <input type="password" id="pw-current" required class="bg-paper border-2 border-ink px-2 py-1.5 outline-none focus:bg-yellow1" />
-            </div>
-            <div class="flex flex-col">
-              <label class="font-bold mb-1">NEW PASSWORD (YENİ ŞİFRE)</label>
-              <input type="password" id="pw-new" required class="bg-paper border-2 border-ink px-2 py-1.5 outline-none focus:bg-yellow1" />
-            </div>
-            <div class="flex flex-col">
-              <label class="font-bold mb-1">CONFIRM NEW PASSWORD (YENİ ŞİFRE TEKRAR)</label>
-              <input type="password" id="pw-confirm" required class="bg-paper border-2 border-ink px-2 py-1.5 outline-none focus:bg-yellow1" />
-            </div>
-            <button type="submit" class="w-full brut bg-ink text-yellow1 font-bold py-3 text-xs uppercase tracking-wider cursor-pointer select-none">
-              🔒 UPDATE PASSWORD
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <!-- GitHub Publish Box -->
-      <div class="col-span-12 lg:col-span-6 space-y-6">
-        <div class="brut bg-paper2 p-6 space-y-4">
-          <h2 class="display text-2xl border-b border-ink pb-2">GITHUB DIRECT PUBLISH</h2>
-          <p class="mono text-xs text-ink/75 leading-relaxed">
-            GitHub PAT (Personal Access Token) bilgilerinizi girerek sitenizi tarayıcıdan doğrudan güncelleyebilirsiniz. Bu işlem sitenizi Vercel üzerinden otomatik olarak deploy edecektir.
-          </p>
-          
-          <div class="space-y-3 mono text-xs">
-            <div class="flex flex-col">
-              <label class="font-bold mb-1">GITHUB TOKEN (PAT)</label>
-              <input type="text" id="gh-token" placeholder="ghp_..." autocomplete="off" spellcheck="false" class="bg-paper border-2 border-ink px-2 py-1.5 outline-none focus:bg-yellow1 font-mono" />
-            </div>
-            <div class="flex flex-col">
-              <label class="font-bold mb-1">REPO OWNER / NAME</label>
-              <input type="text" id="gh-repo" placeholder="VERABERAT/Portfolio" class="bg-paper border-2 border-ink px-2 py-1.5 outline-none focus:bg-yellow1" />
-            </div>
-            <div class="flex flex-col">
-              <label class="font-bold mb-1">BRANCH</label>
-              <input type="text" id="gh-branch" value="main" class="bg-paper border-2 border-ink px-2 py-1.5 outline-none focus:bg-yellow1" />
-            </div>
-            <button id="btn-github-commit-all" class="w-full brut bg-ink text-yellow1 font-bold py-3 text-xs uppercase tracking-wider cursor-pointer select-none">
-              🚀 YENİ KODU DOĞRUDAN GITHUB'A PUSH ET
-            </button>
-            <div id="gh-status-all" class="hidden p-2 border-2 border-ink bg-ink text-yellow1 text-[10px] uppercase"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
+  <script src="doodles.js"></script>
+  <script src="data.js"></script>
   <script>
-    // ----------------------------------------------------
-    // PASSWORD PROTECTION SYSTEM
-    // ----------------------------------------------------
-    const DEFAULT_PASS_HASH = "67a5eaa8bce0215b943493d139e34a6475312f68ad3ca963275059cbeb2dd008"; // default hash
+  /* ============================================================
+     STATE
+     ============================================================ */
+  const LS_DATA = 'portfolio_data';
+  const LS_HASH = 'portfolio_admin_hash';
+  const LS_TOKEN = 'portfolio_gh_token';
+  const COLORS = ['yellow','navy','mint','sky','forest','cream'];
 
-    function getSlugFromFilename(filename) {
-      let base = filename.replace(/\.[^/.]+$/, "");
-      if (/-frame-\d+$/.test(base)) return base.replace(/-frame-\d+$/, "");
-      if (/-side-\d+$/.test(base)) return base.replace(/-side-\d+$/, "");
-      if (/-mobile$/.test(base)) return base.slice(0, -7);
-      if (/-v\d+$/.test(base)) return base.replace(/-v\d+$/, "");
-      if (/-\d+$/.test(base)) return base.replace(/-\d+$/, "");
-      return base;
+  let data = null;
+
+  function deepClone(o){ return JSON.parse(JSON.stringify(o)); }
+  function loadData(){
+    try { const ov = localStorage.getItem(LS_DATA); if (ov) return JSON.parse(ov); } catch(e){}
+    return deepClone(window.PORTFOLIO || { projects:[], profile:{}, experience:[] });
+  }
+  function slugify(s){ return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+  async function sha256(str){
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+  }
+
+  /* ============================================================
+     GATE
+     ============================================================ */
+  const gate = document.getElementById('gate'), app = document.getElementById('app');
+  const gateMsg = document.getElementById('gateMsg'), gatePass = document.getElementById('gatePass');
+  async function enter(){
+    const stored = localStorage.getItem(LS_HASH);
+    const val = gatePass.value;
+    if (!val) { gateMsg.textContent = 'parola boş olamaz'; return; }
+    const h = await sha256(val);
+    if (!stored) { localStorage.setItem(LS_HASH, h); unlock(); return; }   // first run: set password
+    if (h === stored) unlock();
+    else gateMsg.textContent = 'parola yanlış';
+  }
+  function unlock(){ gate.style.display='none'; app.style.display='block'; data = loadData(); renderAll(); }
+  document.getElementById('gateBtn').onclick = enter;
+  gatePass.addEventListener('keydown', e=>{ if(e.key==='Enter') enter(); });
+  document.getElementById('gateReset').onclick = (e)=>{ e.preventDefault();
+    if(confirm('Parola ve TÜM yerel düzenlemeler bu tarayıcıdan silinsin mi?')){
+      localStorage.removeItem(LS_HASH); localStorage.removeItem(LS_DATA); location.reload();
     }
+  };
+  if (!localStorage.getItem(LS_HASH)) gateMsg.textContent = 'ilk giriş — bir parola belirle';
 
-    async function sha256(ascii) {
-      function rightRotate(value, amount) {
-        return (value >>> amount) | (value << (32 - amount));
-      }
-      
-      const mathPow = Math.pow;
-      const maxWord = mathPow(2, 32);
-      let result = '';
-      const words = [];
-      const asciiLength = ascii.length * 8;
-      
-      // Calculate constants (once)
-      if (!sha256.h_init) {
-        sha256.h_init = [];
-        sha256.k_init = [];
-        let primeCounter = 0;
-        const isPrime = {};
-        for (let candidate = 2; primeCounter < 64; candidate++) {
-          if (!isPrime[candidate]) {
-            for (let i = 0; i < 313; i += candidate) {
-              isPrime[i] = true;
-            }
-            sha256.h_init[primeCounter] = (mathPow(candidate, .5) * maxWord) | 0;
-            sha256.k_init[primeCounter++] = (mathPow(candidate, 1 / 3) * maxWord) | 0;
-          }
-        }
-      }
-
-      // Copy the initial hash values for this calculation
-      const hash = [...sha256.h_init];
-      const k = sha256.k_init;
-      
-      ascii += '\x80';
-      while (ascii.length % 64 - 56) ascii += '\x00';
-      
-      for (let i = 0; i < ascii.length; i++) {
-        const j = ascii.charCodeAt(i);
-        if (j >> 8) return ''; // pure ASCII only
-        words[i >> 2] |= j << ((3 - i) % 4 * 8);
-      }
-      words[words.length] = ((asciiLength / maxWord) | 0);
-      words[words.length] = (asciiLength | 0);
-      
-      let w = [];
-      let a, b, c, d, e, f, g, h;
-      for (let i = 0; i < words.length; i += 16) {
-        a = hash[0]; b = hash[1]; c = hash[2]; d = hash[3];
-        e = hash[4]; f = hash[5]; g = hash[6]; h = hash[7];
-        for (let j = 0; j < 64; j++) {
-          if (j < 16) {
-            w[j] = words[i + j];
-          } else {
-            const s0 = rightRotate(w[j - 15], 7) ^ rightRotate(w[j - 15], 18) ^ (w[j - 15] >>> 3);
-            const s1 = rightRotate(w[j - 2], 17) ^ rightRotate(w[j - 2], 19) ^ (w[j - 2] >>> 10);
-            w[j] = (w[j - 16] + s0 + w[j - 7] + s1) | 0;
-          }
-          
-          const temp1 = (h + (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25)) +
-            ((e & f) ^ (~e & g)) + k[j] + (w[j] || 0)) | 0;
-          const temp2 = ((rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22)) +
-            ((a & b) ^ (a & c) ^ (b & c))) | 0;
-          
-          h = g;
-          g = f;
-          f = e;
-          e = (d + temp1) | 0;
-          d = c;
-          c = b;
-          b = a;
-          a = (temp1 + temp2) | 0;
-        }
-        
-        hash[0] = (hash[0] + a) | 0;
-        hash[1] = (hash[1] + b) | 0;
-        hash[2] = (hash[2] + c) | 0;
-        hash[3] = (hash[3] + d) | 0;
-        hash[4] = (hash[4] + e) | 0;
-        hash[5] = (hash[5] + f) | 0;
-        hash[6] = (hash[6] + g) | 0;
-        hash[7] = (hash[7] + h) | 0;
-      }
-      
-      for (let i = 0; i < 8; i++) {
-        for (let j = 3; j + 1; j--) {
-          const b = (hash[i] >> (j * 8)) & 255;
-          result += ((b < 16) ? '0' : '') + b.toString(16);
-        }
-      }
-      return result;
-    }
-
-    async function checkPasswordGate() {
-      const gate = document.getElementById('password-gate');
-      const input = document.getElementById('gate-password-input');
-      const error = document.getElementById('gate-error');
-      
-      if (sessionStorage.getItem('cms_unlocked') === 'true') {
-        gate.classList.add('hidden');
-        return;
-      }
-
-      // Keep gate visible, focus input
-      input.focus();
-
-      async function attemptUnlock() {
-        const password = input.value;
-        const hash = await sha256(password);
-        const savedHash = localStorage.getItem('portfolio_admin_hash') || DEFAULT_PASS_HASH;
-
-        if (hash === savedHash) {
-          sessionStorage.setItem('cms_unlocked', 'true');
-          gate.classList.add('hidden');
-          error.classList.add('hidden');
-        } else {
-          error.classList.remove('hidden');
-          input.value = '';
-          input.focus();
-        }
-      }
-
-      document.getElementById('btn-submit-password').addEventListener('click', attemptUnlock);
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') attemptUnlock();
-      });
-
-      document.getElementById('btn-reset-password-gate').addEventListener('click', () => {
-        if (confirm('Şifreyi varsayılan şifreye ("berat2026") sıfırlamak istiyor musunuz?')) {
-          localStorage.removeItem('portfolio_admin_hash');
-          alert('Şifre varsayılana sıfırlandı! Şifre: berat2026');
-          input.value = 'berat2026';
-          attemptUnlock();
-        }
-      });
-    }
-
-    checkPasswordGate();
-
-    // System Theme Settings
-    let currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    function setTheme(theme) {
-      currentTheme = theme;
-      localStorage.setItem('theme', theme);
-      document.documentElement.setAttribute('data-theme', theme);
-      const btn = document.getElementById('theme-toggle');
-      btn.textContent = theme === 'dark' ? 'LIGHT MODE' : 'DARK MODE';
-    }
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-    });
-    setTheme(currentTheme);
-
-    // Tab switcher logic
-    window.switchTab = function(tabName) {
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('bg-yellow1', 'text-ink', 'font-bold');
-        btn.classList.add('hover:bg-yellow1/25');
-      });
-      const activeBtn = document.getElementById('tab-' + tabName);
-      if (activeBtn) {
-        activeBtn.classList.remove('hover:bg-yellow1/25');
-        activeBtn.classList.add('bg-yellow1', 'text-ink', 'font-bold');
-      }
-      document.querySelectorAll('.tab-panel').forEach(panel => {
-        panel.classList.add('hidden');
-      });
-      document.getElementById('panel-' + tabName).classList.remove('hidden');
+  /* ============================================================
+     NAV
+     ============================================================ */
+  document.querySelectorAll('#nav button').forEach(b=>{
+    b.onclick = ()=>{
+      document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      document.getElementById('tab-'+b.dataset.tab).classList.add('active');
     };
+  });
 
-    // Default static fallbacks (seeding databases)
-    const defaultProjects = [
-      { t:"VERA", c:"Display Typeface", y:"2025", type:"still", f:["editorial","brand"],
-        desc:"VERA is a condensed bold display typeface designed for high-impact visual communication. Built with strong vertical compression, extreme stroke weight, and sharp corners — VERA commands attention in any context. Designed by Berat Erdoğan — 2025",
-        tags:["Typography","Typeface","Font Design","Display Font","Condensed","Bold","Type Design","Lettering","Graphic Design","Branding"], cover:"#1E3CFF", behance:"https://www.behance.net/gallery/246607835/VERA-Condensed-Bold-Display-Typeface", aiTool:"Adobe Illustrator + FontForge" },
-      { t:"FERM", c:"Packaging", y:"2025", type:"still", f:["brand","packaging"],
-        desc:"Fermente ürün serisi için organik tipografi ve ambalaj sistemi.",
-        tags:["Packaging","FMCG","Print"], cover:"#FF2D00" },
-      { t:"SMART LOCKER INTERFACE", c:"UI / UX", y:"2024", type:"ui", f:["ui"],
-        desc:"Akıllı kilit dolabı için dokunmatik ekran arayüz konsepti. Kullanıcı akışı + ekranlar.",
-        tags:["UI","Touchscreen","Flow"], cover:"#0B0B0E" },
-      { t:"CANLANI", c:"Campaign Visual", y:"2024", type:"motion", f:["motion"],
-        desc:"Kampanya filmi & key visual serisi. 6sn / 15sn / 30sn versiyonlar.",
-        tags:["Motion","Key Visual","Campaign"], cover:"#FF2D00" },
-      { t:"DECAY CREATES LIFE", c:"Editorial", y:"2024", type:"ai", f:["ai","editorial"],
-        desc:"AI üretimi görsellerle kurulmuş, bozulma ve yenilenme üzerine kavramsal editöryal seri.",
-        tags:["AI","Editorial","Concept"], cover:"#1B2E15", aiTool:"Midjourney v6 + Photoshop" },
-      { t:"NUTRIPAW — ORGANIC PET FOOD", c:"FMCG Branding", y:"2024", type:"still", f:["brand","packaging"],
-        desc:"Organik pet food markası için bütüncül kimlik, ambalaj sistemi ve kampanya görselleri.",
-        tags:["Identity","FMCG","Packaging","Campaign"], cover:"#3A2A0E" },
-      { t:"İMECE MARKET 2025 — PRODUCTION & FINANCE", c:"Brand System", y:"2025", type:"ui", f:["brand","ui"],
-        desc:"Üretim ve finans yönetim platformu için marka sistemi + dashboard arayüzü.",
-        tags:["System","Dashboard","Identity"], cover:"#062C2C" },
-      { t:"MENU DESIGN", c:"Editorial", y:"2024", type:"still", f:["editorial"],
-        desc:"Restoran menü tasarımı. Hiyerarşi, baskı ve baskı sonrası uygulamalar.",
-        tags:["Print","Editorial","Hierarchy"], cover:"#2A1A08" },
-      { t:"TYPOGRAPHY & DETAILS", c:"Typography", y:"2024", type:"still", f:["editorial"],
-        desc:"Tipografik detaylar, harf çiftleri ve baskı denemeleri.",
-        tags:["Typography","Detail"], cover:"#000000" },
-      { t:"KASTEN MEETS ANKARA", c:"Art Direction", y:"2023", type:"social", f:["social","brand"],
-        desc:"Ankara için hazırlanan kültürel kampanyanın Instagram serisi (carousel + reels).",
-        tags:["Social","Carousel","Reels"], cover:"#FFE600" },
-      { t:"MIU MIU", c:"Campaign Visual", y:"2023", type:"motion", f:["motion"],
-        desc:"Sezonluk kampanya için key visual ve motion edit'ler.",
-        tags:["Motion","Fashion","Campaign"], cover:"#3F2B1A" },
-      { t:"AYTAÇ", c:"FMCG Branding", y:"2023", type:"still", f:["brand","packaging"],
-        desc:"FMCG markası için ambalaj revizyonu ve görsel sistem.",
-        tags:["FMCG","Packaging"], cover:"#0A2E1F" },
-      { t:"ODEABANK", c:"Corporate Identity", y:"2023", type:"still", f:["brand"],
-        desc:"Kurumsal iletişim kampanyası. Baskı + dijital uygulamalar.",
-        tags:["Corporate","Identity"], cover:"#1A2B4D" },
-      { t:"DERBY", c:"Campaign Visual", y:"2023", type:"social", f:["social"],
-        desc:"Spor markası için sosyal medya kampanya serisi.",
-        tags:["Social","Sports","Campaign"], cover:"#4A1A1A" },
-      { t:"TETRA PAK", c:"Packaging", y:"2023", type:"still", f:["packaging","brand"],
-        desc:"Ambalaj görsel sistemleri ve marka uygulamaları.",
-        tags:["Packaging","Industrial"], cover:"#0B3B3A" },
-      { t:"LOSBERAT — MOBILE UI CONCEPT", c:"UI / UX", y:"2023", type:"ui", f:["ui"],
-        desc:"Sosyal mobil uygulama için arayüz konsepti. 24 ekran + akışlar.",
-        tags:["Mobile","UI","Prototype"], cover:"#101015" },
-      { t:"YATAK / MATTRESS CAMPAIGN VISUAL", c:"Campaign Visual", y:"2023", type:"ai", f:["ai","motion"],
-        desc:"AI destekli ürün görselleştirme. Stüdyo çekimi olmadan kampanya key visual'leri.",
-        tags:["AI","Product","Campaign"], cover:"#2A1F4D", aiTool:"Midjourney + Photoshop" },
-      { t:"1 MAYIS EMEK VE DAYANIŞMA GÜNÜ", c:"Social Media", y:"2023", type:"social", f:["social"],
-        desc:"Kurumsal hesap için 1 Mayıs Instagram serisi.",
-        tags:["Social","Editorial","Day"], cover:"#FFE600" },
-      { t:"EKİBİN DİJİTAL AYAK İZLERİ", c:"Digital Communication", y:"2022", type:"social", f:["social"],
-        desc:"Ekip içi dijital iletişim için seri tasarım çalışması.",
-        tags:["Social","Internal"], cover:"#3A2A17" },
-      { t:"CORPORATE SOCIAL MEDIA DESIGNS", c:"Social Media", y:"2022", type:"social", f:["social"],
-        desc:"Aylık kurumsal sosyal medya tasarım sistemi.",
-        tags:["Social","System"], cover:"#1B2E15" },
-      { t:"BRAND IDENTITY APPLICATIONS", c:"Brand System", y:"2022", type:"still", f:["brand"],
-        desc:"Çeşitli markalar için kimlik uygulamaları.",
-        tags:["Identity","Applications"], cover:"#1F1F25" },
-      { t:"MOBILE APP INTERFACE CONCEPTS", c:"UI / UX", y:"2022", type:"ui", f:["ui"],
-        desc:"Çeşitli mobil uygulama arayüz konseptleri.",
-        tags:["Mobile","UI"], cover:"#0E1F0A" },
-      { t:"CAMPAIGN KEY VISUALS", c:"Campaign Visual", y:"2022", type:"still", f:["brand"],
-        desc:"Çeşitli markalar için kampanya key visual derlemesi.",
-        tags:["Campaign","Visual"], cover:"#2A1140" },
-      { t:"DIGITAL COMMUNICATION DESIGNS", c:"Digital Communication", y:"2022", type:"social", f:["social"],
-        desc:"Dijital iletişim tasarımı derlemesi.",
-        tags:["Digital","Comm"], cover:"#1A1140" },
-      { t:"PACKAGING & FMCG BRAND WORKS", c:"Packaging", y:"2022", type:"still", f:["packaging"],
-        desc:"FMCG ve ambalaj derlemesi.",
-        tags:["FMCG","Packaging"], cover:"#3A1010" },
-      { t:"UI / UX INTERFACE CONCEPTS", c:"UI / UX", y:"2022", type:"ui", f:["ui"],
-        desc:"Çeşitli arayüz konseptleri.",
-        tags:["UI","Concept"], cover:"#062C2C" },
-      { t:"EDITORIAL TYPOGRAPHY POSTERS", c:"Editorial", y:"2022", type:"ai", f:["ai","editorial"],
-        desc:"AI destekli editöryal poster serisi. Tipografi + yapay görsel.",
-        tags:["AI","Poster","Type"], cover:"#000000", aiTool:"Midjourney + InDesign" },
-      { t:"PRODUCT PRESENTATION MOCKUPS", c:"Art Direction", y:"2021", type:"still", f:["brand"],
-        desc:"Ürün sunum mockup'ları.",
-        tags:["Mockup","Product"], cover:"#1F1606" },
-      { t:"CREATIVE DIRECTION STUDIES", c:"Creative Direction", y:"2021", type:"ai", f:["ai"],
-        desc:"AI yardımıyla görsel kavramsal çalışmalar.",
-        tags:["AI","Concept","Direction"], cover:"#4A1A1A", aiTool:"Midjourney v5" },
-      { t:"BRAND GUIDELINE & GRID SYSTEMS", c:"Brand System", y:"2021", type:"still", f:["brand"],
-        desc:"Marka kılavuzları ve grid sistemleri.",
-        tags:["Guidelines","Grid"], cover:"#101015" },
-      { t:"SOCIAL MEDIA CAMPAIGN DESIGNS", c:"Social Media", y:"2021", type:"social", f:["social"],
-        desc:"Sosyal medya kampanyaları.",
-        tags:["Social","Campaign"], cover:"#FF2D00" },
-      { t:"VISUAL IDENTITY EXPLORATIONS", c:"Brand Identity", y:"2021", type:"still", f:["brand"],
-        desc:"Kimlik keşif çalışmaları.",
-        tags:["Identity","Exploration"], cover:"#0B0B0E" },
-      { t:"ART DIRECTION PROJECTS", c:"Art Direction", y:"2021", type:"motion", f:["motion"],
-        desc:"Sanat yönetimi projeleri ve motion edit'ler.",
-        tags:["Direction","Motion"], cover:"#2A1A08" },
-      { t:"CREATIVE ADVERTISING VISUALS", c:"Advertising", y:"2020", type:"still", f:["brand"],
-        desc:"Reklam görselleri derlemesi.",
-        tags:["Advertising","Visual"], cover:"#1A1140" },
-      { t:"POSTER & PRINT DESIGN WORKS", c:"Print", y:"2020", type:"still", f:["editorial"],
-        desc:"Poster ve baskı işleri.",
-        tags:["Print","Poster"], cover:"#000000" },
-      { t:"INTERFACE & DASHBOARD CONCEPTS", c:"UI / UX", y:"2020", type:"ui", f:["ui"],
-        desc:"Dashboard ve arayüz konseptleri.",
-        tags:["UI","Dashboard"], cover:"#062C2C" },
-      { t:"CORPORATE BRANDING SYSTEMS", c:"Corporate Identity", y:"2020", type:"still", f:["brand"],
-        desc:"Kurumsal markalama sistemleri.",
-        tags:["Corporate","System"], cover:"#1F1F25" },
-      { t:"PACKAGING MOCKUP SERIES", c:"Packaging", y:"2020", type:"still", f:["packaging"],
-        desc:"Ambalaj mockup serisi.",
-        tags:["Packaging","Mockup"], cover:"#3A2A0E" },
-      { t:"DIGITAL BRAND COMMUNICATION", c:"Digital Communication", y:"2019", type:"social", f:["social"],
-        desc:"Dijital marka iletişimi.",
-        tags:["Digital","Brand"], cover:"#1A2B4D" },
-      { t:"EXPERIMENTAL TYPOGRAPHY WORKS", c:"Typography", y:"2018", type:"ai", f:["ai","editorial"],
-        desc:"Deneysel AI tipografi serisi. Kavramsal harf araştırmaları.",
-        tags:["AI","Typography","Experimental"], cover:"#000000", aiTool:"Stable Diffusion + Procreate" }
-    ];
+  /* ============================================================
+     RENDER ALL
+     ============================================================ */
+  function renderAll(){ renderProjects(); renderProfile(); renderExperience(); }
 
-    const defaultProfile = {
-      aboutHeading: {
-        tr: "FİKİRLERDEN<br/>\n          <span class=\"bg-ink text-paper px-2\">SİSTEMLER</span><br/>\n          KURARIM<span class=\"text-yellow1\">.</span>",
-        en: "I MAKE<br/>\n          <span class=\"bg-ink text-paper px-2\">SYSTEMS</span><br/>\n          OUT OF<br/>\n          IDEAS<span class=\"text-yellow1\">.</span>"
-      },
-      aboutBioP1: {
-        tr: "<span class=\"bg-yellow1 px-1\">Berat Erdoğan</span>; markalar, kültürel projeler ve ürünler için görsel kimlikler, kampanyalar ve dijital arayüzler tasarlayan bir grafik tasarımcı ve sanat yönetmenidir.",
-        en: "<span class=\"bg-yellow1 px-1\">Berat Erdoğan</span> is a graphic designer and art director who designs visual identities, campaigns, and digital interfaces for brands, cultural projects, and products."
-      },
-      aboutBioP2: {
-        tr: "Tipografiyi temel araç olarak kullanır; kaba estetiği, editöryal yapıyı ve sistematik düşünceyi merkezine alır. Her proje, <span class=\"underline decoration-4 decoration-yellow1\">içerik · biçim · bağlam</span> üçgeninde kurgulanır.",
-        en: "He uses typography as his primary tool, focusing on raw aesthetics, editorial structures, and systematic thinking. Each project is constructed within the triangle of <span class=\"underline decoration-4 decoration-yellow1\">content · form · context</span>."
-      },
-      counters: [
-        { val: "03+", label: { tr: "Yıl Deneyim", en: "Years Experience" } },
-        { val: "30+", label: { tr: "Tamamlanmış Proje", en: "Completed Projects" } },
-        { val: "15+", label: { tr: "Marka İş Birliği", en: "Brand Collaborations" } },
-        { val: "★", label: { tr: "Ödül / Basın", en: "Awards / Press" } }
-      ],
-      contactHeading: {
-        tr: "YÜKSEK<br/>\n        <span class=\"bg-ink text-yellow1 px-3\">SESLİ</span><br/>\n        BİR ŞEYLER<br/>\n        YAPALIM<span class=\"text-ink\">.</span>",
-        en: "LET'S<br/>\n        <span class=\"bg-ink text-yellow1 px-3\">MAKE</span><br/>\n        SOMETHING<br/>\n        LOUD<span class=\"text-ink\">.</span>"
-      },
-      email: "hello@beraterdogan.com",
-      availability: {
-        tr: "Marka, kampanya, arayüz ya da editöryal projeniz için iş birliğine açığım. Yeni başlangıçlara <span class=\"bg-ink text-yellow1 px-1\">2026 Q3</span> itibariyle yer var.",
-        en: "I am open to collaborations for brand, campaign, interface, or editorial projects. Availability for new projects starting <span class=\"bg-ink text-yellow1 px-1\">Q3 2026</span>."
-      },
-      socials: {
-        behance: { label: "@beraterdoan1", url: "https://www.behance.net/beraterdoan1" },
-        instagram: { label: "@__bertab", url: "https://www.instagram.com/__bertab/?hl=tr" },
-        linkedin: { label: "Berat Erdoğan", url: "https://www.linkedin.com/in/berat-erdoğan-4a79801b3" }
-      }
-    };
+  /* ---------- doodle picker / swatches ---------- */
+  function swatchHTML(sel){ return COLORS.map(c=>`<div class="swatch ${c===sel?'sel':''}" data-v="${c}" title="${c}"></div>`).join(''); }
+  function doodlePickHTML(sel){ return window.doodleList.map(d=>`<button type="button" data-v="${d.id}" class="${d.id===sel?'sel':''}" title="${d.label}">${doodleSVG(d.id)}</button>`).join(''); }
+  function wireSwatch(scope, onPick){ scope.querySelectorAll('.swatch').forEach(s=>s.onclick=()=>{ scope.querySelectorAll('.swatch').forEach(x=>x.classList.remove('sel')); s.classList.add('sel'); onPick(s.dataset.v); }); }
+  function wireDoodle(scope, onPick){ scope.querySelectorAll('.doodlepick button').forEach(s=>s.onclick=()=>{ scope.querySelectorAll('.doodlepick button').forEach(x=>x.classList.remove('sel')); s.classList.add('sel'); onPick(s.dataset.v); }); }
 
-    const defaultExpertise = [
-      { tr: "MARKA YÖNETİMİ", en: "BRANDING" },
-      { tr: "GÖRSEL KİMLİK", en: "VISUAL IDENTITY" },
-      { tr: "UI / UX TASARIMI", en: "UI / UX DESIGN" },
-      { tr: "SOSYAL MEDYA TASARIMI", en: "SOCIAL MEDIA DESIGN" },
-      { tr: "AMBALAJ TASARIMI", en: "PACKAGING DESIGN" },
-      { tr: "HIZLI TÜKETİM MARKALAMA", en: "FMCG BRAND DESIGN" },
-      { tr: "TİPOGRAFİ", en: "TYPOGRAPHY" },
-      { tr: "EDİTÖRYAL TASARIM", en: "EDITORIAL DESIGN" },
-      { tr: "SANAT YÖNETİMİ", en: "ART DIRECTION" },
-      { tr: "KREATİF DİREKTÖRLÜK", en: "CREATIVE DIRECTION" },
-      { tr: "KAMPANYA GÖRSEL TASARIMI", en: "CAMPAIGN VISUAL DESIGN" },
-      { tr: "KURUMSAL KİMLİK", en: "CORPORATE IDENTITY" },
-      { tr: "MOBİL ARAYÜZ TASARIMI", en: "MOBILE INTERFACE DESIGN" },
-      { tr: "ÜRÜN MOCKUP TASARIMI", en: "PRODUCT MOCKUP DESIGN" },
-      { tr: "DİJİTAL İLETİŞİM", en: "DIGITAL COMMUNICATION" },
-      { tr: "REKLAM GÖRSELİ", en: "ADVERTISING VISUAL" },
-      { tr: "AFİŞ TASARIMI", en: "POSTER DESIGN" },
-      { tr: "BASKI TASARIMI", en: "PRINT DESIGN" },
-      { tr: "MARKA STRATEJİSİ GÖRSELLERİ", en: "BRAND STRATEGY VISUALS" }
-    ];
+  /* ============================================================
+     PROJECTS
+     ============================================================ */
+  let editingIndex = -1;  // -1 none, otherwise index into data.projects
+  const PE = document.getElementById('projectEditor');
 
-    // Local Storage translations caching
-    let translationsDict = { categories: {}, tags: {}, descriptions: {} };
-    try {
-      const cachedDict = localStorage.getItem('translations_dict');
-      if (cachedDict) {
-        translationsDict = JSON.parse(cachedDict);
-      }
-    } catch(e) {}
-
-    // Initialize databases from LocalStorage or defaults
-    let projects = [];
-    let profile = {};
-    let expertise = [];
-
-    function initDatabases() {
-      try {
-        const storedProjs = localStorage.getItem('portfolio_projects');
-        projects = storedProjs ? JSON.parse(storedProjs) : JSON.parse(JSON.stringify(defaultProjects));
-      } catch (e) { projects = JSON.parse(JSON.stringify(defaultProjects)); }
-
-      try {
-        const storedProf = localStorage.getItem('portfolio_profile');
-        profile = storedProf ? JSON.parse(storedProf) : null;
-        if (!profile || !profile.counters || profile.counters[0]?.val === "08+") {
-          profile = JSON.parse(JSON.stringify(defaultProfile));
-        }
-      } catch (e) { profile = JSON.parse(JSON.stringify(defaultProfile)); }
-
-      try {
-        const storedExp = localStorage.getItem('portfolio_expertise');
-        expertise = storedExp ? JSON.parse(storedExp) : JSON.parse(JSON.stringify(defaultExpertise));
-      } catch (e) { expertise = JSON.parse(JSON.stringify(defaultExpertise)); }
-      
-      // Save initially to ensure they are seeded
-      localStorage.setItem('portfolio_projects', JSON.stringify(projects));
-      localStorage.setItem('portfolio_profile', JSON.stringify(profile));
-      localStorage.setItem('portfolio_expertise', JSON.stringify(expertise));
-      localStorage.setItem('translations_dict', JSON.stringify(translationsDict));
-    }
-    
-    initDatabases();
-
-    // Seeding dynamic categories / tags translation structures
-    function initTranslations() {
-      projects.forEach(p => {
-        if (!translationsDict.categories[p.c]) {
-          translationsDict.categories[p.c] = { tr: p.c, en: p.c };
-        }
-        if (!translationsDict.descriptions[p.desc]) {
-          translationsDict.descriptions[p.desc] = { tr: p.desc, en: p.desc };
-        }
-        p.tags.forEach(tag => {
-          if (!translationsDict.tags[tag]) {
-            translationsDict.tags[tag] = { tr: tag, en: tag };
-          }
-        });
-      });
-      localStorage.setItem('translations_dict', JSON.stringify(translationsDict));
-    }
-    initTranslations();
-
-    // ----------------------------------------------------
-    // TAB 1: PROJECTS LOGIC
-    // ----------------------------------------------------
-    const tableBody = document.getElementById('project-table-rows');
-    const projectCountEl = document.getElementById('project-count');
-    const searchInput = document.getElementById('search-input');
-    const editorContainer = document.getElementById('editor-container');
-    const projectForm = document.getElementById('project-form');
-
-    function renderTable(filterQuery = '') {
-      tableBody.innerHTML = '';
-      const query = filterQuery.toLowerCase().trim();
-      
-      const filtered = projects.filter(p => {
-        return p.t.toLowerCase().includes(query) || p.c.toLowerCase().includes(query) || p.y.includes(query);
-      });
-
-      projectCountEl.textContent = filtered.length;
-
-      filtered.forEach((p) => {
-        const origIndex = projects.findIndex(proj => proj.t === p.t && proj.y === p.y);
-        if (origIndex === -1) return;
-
-        const tr = document.createElement('tr');
-        tr.className = 'border-b-2 border-ink hover:bg-yellow1/15';
-        const count = String(origIndex + 1).padStart(2, '0');
-
-        const isFirst = origIndex === 0;
-        const isLast = origIndex === projects.length - 1;
-        const orderButtons = `
-          <button type="button" onclick="moveProject(${origIndex}, -1)" ${isFirst ? 'disabled class="opacity-30 cursor-not-allowed"' : 'class="hover:text-yellow-600 font-bold"'} title="Up">▲</button>
-          <button type="button" onclick="moveProject(${origIndex}, 1)" ${isLast ? 'disabled class="opacity-30 cursor-not-allowed"' : 'class="hover:text-yellow-600 font-bold"'} title="Down">▼</button>
-        `;
-
-        tr.innerHTML = `
-          <td class="p-3 text-left font-bold text-ink/50">${count}</td>
-          <td class="p-3 font-bold text-[13px]">${p.t}</td>
-          <td class="p-3 text-xs uppercase">${p.c}</td>
-          <td class="p-3 text-center font-bold">${p.y}</td>
-          <td class="p-3 text-center"><span class="border px-1.5 py-0.5 text-[9px] uppercase font-bold bg-paper text-ink border-ink">${p.type}</span></td>
-          <td class="p-3 text-center space-x-3">
-            <span class="inline-flex gap-2 mr-2 border-r border-ink/30 pr-2">${orderButtons}</span>
-            <button type="button" onclick="editProject(${origIndex})" class="text-blue-600 hover:underline font-bold cursor-pointer">EDIT</button>
-            <button type="button" onclick="deleteProject(${origIndex})" class="text-red1 hover:underline font-bold cursor-pointer">DELETE</button>
-          </td>
-        `;
-        tableBody.appendChild(tr);
-      });
-    }
-
-    function updateFormMediaUploader() {
-      const titleInput = document.getElementById('form-t');
-      const typeInput = document.getElementById('form-type');
-      const assetTypeSelect = document.getElementById('form-media-asset-type');
-      const filenamePreview = document.getElementById('form-media-filename-preview');
-
-      const title = titleInput.value.trim();
-      if (!title) {
-        assetTypeSelect.innerHTML = '<option value="">-- LÜTFEN ÖNCE PROJE BAŞLIĞI YAZIN --</option>';
-        filenamePreview.textContent = '-';
-        return;
-      }
-
-      const slug = title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-      const type = typeInput.value;
-      const currentSelectedVal = assetTypeSelect.value;
-
-      let files = [];
-      if (type === 'social') {
-        files = [
-          { name: `${slug}-1.jpg`, desc: 'Görsel 1 / Post 1' },
-          { name: `${slug}-2.jpg`, desc: 'Görsel 2 / Post 2' },
-          { name: `${slug}-3.jpg`, desc: 'Görsel 3 / Post 3' }
-        ];
-      } else if (type === 'motion') {
-        files = [
-          { name: `${slug}.mp4`, desc: 'Ana Video (.mp4)' },
-          { name: `${slug}-frame-1.jpg`, desc: 'Detay Görseli 1' },
-          { name: `${slug}-frame-2.jpg`, desc: 'Detay Görseli 2' },
-          { name: `${slug}-frame-3.jpg`, desc: 'Detay Görseli 3' },
-          { name: `${slug}-frame-4.jpg`, desc: 'Detay Görseli 4' }
-        ];
-      } else if (type === 'ai') {
-        files = [
-          { name: `${slug}.jpg`, desc: 'Kapak Görseli' },
-          { name: `${slug}-v1.jpg`, desc: 'Varyasyon 1' },
-          { name: `${slug}-v2.jpg`, desc: 'Varyasyon 2' },
-          { name: `${slug}-v3.jpg`, desc: 'Varyasyon 3' },
-          { name: `${slug}-v4.jpg`, desc: 'Varyasyon 4' }
-        ];
-      } else if (type === 'ui') {
-        files = [
-          { name: `${slug}.jpg`, desc: 'Kapak Görseli' },
-          { name: `${slug}-1.jpg`, desc: 'Detay Görseli 1' },
-          { name: `${slug}-2.jpg`, desc: 'Detay Görseli 2' },
-          { name: `${slug}-3.jpg`, desc: 'Detay Görseli 3' },
-          { name: `${slug}-4.jpg`, desc: 'Detay Görseli 4' },
-          { name: `${slug}-mobile.jpg`, desc: 'Mobil Görseli' },
-          { name: `${slug}-side-1.jpg`, desc: 'Yan Sütun Görseli' }
-        ];
-      } else { // still
-        files = [
-          { name: `${slug}.jpg`, desc: 'Kapak Görseli' },
-          { name: `${slug}-1.jpg`, desc: 'Detay Görseli 1' },
-          { name: `${slug}-2.jpg`, desc: 'Detay Görseli 2' },
-          { name: `${slug}-3.jpg`, desc: 'Detay Görseli 3' },
-          { name: `${slug}-4.jpg`, desc: 'Detay Görseli 4' }
-        ];
-      }
-
-      assetTypeSelect.innerHTML = '';
-      files.forEach(f => {
-        const opt = document.createElement('option');
-        opt.value = f.name;
-        opt.textContent = `${f.name} (${f.desc})`;
-        if (f.name === currentSelectedVal) {
-          opt.selected = true;
-        }
-        assetTypeSelect.appendChild(opt);
-      });
-
-      if (assetTypeSelect.value) {
-        filenamePreview.textContent = assetTypeSelect.value;
-      } else {
-        filenamePreview.textContent = '-';
-      }
-    }
-
-    document.getElementById('btn-add-project').addEventListener('click', () => {
-      projectForm.reset();
-      document.getElementById('edit-index').value = '';
-      document.getElementById('editor-title').textContent = 'ADD NEW PROJECT';
-      editorContainer.classList.remove('hidden');
-      editorContainer.scrollIntoView({ behavior: 'smooth' });
-      updateFormMediaUploader();
+  function renderProjects(){
+    const host = document.getElementById('projectList');
+    document.getElementById('projCount').textContent = `${data.projects.length} proje`;
+    host.innerHTML = data.projects.map((p,i)=>`
+      <div class="row">
+        <div class="row__head">
+          <span class="grip mono">${String(i+1).padStart(2,'0')}</span>
+          <span class="mini" style="color:#2B2B2B">${doodleSVG(p.doodle||'d-spark')}</span>
+          <span class="ttl">${escHtml(p.t||'(adsız)')} </span>
+          <span class="pill">${p.color||'?'}</span>
+          <span class="pill">${(p.media||[]).length} medya</span>
+        </div>
+        <div class="btns">
+          <button class="btn btn--sm" data-act="edit" data-i="${i}">düzenle</button>
+          <button class="btn btn--sm" data-act="up" data-i="${i}">↑</button>
+          <button class="btn btn--sm" data-act="down" data-i="${i}">↓</button>
+          <button class="btn btn--sm" data-act="open" data-i="${i}">↗ önizle</button>
+          <button class="btn btn--sm btn--danger" data-act="del" data-i="${i}">sil</button>
+        </div>
+      </div>`).join('');
+    host.querySelectorAll('button[data-act]').forEach(b=>{
+      const i = +b.dataset.i;
+      b.onclick = ()=>{
+        if(b.dataset.act==='edit'){ editingIndex=i; renderProjectEditor(); PE.scrollIntoView({behavior:'smooth'}); }
+        else if(b.dataset.act==='del'){ if(confirm('Bu proje silinsin mi?')){ data.projects.splice(i,1); if(editingIndex===i)editingIndex=-1; renderProjects(); renderProjectEditor(); } }
+        else if(b.dataset.act==='up' && i>0){ [data.projects[i-1],data.projects[i]]=[data.projects[i],data.projects[i-1]]; renderProjects(); }
+        else if(b.dataset.act==='down' && i<data.projects.length-1){ [data.projects[i+1],data.projects[i]]=[data.projects[i],data.projects[i+1]]; renderProjects(); }
+        else if(b.dataset.act==='open'){ const p=data.projects[i]; window.open('project.html?p='+encodeURIComponent(p.slug||slugify(p.t)),'_blank'); }
+      };
     });
+  }
 
-    document.getElementById('btn-cancel-edit').addEventListener('click', () => {
-      editorContainer.classList.add('hidden');
-      projectForm.reset();
-    });
+  function renderProjectEditor(){
+    if(editingIndex<0){ PE.innerHTML=''; return; }
+    const p = data.projects[editingIndex];
+    PE.innerHTML = `
+      <div class="editor">
+        <h3>proje düzenle</h3>
+        <div class="grid2">
+          <div class="field"><label>başlık</label><input id="f-t" value="${escAttr(p.t)}"></div>
+          <div class="field"><label>slug (url)</label><input id="f-slug" value="${escAttr(p.slug||'')}" placeholder="otomatik"></div>
+        </div>
+        <div class="grid3">
+          <div class="field"><label>kategori</label><input id="f-c" value="${escAttr(p.c)}"></div>
+          <div class="field"><label>yıl</label><input id="f-y" value="${escAttr(p.y)}"></div>
+          <div class="field"><label>dış link (behance vb.)</label><input id="f-link" value="${escAttr(p.link||'')}"></div>
+        </div>
+        <div class="field"><label>açıklama</label><textarea id="f-desc">${escHtml(p.desc||'')}</textarea></div>
+        <div class="field"><label>etiketler (virgülle)</label><input id="f-tags" value="${escAttr((p.tags||[]).join(', '))}"></div>
+        <div class="grid2">
+          <div class="field"><label>renk</label><div class="swatches" id="f-color">${swatchHTML(p.color)}</div></div>
+          <div class="field"><label>doodle</label><div class="doodlepick" id="f-doodle">${doodlePickHTML(p.doodle)}</div></div>
+        </div>
 
-    const formType = document.getElementById('form-type');
-    const aiField = document.getElementById('ai-tool-field');
-    formType.addEventListener('change', () => {
-      if (formType.value === 'ai') {
-        aiField.classList.remove('hidden');
-      } else {
-        aiField.classList.add('hidden');
-      }
-      updateFormMediaUploader();
-    });
+        <div class="field">
+          <label>medya (resim / video / embed)</label>
+          <div id="f-media"></div>
+          <div class="btns"><button type="button" class="btn btn--sm" id="btnAddMedia">+ medya satırı</button></div>
+        </div>
 
-    document.getElementById('form-t').addEventListener('input', updateFormMediaUploader);
-    document.getElementById('form-media-asset-type').addEventListener('change', () => {
-      document.getElementById('form-media-filename-preview').textContent = document.getElementById('form-media-asset-type').value;
-    });
+        <div class="editor" style="margin-top:8px">
+          <b>medya dosyası yükle (github)</b>
+          <p class="hint">dosya repodaki images/&lt;slug&gt;/ klasörüne yüklenir, yolu otomatik medya listesine eklenir. token "yayınla" sekmesindeki ile aynı.</p>
+          <div class="grid2">
+            <div class="field"><label>dosya seç</label><input type="file" id="f-file" accept="image/*,video/*"></div>
+            <div class="field"><label>&nbsp;</label><button type="button" class="btn" id="btnUploadMedia">⬆ github'a yükle</button></div>
+          </div>
+          <div class="status" id="uploadStatus"></div>
+        </div>
 
-    document.getElementById('btn-form-media-upload').addEventListener('click', () => {
-      const status = document.getElementById('form-media-status');
-      status.classList.remove('hidden', 'bg-red-600', 'bg-green-600');
-      status.className = 'col-span-12 p-2 border-2 border-ink bg-ink text-yellow1 text-[10px] uppercase font-bold text-center';
-      status.textContent = 'DOSYA HAZIRLANIYOR...';
+        <div class="btns">
+          <button class="btn btn--ink" id="btnSaveProject">projeyi uygula</button>
+          <button class="btn" id="btnCloseEditor">kapat</button>
+        </div>
+        <p class="hint">not: "uygula" sadece hafızaya alır. kalıcı yapmak için <b>kaydet & yayınla</b> sekmesini kullan.</p>
+      </div>`;
 
-      const token = document.getElementById('gh-token').value.trim();
-      const repo = document.getElementById('gh-repo').value.trim();
-      const branch = document.getElementById('gh-branch').value.trim();
-      const fileInput = document.getElementById('form-media-file');
-      const filename = document.getElementById('form-media-asset-type').value;
+    let color = p.color || 'yellow', doodle = p.doodle || 'd-spark';
+    wireSwatch(PE.querySelector('#f-color'), v=>color=v);
+    wireDoodle(PE.querySelector('#f-doodle'), v=>doodle=v);
 
-      if (!token || !repo) {
-        status.textContent = 'HATA: GITHUB TOKEN VEYA REPO BİLGİSİ EKSİK. LÜTFEN "PUBLISH & SYNC" SEKMESİNDE DOLDURUN.';
-        status.classList.add('bg-red-600', 'text-white');
-        return;
-      }
+    // media rows
+    let media = deepClone(p.media || []);
+    const mhost = PE.querySelector('#f-media');
+    function renderMedia(){
+      mhost.innerHTML = media.map((m,mi)=>`
+        <div class="media-row">
+          <select data-mi="${mi}" data-k="type">
+            <option value="image" ${m.type==='image'?'selected':''}>resim</option>
+            <option value="video" ${m.type==='video'?'selected':''}>video</option>
+            <option value="embed" ${m.type==='embed'?'selected':''}>embed</option>
+          </select>
+          <input data-mi="${mi}" data-k="src" value="${escAttr(m.src||'')}" placeholder="images/... veya https://...">
+          <button type="button" class="btn btn--sm btn--danger" data-rm="${mi}">×</button>
+        </div>`).join('') || '<p class="hint">medya yok.</p>';
+      mhost.querySelectorAll('select,input').forEach(el=>{
+        const upd = ()=>{ media[+el.dataset.mi][el.dataset.k]=el.value; };
+        el.onchange = upd; el.oninput = upd;
+      });
+      mhost.querySelectorAll('button[data-rm]').forEach(b=>b.onclick=()=>{ media.splice(+b.dataset.rm,1); renderMedia(); });
+    }
+    renderMedia();
+    PE.querySelector('#btnAddMedia').onclick = ()=>{ media.push({type:'image',src:''}); renderMedia(); };
 
-      if (!fileInput.files || fileInput.files.length === 0) {
-        status.textContent = 'HATA: LÜTFEN BİR DOSYA SEÇİN.';
-        status.classList.add('bg-red-600', 'text-white');
-        return;
-      }
-
-      if (!filename || filename.startsWith('--')) {
-        status.textContent = 'HATA: LÜTFEN ÖNCE PROJE BAŞLIĞI YAZIN VE GEÇERLİ BİR DOSYA SEÇİN.';
-        status.classList.add('bg-red-600', 'text-white');
-        return;
-      }
-
+    // media upload to github
+    PE.querySelector('#btnUploadMedia').onclick = async ()=>{
+      const fileInput = PE.querySelector('#f-file');
+      const st = PE.querySelector('#uploadStatus');
       const file = fileInput.files[0];
-      const reader = new FileReader();
+      if(!file){ showStatus(st,'err','önce dosya seç'); return; }
+      const slug = (PE.querySelector('#f-slug').value.trim() || slugify(PE.querySelector('#f-t').value));
+      const safeName = file.name.toLowerCase().replace(/[^a-z0-9.]+/g,'-');
+      const path = `images/${slug}/${safeName}`;
+      try{
+        showStatus(st,'info','yükleniyor...');
+        const b64 = await fileToBase64(file);
+        await ghPutFile(path, b64, `cms: upload media ${path}`);
+        const type = /\.(mp4|webm|mov|m4v)$/i.test(file.name) ? 'video' : 'image';
+        media.push({ type, src: path }); renderMedia();
+        showStatus(st,'ok','yüklendi → '+path);
+      }catch(err){ showStatus(st,'err','hata: '+err.message); }
+    };
 
-      reader.onload = async function(event) {
-        try {
-          status.textContent = 'GITHUB BAĞLANTISI KONTROL EDİLİYOR...';
-          const arrayBuffer = event.target.result;
-          
-          const uint8 = new Uint8Array(arrayBuffer);
-          let binaryStr = '';
-          for (let i = 0; i < uint8.length; i++) {
-            binaryStr += String.fromCharCode(uint8[i]);
-          }
-          const base64Content = btoa(binaryStr);
+    PE.querySelector('#btnSaveProject').onclick = ()=>{
+      p.t = PE.querySelector('#f-t').value.trim();
+      p.slug = PE.querySelector('#f-slug').value.trim() || slugify(p.t);
+      p.c = PE.querySelector('#f-c').value.trim();
+      p.y = PE.querySelector('#f-y').value.trim();
+      p.link = PE.querySelector('#f-link').value.trim();
+      p.desc = PE.querySelector('#f-desc').value.trim();
+      p.tags = PE.querySelector('#f-tags').value.split(',').map(s=>s.trim()).filter(Boolean);
+      p.color = color; p.doodle = doodle;
+      p.media = media.filter(m=>m.src && m.src.trim());
+      renderProjects();
+      alert('proje hafızaya alındı. yayınlamayı unutma.');
+    };
+    PE.querySelector('#btnCloseEditor').onclick = ()=>{ editingIndex=-1; renderProjectEditor(); };
+  }
 
-          const slug = getSlugFromFilename(filename);
-          const getUrl = `https://api.github.com/repos/${repo}/contents/images/${slug}/${filename}?ref=${branch}`;
-          const getRes = await fetch(getUrl, {
-            headers: {
-              'Authorization': `token ${token}`,
-              'Accept': 'application/vnd.github.v3+json'
-            }
-          });
+  document.getElementById('btnAddProject').onclick = ()=>{
+    data.projects.unshift({ t:'yeni proje', slug:'', c:'kategori', y:String(new Date().getFullYear()), color:'yellow', doodle:'d-spark', desc:'', tags:[], link:'', media:[] });
+    editingIndex = 0; renderProjects(); renderProjectEditor(); PE.scrollIntoView({behavior:'smooth'});
+  };
 
-          let sha = null;
-          if (getRes.ok) {
-            const fileData = await getRes.json();
-            sha = fileData.sha;
-          }
+  /* ============================================================
+     PROFILE
+     ============================================================ */
+  function renderProfile(){
+    const pr = data.profile || (data.profile={});
+    const s = pr.socials || (pr.socials={});
+    document.getElementById('profileForm').innerHTML = `
+      <div class="editor">
+        <h3>hakkında</h3>
+        <div class="field"><label>başlık</label><input id="pf-h" value="${escAttr(pr.aboutH||'')}"></div>
+        <div class="field"><label>biyografi — paragraf 1 (html olur)</label><textarea id="pf-b0">${escHtml((pr.bio||[])[0]||'')}</textarea></div>
+        <div class="field"><label>biyografi — paragraf 2</label><textarea id="pf-b1">${escHtml((pr.bio||[])[1]||'')}</textarea></div>
+        <div class="field"><label>beceriler (virgülle)</label><input id="pf-skills" value="${escAttr((pr.skills||[]).join(', '))}"></div>
+      </div>
+      <div class="editor">
+        <h3>sayaçlar</h3>
+        <div class="grid2">
+          ${[0,1,2,3].map(i=>`
+            <div class="grid2">
+              <div class="field"><label>değer ${i+1}</label><input id="pf-cv${i}" value="${escAttr((pr.counters||[])[i]?.v||'')}"></div>
+              <div class="field"><label>etiket ${i+1}</label><input id="pf-cl${i}" value="${escAttr((pr.counters||[])[i]?.l||'')}"></div>
+            </div>`).join('')}
+        </div>
+      </div>
+      <div class="editor">
+        <h3>iletişim</h3>
+        <div class="field"><label>iletişim başlığı</label><input id="pf-ch" value="${escAttr(pr.contactH||'')}"></div>
+        <div class="field"><label>e-posta</label><input id="pf-email" value="${escAttr(pr.email||'')}"></div>
+        <div class="field"><label>uygunluk metni (html olur)</label><textarea id="pf-avail">${escHtml(pr.avail||'')}</textarea></div>
+        <div class="grid3">
+          <div class="field"><label>behance</label><input id="pf-behance" value="${escAttr(s.behance||'')}"></div>
+          <div class="field"><label>instagram</label><input id="pf-instagram" value="${escAttr(s.instagram||'')}"></div>
+          <div class="field"><label>linkedin</label><input id="pf-linkedin" value="${escAttr(s.linkedin||'')}"></div>
+        </div>
+      </div>`;
+  }
+  document.getElementById('btnSaveProfile').onclick = ()=>{
+    const g = id=>document.getElementById(id).value;
+    const pr = data.profile;
+    pr.aboutH = g('pf-h');
+    pr.bio = [g('pf-b0'), g('pf-b1')].filter(x=>x.trim());
+    pr.skills = g('pf-skills').split(',').map(s=>s.trim()).filter(Boolean);
+    pr.counters = [0,1,2,3].map(i=>({ v:g('pf-cv'+i), l:g('pf-cl'+i) })).filter(c=>c.v||c.l);
+    pr.contactH = g('pf-ch'); pr.email = g('pf-email'); pr.avail = g('pf-avail');
+    pr.socials = { behance:g('pf-behance'), instagram:g('pf-instagram'), linkedin:g('pf-linkedin') };
+    alert('profil hafızaya alındı. yayınlamayı unutma.');
+  };
 
-          status.textContent = 'DOSYA GITHUB REPOSUNA AKTARILIYOR (BASE64)...';
-          const putUrl = `https://api.github.com/repos/${repo}/contents/images/${slug}/${filename}`;
-          
-          const bodyObj = {
-            message: `cms: upload media asset ${filename}`,
-            content: base64Content,
-            branch: branch
-          };
-          if (sha) {
-            bodyObj.sha = sha;
-          }
+  /* ============================================================
+     EXPERIENCE
+     ============================================================ */
+  function renderExperience(){
+    const host = document.getElementById('expList');
+    host.innerHTML = (data.experience||[]).map((e,i)=>`
+      <div class="row">
+        <div class="grid2">
+          <div class="field"><label>rol</label><input data-i="${i}" data-k="role" value="${escAttr(e.role||'')}"></div>
+          <div class="field"><label>kurum</label><input data-i="${i}" data-k="org" value="${escAttr(e.org||'')}"></div>
+        </div>
+        <div class="grid2">
+          <div class="field"><label>tarih</label><input data-i="${i}" data-k="date" value="${escAttr(e.date||'')}"></div>
+          <div class="field"><label>doodle</label><div class="doodlepick" data-doodle="${i}">${doodlePickHTML(e.doodle)}</div></div>
+        </div>
+        <div class="field"><label>not (html olur)</label><textarea data-i="${i}" data-k="note">${escHtml(e.note||'')}</textarea></div>
+        <div class="btns">
+          <button class="btn btn--sm" data-act="up" data-i="${i}">↑</button>
+          <button class="btn btn--sm" data-act="down" data-i="${i}">↓</button>
+          <button class="btn btn--sm btn--danger" data-act="del" data-i="${i}">sil</button>
+        </div>
+      </div>`).join('') || '<p class="hint">deneyim yok.</p>';
 
-          const putRes = await fetch(putUrl, {
-            method: 'PUT',
-            headers: {
-              'Authorization': `token ${token}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(bodyObj)
-          });
-
-          if (putRes.ok) {
-            status.textContent = `✓ '${filename}' BAŞARIYLA YÜKLENDİ! GÜNCELLEME VERCEL'DE YAYINLANIYOR.`;
-            status.className = 'col-span-12 p-2 border-2 border-ink bg-green-600 text-white text-[10px] uppercase font-bold text-center';
-            fileInput.value = '';
-          } else {
-            const errData = await putRes.json();
-            throw new Error(errData.message || 'PUT failed.');
-          }
-        } catch (err) {
-          status.textContent = 'YÜKLEME HATASI: ' + err.message.toUpperCase();
-          status.classList.add('bg-red-600', 'text-white');
-        }
+    host.querySelectorAll('input[data-k],textarea[data-k]').forEach(el=>{
+      el.oninput = ()=>{ data.experience[+el.dataset.i][el.dataset.k]=el.value; };
+    });
+    host.querySelectorAll('[data-doodle]').forEach(box=>{
+      const i = +box.dataset.doodle;
+      wireDoodle(box, v=>{ data.experience[i].doodle=v; });
+    });
+    host.querySelectorAll('button[data-act]').forEach(b=>{
+      const i=+b.dataset.i;
+      b.onclick=()=>{
+        if(b.dataset.act==='del'){ if(confirm('silinsin mi?')){ data.experience.splice(i,1); renderExperience(); } }
+        else if(b.dataset.act==='up'&&i>0){ [data.experience[i-1],data.experience[i]]=[data.experience[i],data.experience[i-1]]; renderExperience(); }
+        else if(b.dataset.act==='down'&&i<data.experience.length-1){ [data.experience[i+1],data.experience[i]]=[data.experience[i],data.experience[i+1]]; renderExperience(); }
       };
-
-      reader.readAsArrayBuffer(file);
     });
+  }
+  document.getElementById('btnAddExp').onclick = ()=>{
+    (data.experience||(data.experience=[])).push({ role:'rol', org:'kurum', date:'', doodle:'d-spark', note:'' });
+    renderExperience();
+  };
 
-    projectForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const editIdx = document.getElementById('edit-index').value;
-      const t = document.getElementById('form-t').value.trim();
-      const y = document.getElementById('form-y').value.trim();
-      const type = document.getElementById('form-type').value;
-      const c = document.getElementById('form-c').value.trim();
-      const cover = document.getElementById('form-cover').value.trim();
-      const fit = document.getElementById('form-fit').value;
-      const f = document.getElementById('form-f').value.trim().split(/\s+/);
-      const desc_tr = document.getElementById('form-desc-tr').value.trim();
-      const desc_en = document.getElementById('form-desc-en').value.trim();
-      
-      const tags_tr = document.getElementById('form-tags-tr').value.split(',').map(tag => tag.trim()).filter(Boolean);
-      const tags_en = document.getElementById('form-tags-en').value.split(',').map(tag => tag.trim()).filter(Boolean);
-      const aiTool = document.getElementById('form-aitool').value.trim();
-      const behance = document.getElementById('form-behance').value.trim();
+  /* ============================================================
+     SAVE / EXPORT / PUBLISH
+     ============================================================ */
+  function buildDataJs(){
+    const json = JSON.stringify(data, null, 2);
+    return `/* ============================================================
+   PORTFOLIO DATA — single source of truth
+   index.html · project.html · admin.html all read this.
+   Edited via admin.html. localStorage "portfolio_data" overrides
+   this at runtime for live in-browser preview.
+   ============================================================ */
+window.PORTFOLIO =
+/* DATA-START */
+${json}
+/* DATA-END */
+;
+`;
+  }
 
-      const projectItem = {
-        t, c, y, type, f, cover, fit,
-        desc: desc_tr,
-        tags: tags_tr
-      };
-
-      if (type === 'ai' && aiTool) {
-        projectItem.aiTool = aiTool;
-      }
-      if (behance) {
-        projectItem.behance = behance;
-      }
-
-      translationsDict.descriptions[desc_tr] = { tr: desc_tr, en: desc_en };
-      if (desc_tr !== desc_en) {
-        translationsDict.descriptions[desc_en] = { tr: desc_tr, en: desc_en };
-      }
-      translationsDict.categories[c] = { tr: c, en: c };
-      tags_tr.forEach((tag, index) => {
-        const engTag = tags_en[index] || tag;
-        translationsDict.tags[tag] = { tr: tag, en: engTag };
-      });
-
-      if (editIdx === '') {
-        projects.unshift(projectItem);
-      } else {
-        projects[parseInt(editIdx)] = projectItem;
-      }
-
-      localStorage.setItem('portfolio_projects', JSON.stringify(projects));
-      localStorage.setItem('translations_dict', JSON.stringify(translationsDict));
-
-      editorContainer.classList.add('hidden');
-      projectForm.reset();
-      renderTable(searchInput.value);
-      populateProjectDropdownForMedia();
-      alert('✓ Project list updated! Click "LOCAL SAVE" under Publish panel to preview.');
-    });
-
-    window.editProject = function(origIdx) {
-      const p = projects[origIdx];
-      document.getElementById('edit-index').value = origIdx;
-      document.getElementById('editor-title').textContent = `EDIT PROJECT: ${p.t}`;
-
-      document.getElementById('form-t').value = p.t;
-      document.getElementById('form-y').value = p.y;
-      document.getElementById('form-type').value = p.type;
-      document.getElementById('form-c').value = p.c;
-      document.getElementById('form-cover').value = p.cover;
-      document.getElementById('form-fit').value = p.fit || 'contain';
-      document.getElementById('form-f').value = p.f.join(' ');
-
-      let trDesc = p.desc;
-      let enDesc = p.desc;
-      if (translationsDict.descriptions[p.desc]) {
-        trDesc = translationsDict.descriptions[p.desc].tr;
-        enDesc = translationsDict.descriptions[p.desc].en;
-      }
-      document.getElementById('form-desc-tr').value = trDesc;
-      document.getElementById('form-desc-en').value = enDesc;
-
-      let trTags = p.tags;
-      let enTags = p.tags.map(t => {
-        return (translationsDict.tags[t] && translationsDict.tags[t].en) ? translationsDict.tags[t].en : t;
-      });
-      document.getElementById('form-tags-tr').value = trTags.join(', ');
-      document.getElementById('form-tags-en').value = enTags.join(', ');
-
-      if (p.type === 'ai') {
-        aiField.classList.remove('hidden');
-        document.getElementById('form-aitool').value = p.aiTool || '';
-      } else {
-        aiField.classList.add('hidden');
-        document.getElementById('form-aitool').value = '';
-      }
-      document.getElementById('form-behance').value = p.behance || '';
-
-      editorContainer.classList.remove('hidden');
-      editorContainer.scrollIntoView({ behavior: 'smooth' });
-      updateFormMediaUploader();
-    };
-
-    window.deleteProject = function(origIdx) {
-      if (confirm(`Are you sure you want to delete project "${projects[origIdx].t}"?`)) {
-        projects.splice(origIdx, 1);
-        localStorage.setItem('portfolio_projects', JSON.stringify(projects));
-        renderTable(searchInput.value);
-        populateProjectDropdownForMedia();
-      }
-    };
-
-    window.moveProject = function(index, direction) {
-      const newIndex = index + direction;
-      if (newIndex < 0 || newIndex >= projects.length) return;
-      const temp = projects[index];
-      projects[index] = projects[newIndex];
-      projects[newIndex] = temp;
-      localStorage.setItem('portfolio_projects', JSON.stringify(projects));
-      renderTable(searchInput.value);
-      populateProjectDropdownForMedia();
-    };
-
-    searchInput.addEventListener('input', () => renderTable(searchInput.value));
-
-    // ----------------------------------------------------
-    // TAB 2: PROFILE LOGIC
-    // ----------------------------------------------------
-    const profileForm = document.getElementById('profile-form');
-    
-    function populateProfileForm() {
-      document.getElementById('profile-heading-tr').value = profile.aboutHeading.tr;
-      document.getElementById('profile-heading-en').value = profile.aboutHeading.en;
-      document.getElementById('profile-biop1-tr').value = profile.aboutBioP1.tr;
-      document.getElementById('profile-biop1-en').value = profile.aboutBioP1.en;
-      document.getElementById('profile-biop2-tr').value = profile.aboutBioP2.tr;
-      document.getElementById('profile-biop2-en').value = profile.aboutBioP2.en;
-      
-      profile.counters.forEach((c, idx) => {
-        document.getElementById(`counter-${idx+1}-val`).value = c.val;
-        document.getElementById(`counter-${idx+1}-lbl-tr`).value = c.label.tr;
-        document.getElementById(`counter-${idx+1}-lbl-en`).value = c.label.en;
-      });
+  document.getElementById('btnLocalSave').onclick = ()=>{
+    localStorage.setItem(LS_DATA, JSON.stringify(data));
+    showStatus(document.getElementById('localStatus'),'ok','yerel kaydedildi. siteyi (yeni sekmede) yenile, değişiklikleri görürsün.');
+  };
+  document.getElementById('btnRevert').onclick = ()=>{
+    if(confirm('Kaydedilmiş son veriye dönülsün mü? (hafızadaki değişiklikler gider)')){
+      localStorage.removeItem(LS_DATA); data = deepClone(window.PORTFOLIO); renderAll();
     }
-
-    profileForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      profile.aboutHeading.tr = document.getElementById('profile-heading-tr').value.trim();
-      profile.aboutHeading.en = document.getElementById('profile-heading-en').value.trim();
-      profile.aboutBioP1.tr = document.getElementById('profile-biop1-tr').value.trim();
-      profile.aboutBioP1.en = document.getElementById('profile-biop1-en').value.trim();
-      profile.aboutBioP2.tr = document.getElementById('profile-biop2-tr').value.trim();
-      profile.aboutBioP2.en = document.getElementById('profile-biop2-en').value.trim();
-
-      profile.counters = [
-        {
-          val: document.getElementById('counter-1-val').value.trim(),
-          label: {
-            tr: document.getElementById('counter-1-lbl-tr').value.trim(),
-            en: document.getElementById('counter-1-lbl-en').value.trim()
-          }
-        },
-        {
-          val: document.getElementById('counter-2-val').value.trim(),
-          label: {
-            tr: document.getElementById('counter-2-lbl-tr').value.trim(),
-            en: document.getElementById('counter-2-lbl-en').value.trim()
-          }
-        },
-        {
-          val: document.getElementById('counter-3-val').value.trim(),
-          label: {
-            tr: document.getElementById('counter-3-lbl-tr').value.trim(),
-            en: document.getElementById('counter-3-lbl-en').value.trim()
-          }
-        },
-        {
-          val: document.getElementById('counter-4-val').value.trim(),
-          label: {
-            tr: document.getElementById('counter-4-lbl-tr').value.trim(),
-            en: document.getElementById('counter-4-lbl-en').value.trim()
-          }
-        }
-      ];
-
-      localStorage.setItem('portfolio_profile', JSON.stringify(profile));
-      alert('✓ Profile settings updated in memory! Save under Publish panel to preview.');
-    });
-
-    // ----------------------------------------------------
-    // TAB 3: EXPERTISE LOGIC
-    // ----------------------------------------------------
-    const expForm = document.getElementById('exp-form');
-    const expTableBody = document.getElementById('expertise-table-rows');
-    const expCountEl = document.getElementById('expertise-count');
-    const expEditIndexInput = document.getElementById('exp-edit-index');
-    const btnExpSubmit = document.getElementById('btn-exp-submit');
-    const btnExpCancel = document.getElementById('btn-exp-cancel');
-
-    function renderExpertiseTable() {
-      expTableBody.innerHTML = '';
-      expCountEl.textContent = expertise.length;
-
-      expertise.forEach((item, idx) => {
-        const tr = document.createElement('tr');
-        tr.className = 'border-b-2 border-ink hover:bg-yellow1/15';
-
-        const isFirst = idx === 0;
-        const isLast = idx === expertise.length - 1;
-        const orderButtons = `
-          <button type="button" onclick="moveExpertise(${idx}, -1)" ${isFirst ? 'disabled class="opacity-30 cursor-not-allowed"' : 'class="hover:text-yellow-600 font-bold"'} title="Up">▲</button>
-          <button type="button" onclick="moveExpertise(${idx}, 1)" ${isLast ? 'disabled class="opacity-30 cursor-not-allowed"' : 'class="hover:text-yellow-600 font-bold"'} title="Down">▼</button>
-        `;
-
-        tr.innerHTML = `
-          <td class="p-3 text-left font-bold text-ink/50">${String(idx + 1).padStart(2, '0')}</td>
-          <td class="p-3 font-bold text-[13px]">${item.tr}</td>
-          <td class="p-3 text-[13px] font-bold">${item.en}</td>
-          <td class="p-3 text-center space-x-3">
-            <span class="inline-flex gap-2 mr-2 border-r border-ink/30 pr-2">${orderButtons}</span>
-            <button type="button" onclick="editExpertise(${idx})" class="text-blue-600 hover:underline font-bold cursor-pointer">EDIT</button>
-            <button type="button" onclick="deleteExpertise(${idx})" class="text-red1 hover:underline font-bold cursor-pointer">DELETE</button>
-          </td>
-        `;
-        expTableBody.appendChild(tr);
-      });
-    }
-
-    expForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const trTitle = document.getElementById('form-exp-tr').value.trim();
-      const enTitle = document.getElementById('form-exp-en').value.trim();
-      const editIdx = expEditIndexInput.value;
-
-      const expItem = { tr: trTitle, en: enTitle };
-
-      if (editIdx === '') {
-        expertise.push(expItem);
-      } else {
-        expertise[parseInt(editIdx)] = expItem;
-      }
-
-      localStorage.setItem('portfolio_expertise', JSON.stringify(expertise));
-      
-      // Reset form
-      expEditIndexInput.value = '';
-      document.getElementById('form-exp-tr').value = '';
-      document.getElementById('form-exp-en').value = '';
-      btnExpSubmit.textContent = 'ADD TO LIST';
-      btnExpCancel.classList.add('hidden');
-      document.getElementById('exp-form-title').textContent = 'ADD EXPERTISE';
-
-      renderExpertiseTable();
-      alert('✓ Expertise list updated in memory! Save under Publish panel to preview.');
-    });
-
-    btnExpCancel.addEventListener('click', () => {
-      expEditIndexInput.value = '';
-      document.getElementById('form-exp-tr').value = '';
-      document.getElementById('form-exp-en').value = '';
-      btnExpSubmit.textContent = 'ADD TO LIST';
-      btnExpCancel.classList.add('hidden');
-      document.getElementById('exp-form-title').textContent = 'ADD EXPERTISE';
-    });
-
-    window.editExpertise = function(idx) {
-      const item = expertise[idx];
-      expEditIndexInput.value = idx;
-      document.getElementById('form-exp-tr').value = item.tr;
-      document.getElementById('form-exp-en').value = item.en;
-      
-      btnExpSubmit.textContent = 'UPDATE ITEM';
-      btnExpCancel.classList.remove('hidden');
-      document.getElementById('exp-form-title').textContent = `EDIT EXPERTISE № ${idx+1}`;
-      document.getElementById('form-exp-tr').focus();
-    };
-
-    window.deleteExpertise = function(idx) {
-      if (confirm(`Are you sure you want to delete expertise "${expertise[idx].tr}"?`)) {
-        expertise.splice(idx, 1);
-        localStorage.setItem('portfolio_expertise', JSON.stringify(expertise));
-        renderExpertiseTable();
-      }
-    };
-
-    window.moveExpertise = function(idx, direction) {
-      const newIndex = idx + direction;
-      if (newIndex < 0 || newIndex >= expertise.length) return;
-      const temp = expertise[idx];
-      expertise[idx] = expertise[newIndex];
-      expertise[newIndex] = temp;
-      localStorage.setItem('portfolio_expertise', JSON.stringify(expertise));
-      renderExpertiseTable();
-    };
-
-    // ----------------------------------------------------
-    // TAB 4: CONTACT & SOCIALS LOGIC
-    // ----------------------------------------------------
-    const contactForm = document.getElementById('contact-form');
-
-    function populateContactForm() {
-      document.getElementById('contact-heading-tr').value = profile.contactHeading.tr;
-      document.getElementById('contact-heading-en').value = profile.contactHeading.en;
-      document.getElementById('contact-email-input').value = profile.email;
-      document.getElementById('contact-avail-tr').value = profile.availability.tr;
-      document.getElementById('contact-avail-en').value = profile.availability.en;
-
-      document.getElementById('social-behance-lbl').value = profile.socials.behance.label;
-      document.getElementById('social-behance-url').value = profile.socials.behance.url;
-      document.getElementById('social-instagram-lbl').value = profile.socials.instagram.label;
-      document.getElementById('social-instagram-url').value = profile.socials.instagram.url;
-      document.getElementById('social-linkedin-lbl').value = profile.socials.linkedin.label;
-      document.getElementById('social-linkedin-url').value = profile.socials.linkedin.url;
-    }
-
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      profile.contactHeading.tr = document.getElementById('contact-heading-tr').value.trim();
-      profile.contactHeading.en = document.getElementById('contact-heading-en').value.trim();
-      profile.email = document.getElementById('contact-email-input').value.trim();
-      profile.availability.tr = document.getElementById('contact-avail-tr').value.trim();
-      profile.availability.en = document.getElementById('contact-avail-en').value.trim();
-
-      profile.socials.behance.label = document.getElementById('social-behance-lbl').value.trim();
-      profile.socials.behance.url = document.getElementById('social-behance-url').value.trim();
-      profile.socials.instagram.label = document.getElementById('social-instagram-lbl').value.trim();
-      profile.socials.instagram.url = document.getElementById('social-instagram-url').value.trim();
-      profile.socials.linkedin.label = document.getElementById('social-linkedin-lbl').value.trim();
-      profile.socials.linkedin.url = document.getElementById('social-linkedin-url').value.trim();
-
-      localStorage.setItem('portfolio_profile', JSON.stringify(profile));
-      alert('✓ Contact settings updated in memory! Save under Publish panel to preview.');
-    });
-
-    // ----------------------------------------------------
-    // TAB 5: MEDIA UPLOADER LOGIC
-    // ----------------------------------------------------
-    function populateProjectDropdownForMedia() {
-      const select = document.getElementById('media-project-select');
-      select.innerHTML = '<option value="">-- PROJE SEÇİN --</option>';
-      projects.forEach((p, idx) => {
-        const opt = document.createElement('option');
-        opt.value = idx;
-        opt.textContent = `${p.t} (${p.type.toUpperCase()})`;
-        select.appendChild(opt);
-      });
-    }
-
-    document.getElementById('media-project-select').addEventListener('change', () => {
-      const select = document.getElementById('media-project-select');
-      const box = document.getElementById('media-suggestions-box');
-      const slugEl = document.getElementById('media-project-slug');
-      const listEl = document.getElementById('media-suggestions-list');
-      
-      const idx = select.value;
-      if (idx === '') {
-        box.classList.add('hidden');
-        return;
-      }
-      box.classList.remove('hidden');
-
-      const p = projects[idx];
-      const slug = p.t.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-      slugEl.textContent = slug;
-
-      listEl.innerHTML = '';
-      let files = [];
-
-      if (p.type === 'social') {
-        files = [
-          { name: `${slug}-1.jpg`, desc: 'Görsel 1 / Post 1' },
-          { name: `${slug}-2.jpg`, desc: 'Görsel 2 / Post 2' },
-          { name: `${slug}-3.jpg`, desc: 'Görsel 3 / Post 3' }
-        ];
-      } else if (p.type === 'motion') {
-        files = [
-          { name: `${slug}.mp4`, desc: 'Ana Video Dosyası (.mp4)' },
-          { name: `${slug}-frame-1.jpg`, desc: 'Detay Kare Görseli 1' },
-          { name: `${slug}-frame-2.jpg`, desc: 'Detay Kare Görseli 2' },
-          { name: `${slug}-frame-3.jpg`, desc: 'Detay Kare Görseli 3' },
-          { name: `${slug}-frame-4.jpg`, desc: 'Detay Kare Görseli 4' }
-        ];
-      } else if (p.type === 'ai') {
-        files = [
-          { name: `${slug}.jpg`, desc: 'Kapak / Ana Görsel' },
-          { name: `${slug}-v1.jpg`, desc: 'Varyasyon Görseli 1' },
-          { name: `${slug}-v2.jpg`, desc: 'Varyasyon Görseli 2' },
-          { name: `${slug}-v3.jpg`, desc: 'Varyasyon Görseli 3' },
-          { name: `${slug}-v4.jpg`, desc: 'Varyasyon Görseli 4' }
-        ];
-      } else { // still, ui
-        files = [
-          { name: `${slug}.jpg`, desc: 'Kapak / Ana Görsel' },
-          { name: `${slug}-1.jpg`, desc: 'Detay Görseli 1' },
-          { name: `${slug}-2.jpg`, desc: 'Detay Görseli 2' },
-          { name: `${slug}-3.jpg`, desc: 'Detay Görseli 3' },
-          { name: `${slug}-4.jpg`, desc: 'Detay Görseli 4' }
-        ];
-      }
-
-      files.forEach(f => {
-        const li = document.createElement('li');
-        li.className = 'border border-ink bg-paper hover:bg-yellow1 cursor-pointer p-2 flex justify-between items-center transition-colors';
-        li.innerHTML = `<span>📂 <b>${f.name}</b> <span class="text-[10px] text-ink/65 ml-2">(${f.desc})</span></span> <span class="text-[9px] uppercase font-bold bg-ink text-paper px-1">Seç</span>`;
-        li.addEventListener('click', () => {
-          document.getElementById('media-target-name').value = f.name;
-        });
-        listEl.appendChild(li);
-      });
-    });
-
-    document.getElementById('btn-upload-to-github').addEventListener('click', () => {
-      const status = document.getElementById('media-upload-status');
-      status.classList.remove('hidden', 'bg-red-600', 'bg-green-600');
-      status.className = 'p-2 border-2 border-ink bg-ink text-yellow1 text-[10px] uppercase';
-      status.textContent = 'DOSYA HAZIRLANIYOR...';
-
-      const token = document.getElementById('gh-token').value.trim();
-      const repo = document.getElementById('gh-repo').value.trim();
-      const branch = document.getElementById('gh-branch').value.trim();
-      const fileInput = document.getElementById('media-file-input');
-      const filename = document.getElementById('media-target-name').value.trim();
-
-      if (!token || !repo) {
-        status.textContent = 'HATA: GITHUB TOKEN VEYA REPO BİLGİSİ EKSİK. LÜTFEN "PUBLISH & SYNC" SEKMESİNDE DOLDURUN.';
-        status.classList.add('bg-red-600', 'text-white');
-        return;
-      }
-
-      if (!fileInput.files || fileInput.files.length === 0) {
-        status.textContent = 'HATA: LÜTFEN BİR DOSYA SEÇİN.';
-        status.classList.add('bg-red-600', 'text-white');
-        return;
-      }
-
-      if (!filename) {
-        status.textContent = 'HATA: HEDEF DOSYA ADI EKSİK. SAĞ TARAFIN ÜZERİNE TIKLAYARAK VEYA EL YAZISIYLA DOLDURUN.';
-        status.classList.add('bg-red-600', 'text-white');
-        return;
-      }
-
-      const file = fileInput.files[0];
-      const reader = new FileReader();
-
-      reader.onload = async function(event) {
-        try {
-          status.textContent = 'GITHUB BAĞLANTISI KONTROL EDİLİYOR...';
-          const arrayBuffer = event.target.result;
-          
-          const uint8 = new Uint8Array(arrayBuffer);
-          let binaryStr = '';
-          for (let i = 0; i < uint8.length; i++) {
-            binaryStr += String.fromCharCode(uint8[i]);
-          }
-          const base64Content = btoa(binaryStr);
-
-          const slug = getSlugFromFilename(filename);
-          const getUrl = `https://api.github.com/repos/${repo}/contents/images/${slug}/${filename}?ref=${branch}`;
-          const getRes = await fetch(getUrl, {
-            headers: {
-              'Authorization': `token ${token}`,
-              'Accept': 'application/vnd.github.v3+json'
-            }
-          });
-
-          let sha = null;
-          if (getRes.ok) {
-            const fileData = await getRes.json();
-            sha = fileData.sha;
-          }
-
-          status.textContent = 'DOSYA GITHUB REPOSUNA AKTARILIYOR (BASE64)...';
-          const putUrl = `https://api.github.com/repos/${repo}/contents/images/${slug}/${filename}`;
-          
-          const bodyObj = {
-            message: `cms: upload media asset ${filename}`,
-            content: base64Content,
-            branch: branch
-          };
-          if (sha) {
-            bodyObj.sha = sha;
-          }
-
-          const putRes = await fetch(putUrl, {
-            method: 'PUT',
-            headers: {
-              'Authorization': `token ${token}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(bodyObj)
-          });
-
-          if (putRes.ok) {
-            status.textContent = `✓ '${filename}' BAŞARIYLA YÜKLENDİ! GÜNCELLEME VERCEL'DE YAYINLANIYOR.`;
-            status.className = 'p-2 border-2 border-ink bg-green-600 text-white text-[10px] uppercase font-bold';
-            fileInput.value = '';
-            document.getElementById('media-target-name').value = '';
-          } else {
-            const errData = await putRes.json();
-            throw new Error(errData.message || 'PUT failed.');
-          }
-        } catch (e) {
-          status.textContent = 'HATA: ' + e.message.toUpperCase();
-          status.className = 'p-2 border-2 border-ink bg-red-600 text-white text-[10px] uppercase font-bold';
-        }
-      };
-
-      reader.onerror = function() {
-        status.textContent = 'HATA: DOSYA OKUNAMADI.';
-        status.className = 'p-2 border-2 border-ink bg-red-600 text-white text-[10px] uppercase';
-      };
-
-      reader.readAsArrayBuffer(file);
-    });
-
-    // ----------------------------------------------------
-    // TAB 6: PUBLISH & SYNC ACTION HANDLERS
-    // ----------------------------------------------------
-    const savedToken = localStorage.getItem('gh_token') || '';
-    document.getElementById('gh-token').value = savedToken;
-    document.getElementById('form-media-token').value = savedToken;
-    document.getElementById('tab-media-token').value = savedToken;
-
-    document.getElementById('gh-repo').value = localStorage.getItem('gh_repo') || 'VERABERAT/Portfolio';
-    document.getElementById('gh-branch').value = localStorage.getItem('gh_branch') || 'main';
-
-    function syncToken(value) {
-      localStorage.setItem('gh_token', value);
-      document.getElementById('gh-token').value = value;
-      document.getElementById('form-media-token').value = value;
-      document.getElementById('tab-media-token').value = value;
-    }
-
-    document.getElementById('gh-token').addEventListener('input', (e) => syncToken(e.target.value.trim()));
-    document.getElementById('form-media-token').addEventListener('input', (e) => syncToken(e.target.value.trim()));
-    document.getElementById('tab-media-token').addEventListener('input', (e) => syncToken(e.target.value.trim()));
-
-    document.getElementById('btn-save-all').addEventListener('click', () => {
-      localStorage.setItem('portfolio_projects', JSON.stringify(projects));
-      localStorage.setItem('portfolio_profile', JSON.stringify(profile));
-      localStorage.setItem('portfolio_expertise', JSON.stringify(expertise));
-      localStorage.setItem('translations_dict', JSON.stringify(translationsDict));
-      alert('✓ All contents saved in LocalStorage! Open or reload the website to preview.');
-    });
-
-    document.getElementById('btn-reset-all').addEventListener('click', () => {
-      if (confirm('WARNING: This will delete all customized edits (projects, bio, expertise list, contacts) and reset everything to the original defaults. Proceed?')) {
-        localStorage.removeItem('portfolio_projects');
-        localStorage.removeItem('portfolio_profile');
-        localStorage.removeItem('portfolio_expertise');
-        localStorage.removeItem('translations_dict');
-        location.reload();
-      }
-    });
-
-    function replaceSegment(source, startMarker, endMarker, newInnerContent) {
-      const startIdx = source.indexOf(startMarker);
-      const endIdx = source.indexOf(endMarker);
-      if (startIdx === -1 || endIdx === -1) {
-        throw new Error(`Marker pattern not found: "${startMarker.substring(0, 30)}..." or "${endMarker.substring(0, 30)}..."`);
-      }
-      return source.substring(0, startIdx + startMarker.length) + newInnerContent + source.substring(endIdx);
-    }
-
-    async function generateUpdatedHtml() {
-      const res = await fetch('index.html');
-      if (!res.ok) {
-        throw new Error('Failed to load local index.html file structure. Make sure you are running a localhost server.');
-      }
-      let htmlText = await res.text();
-      // Normalize line endings to avoid CRLF mismatch on Windows / git checkouts
-      htmlText = htmlText.replace(/\r\n/g, '\n');
-
-      // 1. Compile defaultProjects
-      let formattedProjects = '\n      ' + JSON.stringify(projects, null, 2).replace(/\n/g, '\n      ').substring(1).slice(0, -1).trim() + '\n    ';
-      htmlText = replaceSegment(htmlText, 'const defaultProjects = [', '];\n\n    // Default Profile Config', formattedProjects);
-
-      // 2. Replace defaultProfile
-      let formattedProfile = '\n      ' + JSON.stringify(profile, null, 2).replace(/\n/g, '\n      ').substring(1).slice(0, -1).trim() + '\n    ';
-      htmlText = replaceSegment(htmlText, 'const defaultProfile = {', '};\n\n    // Default Expertise Config', formattedProfile);
-
-      // 3. Replace defaultExpertise
-      let formattedExpertise = '\n      ' + JSON.stringify(expertise, null, 2).replace(/\n/g, '\n      ').substring(1).slice(0, -1).trim() + '\n    ';
-      htmlText = replaceSegment(htmlText, 'const defaultExpertise = [', '];\n\n    let projects = [], profile = {}, expertise = [];', formattedExpertise);
-
-      return htmlText;
-    }
-
-    document.getElementById('btn-export-full-html').addEventListener('click', async () => {
-      try {
-        const newHtml = await generateUpdatedHtml();
-        const blob = new Blob([newHtml], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'index.html';
-        a.click();
-        URL.revokeObjectURL(url);
-      } catch (e) {
-        alert('Error: ' + e.message);
-      }
-    });
-
-    async function publishToGithub(statusElement) {
-      statusElement.classList.remove('hidden', 'bg-red-600', 'bg-green-600');
-      statusElement.className = 'p-2 border-2 border-ink bg-ink text-yellow1 text-[10px] uppercase font-bold text-center';
-      statusElement.textContent = 'CONNECTING TO GITHUB API...';
-      statusElement.classList.remove('hidden');
-
-      const token = document.getElementById('gh-token').value.trim();
-      const repo = document.getElementById('gh-repo').value.trim();
-      const branch = document.getElementById('gh-branch').value.trim();
-
-      if (!token || !repo || !branch) {
-        statusElement.textContent = 'HATA: GITHUB TOKEN VEYA REPO BİLGİSİ EKSİK. LÜTFEN BİLGİLERİ DOLDURUN.';
-        statusElement.classList.add('bg-red-600', 'text-white');
-        return;
-      }
-
-      localStorage.setItem('gh_token', token);
-      localStorage.setItem('gh_repo', repo);
-      localStorage.setItem('gh_branch', branch);
-
-      try {
-        statusElement.textContent = 'STATİK SAYFA DERLENİYOR (COMPILING)...';
-        const updatedHtml = await generateUpdatedHtml();
-
-        statusElement.textContent = 'MEVCUT DOSYA BİLGİLERİ ALINIYOR (SHA)...';
-        const getUrl = `https://api.github.com/repos/${repo}/contents/index.html?ref=${branch}`;
-        const getRes = await fetch(getUrl, {
-          headers: {
-            'Authorization': `token ${token}`,
-            'Accept': 'application/vnd.github.v3+json'
-          }
-        });
-
-        if (!getRes.ok) {
-          throw new Error('Repository or index.html file not found on GitHub. Check path & Token.');
-        }
-
-        const fileData = await getRes.json();
-        const sha = fileData.sha;
-
-        statusElement.textContent = 'YENİ DEĞİŞİKLİKLER REPOYA İŞLENİYOR (COMMITTING)...';
-        const putUrl = `https://api.github.com/repos/${repo}/contents/index.html`;
-        
-        const utf8Bytes = new TextEncoder().encode(updatedHtml);
-        let binaryStr = '';
-        for (let i = 0; i < utf8Bytes.length; i++) {
-          binaryStr += String.fromCharCode(utf8Bytes[i]);
-        }
-        const base64Content = btoa(binaryStr);
-
-        const putRes = await fetch(putUrl, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `token ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            message: "cms: update portfolio contents and databases",
-            content: base64Content,
-            sha: sha,
-            branch: branch
-          })
-        });
-
-        if (putRes.ok) {
-          statusElement.textContent = '✓ BAŞARIYLA YAYINLANDI! SİTE VERCEL ÜZERİNDE GÜNCELLENİYOR (15sn)...';
-          statusElement.className = 'p-2 border-2 border-ink bg-green-600 text-white text-[10px] uppercase font-bold text-center';
-        } else {
-          const errData = await putRes.json();
-          throw new Error(errData.message || 'GitHub PUT failed.');
-        }
-      } catch (err) {
-        statusElement.textContent = 'HATA: ' + err.message.toUpperCase();
-        statusElement.classList.add('bg-red-600', 'text-white');
-      }
-    }
-
-    document.getElementById('btn-github-commit-all').addEventListener('click', () => {
-      publishToGithub(document.getElementById('gh-status-all'));
-    });
-
-    document.getElementById('btn-publish-direct').addEventListener('click', () => {
-      publishToGithub(document.getElementById('publish-direct-status'));
-    });
-
-    // Password Change Handler
-    const passwordForm = document.getElementById('password-change-form');
-    passwordForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const current = document.getElementById('pw-current').value;
-      const newPw = document.getElementById('pw-new').value;
-      const confirmPw = document.getElementById('pw-confirm').value;
-
-      const savedHash = localStorage.getItem('portfolio_admin_hash') || DEFAULT_PASS_HASH;
-      const currentHash = await sha256(current);
-
-      if (currentHash !== savedHash) {
-        alert('HATA: Mevcut şifreniz yanlış!');
-        return;
-      }
-
-      if (newPw !== confirmPw) {
-        alert('HATA: Yeni şifre ve onay şifresi uyuşmuyor!');
-        return;
-      }
-
-      if (newPw.length < 4) {
-        alert('HATA: Yeni şifre en az 4 karakter olmalıdır!');
-        return;
-      }
-
-      const newHash = await sha256(newPw);
-      localStorage.setItem('portfolio_admin_hash', newHash);
-      
-      document.getElementById('pw-current').value = '';
-      document.getElementById('pw-new').value = '';
-      document.getElementById('pw-confirm').value = '';
-
-      alert('✓ Şifreniz başarıyla güncellendi! Bir sonraki girişinizde aktif olacaktır.');
-    });
-
-    // Render lists on startup
-    renderTable();
-    populateProfileForm();
-    renderExpertiseTable();
-    populateContactForm();
-    populateProjectDropdownForMedia();
+  };
+  document.getElementById('btnDownload').onclick = ()=>{
+    const blob = new Blob([buildDataJs()], {type:'text/javascript'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download='data.js'; a.click();
+  };
+
+  /* ----- GitHub helpers ----- */
+  const tokenInput = document.getElementById('ghToken');
+  tokenInput.value = localStorage.getItem(LS_TOKEN) || '';
+  tokenInput.addEventListener('change', ()=>localStorage.setItem(LS_TOKEN, tokenInput.value.trim()));
+
+  function ghCfg(){ return {
+    owner: document.getElementById('ghOwner').value.trim(),
+    repo: document.getElementById('ghRepo').value.trim(),
+    branch: document.getElementById('ghBranch').value.trim() || 'main',
+    token: document.getElementById('ghToken').value.trim()
+  }; }
+
+  async function ghGetSha(path){
+    const c = ghCfg();
+    const r = await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}/contents/${encodeURI(path)}?ref=${c.branch}`,
+      { headers:{ Authorization:`Bearer ${c.token}`, Accept:'application/vnd.github+json' } });
+    if(r.status===404) return null;
+    if(!r.ok) throw new Error('sha alınamadı ('+r.status+')');
+    return (await r.json()).sha;
+  }
+  async function ghPutFile(path, base64Content, message){
+    const c = ghCfg();
+    if(!c.token) throw new Error('github token gerekli');
+    const sha = await ghGetSha(path);
+    const body = { message, content: base64Content, branch: c.branch };
+    if(sha) body.sha = sha;
+    const r = await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}/contents/${encodeURI(path)}`,
+      { method:'PUT', headers:{ Authorization:`Bearer ${c.token}`, Accept:'application/vnd.github+json', 'Content-Type':'application/json' }, body: JSON.stringify(body) });
+    if(!r.ok){ const t=await r.text(); throw new Error('('+r.status+') '+t.slice(0,160)); }
+    return r.json();
+  }
+  function utf8ToBase64(str){ return btoa(unescape(encodeURIComponent(str))); }
+  function fileToBase64(file){ return new Promise((res,rej)=>{ const fr=new FileReader(); fr.onload=()=>res(fr.result.split(',')[1]); fr.onerror=rej; fr.readAsDataURL(file); }); }
+
+  document.getElementById('btnPublish').onclick = async ()=>{
+    const st = document.getElementById('publishStatus');
+    localStorage.setItem(LS_TOKEN, ghCfg().token);
+    try{
+      showStatus(st,'info','data.js yayınlanıyor...');
+      await ghPutFile('data.js', utf8ToBase64(buildDataJs()), 'cms: update data.js via admin');
+      localStorage.setItem(LS_DATA, JSON.stringify(data)); // keep local preview in sync
+      showStatus(st,'ok','✅ yayınlandı! vercel birkaç dakikada deploy eder. canlı sitede Cmd+Shift+R yap.');
+    }catch(err){ showStatus(st,'err','hata: '+err.message); }
+  };
+
+  /* ----- utils ----- */
+  function showStatus(el,kind,msg){ el.className='status show '+kind; el.textContent=msg; }
+  function escAttr(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+  function escHtml(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   </script>
 </body>
 </html>
