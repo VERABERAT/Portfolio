@@ -104,7 +104,7 @@ window.PORTFOLIO =
       "slug": "miu-miu",
       "t": "miu miu",
       "c": "kampanya",
-      "y": "2023",
+      "y": "2024",
       "color": "yellow",
       "doodle": "d-spark",
       "desc": "sezonluk kampanya için key visual ve motion kurgular.",
@@ -118,7 +118,7 @@ window.PORTFOLIO =
       "slug": "kasten-meets-ankara",
       "t": "kasten meets ankara",
       "c": "sanat yönetimi",
-      "y": "2023",
+      "y": "2024",
       "color": "sky",
       "doodle": "d-tent",
       "desc": "ankara için kültürel kampanyanın instagram serisi — carousel + reels.",
@@ -130,7 +130,7 @@ window.PORTFOLIO =
       "slug": "odeabank",
       "t": "odeabank",
       "c": "kurumsal kimlik",
-      "y": "2023",
+      "y": "2024",
       "color": "mint",
       "doodle": "d-cloud",
       "desc": "kurumsal iletişim kampanyası. baskı + dijital uygulamalar.",
@@ -142,7 +142,7 @@ window.PORTFOLIO =
   "profile": {
     "aboutH": "statik markayla motion arasına köprü kurarım.",
     "bio": [
-      "<b>berat erdoğan</b> — statik markalama ile motion arasındaki boşluğu kapatan bir görsel tasarımcı. midjourney ve firefly gibi generative ai araçlarını kreatif akışa entegre ederek üretimi hızlandırır.",
+      "<b>berat erdoğan</b> — statik markalama ile motion arasındaki boşluğu kapatan bir art director. midjourney ve firefly gibi generative ai araçlarını kreatif akışa entegre ederek üretimi hızlandırır.",
       "konsept geliştirmeden sosyal medya adaptasyonuna kadar uçtan uca kampanya tasarımı. teknik hassasiyet + modern, tipografik estetik. az sözle çok şey."
     ],
     "skills": ["brand identity", "motion graphics", "social media", "typography", "figma", "after effects", "midjourney", "firefly"],
@@ -162,9 +162,9 @@ window.PORTFOLIO =
     }
   },
   "experience": [
-    { "role": "visual designer", "org": "kasten kolektif", "date": "ara 2024 — ara 2025", "doodle": "d-tent",
+    { "role": "art director", "org": "kasten kolektif", "date": "ara 2024 — ara 2025", "doodle": "d-tent",
       "note": "büyük ölçekli sergiler için görsel kimlik adaptasyonu. 20+ baskı &amp; dijital varlık, ai ile %40 daha hızlı üretim." },
-    { "role": "visual designer", "org": "yup agency", "date": "haz — eyl 2024", "doodle": "d-wave",
+    { "role": "art director", "org": "yup agency", "date": "haz — eyl 2024", "doodle": "d-wave",
       "note": "sosyal medya kampanyaları (%20 etkileşim artışı), motion grafik ve kısa video (reels / shorts)." },
     { "role": "brand designer · freelance", "org": "tus bodrum", "date": "2023", "doodle": "d-spark",
       "note": "sıfırdan görsel kimlik: logo, renk paleti, tipografi kuralları ve sezonluk sosyal medya dili." },
