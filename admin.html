@@ -878,8 +878,8 @@
     // Default static fallbacks (seeding databases)
     const defaultProjects = [
       { t:"VERA", c:"Display Typeface", y:"2025", type:"still", f:["editorial","brand"],
-        desc:"VERA is a condensed bold display typeface designed for high-impact visual communication. Built with strong vertical compression, extreme stroke weight, and sharp corners — VERA commands attention in any context. Design Process: The typeface was developed through a structured workflow: each letterform was drawn individually in Adobe Illustrator using a strict grid system with defined baseline, cap height, x-height, ascender, and descender guides. Characters were then refined and exported as vector paths to build a consistent, cohesive type system. Usage: VERA works best in headlines, posters, editorial layouts, brand identities, and any context where typographic presence is essential. Its condensed proportions make it ideal for tight spaces without sacrificing visual weight. Designed by Berat Erdoğan.",
-        tags:["Typeface","Typography","Type Design","Condensed"], cover:"#1E3CFF", behance:"https://www.behance.net/gallery/246607835/VERA-Condensed-Bold-Display-Typeface" },
+        desc:"VERA is a condensed bold display typeface designed for high-impact visual communication. Built with strong vertical compression, extreme stroke weight, and sharp corners — VERA commands attention in any context. Designed by Berat Erdoğan — 2025",
+        tags:["Typography","Typeface","Font Design","Display Font","Condensed","Bold","Type Design","Lettering","Graphic Design","Branding"], cover:"#1E3CFF", behance:"https://www.behance.net/gallery/246607835/VERA-Condensed-Bold-Display-Typeface", aiTool:"Adobe Illustrator + FontForge" },
       { t:"FERM", c:"Packaging", y:"2025", type:"still", f:["brand","packaging"],
         desc:"Fermente ürün serisi için organik tipografi ve ambalaj sistemi.",
         tags:["Packaging","FMCG","Print"], cover:"#FF2D00" },
@@ -1013,10 +1013,10 @@
         en: "He uses typography as his primary tool, focusing on raw aesthetics, editorial structures, and systematic thinking. Each project is constructed within the triangle of <span class=\"underline decoration-4 decoration-yellow1\">content · form · context</span>."
       },
       counters: [
-        { val: "08+", label: { tr: "Yıl Deneyim", en: "Years Experience" } },
-        { val: "120+", label: { tr: "Tamamlanmış Proje", en: "Completed Projects" } },
-        { val: "40+", label: { tr: "Marka İş Birliği", en: "Brand Collaborations" } },
-        { val: "★★★", label: { tr: "Ödül / Basın", en: "Awards / Press" } }
+        { val: "03+", label: { tr: "Yıl Deneyim", en: "Years Experience" } },
+        { val: "30+", label: { tr: "Tamamlanmış Proje", en: "Completed Projects" } },
+        { val: "15+", label: { tr: "Marka İş Birliği", en: "Brand Collaborations" } },
+        { val: "★", label: { tr: "Ödül / Basın", en: "Awards / Press" } }
       ],
       contactHeading: {
         tr: "YÜKSEK<br/>\n        <span class=\"bg-ink text-yellow1 px-3\">SESLİ</span><br/>\n        BİR ŞEYLER<br/>\n        YAPALIM<span class=\"text-ink\">.</span>",
@@ -1078,7 +1078,10 @@
 
       try {
         const storedProf = localStorage.getItem('portfolio_profile');
-        profile = storedProf ? JSON.parse(storedProf) : JSON.parse(JSON.stringify(defaultProfile));
+        profile = storedProf ? JSON.parse(storedProf) : null;
+        if (!profile || !profile.counters || profile.counters[0]?.val === "08+") {
+          profile = JSON.parse(JSON.stringify(defaultProfile));
+        }
       } catch (e) { profile = JSON.parse(JSON.stringify(defaultProfile)); }
 
       try {
@@ -1940,6 +1943,8 @@
         throw new Error('Failed to load local index.html file structure. Make sure you are running a localhost server.');
       }
       let htmlText = await res.text();
+      // Normalize line endings to avoid CRLF mismatch on Windows / git checkouts
+      htmlText = htmlText.replace(/\r\n/g, '\n');
 
       // 1. Compile defaultProjects
       let formattedProjects = '\n      ' + JSON.stringify(projects, null, 2).replace(/\n/g, '\n      ').substring(1).slice(0, -1).trim() + '\n    ';
@@ -1951,7 +1956,7 @@
 
       // 3. Replace defaultExpertise
       let formattedExpertise = '\n      ' + JSON.stringify(expertise, null, 2).replace(/\n/g, '\n      ').substring(1).slice(0, -1).trim() + '\n    ';
-      htmlText = replaceSegment(htmlText, 'const defaultExpertise = [', '];\n\n    let projects = [];', formattedExpertise);
+      htmlText = replaceSegment(htmlText, 'const defaultExpertise = [', '];\n\n    let projects = [], profile = {}, expertise = [];', formattedExpertise);
 
       return htmlText;
     }
