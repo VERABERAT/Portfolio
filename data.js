@@ -26,7 +26,8 @@ window.PORTFOLIO =
       "tags": ["typography", "type design", "display"],
       "link": "https://www.behance.net/gallery/246607835/VERA-Condensed-Bold-Display-Typeface",
       "media": [
-        { "type": "image", "src": "images/vera/vera.jpg" }
+        { "type": "image", "src": "images/vera/vera.jpg" },
+        { "type": "embed", "src": "https://www.behance.net/embed/project/246607835?ilo0=1" }
       ]
     },
     {
@@ -42,7 +43,11 @@ window.PORTFOLIO =
       },
       "tags": ["packaging", "fmcg", "print"],
       "link": "https://www.behance.net/gallery/244632009/FERM-360-Brand-Ecosystem-Web-UIUX-Design",
-      "media": []
+      "media": [
+        { "type": "embed", "src": "https://www.behance.net/embed/project/242331839?ilo0=1" },
+        { "type": "embed", "src": "https://www.behance.net/embed/project/243459673?ilo0=1" },
+        { "type": "embed", "src": "https://www.behance.net/embed/project/244631009?ilo0=1" }
+      ]
     },
     {
       "slug": "nutripaw",
@@ -56,8 +61,10 @@ window.PORTFOLIO =
         "en": "holistic identity, packaging and campaign for an organic pet food brand."
       },
       "tags": ["identity", "packaging", "campaign"],
-      "link": "",
-      "media": []
+      "link": "https://www.behance.net/gallery/242252719/x",
+      "media": [
+        { "type": "embed", "src": "https://www.behance.net/embed/project/242252719?ilo0=1" }
+      ]
     },
     {
       "slug": "smart-locker",
@@ -118,9 +125,10 @@ window.PORTFOLIO =
         "en": "brand system and dashboard interface for a production & finance platform."
       },
       "tags": ["system", "dashboard", "identity"],
-      "link": "",
+      "link": "https://www.behance.net/gallery/242251305/x",
       "media": [
-        { "type": "image", "src": "images/i-mece-market-2025-production-finance/i-mece-market-2025-production-finance.jpg" }
+        { "type": "image", "src": "images/i-mece-market-2025-production-finance/i-mece-market-2025-production-finance.jpg" },
+        { "type": "embed", "src": "https://www.behance.net/embed/project/242251305?ilo0=1" }
       ]
     },
     {
@@ -152,8 +160,44 @@ window.PORTFOLIO =
         "en": "instagram series for a cultural campaign for ankara — carousel + reels."
       },
       "tags": ["social", "carousel", "reels"],
-      "link": "",
-      "media": []
+      "link": "https://www.behance.net/gallery/242239553/x",
+      "media": [
+        { "type": "embed", "src": "https://www.behance.net/embed/project/242239553?ilo0=1" }
+      ]
+    },
+    {
+      "slug": "yazgiya-inat-yazi",
+      "t": "yazgıya inat yazı",
+      "c": { "tr": "sergi · poster", "en": "exhibition · poster" },
+      "y": "2025",
+      "color": "forest",
+      "doodle": "d-type",
+      "desc": {
+        "tr": "sergi kimliği ve poster serisi — tipografi odaklı, brutalist bir görsel dil.",
+        "en": "exhibition identity and poster series — a typography-led, brutalist visual language."
+      },
+      "tags": ["poster", "typography", "exhibition", "print"],
+      "link": "https://www.behance.net/gallery/242240151/x",
+      "media": [
+        { "type": "embed", "src": "https://www.behance.net/embed/project/242240151?ilo0=1" }
+      ]
+    },
+    {
+      "slug": "tus-bodrum",
+      "t": "tus bodrum",
+      "c": { "tr": "marka kimliği · menü", "en": "brand identity · menu" },
+      "y": "2024",
+      "color": "yellow",
+      "doodle": "d-spark",
+      "desc": {
+        "tr": "otel & restoran için sıfırdan görsel kimlik, logo ve menü tasarımı.",
+        "en": "visual identity from scratch, logo and menu design for a hospitality brand."
+      },
+      "tags": ["branding", "identity", "menu", "hospitality"],
+      "link": "https://www.behance.net/gallery/242243045/x",
+      "media": [
+        { "type": "embed", "src": "https://www.behance.net/embed/project/242243045?ilo0=1" }
+      ]
     },
     {
       "slug": "odeabank",
