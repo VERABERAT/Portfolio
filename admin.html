@@ -198,6 +198,18 @@
     return deepClone(window.PORTFOLIO || { projects:[], profile:{}, experience:[] });
   }
   function slugify(s){ return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+
+  /* ----- bilingual field helpers ({tr,en}) ----- */
+  function tv(v,l){ return (v && typeof v==='object' && !Array.isArray(v)) ? (v[l]||'') : (l==='tr' ? (v==null?'':v) : ''); }
+  function biInput(idBase, label, v, isArea){
+    const tr = isArea ? `<textarea id="${idBase}-tr">${escHtml(tv(v,'tr'))}</textarea>` : `<input id="${idBase}-tr" value="${escAttr(tv(v,'tr'))}">`;
+    const en = isArea ? `<textarea id="${idBase}-en">${escHtml(tv(v,'en'))}</textarea>` : `<input id="${idBase}-en" value="${escAttr(tv(v,'en'))}">`;
+    return `<div class="grid2">
+      <div class="field"><label>${label} <span class="hint">· tr</span></label>${tr}</div>
+      <div class="field"><label>${label} <span class="hint">· en</span></label>${en}</div>
+    </div>`;
+  }
+  function readBi(idBase){ return { tr: document.getElementById(idBase+'-tr').value, en: document.getElementById(idBase+'-en').value }; }
   async function sha256(str){
     const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
     return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
@@ -298,12 +310,12 @@
           <div class="field"><label>başlık</label><input id="f-t" value="${escAttr(p.t)}"></div>
           <div class="field"><label>slug (url)</label><input id="f-slug" value="${escAttr(p.slug||'')}" placeholder="otomatik"></div>
         </div>
-        <div class="grid3">
-          <div class="field"><label>kategori</label><input id="f-c" value="${escAttr(p.c)}"></div>
+        <div class="grid2">
           <div class="field"><label>yıl</label><input id="f-y" value="${escAttr(p.y)}"></div>
           <div class="field"><label>dış link (behance vb.)</label><input id="f-link" value="${escAttr(p.link||'')}"></div>
         </div>
-        <div class="field"><label>açıklama</label><textarea id="f-desc">${escHtml(p.desc||'')}</textarea></div>
+        ${biInput('f-c','kategori', p.c)}
+        ${biInput('f-desc','açıklama', p.desc, true)}
         <div class="field"><label>etiketler (virgülle)</label><input id="f-tags" value="${escAttr((p.tags||[]).join(', '))}"></div>
         <div class="grid2">
           <div class="field"><label>renk</label><div class="swatches" id="f-color">${swatchHTML(p.color)}</div></div>
@@ -382,10 +394,10 @@
     PE.querySelector('#btnSaveProject').onclick = ()=>{
       p.t = PE.querySelector('#f-t').value.trim();
       p.slug = PE.querySelector('#f-slug').value.trim() || slugify(p.t);
-      p.c = PE.querySelector('#f-c').value.trim();
+      p.c = readBi('f-c');
       p.y = PE.querySelector('#f-y').value.trim();
       p.link = PE.querySelector('#f-link').value.trim();
-      p.desc = PE.querySelector('#f-desc').value.trim();
+      p.desc = readBi('f-desc');
       p.tags = PE.querySelector('#f-tags').value.split(',').map(s=>s.trim()).filter(Boolean);
       p.color = color; p.doodle = doodle;
       p.media = media.filter(m=>m.src && m.src.trim());
@@ -409,26 +421,24 @@
     document.getElementById('profileForm').innerHTML = `
       <div class="editor">
         <h3>hakkında</h3>
-        <div class="field"><label>başlık</label><input id="pf-h" value="${escAttr(pr.aboutH||'')}"></div>
-        <div class="field"><label>biyografi — paragraf 1 (html olur)</label><textarea id="pf-b0">${escHtml((pr.bio||[])[0]||'')}</textarea></div>
-        <div class="field"><label>biyografi — paragraf 2</label><textarea id="pf-b1">${escHtml((pr.bio||[])[1]||'')}</textarea></div>
-        <div class="field"><label>beceriler (virgülle)</label><input id="pf-skills" value="${escAttr((pr.skills||[]).join(', '))}"></div>
+        ${biInput('pf-h','başlık', pr.aboutH)}
+        ${biInput('pf-b0','biyografi p1 (html)', (pr.bio||[])[0], true)}
+        ${biInput('pf-b1','biyografi p2 (html)', (pr.bio||[])[1], true)}
+        <div class="field"><label>beceriler (virgülle — dilden bağımsız)</label><input id="pf-skills" value="${escAttr((pr.skills||[]).join(', '))}"></div>
       </div>
       <div class="editor">
         <h3>sayaçlar</h3>
-        <div class="grid2">
-          ${[0,1,2,3].map(i=>`
-            <div class="grid2">
-              <div class="field"><label>değer ${i+1}</label><input id="pf-cv${i}" value="${escAttr((pr.counters||[])[i]?.v||'')}"></div>
-              <div class="field"><label>etiket ${i+1}</label><input id="pf-cl${i}" value="${escAttr((pr.counters||[])[i]?.l||'')}"></div>
-            </div>`).join('')}
-        </div>
+        ${[0,1,2,3].map(i=>`
+          <div class="row">
+            <div class="field"><label>değer ${i+1}</label><input id="pf-cv${i}" value="${escAttr((pr.counters||[])[i]?.v||'')}"></div>
+            ${biInput('pf-cl'+i,'etiket '+(i+1), (pr.counters||[])[i]?.l)}
+          </div>`).join('')}
       </div>
       <div class="editor">
         <h3>iletişim</h3>
-        <div class="field"><label>iletişim başlığı</label><input id="pf-ch" value="${escAttr(pr.contactH||'')}"></div>
-        <div class="field"><label>e-posta</label><input id="pf-email" value="${escAttr(pr.email||'')}"></div>
-        <div class="field"><label>uygunluk metni (html olur)</label><textarea id="pf-avail">${escHtml(pr.avail||'')}</textarea></div>
+        ${biInput('pf-ch','iletişim başlığı', pr.contactH)}
+        <div class="field"><label>e-posta (dilden bağımsız)</label><input id="pf-email" value="${escAttr(pr.email||'')}"></div>
+        ${biInput('pf-avail','uygunluk metni (html)', pr.avail, true)}
         <div class="grid3">
           <div class="field"><label>behance</label><input id="pf-behance" value="${escAttr(s.behance||'')}"></div>
           <div class="field"><label>instagram</label><input id="pf-instagram" value="${escAttr(s.instagram||'')}"></div>
@@ -439,11 +449,11 @@
   document.getElementById('btnSaveProfile').onclick = ()=>{
     const g = id=>document.getElementById(id).value;
     const pr = data.profile;
-    pr.aboutH = g('pf-h');
-    pr.bio = [g('pf-b0'), g('pf-b1')].filter(x=>x.trim());
+    pr.aboutH = readBi('pf-h');
+    pr.bio = [readBi('pf-b0'), readBi('pf-b1')].filter(b => b.tr.trim() || b.en.trim());
     pr.skills = g('pf-skills').split(',').map(s=>s.trim()).filter(Boolean);
-    pr.counters = [0,1,2,3].map(i=>({ v:g('pf-cv'+i), l:g('pf-cl'+i) })).filter(c=>c.v||c.l);
-    pr.contactH = g('pf-ch'); pr.email = g('pf-email'); pr.avail = g('pf-avail');
+    pr.counters = [0,1,2,3].map(i=>({ v:g('pf-cv'+i), l:readBi('pf-cl'+i) })).filter(c=>c.v);
+    pr.contactH = readBi('pf-ch'); pr.email = g('pf-email'); pr.avail = readBi('pf-avail');
     pr.socials = { behance:g('pf-behance'), instagram:g('pf-instagram'), linkedin:g('pf-linkedin') };
     alert('profil hafızaya alındı. yayınlamayı unutma.');
   };
@@ -460,10 +470,14 @@
           <div class="field"><label>kurum</label><input data-i="${i}" data-k="org" value="${escAttr(e.org||'')}"></div>
         </div>
         <div class="grid2">
-          <div class="field"><label>tarih</label><input data-i="${i}" data-k="date" value="${escAttr(e.date||'')}"></div>
-          <div class="field"><label>doodle</label><div class="doodlepick" data-doodle="${i}">${doodlePickHTML(e.doodle)}</div></div>
+          <div class="field"><label>tarih · tr</label><input data-i="${i}" data-bi="date" data-l="tr" value="${escAttr(tv(e.date,'tr'))}"></div>
+          <div class="field"><label>tarih · en</label><input data-i="${i}" data-bi="date" data-l="en" value="${escAttr(tv(e.date,'en'))}"></div>
         </div>
-        <div class="field"><label>not (html olur)</label><textarea data-i="${i}" data-k="note">${escHtml(e.note||'')}</textarea></div>
+        <div class="field"><label>doodle</label><div class="doodlepick" data-doodle="${i}">${doodlePickHTML(e.doodle)}</div></div>
+        <div class="grid2">
+          <div class="field"><label>not · tr (html)</label><textarea data-i="${i}" data-bi="note" data-l="tr">${escHtml(tv(e.note,'tr'))}</textarea></div>
+          <div class="field"><label>not · en (html)</label><textarea data-i="${i}" data-bi="note" data-l="en">${escHtml(tv(e.note,'en'))}</textarea></div>
+        </div>
         <div class="btns">
           <button class="btn btn--sm" data-act="up" data-i="${i}">↑</button>
           <button class="btn btn--sm" data-act="down" data-i="${i}">↓</button>
@@ -473,6 +487,11 @@
 
     host.querySelectorAll('input[data-k],textarea[data-k]').forEach(el=>{
       el.oninput = ()=>{ data.experience[+el.dataset.i][el.dataset.k]=el.value; };
+    });
+    host.querySelectorAll('[data-bi]').forEach(el=>{
+      el.oninput = ()=>{ const e=data.experience[+el.dataset.i], k=el.dataset.bi;
+        if(!e[k] || typeof e[k]!=='object') e[k]={tr:'',en:''};
+        e[k][el.dataset.l]=el.value; };
     });
     host.querySelectorAll('[data-doodle]').forEach(box=>{
       const i = +box.dataset.doodle;
@@ -488,7 +507,7 @@
     });
   }
   document.getElementById('btnAddExp').onclick = ()=>{
-    (data.experience||(data.experience=[])).push({ role:'rol', org:'kurum', date:'', doodle:'d-spark', note:'' });
+    (data.experience||(data.experience=[])).push({ role:'rol', org:'kurum', date:{tr:'',en:''}, doodle:'d-spark', note:{tr:'',en:''} });
     renderExperience();
   };
 

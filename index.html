@@ -301,6 +301,24 @@
     body.cursor-on a, body.cursor-on button { cursor: none; }
     .cursor-dot.on, .cursor-ring.on { opacity: 1; }
 
+    /* ============================================================
+       LANGUAGE TOGGLE (fixed, hand-drawn) — visible on every card
+       via mix-blend-mode:difference
+       ============================================================ */
+    .lang {
+      position: fixed; top: 16px; right: 18px; z-index: 9000;
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--hand); font-weight: 800; font-size: 16px;
+      color: #fff; mix-blend-mode: difference;
+      border: 2.5px solid #fff; border-radius: 999px;
+      padding: 5px 13px; background: transparent;
+      text-transform: lowercase; letter-spacing: .02em;
+    }
+    .lang span[data-l] { opacity: .45; transition: opacity .25s; }
+    .lang span[data-l].on { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+    .lang .lang__sep { opacity: .55; text-decoration: none; }
+    @media (max-width: 520px) { .lang { top: 12px; right: 12px; font-size: 14px; } }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .reveal { opacity: 1; transform: none; transition: none; }
@@ -316,6 +334,10 @@
        ============================================================ -->
 <!-- doodle <defs> injected at runtime by doodles.js (injectDoodleDefs) -->
 
+  <button class="lang" id="langToggle" aria-label="dil / language">
+    <span data-l="tr">tr</span><span class="lang__sep">·</span><span data-l="en">en</span>
+  </button>
+
   <main>
     <!-- ============ HERO ============ -->
     <section class="card hero" data-c="yellow" id="top">
@@ -328,8 +350,8 @@
       </div>
       <div class="card__text">
         <h1 class="hero__word">berat.</h1>
-        <p class="hero__sub">art director — marka, motion &amp; ai destekli üretim. istanbul'dan basit, güçlü işler.</p>
-        <p class="hero__scroll">↓ aşağı kaydır, işlere bak</p>
+        <p class="hero__sub" data-ui="heroSub">art director — marka, motion &amp; ai destekli üretim. istanbul'dan basit, güçlü işler.</p>
+        <p class="hero__scroll" data-ui="scroll">↓ aşağı kaydır, işlere bak</p>
       </div>
     </section>
 
@@ -340,7 +362,7 @@
     <section class="card flow" data-c="mint" id="about">
       <div class="card__top">
         <span class="brand">berat.</span>
-        <span class="meta"><span class="dot"></span> hakkında</span>
+        <span class="meta"><span class="dot"></span> <span data-ui="mAbout">hakkında</span></span>
       </div>
       <div class="about__grid" style="margin:auto 0;">
         <div class="reveal">
@@ -359,9 +381,9 @@
     <section class="card flow" data-c="sky" id="experience">
       <div class="card__top">
         <span class="brand">berat.</span>
-        <span class="meta"><span class="dot"></span> deneyim</span>
+        <span class="meta"><span class="dot"></span> <span data-ui="mExp">deneyim</span></span>
       </div>
-      <h2 class="about__h reveal" style="margin-top:18px;">nerelerde çalıştım.</h2>
+      <h2 class="about__h reveal" style="margin-top:18px;" data-ui="expHead">nerelerde çalıştım.</h2>
       <div class="exp reveal" id="expList"></div>
     </section>
 
@@ -369,7 +391,7 @@
     <section class="card flow" data-c="navy" id="contact">
       <div class="card__top">
         <span class="brand">berat.</span>
-        <span class="meta"><span class="dot"></span> iletişim</span>
+        <span class="meta"><span class="dot"></span> <span data-ui="mContact">iletişim</span></span>
       </div>
       <div style="margin:auto 0;" class="reveal">
         <h2 class="contact__h" id="contactH"></h2>
@@ -382,11 +404,11 @@
 
   <!-- ============ HAND-DRAWN DOCK ============ -->
   <nav class="dock" aria-label="navigasyon">
-    <a href="#top" data-target="top"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-sun"/></svg>başla</a>
-    <a href="#work" data-target="work"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-spark"/></svg>işler</a>
+    <a href="#top" data-target="top"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-sun"/></svg><span data-ui="dStart">başla</span></a>
+    <a href="#work" data-target="work"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-spark"/></svg><span data-ui="dWork">işler</span></a>
     <a href="#top" class="up" aria-label="yukarı"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
-    <a href="#about" data-target="about"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-sprout"/></svg>ben</a>
-    <a href="#contact" data-target="contact"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-heart"/></svg>yaz</a>
+    <a href="#about" data-target="about"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-sprout"/></svg><span data-ui="dMe">ben</span></a>
+    <a href="#contact" data-target="contact"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-heart"/></svg><span data-ui="dWrite">yaz</span></a>
   </nav>
 
   <script src="doodles.js"></script>
@@ -402,6 +424,34 @@
     const projects = DATA.projects || [];
     const profile = DATA.profile || {};
     const experience = DATA.experience || [];
+
+    /* ------------ i18n: language resolver ------------ */
+    const LANG = (localStorage.getItem('portfolio_lang') === 'en') ? 'en' : 'tr';
+    document.documentElement.lang = LANG;
+    // t(v): if v is a {tr,en} object pick the language, else return as-is
+    const t = (v) => (v && typeof v === 'object' && !Array.isArray(v)) ? (v[LANG] ?? v.tr ?? v.en ?? '') : (v ?? '');
+
+    const UI = {
+      heroSub: { tr: "art director — marka, motion & ai destekli üretim. istanbul'dan basit, güçlü işler.", en: "art director — brand, motion & ai-assisted production. simple, strong work from istanbul." },
+      scroll:  { tr: "↓ aşağı kaydır, işlere bak", en: "↓ scroll down, see the work" },
+      mAbout:  { tr: "hakkında", en: "about" },
+      mExp:    { tr: "deneyim", en: "experience" },
+      mContact:{ tr: "iletişim", en: "contact" },
+      expHead: { tr: "nerelerde çalıştım.", en: "where i've worked." },
+      viewProj:{ tr: "projeyi gör →", en: "view project →" },
+      dStart:  { tr: "başla", en: "start" },
+      dWork:   { tr: "işler", en: "work" },
+      dMe:     { tr: "ben", en: "me" },
+      dWrite:  { tr: "yaz", en: "say hi" }
+    };
+    // apply static UI strings
+    document.querySelectorAll('[data-ui]').forEach(el => { const v = UI[el.dataset.ui]; if (v) el.textContent = t(v); });
+    // language toggle button state + wiring
+    document.querySelectorAll('#langToggle span[data-l]').forEach(s => s.classList.toggle('on', s.dataset.l === LANG));
+    document.getElementById('langToggle').addEventListener('click', () => {
+      localStorage.setItem('portfolio_lang', LANG === 'tr' ? 'en' : 'tr');
+      location.reload();
+    });
     /* ------------ RENDER: project cards ------------ */
     const work = document.getElementById('work');
     work.innerHTML = projects.map((p, i) => {
@@ -418,36 +468,36 @@
           <svg class="draw" viewBox="0 0 200 200" aria-hidden="true"><use href="#${p.doodle}"/></svg>
         </a>
         <div class="card__text reveal">
-          <div class="proj__num">${num} · ${p.c}</div>
+          <div class="proj__num">${num} · ${t(p.c)}</div>
           <h2 class="proj__title"><a href="${href}">${p.t}</a></h2>
-          <p class="body">${p.desc}</p>
-          <div class="tags">${(p.tags || []).map(t => `<span>${t}</span>`).join('')}</div>
-          <a class="card__cta" href="${href}">projeyi gör →</a>
+          <p class="body">${t(p.desc)}</p>
+          <div class="tags">${(p.tags || []).map(tag => `<span>${tag}</span>`).join('')}</div>
+          <a class="card__cta" href="${href}">${t(UI.viewProj)}</a>
         </div>
       </section>`;
     }).join('');
 
     /* ------------ RENDER: about ------------ */
-    document.getElementById('aboutH').textContent = profile.aboutH;
-    document.getElementById('aboutBio').innerHTML = profile.bio.map(p => `<p class="about__p">${p}</p>`).join('');
-    document.getElementById('skills').innerHTML = profile.skills.map(s => `<span>${s}</span>`).join('');
+    document.getElementById('aboutH').textContent = t(profile.aboutH);
+    document.getElementById('aboutBio').innerHTML = (profile.bio || []).map(b => `<p class="about__p">${t(b)}</p>`).join('');
+    document.getElementById('skills').innerHTML = (profile.skills || []).map(s => `<span>${s}</span>`).join('');
     document.getElementById('expList').innerHTML = experience.map(e => `
       <div class="exp__row">
         <svg class="draw" viewBox="0 0 200 200" aria-hidden="true"><use href="#${e.doodle}"/></svg>
         <div>
           <div class="exp__role">${e.role} <span class="at">@ ${e.org}</span></div>
-          <div class="exp__date">${e.date}</div>
-          <p class="exp__note">${e.note}</p>
+          <div class="exp__date">${t(e.date)}</div>
+          <p class="exp__note">${t(e.note)}</p>
         </div>
       </div>`).join('');
-    document.getElementById('counters').innerHTML = profile.counters
-      .map(c => `<div class="counter"><b>${c.v}</b><span>${c.l}</span></div>`).join('');
+    document.getElementById('counters').innerHTML = (profile.counters || [])
+      .map(c => `<div class="counter"><b>${c.v}</b><span>${t(c.l)}</span></div>`).join('');
 
     /* ------------ RENDER: contact ------------ */
-    document.getElementById('contactH').textContent = profile.contactH;
+    document.getElementById('contactH').textContent = t(profile.contactH);
     document.getElementById('mailText').textContent = profile.email;
     document.getElementById('mail').href = 'mailto:' + profile.email;
-    document.getElementById('avail').innerHTML = profile.avail;
+    document.getElementById('avail').innerHTML = t(profile.avail);
     document.getElementById('socials').innerHTML = Object.entries(profile.socials)
       .map(([k,v]) => `<a href="${v}" target="_blank" rel="noopener">${k}</a>`).join('');
 

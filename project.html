@@ -40,6 +40,11 @@
     .bar a.back { display:inline-flex; align-items:center; gap:8px; transition:gap .3s var(--ease); }
     .bar a.back:hover { gap:14px; }
     .bar .brand { font-weight:800; }
+    .lang { display:inline-flex; align-items:center; gap:6px; font-family:var(--hand); font-weight:800; font-size:15px;
+      border:2.5px solid var(--cream-ink); border-radius:999px; padding:3px 11px; background:transparent; color:var(--cream-ink); text-transform:lowercase; }
+    .lang span[data-l] { opacity:.45; transition:opacity .25s; }
+    .lang span[data-l].on { opacity:1; text-decoration:underline; text-underline-offset:3px; }
+    .lang .lang__sep { opacity:.55; text-decoration:none; }
 
     /* hero band in project colour */
     .phero { padding:clamp(40px,8vh,90px) var(--pad-x); }
@@ -82,8 +87,11 @@
 </head>
 <body>
   <header class="bar">
-    <a class="back" href="index.html#work">← tüm işler</a>
-    <a class="brand" href="index.html">berat.</a>
+    <a class="back" href="index.html#work" data-ui="back">← tüm işler</a>
+    <div style="display:flex;align-items:center;gap:14px">
+      <button class="lang" id="langToggle" aria-label="dil / language"><span data-l="tr">tr</span><span class="lang__sep">·</span><span data-l="en">en</span></button>
+      <a class="brand" href="index.html">berat.</a>
+    </div>
   </header>
 
   <main id="app"><!-- rendered by JS --></main>
@@ -97,6 +105,28 @@
     let DATA = window.PORTFOLIO ? JSON.parse(JSON.stringify(window.PORTFOLIO)) : { projects: [] };
     try { const ov = localStorage.getItem('portfolio_data'); if (ov) DATA = JSON.parse(ov); } catch (e) {}
     const projects = DATA.projects || [];
+
+    /* ------------ i18n ------------ */
+    const LANG = (localStorage.getItem('portfolio_lang') === 'en') ? 'en' : 'tr';
+    document.documentElement.lang = LANG;
+    const t = (v) => (v && typeof v === 'object' && !Array.isArray(v)) ? (v[LANG] ?? v.tr ?? v.en ?? '') : (v ?? '');
+    const UI = {
+      back:     { tr: "← tüm işler", en: "← all work" },
+      visuals:  { tr: "görseller", en: "visuals" },
+      soon:     { tr: "bu proje için görsel/video yakında eklenecek.", en: "visuals / video for this project coming soon." },
+      onBehance:{ tr: "behance'de gör →", en: "view on behance →" },
+      fullCase: { tr: "behance'de tam dosya →", en: "full case on behance →" },
+      notFound: { tr: "böyle bir proje bulunamadı.", en: "no such project found." },
+      backHome: { tr: "← tüm işlere dön", en: "← back to all work" },
+      prev:     { tr: "← önceki", en: "← prev" },
+      next:     { tr: "sonraki →", en: "next →" },
+      home:     { tr: "ana sayfa", en: "home" }
+    };
+    // static UI + lang toggle
+    document.querySelectorAll('[data-ui]').forEach(el => { const v = UI[el.dataset.ui]; if (v) el.textContent = t(v); });
+    document.querySelectorAll('#langToggle span[data-l]').forEach(s => s.classList.toggle('on', s.dataset.l === LANG));
+    const lt = document.getElementById('langToggle');
+    if (lt) lt.addEventListener('click', () => { localStorage.setItem('portfolio_lang', LANG === 'tr' ? 'en' : 'tr'); location.reload(); });
 
     const slugify = (s) => (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     const getSlug = (p) => p.slug || slugify(p.t);
@@ -130,34 +160,34 @@
     }
 
     if (!p) {
-      document.title = 'proje bulunamadı — berat.';
-      app.innerHTML = `<section class="gallery"><div class="empty">böyle bir proje bulunamadı.<br><a href="index.html#work" style="border-bottom:2px solid currentColor">← tüm işlere dön</a></div></section>`;
+      document.title = (LANG === 'en' ? 'project not found' : 'proje bulunamadı') + ' — berat.';
+      app.innerHTML = `<section class="gallery"><div class="empty">${t(UI.notFound)}<br><a href="index.html#work" style="border-bottom:2px solid currentColor">${t(UI.backHome)}</a></div></section>`;
     } else {
       document.title = p.t + ' — berat.';
       const media = (p.media || []).map(mediaHTML).join('');
       const ext = (p.link && p.link !== '#')
-        ? `<a class="phero__cta" href="${p.link}" target="_blank" rel="noopener">behance'de tam dosya →</a>` : '';
+        ? `<a class="phero__cta" href="${p.link}" target="_blank" rel="noopener">${t(UI.fullCase)}</a>` : '';
       const galleryBlock = media
-        ? `<section class="gallery"><div class="gallery__head">görseller</div>${media}</section>`
-        : `<section class="gallery"><div class="empty">bu proje için görsel/video yakında eklenecek.${(p.link && p.link !== '#') ? `<br><a href="${p.link}" target="_blank" rel="noopener" style="border-bottom:2px solid currentColor">behance'de gör →</a>` : ''}</div></section>`;
+        ? `<section class="gallery"><div class="gallery__head">${t(UI.visuals)}</div>${media}</section>`
+        : `<section class="gallery"><div class="empty">${t(UI.soon)}${(p.link && p.link !== '#') ? `<br><a href="${p.link}" target="_blank" rel="noopener" style="border-bottom:2px solid currentColor">${t(UI.onBehance)}</a>` : ''}</div></section>`;
 
       // prev / next (wrap around)
       const prev = projects[(idx - 1 + projects.length) % projects.length];
       const next = projects[(idx + 1) % projects.length];
       const pnav = projects.length > 1 ? `
         <nav class="pnav">
-          <a class="prev" href="project.html?p=${encodeURIComponent(getSlug(prev))}"><small>← önceki</small>${prev.t}</a>
-          <a class="next" href="project.html?p=${encodeURIComponent(getSlug(next))}"><small>sonraki →</small>${next.t}</a>
+          <a class="prev" href="project.html?p=${encodeURIComponent(getSlug(prev))}"><small>${t(UI.prev)}</small>${prev.t}</a>
+          <a class="next" href="project.html?p=${encodeURIComponent(getSlug(next))}"><small>${t(UI.next)}</small>${next.t}</a>
         </nav>` : '';
 
       app.innerHTML = `
         <section class="phero" data-c="${p.color || 'cream'}">
           <div class="phero__grid">
             <div>
-              <div class="phero__meta">${p.c || ''} · ${p.y || ''}</div>
+              <div class="phero__meta">${t(p.c) || ''} · ${p.y || ''}</div>
               <h1 class="phero__title">${p.t}</h1>
-              <p class="phero__desc">${p.desc || ''}</p>
-              <div class="phero__tags">${(p.tags || []).map(t => `<span>${t}</span>`).join('')}</div>
+              <p class="phero__desc">${t(p.desc) || ''}</p>
+              <div class="phero__tags">${(p.tags || []).map(tag => `<span>${tag}</span>`).join('')}</div>
               ${ext}
             </div>
             <div class="phero__art"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#${p.doodle || 'd-spark'}"/></svg></div>
@@ -165,7 +195,7 @@
         </section>
         ${galleryBlock}
         ${pnav}
-        <footer class="pfoot">© <span id="y"></span> berat erdoğan · <a href="index.html">ana sayfa</a></footer>`;
+        <footer class="pfoot">© <span id="y"></span> berat erdoğan · <a href="index.html">${t(UI.home)}</a></footer>`;
       document.getElementById('y').textContent = new Date().getFullYear();
     }
   </script>

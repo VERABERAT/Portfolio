@@ -1,10 +1,12 @@
 /* ============================================================
    PORTFOLIO DATA — single source of truth
    index.html · project.html · admin.html all read this.
-   Admin panel rewrites the JSON between DATA-START / DATA-END
-   and commits this file to GitHub (Vercel auto-deploys).
-   localStorage key "portfolio_data" overrides this at runtime
-   so in-browser edits preview instantly.
+   Translatable fields are { "tr": "...", "en": "..." } objects;
+   resolve with t() in the pages. Language-neutral fields
+   (tags, skills, slug, year, color, doodle, email, socials)
+   stay as plain strings.
+   Admin panel rewrites the JSON between DATA-START / DATA-END.
+   localStorage "portfolio_data" overrides at runtime (live preview).
    ============================================================ */
 window.PORTFOLIO =
 /* DATA-START */
@@ -13,11 +15,14 @@ window.PORTFOLIO =
     {
       "slug": "vera",
       "t": "vera",
-      "c": "display typeface",
+      "c": { "tr": "display tipografi", "en": "display typeface" },
       "y": "2025",
       "color": "navy",
       "doodle": "d-type",
-      "desc": "sıkışık, kalın, keskin köşeli display tipografi. dikkat ister, dikkat alır.",
+      "desc": {
+        "tr": "sıkışık, kalın, keskin köşeli display tipografi. dikkat ister, dikkat alır.",
+        "en": "a condensed, heavy, sharp-cornered display typeface. demands attention, earns it."
+      },
       "tags": ["typography", "type design", "display"],
       "link": "https://www.behance.net/gallery/246607835/VERA-Condensed-Bold-Display-Typeface",
       "media": [
@@ -27,11 +32,14 @@ window.PORTFOLIO =
     {
       "slug": "ferm",
       "t": "ferm",
-      "c": "ambalaj",
+      "c": { "tr": "ambalaj", "en": "packaging" },
       "y": "2025",
       "color": "forest",
       "doodle": "d-sprout",
-      "desc": "fermente ürün serisi için organik tipografi ve canlı bir ambalaj sistemi.",
+      "desc": {
+        "tr": "fermente ürün serisi için organik tipografi ve canlı bir ambalaj sistemi.",
+        "en": "organic typography and a lively packaging system for a fermented product line."
+      },
       "tags": ["packaging", "fmcg", "print"],
       "link": "https://www.behance.net/gallery/244632009/FERM-360-Brand-Ecosystem-Web-UIUX-Design",
       "media": []
@@ -39,11 +47,14 @@ window.PORTFOLIO =
     {
       "slug": "nutripaw",
       "t": "nutripaw",
-      "c": "fmcg branding",
+      "c": { "tr": "fmcg branding", "en": "fmcg branding" },
       "y": "2024",
       "color": "yellow",
       "doodle": "d-box",
-      "desc": "organik pet food markası için bütüncül kimlik, ambalaj ve kampanya.",
+      "desc": {
+        "tr": "organik pet food markası için bütüncül kimlik, ambalaj ve kampanya.",
+        "en": "holistic identity, packaging and campaign for an organic pet food brand."
+      },
       "tags": ["identity", "packaging", "campaign"],
       "link": "",
       "media": []
@@ -51,11 +62,14 @@ window.PORTFOLIO =
     {
       "slug": "smart-locker",
       "t": "smart locker",
-      "c": "ui / ux",
+      "c": { "tr": "ui / ux", "en": "ui / ux" },
       "y": "2024",
       "color": "sky",
       "doodle": "d-eye",
-      "desc": "akıllı kilit dolabı için dokunmatik arayüz konsepti. akış + ekranlar.",
+      "desc": {
+        "tr": "akıllı kilit dolabı için dokunmatik arayüz konsepti. akış + ekranlar.",
+        "en": "touchscreen interface concept for a smart locker. flows + screens."
+      },
       "tags": ["ui", "touchscreen", "flow"],
       "link": "",
       "media": [
@@ -65,11 +79,14 @@ window.PORTFOLIO =
     {
       "slug": "canlani",
       "t": "canlanı",
-      "c": "kampanya",
+      "c": { "tr": "kampanya", "en": "campaign" },
       "y": "2024",
       "color": "mint",
       "doodle": "d-wave",
-      "desc": "kampanya filmi ve key visual serisi. 6sn / 15sn / 30sn versiyonlar.",
+      "desc": {
+        "tr": "kampanya filmi ve key visual serisi. 6sn / 15sn / 30sn versiyonlar.",
+        "en": "campaign film and key visual series. 6s / 15s / 30s cuts."
+      },
       "tags": ["motion", "key visual", "campaign"],
       "link": "",
       "media": []
@@ -77,11 +94,14 @@ window.PORTFOLIO =
     {
       "slug": "decay-creates-life",
       "t": "decay creates life",
-      "c": "editöryal",
+      "c": { "tr": "editöryal", "en": "editorial" },
       "y": "2024",
       "color": "forest",
       "doodle": "d-flower",
-      "desc": "bozulma ve yenilenme üzerine kavramsal seri. ai görseller + photoshop.",
+      "desc": {
+        "tr": "bozulma ve yenilenme üzerine kavramsal seri. ai görseller + photoshop.",
+        "en": "a conceptual series on decay and renewal. ai imagery + photoshop."
+      },
       "tags": ["ai", "editorial", "concept"],
       "link": "",
       "media": []
@@ -89,11 +109,14 @@ window.PORTFOLIO =
     {
       "slug": "imece-market",
       "t": "imece market",
-      "c": "marka sistemi",
+      "c": { "tr": "marka sistemi", "en": "brand system" },
       "y": "2025",
       "color": "navy",
       "doodle": "d-box",
-      "desc": "üretim & finans platformu için marka sistemi ve dashboard arayüzü.",
+      "desc": {
+        "tr": "üretim & finans platformu için marka sistemi ve dashboard arayüzü.",
+        "en": "brand system and dashboard interface for a production & finance platform."
+      },
       "tags": ["system", "dashboard", "identity"],
       "link": "",
       "media": [
@@ -103,11 +126,14 @@ window.PORTFOLIO =
     {
       "slug": "miu-miu",
       "t": "miu miu",
-      "c": "kampanya",
+      "c": { "tr": "kampanya", "en": "campaign" },
       "y": "2024",
       "color": "yellow",
       "doodle": "d-spark",
-      "desc": "sezonluk kampanya için key visual ve motion kurgular.",
+      "desc": {
+        "tr": "sezonluk kampanya için key visual ve motion kurgular.",
+        "en": "key visuals and motion edits for a seasonal campaign."
+      },
       "tags": ["motion", "fashion", "campaign"],
       "link": "",
       "media": [
@@ -117,11 +143,14 @@ window.PORTFOLIO =
     {
       "slug": "kasten-meets-ankara",
       "t": "kasten meets ankara",
-      "c": "sanat yönetimi",
+      "c": { "tr": "sanat yönetimi", "en": "art direction" },
       "y": "2024",
       "color": "sky",
       "doodle": "d-tent",
-      "desc": "ankara için kültürel kampanyanın instagram serisi — carousel + reels.",
+      "desc": {
+        "tr": "ankara için kültürel kampanyanın instagram serisi — carousel + reels.",
+        "en": "instagram series for a cultural campaign for ankara — carousel + reels."
+      },
       "tags": ["social", "carousel", "reels"],
       "link": "",
       "media": []
@@ -129,32 +158,44 @@ window.PORTFOLIO =
     {
       "slug": "odeabank",
       "t": "odeabank",
-      "c": "kurumsal kimlik",
+      "c": { "tr": "kurumsal kimlik", "en": "corporate identity" },
       "y": "2024",
       "color": "mint",
       "doodle": "d-cloud",
-      "desc": "kurumsal iletişim kampanyası. baskı + dijital uygulamalar.",
+      "desc": {
+        "tr": "kurumsal iletişim kampanyası. baskı + dijital uygulamalar.",
+        "en": "corporate communication campaign. print + digital applications."
+      },
       "tags": ["corporate", "identity"],
       "link": "",
       "media": []
     }
   ],
   "profile": {
-    "aboutH": "statik markayla motion arasına köprü kurarım.",
+    "aboutH": { "tr": "statik markayla motion arasına köprü kurarım.", "en": "i bridge static branding and motion." },
     "bio": [
-      "<b>berat erdoğan</b> — statik markalama ile motion arasındaki boşluğu kapatan bir art director. midjourney ve firefly gibi generative ai araçlarını kreatif akışa entegre ederek üretimi hızlandırır.",
-      "konsept geliştirmeden sosyal medya adaptasyonuna kadar uçtan uca kampanya tasarımı. teknik hassasiyet + modern, tipografik estetik. az sözle çok şey."
+      {
+        "tr": "<b>berat erdoğan</b> — statik markalama ile motion arasındaki boşluğu kapatan bir art director. midjourney ve firefly gibi generative ai araçlarını kreatif akışa entegre ederek üretimi hızlandırır.",
+        "en": "<b>berat erdoğan</b> — an art director closing the gap between static branding and motion. integrates generative ai tools like midjourney and firefly into the creative workflow to speed production up."
+      },
+      {
+        "tr": "konsept geliştirmeden sosyal medya adaptasyonuna kadar uçtan uca kampanya tasarımı. teknik hassasiyet + modern, tipografik estetik. az sözle çok şey.",
+        "en": "end-to-end campaign design, from concept development to social media adaptation. technical precision + a modern, typographic aesthetic. much, said simply."
+      }
     ],
     "skills": ["brand identity", "motion graphics", "social media", "typography", "figma", "after effects", "midjourney", "firefly"],
     "counters": [
-      { "v": "03+", "l": "yıl deneyim" },
-      { "v": "04", "l": "ajans / stüdyo" },
-      { "v": "%40", "l": "ai ile hız" },
-      { "v": "★", "l": "full-time'a açık" }
+      { "v": "03+", "l": { "tr": "yıl deneyim", "en": "years experience" } },
+      { "v": "04", "l": { "tr": "ajans / stüdyo", "en": "agencies / studios" } },
+      { "v": "%40", "l": { "tr": "ai ile hız", "en": "faster with ai" } },
+      { "v": "★", "l": { "tr": "full-time'a açık", "en": "open to full-time" } }
     ],
-    "contactH": "birlikte basit ama güçlü bir şey yapalım.",
+    "contactH": { "tr": "birlikte basit ama güçlü bir şey yapalım.", "en": "let's make something simple but strong." },
     "email": "losberat@icloud.com",
-    "avail": "görsel tasarım, marka, motion ya da sosyal medya projen için açığım. <mark>full-time</mark> ve remote çalışmaya hazırım.",
+    "avail": {
+      "tr": "görsel tasarım, marka, motion ya da sosyal medya projen için açığım. <mark>full-time</mark> ve remote çalışmaya hazırım.",
+      "en": "open for visual, brand, motion or social media projects. available <mark>full-time</mark> and remote."
+    },
     "socials": {
       "behance": "https://www.behance.net/beraterdoan1",
       "instagram": "https://www.instagram.com/__bertab/?hl=tr",
@@ -162,14 +203,38 @@ window.PORTFOLIO =
     }
   },
   "experience": [
-    { "role": "art director", "org": "kasten kolektif", "date": "ara 2024 — ara 2025", "doodle": "d-tent",
-      "note": "büyük ölçekli sergiler için görsel kimlik adaptasyonu. 20+ baskı &amp; dijital varlık, ai ile %40 daha hızlı üretim." },
-    { "role": "art director", "org": "yup agency", "date": "haz — eyl 2024", "doodle": "d-wave",
-      "note": "sosyal medya kampanyaları (%20 etkileşim artışı), motion grafik ve kısa video (reels / shorts)." },
-    { "role": "brand designer · freelance", "org": "tus bodrum", "date": "2023", "doodle": "d-spark",
-      "note": "sıfırdan görsel kimlik: logo, renk paleti, tipografi kuralları ve sezonluk sosyal medya dili." },
-    { "role": "digital designer", "org": "notivent app", "date": "haz — eki 2023", "doodle": "d-box",
-      "note": "mobil uygulama lansmanı için görsel strateji ve app store tanıtım varlıkları." }
+    {
+      "role": "art director", "org": "kasten kolektif",
+      "date": { "tr": "ara 2024 — ara 2025", "en": "dec 2024 — dec 2025" }, "doodle": "d-tent",
+      "note": {
+        "tr": "büyük ölçekli sergiler için görsel kimlik adaptasyonu. 20+ baskı &amp; dijital varlık, ai ile %40 daha hızlı üretim.",
+        "en": "visual identity adaptation for large-scale exhibitions. 20+ print &amp; digital assets, 40% faster production with ai."
+      }
+    },
+    {
+      "role": "art director", "org": "yup agency",
+      "date": { "tr": "haz — eyl 2024", "en": "jun — sep 2024" }, "doodle": "d-wave",
+      "note": {
+        "tr": "sosyal medya kampanyaları (%20 etkileşim artışı), motion grafik ve kısa video (reels / shorts).",
+        "en": "social media campaigns (20% more engagement), motion graphics and short-form video (reels / shorts)."
+      }
+    },
+    {
+      "role": "brand designer · freelance", "org": "tus bodrum",
+      "date": { "tr": "2023", "en": "2023" }, "doodle": "d-spark",
+      "note": {
+        "tr": "sıfırdan görsel kimlik: logo, renk paleti, tipografi kuralları ve sezonluk sosyal medya dili.",
+        "en": "visual identity from scratch: logo, colour palette, typography rules and a seasonal social media language."
+      }
+    },
+    {
+      "role": "digital designer", "org": "notivent app",
+      "date": { "tr": "haz — eki 2023", "en": "jun — oct 2023" }, "doodle": "d-box",
+      "note": {
+        "tr": "mobil uygulama lansmanı için görsel strateji ve app store tanıtım varlıkları.",
+        "en": "visual strategy for a mobile app launch and app store promo assets."
+      }
+    }
   ]
 }
 /* DATA-END */
