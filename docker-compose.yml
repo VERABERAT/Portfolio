@@ -1,0 +1,70 @@
+version: '3.8'
+
+# GCP Ollama Qwen - Docker Compose
+# Bu dosya yerel geliştirme için Ollama containerını çalıştırır
+#
+# Kullanım:
+#   docker-compose up -d        # Başlat
+#   docker-compose logs -f      # Logları izle
+#   docker-compose down         # Durdur ve sil
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama-qwen
+
+    # GPU desteği (NVIDIA GPU varsa)
+    runtime: nvidia
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+      - NVIDIA_VISIBLE_DEVICES=all
+
+    # Port yapılandırması
+    ports:
+      - "11434:11434"
+
+    # Volume'ler (modelleri ve datayı persist et)
+    volumes:
+      - ollama_data:/root/.ollama
+
+    # Kaynak sınırlaması
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 16G
+        reservations:
+          cpus: '2'
+          memory: 8G
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+    # Otomatik yeniden başlat
+    restart: unless-stopped
+
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+    # Logging
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  ollama_data:
+    driver: local
+
+# Network tanımı (isteğe bağlı)
+networks:
+  default:
+    name: ollama-network
+    driver: bridge
