@@ -13,6 +13,102 @@ window.PORTFOLIO =
 {
   "projects": [
     {
+      "slug": "ds-damat",
+      "t": "d's damat",
+      "y": "2026",
+      "c": { "tr": "kampanya · ai üretim", "en": "campaign · ai production" },
+      "color": "navy",
+      "doodle": "d-spark",
+      "desc": {
+        "tr": "smokin ve takım serisi için reels. ürün kumaşına kadar korunur, etrafındaki dünya sıfırdan kurulur.",
+        "en": "reels for a suit and tuxedo line. the product stays exact down to the fabric; the world around it is rebuilt."
+      },
+      "tags": ["reels", "moda", "ai"],
+      "link": "#",
+      "media": [
+        { "type": "image", "src": "images/ds-damat-01.jpg" }
+      ]
+    },
+    {
+      "slug": "yatsan",
+      "t": "yatsan",
+      "y": "2026",
+      "c": { "tr": "ürün filmi", "en": "product film" },
+      "color": "mint",
+      "doodle": "d-sprout",
+      "desc": {
+        "tr": "yatak serisi için ürün videoları ve mağaza kampanyası. aynı ürün, üç farklı oda ve ışık.",
+        "en": "product films and a store campaign for a bedding line. one product, three rooms, three lights."
+      },
+      "tags": ["ürün", "video", "ai"],
+      "link": "#",
+      "media": [
+        { "type": "video", "src": "images/yatsan-reel.mp4" }
+      ]
+    },
+    {
+      "slug": "toshiba",
+      "t": "toshiba",
+      "y": "2026",
+      "c": { "tr": "reels · motion", "en": "reels · motion" },
+      "color": "sky",
+      "doodle": "d-sun",
+      "desc": {
+        "tr": "klima serisi için dikey reels. ai sahneler after effects'te kompozit edilip bitiriliyor.",
+        "en": "vertical reels for an ac line. ai scenes composited and finished in after effects."
+      },
+      "tags": ["reels", "after effects"],
+      "link": "#",
+      "media": [
+        { "type": "embed", "src": "https://vimeo.com/123456789" }
+      ]
+    },
+    {
+      "slug": "ae-ai-copilot",
+      "t": "ae ai copilot",
+      "y": "2026",
+      "c": { "tr": "araç · otomasyon", "en": "tool · automation" },
+      "color": "navy",
+      "doodle": "d-spark",
+      "desc": {
+        "tr": "after effects paneli: gündelik dille yazdığın isteği script'e çevirip projede çalıştırır.",
+        "en": "an after effects panel: turns a plain-language request into a script and runs it."
+      },
+      "tags": ["after effects", "araç"],
+      "link": "#",
+      "media": []
+    },
+    {
+      "slug": "kolpa-ai",
+      "t": "kolpa ai",
+      "y": "2025",
+      "c": { "tr": "ios uygulama · ürün", "en": "ios app · product" },
+      "color": "forest",
+      "doodle": "d-eye",
+      "desc": {
+        "tr": "app store'da yayında. fikri, arayüzü, kodu ve büyümesi bana ait.",
+        "en": "live on the app store. idea, interface, code and growth all mine."
+      },
+      "tags": ["ios", "ui/ux", "swiftui"],
+      "link": "#",
+      "media": []
+    },
+    {
+      "slug": "lumio",
+      "t": "lumio",
+      "y": "2025",
+      "c": { "tr": "ios uygulama · ürün", "en": "ios app · product" },
+      "color": "yellow",
+      "doodle": "d-sprout",
+      "desc": {
+        "tr": "yapay zekâ destekli günlük uygulaması. tasarımdan aboneliğe kadar tek başıma kuruldu.",
+        "en": "an ai-assisted journaling app. built solo, from design through to subscriptions."
+      },
+      "tags": ["ios", "ui/ux", "swiftui"],
+      "link": "#",
+      "media": []
+    },
+    {
       "slug": "vera",
       "t": "vera",
       "c": { "tr": "display tipografi", "en": "display typeface" },
