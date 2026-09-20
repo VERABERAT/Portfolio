@@ -34,316 +34,372 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- Shantell Sans: marker-style handwriting (grug vibe) -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap" as="style" />
   <link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
 
   <style>
-    /* ============================================================
-       DESIGN TOKENS — grug-inspired hand-drawn language
-       ============================================================ */
     :root {
       --hand: 'Shantell Sans', 'Comic Sans MS', 'Segoe Print', cursive;
-
-      /* Per-card palettes (bg + ink) pulled from the reference */
-      --yellow:    #FFD93D;  --yellow-ink:   #2B2B2B;
-      --navy:      #1B1B3A;  --navy-ink:     #E8924A;
-      --mint:      #AEEBD0;  --mint-ink:     #8B2E2E;
-      --sky:       #6BC5F0;  --sky-ink:      #1B2B4A;
-      --forest:    #1B4D3E;  --forest-ink:   #EDE5B6;
-      --cream:     #F3EFE6;  --cream-ink:    #2B2B2B;
-
-      --ease:      cubic-bezier(.34,1.2,.64,1);
-      --pad-x:     clamp(22px, 6vw, 80px);
+      --yellow:#FFD93D; --yellow-ink:#2B2B2B;
+      --navy:#1B1B3A; --navy-ink:#F2B06D;
+      --mint:#AEEBD0; --mint-ink:#7A2323;
+      --sky:#6BC5F0; --sky-ink:#122843;
+      --forest:#1B4D3E; --forest-ink:#F5EDC8;
+      --cream:#F3EFE6; --cream-ink:#2B2B2B;
+      --pad-x:clamp(1.375rem, 6vw, 5rem);
+      --ease:cubic-bezier(.34,1.2,.64,1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html {
-      scroll-snap-type: y proximity;
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-    }
+    html { scroll-snap-type: y proximity; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
     body {
       font-family: var(--hand);
       background: var(--cream);
       color: var(--cream-ink);
       line-height: 1.5;
       overflow-x: hidden;
-      padding-bottom: 92px;   /* room for the hand-drawn bottom nav */
+      padding-bottom: 5.75rem;
     }
     a { color: inherit; text-decoration: none; }
-    svg { display: block; }
+    svg, img, video, iframe, picture { display: block; max-width: 100%; }
     button { font: inherit; background: none; border: 0; color: inherit; cursor: pointer; }
     ::selection { background: var(--navy); color: var(--yellow); }
 
-    /* paper grain — very subtle */
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid currentColor;
+      outline-offset: 3px;
+    }
+
     body::before {
       content: ""; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
       opacity: .04; mix-blend-mode: multiply;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* ============================================================
-       CARD SHELL — every screen is one solid colour
-       ============================================================ */
-    .card {
-      min-height: 100vh;
-      scroll-snap-align: start;
-      padding: clamp(28px,7vh,64px) var(--pad-x) clamp(40px,9vh,90px);
-      display: flex; flex-direction: column;
-      position: relative;
-      transition: background .5s ease;
-    }
-    .card[data-c="yellow"] { background: var(--yellow); color: var(--yellow-ink); }
-    .card[data-c="navy"]   { background: var(--navy);   color: var(--navy-ink); }
-    .card[data-c="mint"]   { background: var(--mint);   color: var(--mint-ink); }
-    .card[data-c="sky"]    { background: var(--sky);    color: var(--sky-ink); }
-    .card[data-c="forest"] { background: var(--forest); color: var(--forest-ink); }
-    .card[data-c="cream"]  { background: var(--cream);  color: var(--cream-ink); }
-
-    /* top bar inside each card: brand + entry meta (like grug status line) */
-    .card__top {
-      display: flex; align-items: center; justify-content: space-between;
-      font-weight: 600; font-size: 18px; letter-spacing: -.01em;
-    }
-    .card__top .brand { font-weight: 700; }
-    .card__top .meta {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 15px; opacity: .9;
-    }
-    .card__top .meta .bat {
-      border: 2px solid currentColor; border-radius: 6px;
-      padding: 1px 6px; font-size: 12px; font-weight: 700;
-    }
-    .card__top .dot { width: 12px; height: 12px; border-radius: 50%; background: currentColor; }
-
-    /* the doodle sits in the breathing space */
-    .card__art {
-      flex: 1;
-      display: flex; align-items: center; justify-content: center;
-      padding: 24px 0;
-    }
-    .card__art svg { width: clamp(180px, 38vw, 300px); height: auto; }
     .doodle { fill: none; stroke: currentColor; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
     .doodle--thin { stroke-width: 3; }
 
-    /* text block at the bottom (grug aphorism style) */
+    .lang {
+      position: fixed; top: 1rem; right: 1.125rem; z-index: 9000;
+      display: inline-flex; align-items: center; gap: .4375rem;
+      font-family: var(--hand); font-weight: 800; font-size: 1rem;
+      color: #fff; mix-blend-mode: difference;
+      border: 2.5px solid #fff; border-radius: 999px;
+      padding: .3125rem .8125rem; background: transparent;
+      text-transform: lowercase; letter-spacing: .02em;
+    }
+    .lang span[data-l] { opacity: .45; transition: opacity .25s; }
+    .lang span[data-l].on { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+    .lang .lang__sep { opacity: .55; text-decoration: none; }
+
+    .card {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      padding: clamp(1.75rem,7vh,4rem) var(--pad-x) clamp(2.5rem,9vh,5.625rem);
+      display: flex; flex-direction: column;
+      position: relative;
+    }
+    .card[data-c="yellow"] { background: var(--yellow); color: var(--yellow-ink); }
+    .card[data-c="navy"] { background: var(--navy); color: var(--navy-ink); }
+    .card[data-c="mint"] { background: var(--mint); color: var(--mint-ink); }
+    .card[data-c="sky"] { background: var(--sky); color: var(--sky-ink); }
+    .card[data-c="forest"] { background: var(--forest); color: var(--forest-ink); }
+    .card[data-c="cream"] { background: var(--cream); color: var(--cream-ink); }
+
+    .card__top {
+      display: flex; align-items: center; justify-content: space-between;
+      font-weight: 600; font-size: 1.125rem; letter-spacing: -.01em;
+    }
+    .card__top .brand { font-weight: 700; }
+    .card__top .meta { display: flex; align-items: center; gap: .625rem; font-size: .9375rem; opacity: .9; }
+    .card__top .dot { width: .75rem; height: .75rem; border-radius: 50%; background: currentColor; }
+
+    .card__art {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem 0;
+      transition: opacity .2s ease;
+    }
+    .card__art svg { width: clamp(11.25rem, 38vw, 18.75rem); height: auto; }
+
+    .card__cover-wrap { width: min(78vw, 28rem); aspect-ratio: 4 / 3; }
+    .card__cover {
+      width: 100%; height: 100%; object-fit: cover;
+      border: 3px solid currentColor;
+      border-radius: 14px;
+      transform: rotate(-1.5deg);
+      transition: transform .35s var(--ease);
+      background: color-mix(in srgb, currentColor 8%, transparent);
+    }
+    .card__art:hover .card__cover,
+    .card__art:focus-visible .card__cover { transform: rotate(0deg); }
+
     .card__text { max-width: 30ch; }
     .card__text .body {
-      font-size: clamp(20px, 3.2vw, 28px);
-      font-weight: 500; line-height: 1.45;
-    }
-    .card__text .sig {
-      margin-top: 18px; font-size: clamp(16px,2.4vw,20px);
-      font-weight: 700; opacity: .85;
+      font-size: clamp(1.25rem, 3.2vw, 1.75rem);
+      font-weight: 500;
+      line-height: 1.5;
+      opacity: 1;
+      transition: opacity .2s ease;
     }
     .card__text .tags {
-      margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px 14px;
-      font-size: 14px; font-weight: 600; opacity: .7;
+      margin-top: .875rem; display: flex; flex-wrap: wrap; gap: .5rem .875rem;
+      font-size: .875rem; font-weight: 600; opacity: .7;
     }
     .card__text .tags span::before { content: "· "; }
     .card__cta {
-      align-self: flex-start; margin-top: 20px;
-      display: inline-flex; align-items: center; gap: 8px;
-      font-weight: 700; font-size: 18px;
-      border-bottom: 2.5px solid currentColor; padding-bottom: 2px;
-      transition: gap .3s var(--ease);
+      align-self: flex-start; margin-top: 1.25rem;
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-weight: 700; font-size: 1.125rem;
+      border-bottom: 2.5px solid currentColor; padding-bottom: .125rem;
+      transition: opacity .2s ease;
     }
-    .card__cta:hover { gap: 16px; }
+    .card__cta:active, .dock a:active { transform: scale(.97); transition: transform 100ms ease-out; }
 
-    /* ============================================================
-       HERO
-       ============================================================ */
-    .hero .card__art svg { width: clamp(220px, 46vw, 380px); }
+    .hero .card__art svg { width: clamp(13.75rem, 46vw, 23.75rem); }
     .hero__word {
-      font-size: clamp(72px, 22vw, 220px);
-      font-weight: 800; line-height: .9; letter-spacing: -.04em;
+      font-size: clamp(4.5rem, 22vw, 13.75rem);
+      font-weight: 800; line-height: .95; letter-spacing: -.04em;
     }
     .hero__sub {
-      font-size: clamp(18px, 3vw, 26px); font-weight: 500;
-      max-width: 24ch; margin-top: 12px;
+      font-size: clamp(1.125rem, 3vw, 1.625rem);
+      font-weight: 500;
+      line-height: 1.5;
+      max-width: 24ch;
+      margin-top: .75rem;
     }
-    .hero__scroll { margin-top: 26px; font-weight: 600; opacity: .7; font-size: 16px; }
+    .hero__scroll { margin-top: 1.625rem; font-weight: 600; opacity: .7; font-size: 1rem; }
 
-    /* ============================================================
-       PROJECT CARD layout (two-zone like grug entries)
-       ============================================================ */
-    .proj__num {
-      font-size: clamp(15px,2vw,18px); font-weight: 700; opacity: .8;
-      margin-bottom: 6px;
+    .overview {
+      min-height: auto;
+      scroll-snap-align: none;
+      padding: clamp(2.25rem,6vh,4.75rem) var(--pad-x);
+      background: var(--cream);
+      color: var(--cream-ink);
+      border-top: 2.5px solid var(--cream-ink);
+      border-bottom: 2.5px solid var(--cream-ink);
     }
-    .proj__title {
-      font-size: clamp(34px, 7vw, 72px); font-weight: 800;
-      line-height: .98; letter-spacing: -.02em; margin-bottom: 14px;
+    .overview__head {
+      font-size: clamp(2rem, 6vw, 4rem);
+      line-height: .95;
+      letter-spacing: -.03em;
+      text-transform: lowercase;
+      margin-bottom: 1rem;
+    }
+    .overview__filters {
+      display: flex; flex-wrap: wrap; gap: .625rem;
+      margin-bottom: 1.25rem;
+    }
+    .overview__filters button {
+      border: 2.5px solid currentColor;
+      border-radius: 999px;
+      padding: .375rem .875rem;
+      font-weight: 700;
+      font-size: .875rem;
       text-transform: lowercase;
     }
+    .overview__filters button.active {
+      background: currentColor;
+      color: var(--cream);
+    }
+    .overview__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(13.75rem, 1fr));
+      gap: .875rem;
+    }
+    .mini {
+      border: 2.5px solid currentColor;
+      border-radius: .875rem;
+      padding: .75rem;
+      display: flex;
+      flex-direction: column;
+      gap: .625rem;
+      background: color-mix(in srgb, var(--cream) 70%, transparent);
+    }
+    .mini__art {
+      aspect-ratio: 4 / 3;
+      border: 2.5px solid currentColor;
+      border-radius: .75rem;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      background: color-mix(in srgb, currentColor 8%, transparent);
+    }
+    .mini__art svg { width: 48%; height: auto; }
+    .mini__art img { width: 100%; height: 100%; object-fit: cover; }
+    .mini__meta { font-size: .8125rem; opacity: .75; font-weight: 700; }
+    .mini__title { font-size: 1.25rem; line-height: 1.05; letter-spacing: -.02em; text-transform: lowercase; font-weight: 800; }
 
-    /* ============================================================
-       ABOUT / CONTACT (normal scroll, same hand-drawn skin)
-       ============================================================ */
+    .proj__num {
+      font-size: clamp(.9375rem,2vw,1.125rem);
+      font-weight: 700;
+      opacity: .8;
+      margin-bottom: .375rem;
+    }
+    .proj__title {
+      font-size: clamp(2.125rem, 7vw, 4.5rem);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -.03em;
+      margin-bottom: .875rem;
+      text-transform: lowercase;
+    }
+    .proj__title a { display: inline-block; transition: opacity .2s ease; }
+
     .flow { min-height: auto; scroll-snap-align: none; }
-    .about__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; }
+    .about__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; align-items: center; }
     .about__h {
-      font-size: clamp(36px,6vw,76px); font-weight: 800; line-height: .98;
-      letter-spacing: -.02em; margin-bottom: 22px; text-transform: lowercase;
+      font-size: clamp(2.25rem,6vw,4.75rem);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -.03em;
+      margin-bottom: 1.375rem;
+      text-transform: lowercase;
     }
-    .about__p { font-size: clamp(17px,2.4vw,22px); font-weight: 500; margin-bottom: 16px; max-width: 46ch; }
+    .about__p { font-size: clamp(1.0625rem,2.4vw,1.375rem); line-height: 1.5; font-weight: 500; margin-bottom: 1rem; max-width: 46ch; }
     .about__p b { font-weight: 800; }
-    .counters { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; margin-top: 34px; }
-    .counter b { display: block; font-size: clamp(34px,5vw,60px); font-weight: 800; line-height: 1; }
-    .counter span { font-size: 14px; font-weight: 600; opacity: .7; }
+    .counters { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; margin-top: 2.125rem; }
+    .counter b { display: block; font-size: clamp(2.125rem,5vw,3.75rem); font-weight: 800; line-height: 1; }
+    .counter span { font-size: .875rem; font-weight: 600; opacity: .7; }
 
-    .skills { display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 26px; }
+    .skills { display: flex; flex-wrap: wrap; gap: .5rem .625rem; margin-top: 1.625rem; }
     .skills span {
-      font-size: 14px; font-weight: 700;
-      padding: 5px 12px; border: 2px solid currentColor; border-radius: 999px;
+      font-size: .875rem; font-weight: 700;
+      padding: .3125rem .75rem; border: 2px solid currentColor; border-radius: 999px;
     }
 
-    /* experience list (grug entries) */
-    .exp { display: flex; flex-direction: column; gap: 30px; margin: 40px 0 auto; max-width: 760px; }
-    .exp__row { display: grid; grid-template-columns: 56px 1fr; gap: 18px; align-items: start; }
-    .exp__row svg { width: 48px; height: 48px; }
-    .exp__role { font-size: clamp(22px,3.6vw,32px); font-weight: 800; line-height: 1.05; text-transform: lowercase; }
+    .exp { display: flex; flex-direction: column; gap: 1.875rem; margin: 2.5rem 0 auto; max-width: 47.5rem; }
+    .exp__row { display: grid; grid-template-columns: 3.5rem 1fr; gap: 1.125rem; align-items: start; }
+    .exp__row svg { width: 3rem; height: 3rem; }
+    .exp__role { font-size: clamp(1.375rem,3.6vw,2rem); font-weight: 800; line-height: 1.05; text-transform: lowercase; }
     .exp__role .at { font-weight: 600; opacity: .7; }
-    .exp__date { font-size: 14px; font-weight: 700; opacity: .65; margin: 4px 0 7px; }
-    .exp__note { font-size: clamp(15px,2vw,18px); font-weight: 500; max-width: 54ch; }
-    @media (max-width: 560px) { .exp__row { grid-template-columns: 40px 1fr; gap: 14px; } .exp__row svg { width: 36px; height: 36px; } }
+    .exp__date { font-size: .875rem; font-weight: 700; opacity: .65; margin: .25rem 0 .4375rem; }
+    .exp__note { font-size: clamp(.9375rem,2vw,1.125rem); font-weight: 500; line-height: 1.5; max-width: 54ch; }
+    @media (max-width: 35rem) { .exp__row { grid-template-columns: 2.5rem 1fr; gap: .875rem; } .exp__row svg { width: 2.25rem; height: 2.25rem; } }
 
-    .contact__h { font-size: clamp(40px,10vw,140px); font-weight: 800; line-height: .92; letter-spacing: -.03em; text-transform: lowercase; }
-    .contact__mail {
-      display: inline-flex; align-items: center; gap: 14px; margin-top: 28px;
-      font-size: clamp(24px,5vw,52px); font-weight: 800;
-      border-bottom: 3px solid currentColor; padding-bottom: 6px;
-      transition: gap .3s var(--ease);
+    .contact__h {
+      font-size: clamp(2.5rem,10vw,8.75rem);
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -.03em;
+      text-transform: lowercase;
     }
-    .contact__mail:hover { gap: 24px; }
-    .contact__avail { margin-top: 26px; max-width: 44ch; font-size: clamp(16px,2.4vw,20px); font-weight: 500; }
-    .contact__avail mark { background: var(--yellow); color: var(--navy); padding: 1px 7px; border-radius: 4px; }
-    .contact__socials { margin-top: 30px; display: flex; gap: 22px; font-weight: 700; }
+    .contact__mail {
+      display: inline-flex; align-items: center; gap: .875rem; margin-top: 1.75rem;
+      font-size: clamp(1.5rem,5vw,3.25rem); font-weight: 800;
+      border-bottom: 3px solid currentColor; padding-bottom: .375rem;
+      transition: opacity .2s ease;
+    }
+    .contact__avail { margin-top: 1.625rem; max-width: 44ch; font-size: clamp(1rem,2.4vw,1.25rem); line-height: 1.5; font-weight: 500; }
+    .contact__avail mark { background: var(--yellow); color: var(--navy); padding: .0625rem .4375rem; border-radius: 4px; }
+    .contact__socials { margin-top: 1.875rem; display: flex; gap: 1.375rem; font-weight: 700; }
     .contact__socials a { border-bottom: 2px solid currentColor; }
 
-    @media (max-width: 820px) {
-      .about__grid { grid-template-columns: 1fr; gap: 28px; }
+    @media (max-width: 51.25rem) {
+      .about__grid { grid-template-columns: 1fr; gap: 1.75rem; }
       .counters { grid-template-columns: repeat(2,1fr); }
     }
 
-    /* ============================================================
-       HAND-DRAWN BOTTOM NAV (grug dock)
-       ============================================================ */
     .dock {
       position: fixed; left: 0; right: 0; bottom: 0; z-index: 1000;
       display: flex; align-items: center; justify-content: space-around;
-      gap: 8px; padding: 12px var(--pad-x) 16px;
+      gap: .5rem; padding: .75rem var(--pad-x) 1rem;
       background: var(--cream);
       border-top: 2.5px solid var(--cream-ink);
     }
     .dock a {
-      display: flex; flex-direction: column; align-items: center; gap: 4px;
-      font-size: 12px; font-weight: 700; opacity: .55;
-      transition: opacity .25s, transform .25s var(--ease);
+      display: flex; flex-direction: column; align-items: center; gap: .25rem;
+      font-size: .75rem; font-weight: 700; opacity: .55;
+      transition: opacity .2s ease;
     }
-    .dock a svg { width: 26px; height: 26px; }
-    .dock a:hover, .dock a.active { opacity: 1; transform: translateY(-3px); }
+    .dock a svg { width: 1.625rem; height: 1.625rem; }
+    .dock a:hover, .dock a.active { opacity: 1; }
     .dock .up {
-      width: 52px; height: 60px;
+      width: 3.25rem; height: 3.75rem;
       border: 2.5px solid var(--cream-ink); border-radius: 50% / 42%;
       display: flex; align-items: center; justify-content: center;
       opacity: 1;
     }
-    .dock .up svg { width: 24px; height: 24px; }
+    .dock .up svg { width: 1.5rem; height: 1.5rem; }
 
-    /* ============================================================
-       REVEAL
-       ============================================================ */
-    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .reveal { opacity: 0; transform: translateY(1.375rem); transition: opacity .7s var(--ease), transform .7s var(--ease); }
     .reveal.in { opacity: 1; transform: none; }
 
-    /* ============================================================
-       HAND-DRAWN MOTION — doodles "draw" themselves in.
-       stroke-* are inherited, so setting them on the <svg> reaches
-       the <use>-cloned paths.
-       ============================================================ */
     .draw { stroke-dasharray: 1400; stroke-dashoffset: 1400; transition: stroke-dashoffset 1.3s var(--ease); }
     .draw.drawn { stroke-dashoffset: 0; }
 
-    /* living-sketch wobble on the hero doodle */
     @keyframes wobble { 0%,100% { transform: rotate(-2.2deg); } 50% { transform: rotate(2.2deg); } }
     .hero .card__art svg { transform-origin: center; animation: wobble 7s ease-in-out infinite; }
 
-    /* project art reacts to hover */
-    .card__art { transition: transform .45s var(--ease); }
-    a.card__art:hover { transform: translateY(-8px) rotate(-2deg) scale(1.03); }
-    .proj__title a { display: inline-block; transition: transform .35s var(--ease); }
-    .proj__title a:hover { transform: translateX(8px); }
-
-    /* experience doodles bob a touch on hover */
-    .exp__row svg { transition: transform .4s var(--ease); }
-    .exp__row:hover svg { transform: translateY(-4px) rotate(-3deg); }
-
-    /* ============================================================
-       CUSTOM CURSOR (hand-drawn ink) — fine-pointer devices only.
-       mix-blend-mode:difference keeps it visible on every card colour.
-       ============================================================ */
     .cursor-dot, .cursor-ring {
       position: fixed; top: 0; left: 0; z-index: 10000;
       pointer-events: none; border-radius: 50%;
       mix-blend-mode: difference;
       opacity: 0; transition: opacity .3s;
     }
-    .cursor-dot { width: 8px; height: 8px; background: #fff; transform: translate(-50%,-50%); }
+    .cursor-dot { width: .5rem; height: .5rem; background: #fff; transform: translate(-50%,-50%); }
     .cursor-ring {
-      width: 38px; height: 38px; border: 2.5px solid #fff;
+      width: 2.375rem; height: 2.375rem; border: 2.5px solid #fff;
       transform: translate(-50%,-50%);
       transition: width .25s var(--ease), height .25s var(--ease), opacity .3s;
     }
-    .cursor-ring.hover { width: 66px; height: 66px; }
-    .cursor-ring.click { width: 28px; height: 28px; }
+    .cursor-ring.hover { width: 4.125rem; height: 4.125rem; }
+    .cursor-ring.click { width: 1.75rem; height: 1.75rem; }
     body.cursor-on { cursor: none; }
     body.cursor-on a, body.cursor-on button { cursor: none; }
     .cursor-dot.on, .cursor-ring.on { opacity: 1; }
 
-    /* ============================================================
-       LANGUAGE TOGGLE (fixed, hand-drawn) — visible on every card
-       via mix-blend-mode:difference
-       ============================================================ */
-    .lang {
-      position: fixed; top: 16px; right: 18px; z-index: 9000;
-      display: inline-flex; align-items: center; gap: 7px;
-      font-family: var(--hand); font-weight: 800; font-size: 16px;
-      color: #fff; mix-blend-mode: difference;
-      border: 2.5px solid #fff; border-radius: 999px;
-      padding: 5px 13px; background: transparent;
-      text-transform: lowercase; letter-spacing: .02em;
+    .chrome-glass .dock {
+      background: color-mix(in srgb, var(--cream) 72%, transparent);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-top: 1px solid rgba(255, 255, 255, 0.45);
     }
-    .lang span[data-l] { opacity: .45; transition: opacity .25s; }
-    .lang span[data-l].on { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
-    .lang .lang__sep { opacity: .55; text-decoration: none; }
-    @media (max-width: 520px) { .lang { top: 12px; right: 12px; font-size: 14px; } }
+    .chrome-glass .dock .up { border-width: 2px; }
+    .chrome-glass .lang {
+      background: color-mix(in srgb, #fff 14%, transparent);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-color: rgba(255,255,255,.8);
+    }
+
+    @media (prefers-reduced-transparency: reduce) {
+      .chrome-glass .dock,
+      .chrome-glass .lang {
+        background: var(--cream);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+      .chrome-glass .lang { border-color: #fff; }
+    }
+
+    @supports not (backdrop-filter: blur(1px)) {
+      .chrome-glass .dock,
+      .chrome-glass .lang {
+        background: var(--cream);
+      }
+    }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .reveal { opacity: 1; transform: none; transition: none; }
       .draw { stroke-dashoffset: 0 !important; transition: none; }
       .hero .card__art svg { animation: none; }
+      .spring-fade { transition: opacity .2s ease !important; }
+      .spring-fade:hover { opacity: .86; }
     }
   </style>
 </head>
 <body>
-
-  <!-- ============================================================
-       REUSABLE HAND-DRAWN DOODLES
-       ============================================================ -->
-<!-- doodle <defs> injected at runtime by doodles.js (injectDoodleDefs) -->
-
-  <button class="lang" id="langToggle" aria-label="dil / language">
+  <button class="lang spring-fade" id="langToggle" aria-label="dil / language" aria-pressed="false">
     <span data-l="tr">tr</span><span class="lang__sep">·</span><span data-l="en">en</span>
   </button>
 
   <main>
-    <!-- ============ HERO ============ -->
     <section class="card hero" data-c="yellow" id="top">
       <div class="card__top">
         <span class="brand">berat.</span>
-        <span class="meta"><span class="bat" id="clock">9:41</span></span>
+        <span class="meta"><span class="dot"></span><span data-ui="mWork">işler</span></span>
       </div>
       <div class="card__art">
         <svg class="draw" viewBox="0 0 200 200" aria-hidden="true"><use href="#d-sun"/></svg>
@@ -355,10 +411,14 @@
       </div>
     </section>
 
-    <!-- ============ PROJECT CARDS (rendered by JS) ============ -->
+    <section class="overview" id="overview">
+      <h2 class="overview__head" data-ui="overviewH">işlere hızlı bakış</h2>
+      <div class="overview__filters" id="overviewFilters"></div>
+      <div class="overview__grid" id="overviewGrid"></div>
+    </section>
+
     <div id="work"></div>
 
-    <!-- ============ ABOUT (normal scroll) ============ -->
     <section class="card flow" data-c="mint" id="about">
       <div class="card__top">
         <span class="brand">berat.</span>
@@ -377,17 +437,15 @@
       </div>
     </section>
 
-    <!-- ============ EXPERIENCE (normal scroll) ============ -->
     <section class="card flow" data-c="sky" id="experience">
       <div class="card__top">
         <span class="brand">berat.</span>
         <span class="meta"><span class="dot"></span> <span data-ui="mExp">deneyim</span></span>
       </div>
-      <h2 class="about__h reveal" style="margin-top:18px;" data-ui="expHead">nerelerde çalıştım.</h2>
+      <h2 class="about__h reveal" style="margin-top:1.125rem;" data-ui="expHead">nerelerde çalıştım.</h2>
       <div class="exp reveal" id="expList"></div>
     </section>
 
-    <!-- ============ CONTACT (normal scroll) ============ -->
     <section class="card flow" data-c="navy" id="contact">
       <div class="card__top">
         <span class="brand">berat.</span>
@@ -395,89 +453,170 @@
       </div>
       <div style="margin:auto 0;" class="reveal">
         <h2 class="contact__h" id="contactH"></h2>
-        <a class="contact__mail" id="mail" href="#"><span id="mailText"></span> <span>→</span></a>
+        <a class="contact__mail spring-fade" id="mail" href="#"><span id="mailText"></span> <span>→</span></a>
         <p class="contact__avail" id="avail"></p>
         <div class="contact__socials" id="socials"></div>
       </div>
     </section>
   </main>
 
-  <!-- ============ HAND-DRAWN DOCK ============ -->
   <nav class="dock" aria-label="navigasyon">
-    <a href="#top" data-target="top"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-sun"/></svg><span data-ui="dStart">başla</span></a>
-    <a href="#work" data-target="work"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-spark"/></svg><span data-ui="dWork">işler</span></a>
-    <a href="#top" class="up" aria-label="yukarı"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
-    <a href="#about" data-target="about"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-sprout"/></svg><span data-ui="dMe">ben</span></a>
-    <a href="#contact" data-target="contact"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-heart"/></svg><span data-ui="dWrite">yaz</span></a>
+    <a href="#top" data-target="top" class="spring-fade"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-sun"/></svg><span data-ui="dStart">başla</span></a>
+    <a href="#overview" data-target="overview" class="spring-fade"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-spark"/></svg><span data-ui="dWork">işler</span></a>
+    <a href="#top" class="up spring-fade" aria-label="yukarı"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
+    <a href="#about" data-target="about" class="spring-fade"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-sprout"/></svg><span data-ui="dMe">ben</span></a>
+    <a href="#contact" data-target="contact" class="spring-fade"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#d-heart"/></svg><span data-ui="dWrite">yaz</span></a>
   </nav>
 
   <script src="doodles.js"></script>
   <script src="data.js"></script>
   <script>
-    /* ============================================================
-       DATA — loaded from data.js (window.PORTFOLIO), overridden by
-       localStorage "portfolio_data" for live in-browser admin preview.
-       ============================================================ */
     injectDoodleDefs();
+    const isChrome = /Chrome\//.test(navigator.userAgent) && !/Edg\//.test(navigator.userAgent) && !/OPR\//.test(navigator.userAgent);
+    if (isChrome) document.documentElement.classList.add('chrome-glass');
+
     let DATA = window.PORTFOLIO ? JSON.parse(JSON.stringify(window.PORTFOLIO)) : { projects: [], profile: {}, experience: [] };
     try { const ov = localStorage.getItem('portfolio_data'); if (ov) DATA = JSON.parse(ov); } catch (e) {}
     const projects = DATA.projects || [];
     const profile = DATA.profile || {};
     const experience = DATA.experience || [];
 
-    /* ------------ i18n: language resolver ------------ */
     const LANG = (localStorage.getItem('portfolio_lang') === 'en') ? 'en' : 'tr';
     document.documentElement.lang = LANG;
-    // t(v): if v is a {tr,en} object pick the language, else return as-is
     const t = (v) => (v && typeof v === 'object' && !Array.isArray(v)) ? (v[LANG] ?? v.tr ?? v.en ?? '') : (v ?? '');
 
     const UI = {
       heroSub: { tr: "art director — marka, motion & ai destekli üretim. istanbul'dan basit, güçlü işler.", en: "art director — brand, motion & ai-assisted production. simple, strong work from istanbul." },
-      scroll:  { tr: "↓ aşağı kaydır, işlere bak", en: "↓ scroll down, see the work" },
-      mAbout:  { tr: "hakkında", en: "about" },
-      mExp:    { tr: "deneyim", en: "experience" },
-      mContact:{ tr: "iletişim", en: "contact" },
+      scroll: { tr: "↓ aşağı kaydır, işlere bak", en: "↓ scroll down, see the work" },
+      mWork: { tr: "işler", en: "work" },
+      mAbout: { tr: "hakkında", en: "about" },
+      mExp: { tr: "deneyim", en: "experience" },
+      mContact: { tr: "iletişim", en: "contact" },
       expHead: { tr: "nerelerde çalıştım.", en: "where i've worked." },
-      viewProj:{ tr: "projeyi gör →", en: "view project →" },
-      dStart:  { tr: "başla", en: "start" },
-      dWork:   { tr: "işler", en: "work" },
-      dMe:     { tr: "ben", en: "me" },
-      dWrite:  { tr: "yaz", en: "say hi" }
+      viewProj: { tr: "projeyi gör →", en: "view project →" },
+      dStart: { tr: "başla", en: "start" },
+      dWork: { tr: "işler", en: "work" },
+      dMe: { tr: "ben", en: "me" },
+      dWrite: { tr: "yaz", en: "say hi" },
+      overviewH: { tr: "işlere hızlı bakış", en: "work overview" },
+      all: { tr: "hepsi", en: "all" }
     };
-    // apply static UI strings
+
     document.querySelectorAll('[data-ui]').forEach(el => { const v = UI[el.dataset.ui]; if (v) el.textContent = t(v); });
-    // language toggle button state + wiring
+
+    const langButton = document.getElementById('langToggle');
     document.querySelectorAll('#langToggle span[data-l]').forEach(s => s.classList.toggle('on', s.dataset.l === LANG));
-    document.getElementById('langToggle').addEventListener('click', () => {
+    langButton.setAttribute('aria-pressed', String(LANG === 'en'));
+    langButton.addEventListener('click', () => {
       localStorage.setItem('portfolio_lang', LANG === 'tr' ? 'en' : 'tr');
       location.reload();
     });
-    /* ------------ RENDER: project cards ------------ */
-    const work = document.getElementById('work');
-    work.innerHTML = projects.map((p, i) => {
-      const num = String(i + 1).padStart(2, '0');
-      const slug = p.slug || p.t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-      const href = 'project.html?p=' + encodeURIComponent(slug);
-      return `
-      <section class="card" data-c="${p.color}">
-        <div class="card__top">
-          <span class="brand">berat.</span>
-          <span class="meta">${p.y} <span class="dot"></span></span>
-        </div>
-        <a class="card__art" href="${href}" aria-label="${p.t} projesini aç">
-          <svg class="draw" viewBox="0 0 200 200" aria-hidden="true"><use href="#${p.doodle}"/></svg>
-        </a>
-        <div class="card__text reveal">
-          <div class="proj__num">${num} · ${t(p.c)}</div>
-          <h2 class="proj__title"><a href="${href}">${p.t}</a></h2>
-          <p class="body">${t(p.desc)}</p>
-          <div class="tags">${(p.tags || []).map(tag => `<span>${tag}</span>`).join('')}</div>
-          <a class="card__cta" href="${href}">${t(UI.viewProj)}</a>
-        </div>
-      </section>`;
-    }).join('');
 
-    /* ------------ RENDER: about ------------ */
+    const slugify = (s) => (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    const coverBase = (cover) => {
+      if (!cover) return '';
+      const m = cover.match(/^(.*)\.(jpg|jpeg|png|webp)$/i);
+      return m ? m[1] : '';
+    };
+
+    function coverPictureHTML(p, cls) {
+      if (!p.cover) return `<svg class="draw" viewBox="0 0 200 200" aria-hidden="true"><use href="#${p.doodle || 'd-spark'}"/></svg>`;
+      const base = coverBase(p.cover);
+      const alt = `${p.t} ${t(p.c) || ''} kapak çalışması`;
+      const webpSrc = base ? `${base}.webp` : p.cover;
+      return `
+        <picture>
+          <source type="image/webp" srcset="${webpSrc}">
+          <img class="${cls}" src="${p.cover}" alt="${alt}" loading="lazy" decoding="async" />
+        </picture>`;
+    }
+
+    function categoryKey(p) {
+      const raw = `${t(p.c) || ''} ${(p.tags || []).join(' ')}`.toLowerCase();
+      if (raw.includes('kampanya') || raw.includes('campaign')) return 'kampanya';
+      if (raw.includes('ürün') || raw.includes('product')) return 'ürün';
+      if (raw.includes('kimlik') || raw.includes('identity') || raw.includes('brand')) return 'kimlik';
+      if (raw.includes('araç') || raw.includes('tool') || raw.includes('otomasyon') || raw.includes('system')) return 'araç';
+      return 'diğer';
+    }
+
+    const categoryLabels = {
+      kampanya: { tr: 'kampanya', en: 'campaign' },
+      ürün: { tr: 'ürün', en: 'product' },
+      kimlik: { tr: 'kimlik', en: 'identity' },
+      araç: { tr: 'araç', en: 'tool' },
+      diğer: { tr: 'diğer', en: 'other' }
+    };
+
+    const work = document.getElementById('work');
+    function renderCards(items) {
+      work.innerHTML = items.map((p, i) => {
+        const num = String(i + 1).padStart(2, '0');
+        const slug = p.slug || slugify(p.t);
+        const href = 'project.html?p=' + encodeURIComponent(slug);
+        const art = p.cover
+          ? `<picture class="card__cover-wrap spring-item" data-spring="cover"><source type="image/webp" srcset="${coverBase(p.cover) ? `${coverBase(p.cover)}.webp` : p.cover}"><img class="card__cover" src="${p.cover}" alt="${p.t} ${t(p.c) || ''} kapak çalışması" loading="lazy" decoding="async"></picture>`
+          : `<svg class="draw" viewBox="0 0 200 200" aria-hidden="true"><use href="#${p.doodle || 'd-spark'}"/></svg>`;
+        return `
+        <section class="card" data-c="${p.color || 'cream'}" id="card-${slug}">
+          <div class="card__top">
+            <span class="brand">berat.</span>
+            <span class="meta">${p.y || ''} <span class="dot"></span></span>
+          </div>
+          <a class="card__art spring-fade" href="${href}" aria-label="${p.t} projesini aç">${art}</a>
+          <div class="card__text reveal spring-fade">
+            <div class="proj__num">${num} · ${t(p.c)}</div>
+            <h2 class="proj__title"><a href="${href}" class="spring-item" data-spring="link">${p.t}</a></h2>
+            <p class="body">${t(p.desc)}</p>
+            <div class="tags">${(p.tags || []).map(tag => `<span>${tag}</span>`).join('')}</div>
+            <a class="card__cta spring-item" data-spring="cta" href="${href}">${t(UI.viewProj)}</a>
+          </div>
+        </section>`;
+      }).join('');
+    }
+    renderCards(projects);
+
+    const categories = [...new Set(projects.map(categoryKey))].filter(Boolean);
+    let activeFilter = 'all';
+    const overviewFilters = document.getElementById('overviewFilters');
+    const overviewGrid = document.getElementById('overviewGrid');
+
+    function renderFilters() {
+      const buttons = ['all', ...categories].map(key => {
+        const label = key === 'all' ? t(UI.all) : t(categoryLabels[key] || { tr: key, en: key });
+        const active = activeFilter === key ? 'active' : '';
+        return `<button class="spring-item ${active}" data-filter="${key}" data-spring="pill">${label}</button>`;
+      }).join('');
+      overviewFilters.innerHTML = buttons;
+      overviewFilters.querySelectorAll('button[data-filter]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeFilter = btn.dataset.filter;
+          renderFilters();
+          renderOverview();
+          initSpringInteractions();
+        });
+      });
+    }
+
+    function renderOverview() {
+      const filtered = projects.filter(p => activeFilter === 'all' || categoryKey(p) === activeFilter);
+      overviewGrid.innerHTML = filtered.map(p => {
+        const slug = p.slug || slugify(p.t);
+        const href = 'project.html?p=' + encodeURIComponent(slug);
+        const art = p.cover
+          ? `<picture><source type="image/webp" srcset="${coverBase(p.cover) ? `${coverBase(p.cover)}.webp` : p.cover}"><img src="${p.cover}" alt="${p.t} ${t(p.c) || ''} kapak çalışması" loading="lazy" decoding="async"></picture>`
+          : `<svg class="draw" viewBox="0 0 200 200" aria-hidden="true"><use href="#${p.doodle || 'd-spark'}"/></svg>`;
+        return `<a class="mini spring-item" data-spring="mini" href="${href}">
+          <span class="mini__art">${art}</span>
+          <span class="mini__meta">${p.y || ''} · ${t(p.c) || ''}</span>
+          <strong class="mini__title">${p.t}</strong>
+        </a>`;
+      }).join('');
+    }
+
+    renderFilters();
+    renderOverview();
+
     document.getElementById('aboutH').textContent = t(profile.aboutH);
     document.getElementById('aboutBio').innerHTML = (profile.bio || []).map(b => `<p class="about__p">${t(b)}</p>`).join('');
     document.getElementById('skills').innerHTML = (profile.skills || []).map(s => `<span>${s}</span>`).join('');
@@ -493,28 +632,18 @@
     document.getElementById('counters').innerHTML = (profile.counters || [])
       .map(c => `<div class="counter"><b>${c.v}</b><span>${t(c.l)}</span></div>`).join('');
 
-    /* ------------ RENDER: contact ------------ */
     document.getElementById('contactH').textContent = t(profile.contactH);
     document.getElementById('mailText').textContent = profile.email;
     document.getElementById('mail').href = 'mailto:' + profile.email;
     document.getElementById('avail').innerHTML = t(profile.avail);
-    document.getElementById('socials').innerHTML = Object.entries(profile.socials)
+    document.getElementById('socials').innerHTML = Object.entries(profile.socials || {})
       .map(([k,v]) => `<a href="${v}" target="_blank" rel="noopener">${k}</a>`).join('');
 
-    /* ------------ clock (grug status line) ------------ */
-    function clock() {
-      const t = new Intl.DateTimeFormat('en-GB', { hour:'2-digit', minute:'2-digit', timeZone:'Europe/Istanbul' }).format(new Date());
-      document.getElementById('clock').textContent = t;
-    }
-    clock(); setInterval(clock, 20000);
-
-    /* ------------ reveal on scroll ------------ */
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
     }, { threshold: .2 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-    /* ------------ hand-drawn "draw in" doodles ------------ */
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!prefersReduced) {
       const drawIO = new IntersectionObserver((entries) => {
@@ -525,27 +654,19 @@
       document.querySelectorAll('svg.draw').forEach(el => el.classList.add('drawn'));
     }
 
-    /* ------------ dock active state ------------ */
     const dockLinks = document.querySelectorAll('.dock a[data-target]');
     const navObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
         const id = e.target.id;
-        const map = { top:'top', about:'about', contact:'contact' };
-        const key = map[id] || 'work';
+        const map = { top:'top', overview:'overview', about:'about', contact:'contact' };
+        const key = map[id] || 'overview';
         dockLinks.forEach(a => a.classList.toggle('active', a.dataset.target === key));
       });
     }, { threshold: .5 });
-    ['top','about','contact'].forEach(id => { const el = document.getElementById(id); if (el) navObserver.observe(el); });
+    ['top','overview','about','contact'].forEach(id => { const el = document.getElementById(id); if (el) navObserver.observe(el); });
     document.querySelectorAll('#work .card').forEach(c => navObserver.observe(c));
-    // work cards don't have ids -> mark "işler" active when any work card is centred
-    const workObserver = new IntersectionObserver((entries) => {
-      const anyWork = entries.some(e => e.isIntersecting);
-      if (anyWork) dockLinks.forEach(a => a.classList.toggle('active', a.dataset.target === 'work'));
-    }, { threshold: .5 });
-    document.querySelectorAll('#work .card').forEach(c => workObserver.observe(c));
 
-    /* ------------ custom hand-drawn cursor ------------ */
     (function initCursor() {
       const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
       if (!finePointer || prefersReduced) return;
@@ -555,8 +676,8 @@
       document.body.append(dot, ring);
       document.body.classList.add('cursor-on');
 
-      let mx = innerWidth / 2, my = innerHeight / 2;   // mouse target
-      let rx = mx, ry = my;                            // ring (lagging)
+      let mx = innerWidth / 2, my = innerHeight / 2;
+      let rx = mx, ry = my;
       let shown = false;
 
       addEventListener('mousemove', (e) => {
@@ -569,7 +690,6 @@
       addEventListener('mouseup', () => ring.classList.remove('click'));
       addEventListener('mouseleave', () => { dot.classList.remove('on'); ring.classList.remove('on'); shown = false; });
 
-      // grow ring over interactive targets
       const interactive = 'a, button, .card__art, .dock a, [href]';
       addEventListener('mouseover', (e) => { if (e.target.closest(interactive)) ring.classList.add('hover'); });
       addEventListener('mouseout',  (e) => { if (e.target.closest(interactive)) ring.classList.remove('hover'); });
@@ -580,6 +700,63 @@
         requestAnimationFrame(loop);
       })();
     })();
+
+    function initSpringInteractions() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      document.querySelectorAll('.spring-item').forEach((el) => {
+        if (el.dataset.springReady) return;
+        el.dataset.springReady = '1';
+
+        const mode = el.dataset.spring || 'default';
+        const params = {
+          response: 0.35,
+          damping: mode === 'mini' ? 0.8 : 1.0 // NOTE: only momentum-like grid/card interactions get slight overshoot.
+        };
+        const omega = (2 * Math.PI) / params.response;
+        const damping = params.damping;
+        const state = { x: 0, y: 0, s: 1, r: 0, vx: 0, vy: 0, vs: 0, vr: 0, tx: 0, ty: 0, ts: 1, tr: 0 };
+        let raf = 0;
+
+        const apply = () => { el.style.transform = `translate(${state.x}px, ${state.y}px) scale(${state.s}) rotate(${state.r}deg)`; };
+
+        function animate() {
+          const dt = 1 / 60;
+          const k = omega * omega;
+          const c = 2 * damping * omega;
+
+          const axes = [['x', 'tx', 'vx'], ['y', 'ty', 'vy'], ['s', 'ts', 'vs'], ['r', 'tr', 'vr']];
+          axes.forEach(([val, tar, vel]) => {
+            const a = -k * (state[val] - state[tar]) - c * state[vel];
+            state[vel] += a * dt;
+            state[val] += state[vel] * dt;
+          });
+          apply();
+
+          const done = axes.every(([val, tar, vel]) => Math.abs(state[val] - state[tar]) < 0.001 && Math.abs(state[vel]) < 0.001);
+          if (!done) raf = requestAnimationFrame(animate);
+          else raf = 0;
+        }
+
+        const setTarget = (tx, ty, ts, tr) => {
+          state.tx = tx; state.ty = ty; state.ts = ts; state.tr = tr;
+          if (!raf) raf = requestAnimationFrame(animate);
+        };
+
+        el.addEventListener('pointerenter', () => {
+          if (mode === 'cover') setTarget(0, -5, 1.02, 0);
+          else if (mode === 'link') setTarget(6, 0, 1, 0);
+          else if (mode === 'cta') setTarget(0, -2, 1, 0);
+          else if (mode === 'pill') setTarget(0, -1, 1, 0);
+          else if (mode === 'mini') setTarget(0, -4, 1.01, -0.6);
+          else setTarget(0, -3, 1.01, 0);
+        });
+        el.addEventListener('pointerleave', () => setTarget(0, 0, 1, 0));
+        el.addEventListener('pointerdown', () => setTarget(0, 0, .97, 0));
+        el.addEventListener('pointerup', () => setTarget(0, -2, 1, 0));
+      });
+    }
+
+    initSpringInteractions();
   </script>
 </body>
 </html>
