@@ -344,6 +344,16 @@ window.PORTFOLIO =
   },
   "experience": [
     {
+      "role": "junior art director",
+      "org": "altavia dekatlon",
+      "date": { "tr": "2026 — devam ediyor", "en": "2026 — present" },
+      "note": {
+        "tr": "sekiz marka hesabına ai destekli reklam kreatifi ve sosyal içerik. ilk kareden after effects'te bitirmeye kadar üretim hattı bende.",
+        "en": "ai-assisted ad creative and social content across eight brand accounts. i own the pipeline, first frame to final cut."
+      },
+      "doodle": "d-spark"
+    },
+    {
       "role": "art director", "org": "kasten kolektif",
       "date": { "tr": "ara 2024 — ara 2025", "en": "dec 2024 — dec 2025" }, "doodle": "d-tent",
       "note": {
