@@ -123,6 +123,19 @@
       padding: 24px 0;
     }
     .card__art svg { width: clamp(180px, 38vw, 300px); height: auto; }
+
+    /* cover image — the real work. falls back to the doodle when a
+       project has no cover, so nothing breaks. */
+    .card__art .cover { display: block; width: clamp(260px, 54vw, 580px); }
+    .card__art .cover img {
+      width: 100%; height: auto;
+      aspect-ratio: 16 / 10;          /* reserved up front: no layout jump */
+      object-fit: cover;
+      border: 3px solid currentColor;
+      border-radius: 14px;
+      transform: rotate(-1.5deg);     /* pinned-up-by-hand tilt */
+      background: color-mix(in srgb, currentColor 10%, transparent);
+    }
     .doodle { fill: none; stroke: currentColor; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
     .doodle--thin { stroke-width: 3; }
 
@@ -268,6 +281,11 @@
     /* project art reacts to hover */
     .card__art { transition: transform .45s var(--ease); }
     a.card__art:hover { transform: translateY(-8px) rotate(-2deg) scale(1.03); }
+    /* a tilted cover already carries the hand-made feel — on hover it
+       straightens up rather than the whole card tilting again. */
+    a.card__art:has(.cover):hover { transform: translateY(-8px) scale(1.02); }
+    .card__art .cover img { transition: transform .45s var(--ease); }
+    a.card__art:hover .cover img { transform: rotate(0deg); }
     .proj__title a { display: inline-block; transition: transform .35s var(--ease); }
     .proj__title a:hover { transform: translateX(8px); }
 
@@ -320,6 +338,7 @@
       .reveal { opacity: 1; transform: none; transition: none; }
       .draw { stroke-dashoffset: 0 !important; transition: none; }
       .hero .card__art svg { animation: none; }
+      .card__art, .card__art .cover img { transition: none; }
     }
   </style>
 </head>
@@ -438,7 +457,8 @@
       dStart:  { tr: "başla", en: "start" },
       dWork:   { tr: "işler", en: "work" },
       dMe:     { tr: "ben", en: "me" },
-      dWrite:  { tr: "yaz", en: "say hi" }
+      dWrite:  { tr: "yaz", en: "say hi" },
+      openProj:{ tr: "{p} projesini aç", en: "open the {p} project" }
     };
     // apply static UI strings
     document.querySelectorAll('[data-ui]').forEach(el => { const v = UI[el.dataset.ui]; if (v) el.textContent = t(v); });
@@ -448,6 +468,23 @@
       localStorage.setItem('portfolio_lang', LANG === 'tr' ? 'en' : 'tr');
       location.reload();
     });
+    /* ------------ cover art ------------
+       A project with a cover shows the actual work; everything else
+       falls back to its doodle. webp is only offered when the data
+       names one, so a missing file can never break the <picture>. */
+    function coverAlt(p) {
+      return p.coverAlt ? t(p.coverAlt) : `${p.t} — ${t(p.c)}`;
+    }
+    function coverHTML(p) {
+      if (!p.cover) {
+        return `<svg class="draw" viewBox="0 0 200 200" aria-hidden="true"><use href="#${p.doodle}"/></svg>`;
+      }
+      const webp = p.coverWebp ? `<source srcset="${p.coverWebp}" type="image/webp">` : '';
+      return `<picture class="cover">${webp}<img src="${p.cover}" alt="${esc(coverAlt(p))}"
+        width="1200" height="750" loading="lazy" decoding="async"></picture>`;
+    }
+    const esc = (s) => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+
     /* ------------ RENDER: project cards ------------ */
     const work = document.getElementById('work');
     work.innerHTML = projects.map((p, i) => {
@@ -460,8 +497,8 @@
           <span class="brand">berat.</span>
           <span class="meta">${p.y} <span class="dot"></span></span>
         </div>
-        <a class="card__art" href="${href}" aria-label="${p.t} projesini aç">
-          <svg class="draw" viewBox="0 0 200 200" aria-hidden="true"><use href="#${p.doodle}"/></svg>
+        <a class="card__art" href="${href}" aria-label="${t(UI.openProj).replace('{p}', p.t)}">
+          ${coverHTML(p)}
         </a>
         <div class="card__text reveal">
           <div class="proj__num">${num} · ${t(p.c)}</div>

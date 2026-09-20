@@ -38,8 +38,9 @@ Proje şeması:
   y: "2025",                           // yıl
   color: "navy",                       // kart paleti: yellow|navy|mint|sky|forest|cream
   doodle: "d-type",                    // doodles.js'teki id
-  cover: "images/vera/vera.jpg",       // opsiyonel kapak; yoksa doodle'a düşer
-  coverAlt: { tr: "...", en: "..." },  // opsiyonel; yoksa başlık+kategoriden üretilir
+  cover: "images/vera/cover.jpg",      // opsiyonel kapak; yoksa doodle'a düşer
+  coverWebp: "images/vera/cover.webp", // opsiyonel; varsa <picture> ile önce bu denenir
+  coverAlt: { tr: "...", en: "..." },  // opsiyonel; yoksa başlık + kategoriden üretilir
   desc: { tr: "...", en: "..." },
   tags: ["typography", "display"],
   link: "https://behance.net/...",     // opsiyonel dış bağlantı

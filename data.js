@@ -25,6 +25,12 @@ window.PORTFOLIO =
       "y": "2025",
       "color": "navy",
       "doodle": "d-type",
+      "cover": "images/vera/cover.jpg",
+      "coverWebp": "images/vera/cover.webp",
+      "coverAlt": {
+        "tr": "vera display tipografisinin sıkışık, kalın harf serisi",
+        "en": "the condensed, heavy letterforms of the vera display typeface"
+      },
       "desc": {
         "tr": "sıkışık, kalın, keskin köşeli display tipografi. dikkat ister, dikkat alır.",
         "en": "a condensed, heavy, sharp-cornered display typeface. demands attention, earns it."
@@ -118,6 +124,12 @@ window.PORTFOLIO =
       "y": "2024",
       "color": "sky",
       "doodle": "d-eye",
+      "cover": "images/smart-locker-interface/cover.jpg",
+      "coverWebp": "images/smart-locker-interface/cover.webp",
+      "coverAlt": {
+        "tr": "akıllı emanet dolabının dokunmatik ekran arayüzü",
+        "en": "the touchscreen interface of the smart locker"
+      },
       "desc": {
         "tr": "akıllı emanet dolabı için dokunmatik arayüz konsepti. akış + ekranlar.",
         "en": "touchscreen interface concept for a smart locker. flows + screens."
@@ -145,6 +157,12 @@ window.PORTFOLIO =
       "y": "2025",
       "color": "navy",
       "doodle": "d-box",
+      "cover": "images/i-mece-market-2025-production-finance/cover.jpg",
+      "coverWebp": "images/i-mece-market-2025-production-finance/cover.webp",
+      "coverAlt": {
+        "tr": "imece market marka sistemi ve dashboard ekranları",
+        "en": "the imece market brand system and dashboard screens"
+      },
       "desc": {
         "tr": "üretim ve finans platformu için marka sistemi ve dashboard arayüzü.",
         "en": "brand system and dashboard interface for a production & finance platform."
