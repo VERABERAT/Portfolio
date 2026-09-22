@@ -301,8 +301,7 @@ body::after {
 
 .rec a { display: block; position: absolute; inset: 0; }
 
-/* now playing + transport */
-.nowplaying { display: none; }
+/* transport */
 .crate__ctrl {
   display: flex; align-items: center; justify-content: center; gap: 1.2rem;
   padding: 3.2rem var(--gut) 0;

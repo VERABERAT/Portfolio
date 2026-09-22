@@ -57,7 +57,6 @@
       if (near !== active) {
         active = near;
         els.forEach((el, i) => el.classList.toggle('is-active', i === near));
-        els.forEach((el, i) => el.setAttribute('aria-hidden', i === near ? 'false' : 'true'));
         onActive && onActive(near, records[near]);
       }
     }
@@ -159,6 +158,13 @@
     paint(0);
     if (reduced.matches) root.classList.add('is-reduced');
 
-    return { goTo, get index() { return active; } };
+    // `target` is where the crate is heading, `index` is where it has
+    // settled. Transport buttons must read `target`, or a second click
+    // before the spring lands re-issues the move it just made.
+    return {
+      goTo,
+      get index() { return active; },
+      get target() { return Math.round(spring.target); }
+    };
   };
 })();

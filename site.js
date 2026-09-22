@@ -79,9 +79,12 @@
       </span>`;
   }
 
+  // Off-stage records carry `inert`: they leave the tab order and the
+  // accessibility tree together. aria-hidden alone would have hidden
+  // links that were still focusable, which is worse than doing nothing.
   stage.innerHTML = projects.map((p, i) => {
     const col = p.color || 'cream';
-    return `<article class="rec" id="rec-${i}" role="option" aria-selected="${i === 0}" tabindex="${i === 0 ? '0' : '-1'}"
+    return `<article class="rec" id="rec-${i}"${i === 0 ? '' : ' inert'}
         style="--label:var(--${col}); --labelink:var(--${col}-ink); --sleeve:var(--${col}); --sleeveink:var(--${col}-ink)">
       <span class="rec__vinyl" aria-hidden="true">
         <span class="rec__label"><small>berat. rec</small><b>${esc(p.t)}</b><small>${esc(p.y || '')}</small></span>
@@ -99,23 +102,21 @@
 
   const prevBtn = document.getElementById('prevRec');
   const nextBtn = document.getElementById('nextRec');
+  const nowPlaying = document.getElementById('nowPlaying');
 
   const gallery = window.initVinyl(crate, projects, {
     onOpen: (i, p) => go(hrefOf(p)),
-    onActive: (i) => {
+    onActive: (i, p) => {
       tickEls.forEach((el, n) => el.classList.toggle('on', n === i));
-      crate.setAttribute('aria-activedescendant', 'rec-' + i);
-      stage.querySelectorAll('.rec').forEach((el, n) => {
-        el.setAttribute('aria-selected', String(n === i));
-        el.tabIndex = n === i ? 0 : -1;
-      });
+      stage.querySelectorAll('.rec').forEach((el, n) => { el.inert = n !== i; });
       prevBtn.disabled = i === 0;
       nextBtn.disabled = i === projects.length - 1;
+      nowPlaying.textContent = `${p.t} — ${t(p.c)}, ${p.y} (${i + 1}/${projects.length})`;
     }
   });
   if (gallery) {
-    prevBtn.addEventListener('click', () => gallery.goTo(gallery.index - 1));
-    nextBtn.addEventListener('click', () => gallery.goTo(gallery.index + 1));
+    prevBtn.addEventListener('click', () => gallery.goTo(gallery.target - 1));
+    nextBtn.addEventListener('click', () => gallery.goTo(gallery.target + 1));
   }
 
   /* ---------- dizin: list + filters + pointer preview ---------- */
