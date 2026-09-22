@@ -232,9 +232,72 @@ window.PORTFOLIO =
       "media": [
         {
           "type": "video",
-          "src": "images/miu-miu/miu-miu.mp4"
+          "src": "images/miu-miu/film.mp4",
+          "poster": "images/miu-miu/poster.jpg",
+          "w": 848,
+          "h": 480
         }
-      ]
+      ],
+      "preview": {
+        "webm": "images/miu-miu/preview.webm",
+        "mp4": "images/miu-miu/preview.mp4"
+      },
+      "credits": [
+        {
+          "role": {
+            "tr": "prodüksiyon",
+            "en": "production"
+          },
+          "name": "Kasten Kolektif"
+        },
+        {
+          "role": {
+            "tr": "yönetmen",
+            "en": "directors"
+          },
+          "name": "Özhan Aydemir & Işıl Sevim"
+        },
+        {
+          "role": {
+            "tr": "görüntü yönetmeni",
+            "en": "director of photography"
+          },
+          "name": "Bahar Kılıç"
+        },
+        {
+          "role": {
+            "tr": "kreatif direktör",
+            "en": "creative direction"
+          },
+          "name": "Defne Ulusoy"
+        },
+        {
+          "role": {
+            "tr": "kurgu",
+            "en": "editing"
+          },
+          "name": "Özhan Aydemir & Özüm Mersin"
+        },
+        {
+          "role": {
+            "tr": "oyuncular",
+            "en": "talent"
+          },
+          "name": "Defne Ulusoy, Özüm Mersin, Petek Öztürk"
+        },
+        {
+          "role": {
+            "tr": "line producer",
+            "en": "line producer"
+          },
+          "name": "Berat Erdoğan",
+          "me": true
+        }
+      ],
+      "role": {
+        "tr": "line producer",
+        "en": "line producer"
+      }
     },
     {
       "slug": "kasten-meets-ankara",
@@ -409,6 +472,11 @@ window.PORTFOLIO =
       "behance": "https://www.behance.net/beraterdoan1",
       "instagram": "https://www.instagram.com/__bertab/?hl=tr",
       "linkedin": "https://www.linkedin.com/in/beraterdogan"
+    },
+    "reel": null,
+    "title": {
+      "tr": "motion designer & art director",
+      "en": "motion designer & art director"
     }
   },
   "experience": [
