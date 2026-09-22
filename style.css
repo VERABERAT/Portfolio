@@ -52,7 +52,19 @@
   --muted:  #6C6C6C;            /* 5.25:1 on white — AA */
   --well:   #F4F4F4;            /* media backdrop, behind images */
   --glass-edge: color-mix(in srgb, var(--ink) 10%, transparent);
-  --vinyl-rim: rgba(255,255,255,.07);
+  /* the record: the one surface that is not paper or ink */
+  --vinyl-a: #191919;                 /* groove highlight */
+  --vinyl-b: #0D0D0D;                 /* groove shadow    */
+  --vinyl-c: #141414;                 /* groove body      */
+  --vinyl-rim:   rgba(255, 255, 255, .07);
+  --vinyl-sheen: rgba(255, 255, 255, .13);
+  --vinyl-cast:  rgba(0, 0, 0, .55);
+  --spindle:     rgba(0, 0, 0, .25);
+
+  /* rgb helpers, for rgba() without re-declaring a colour */
+  --paper-rgb: 255, 255, 255;
+  --ink-rgb: 0, 0, 0;
+  --accent-rgb: 229, 38, 26;
   --shadow: 0 1.5rem 3rem -1rem color-mix(in srgb, var(--ink) 34%, transparent);
 
   /* --- record label palette (carried over from the old cards) --- */
@@ -349,15 +361,15 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transition: transform .8s var(--energy);
   background:
     repeating-radial-gradient(circle at 50% 50%,
-      #191919 0 1px, #0d0d0d 1px 2.5px, #141414 2.5px 4px);
-  box-shadow: 0 1rem 2.5rem -.8rem rgba(0,0,0,.55), inset 0 0 0 1px var(--vinyl-rim);
+      var(--vinyl-a) 0 1px, var(--vinyl-b) 1px 2.5px, var(--vinyl-c) 2.5px 4px);
+  box-shadow: 0 1rem 2.5rem -.8rem var(--vinyl-cast), inset 0 0 0 1px var(--vinyl-rim);
 }
 /* the sheen that reads as "this is vinyl, not a black circle" */
 .rec__vinyl::before {
   content: ""; position: absolute; inset: 0; border-radius: 50%;
   background: conic-gradient(from 210deg,
-    rgba(255,255,255,0) 0deg, rgba(255,255,255,.13) 32deg, rgba(255,255,255,0) 80deg,
-    rgba(255,255,255,0) 190deg, rgba(255,255,255,.09) 222deg, rgba(255,255,255,0) 270deg);
+    transparent 0deg, var(--vinyl-sheen) 32deg, transparent 80deg,
+    transparent 190deg, var(--vinyl-sheen) 222deg, transparent 270deg);
 }
 .rec__label {
   position: absolute; inset: 32%; border-radius: 50%;
@@ -373,7 +385,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* spindle hole */
 .rec__label::after {
   content: ""; position: absolute; width: 9%; aspect-ratio: 1; border-radius: 50%;
-  background: var(--paper); box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
+  background: var(--paper); box-shadow: inset 0 0 0 1px var(--spindle);
 }
 
 /* the active record pulls its vinyl out and spins it */
@@ -638,3 +650,38 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   font-size: clamp(1.2rem, 3vw, 1.9rem); letter-spacing: -.025em; line-height: 1.05;
 }
 .pnav .next { text-align: right; margin-left: auto; }
+
+
+/* ============================================================
+   TOUCH TARGETS
+   Measured at 390px: the language toggle came out 31px tall, the
+   filter pills 35, a social link 19. Coarse pointers get a 44px
+   minimum — pills grow, text links keep their exact look and gain
+   an invisible hit area instead.
+   ============================================================ */
+@media (pointer: coarse) {
+  .lang, .filter, .ctrl { min-height: 44px; }
+  .lang, .filter { display: inline-flex; align-items: center; }
+
+  .socials a,
+  .nav__links a,
+  .nav__brand,
+  .ulink,
+  .contact__mail { position: relative; }
+
+  .socials a::after,
+  .nav__links a::after,
+  .nav__brand::after,
+  .ulink::after,
+  .contact__mail::after {
+    content: ""; position: absolute; left: 0; right: 0;
+    top: 50%; height: 44px; transform: translateY(-50%);
+  }
+  /* the nav underline already owns ::after — give it the real one back */
+  .nav__links a::after {
+    left: 0; right: 0; top: auto; bottom: -.28em; height: 1px;
+    transform: scaleX(0); transform-origin: left;
+    background: currentColor;
+  }
+  .nav__links a { padding-block: .7rem; }
+}

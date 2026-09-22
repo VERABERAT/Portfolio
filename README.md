@@ -28,6 +28,18 @@ Canlı: <https://beraterdogan.studio> — `main`'e her push Vercel'de otomatik d
 
 ## Tasarım sistemi
 
+Tam spec `DESIGN.md`'de — 9 bölüm: tema, renk, tipografi, bileşen durumları,
+layout, derinlik, hareket, do's & don'ts, responsive. Koda dokunmadan önce
+oraya bak; kod o dosyayı takip eder, tersi değil.
+
+`DESIGN.md`, [web-design](https://github.com/KAOPU-XiaoPu/web-design) SKILL'inin
+(MIT) 9 bölümlü şablonuna göre üretildi. SKILL'in bazı zorunlu maddeleri
+(WebGL signature moment, Aurora arka plan katmanı, gradyan metin, custom cursor)
+bilinçli olarak uygulanmadı — gerekçeleri `DESIGN.md`'in sonundaki
+"Bu spec'ten bilinçli sapmalar" tablosunda.
+
+### Özet
+
 Tüm token'lar `style.css` içindeki `:root`'ta:
 
 | Token | Değer | Not |
