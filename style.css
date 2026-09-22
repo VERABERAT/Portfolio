@@ -255,6 +255,8 @@ body::after {
 
 .rec__vinyl {
   position: absolute; inset: 0; border-radius: 50%; z-index: 1;
+  overflow: hidden;   /* the sheen below is a square that rotates —
+                         unclipped, its corners sweep past the disc */
   transform: translateX(22%);
   transition: transform .8s var(--energy);
   background:
