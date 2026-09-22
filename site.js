@@ -112,6 +112,7 @@
       prevBtn.disabled = i === 0;
       nextBtn.disabled = i === projects.length - 1;
       nowPlaying.textContent = `${p.t} — ${t(p.c)}, ${p.y} (${i + 1}/${projects.length})`;
+      tagRecord(i);   // whoever is active is the one that flies out next
     }
   });
   if (gallery) {
@@ -205,16 +206,58 @@
   });
 
   /* ---------- page transition ----------
-     View Transitions is native, so this costs nothing and simply
-     does not run where it is unsupported. */
-  function go(href) {
-    if (!document.startViewTransition || window.Motion.reduced.matches) { location.href = href; return; }
-    document.startViewTransition(() => { location.href = href; });
+     @view-transition in the stylesheet drives the navigation, so
+     links are left alone — no click interception, middle-click and
+     ctrl-click keep working. All this does is put the name on the
+     right record so the browser knows what morphs into what. */
+  // The class names are literals, not consts: onActive calls this
+  // during gallery init, which runs before anything declared down
+  // here would be initialised.
+  function tagRecord(i) {
+    stage.querySelectorAll('.vt-sleeve, .vt-vinyl')
+      .forEach(el => el.classList.remove('vt-sleeve', 'vt-vinyl'));
+    const rec = stage.children[i];
+    if (!rec) return;
+    rec.querySelector('.rec__sleeve').classList.add('vt-sleeve');
+    rec.querySelector('.rec__vinyl').classList.add('vt-vinyl');
   }
-  document.querySelectorAll('a[href^="project.html"]').forEach(a => {
-    a.addEventListener('click', (e) => {
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-      e.preventDefault(); go(a.getAttribute('href'));
-    });
+
+  // Remember which record was opened, so coming back lands on it
+  // instead of snapping to the first one.
+  const LAST = 'portfolio_last_record';
+  function slugAt(i) { return projects[i] ? slugOf(projects[i]) : ''; }
+
+  function go(href) { location.href = href; }   // let the browser transition
+
+  // pageswap fires before the outgoing page is snapshotted — the one
+  // moment where naming the element still affects the transition.
+  addEventListener('pageswap', (e) => {
+    if (!e.viewTransition) return;
+    let slug = '';
+    try { slug = new URL(e.activation.entry.url).searchParams.get('p') || ''; } catch (_) {}
+    const i = projects.findIndex(p => slugOf(p) === slug);
+    if (i < 0) return;
+    try { sessionStorage.setItem(LAST, slug); } catch (_) {}
+    crate.classList.add('is-swapping');   // flatten and unclip for the snapshot
+    tagRecord(i);
   });
+
+  // is-swapping is set on the way out. If the page comes back from
+  // bfcache this script does not re-run, so clear it on restore or
+  // the crate stays unclipped with its neighbours hidden.
+  addEventListener('pageshow', () => crate.classList.remove('is-swapping'));
+  addEventListener('pagereveal', () => crate.classList.remove('is-swapping'));
+
+  // Coming back: open on the record we left from and name it, so the
+  // hero record on the project page morphs back into the crate.
+  let startAt = 0;
+  try {
+    const back = sessionStorage.getItem(LAST);
+    const i = projects.findIndex(p => slugOf(p) === back);
+    if (i > 0) startAt = i;
+  } catch (_) {}
+
+  if (gallery && startAt > 0) {
+    gallery.jumpTo(startAt);   // onActive tags it
+  }
 })();

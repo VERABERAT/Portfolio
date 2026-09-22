@@ -123,8 +123,8 @@
       </div>
       <div class="phero__rec" aria-hidden="true"
            style="--label:var(--${col}); --labelink:var(--${col}-ink); --sleeve:var(--${col}); --sleeveink:var(--${col}-ink)">
-        <span class="rec__vinyl"><span class="rec__label"><small>berat. rec</small><b>${esc(p.t)}</b><small>${esc(p.y || '')}</small></span></span>
-        <span class="rec__sleeve">${sleeve}</span>
+        <span class="rec__vinyl vt-vinyl"><span class="rec__label"><small>berat. rec</small><b>${esc(p.t)}</b><small>${esc(p.y || '')}</small></span></span>
+        <span class="rec__sleeve vt-sleeve">${sleeve}</span>
       </div>
     </section>
 
@@ -141,6 +141,9 @@
     </footer>`;
 
   document.getElementById('y').textContent = new Date().getFullYear();
+
+  // so index.html opens on this record and the morph runs in reverse
+  try { sessionStorage.setItem('portfolio_last_record', slugOf(p)); } catch (e) {}
   window.Motion.reveal(document);
   window.Motion.smoothScroll({ lerp: 0.165 });
 })();
