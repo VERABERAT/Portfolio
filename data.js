@@ -62,6 +62,13 @@ window.PORTFOLIO =
       "y": "2025",
       "color": "forest",
       "doodle": "d-sprout",
+      "cover": "images/ferm/sleeve.svg",
+      "coverW": 1200,
+      "coverH": 1200,
+      "coverAlt": {
+        "tr": "ferm kılıfı — kavanozda yükselen fermantasyon kabarcıkları",
+        "en": "ferm sleeve — fermentation bubbles rising in a jar"
+      },
       "desc": {
         "tr": "fermente ürün serisi için organik tipografi ve canlı bir ambalaj sistemi.",
         "en": "organic typography and a lively packaging system for a fermented product line."
@@ -97,6 +104,13 @@ window.PORTFOLIO =
       "y": "2024",
       "color": "yellow",
       "doodle": "d-box",
+      "cover": "images/nutripaw/sleeve.svg",
+      "coverW": 1200,
+      "coverH": 1200,
+      "coverAlt": {
+        "tr": "nutripaw kılıfı — baskı ızgarası üstünde pati işareti",
+        "en": "nutripaw sleeve — a paw mark over a print grid"
+      },
       "desc": {
         "tr": "organik pet food markası için uçtan uca kimlik, ambalaj ve kampanya.",
         "en": "holistic identity, packaging and campaign for an organic pet food brand."
@@ -194,6 +208,13 @@ window.PORTFOLIO =
       "y": "2024",
       "color": "yellow",
       "doodle": "d-spark",
+      "cover": "images/miu-miu/sleeve.svg",
+      "coverW": 1200,
+      "coverH": 1200,
+      "coverAlt": {
+        "tr": "miu miu kılıfı — kampanya kurgularını anlatan kayan tipografi tekrarları",
+        "en": "miu miu sleeve — sliding typographic repeats standing for the campaign cuts"
+      },
       "desc": {
         "tr": "sezonluk kampanya için key visual ve motion kurgular.",
         "en": "key visuals and motion edits for a seasonal campaign."
@@ -221,6 +242,13 @@ window.PORTFOLIO =
       "y": "2024",
       "color": "sky",
       "doodle": "d-tent",
+      "cover": "images/kasten-meets-ankara/sleeve.svg",
+      "coverW": 1200,
+      "coverH": 1200,
+      "coverAlt": {
+        "tr": "kasten meets ankara kılıfı — kesişen iki daire",
+        "en": "kasten meets ankara sleeve — two intersecting circles"
+      },
       "desc": {
         "tr": "ankara için bir kültür kampanyasının instagram serisi — carousel + reels.",
         "en": "instagram series for a cultural campaign for ankara — carousel + reels."
@@ -248,6 +276,13 @@ window.PORTFOLIO =
       "y": "2025",
       "color": "forest",
       "doodle": "d-type",
+      "cover": "images/yazgiya-inat-yazi/sleeve.svg",
+      "coverW": 1200,
+      "coverH": 1200,
+      "coverAlt": {
+        "tr": "yazgıya inat yazı kılıfı — kenarlardan taşan brutalist tipografi",
+        "en": "yazgıya inat yazı sleeve — brutalist type bleeding off both edges"
+      },
       "desc": {
         "tr": "sergi kimliği ve poster serisi — tipografi odaklı, brutalist bir görsel dil.",
         "en": "exhibition identity and poster series — a typography-led, brutalist visual language."
@@ -276,6 +311,13 @@ window.PORTFOLIO =
       "y": "2024",
       "color": "yellow",
       "doodle": "d-spark",
+      "cover": "images/tus-bodrum/sleeve.svg",
+      "coverW": 1200,
+      "coverH": 1200,
+      "coverAlt": {
+        "tr": "tus bodrum kılıfı — ufukta batan güneş",
+        "en": "tus bodrum sleeve — a sun setting on the horizon"
+      },
       "desc": {
         "tr": "otel & restoran için sıfırdan görsel kimlik, logo ve menü tasarımı.",
         "en": "visual identity from scratch, logo and menu design for a hospitality brand."

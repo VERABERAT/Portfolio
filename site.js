@@ -68,8 +68,11 @@
     if (p.cover) {
       const webp = p.coverWebp ? `<source srcset="${p.coverWebp}" type="image/webp">` : '';
       const alt = p.coverAlt ? t(p.coverAlt) : fill(t(UI.sleeveOf), p);
+      // designed sleeves are square, photo covers are 16:10 — the real
+      // ratio has to be declared or the box shifts while loading
       return `<picture>${webp}<img src="${p.cover}" alt="${esc(alt)}"
-        width="1200" height="750" loading="lazy" decoding="async"></picture>`;
+        width="${p.coverW || 1200}" height="${p.coverH || 750}"
+        loading="lazy" decoding="async"></picture>`;
     }
     // no cover: a typographic sleeve, with the project's doodle as its mark
     return `<span class="rec__type">

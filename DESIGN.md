@@ -224,6 +224,39 @@ karedir ve 14rem'de blok gibi durur).
 
 `.rec a`'nın `z-index: 3` olması zorunlu: kılıf 2'de ve kapak görseli tıklamayı yutar.
 
+### Record sleeve (kılıf sanatı)
+
+Her projenin kılıfı ya **gerçek iş** (foto kapak) ya da **tasarlanmış vektör
+kılıf**tır. Placeholder yoktur.
+
+Tasarlanmış kılıflar `images/<slug>/sleeve.svg`, 1200×1200 kare, ve hepsi aynı
+üç kuralı paylaşır:
+
+1. Zemin projenin etiket rengi, çizim o rengin ink'i. **Sadece bu iki renk.**
+2. Mobilya sabittir: sol üstte kategori (30px, `letter-spacing 7`),
+   sol altta başlık (700) ve yıl.
+3. Ortadaki fikir projeye özeldir ve **işi anlatır**, süs değildir.
+
+| Proje | Fikir |
+|---|---|
+| ferm | Kavanozda yükselen fermantasyon kabarcıkları + sıvı çizgisi |
+| nutripaw | Baskı ızgarası (halftone) üstünde pati — ambalaj = baskı |
+| miu miu | Kayan tipografi tekrarları — kampanyanın 6/15/30sn kurguları |
+| kasten meets ankara | Kesişen iki daire; "MEETS" kesişimin içinde |
+| yazgıya inat yazı | Her iki kenardan taşan brutalist tipografi |
+| tus bodrum | Ufukta batan güneş + dalga çizgileri |
+
+**Kural**: kılıf AI ile üretilmez. Portfolyoda bir kılıf ya yapılan işi gösterir
+ya da onu tipografik/geometrik olarak yorumlar. Üretilmiş görsel, var olmayan
+bir işi temsil eder.
+
+Foto kapaklar 16:10, tasarlanmış kılıflar 1:1. Oran `coverW`/`coverH` ile
+bildirilir; yüklenirken kutu kaymasın.
+
+```css
+.rec__sleeve img { width: 100%; height: 100%; object-fit: cover; }
+```
+
 ### Index row (dizin satırı)
 
 ```css

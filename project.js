@@ -100,7 +100,7 @@
   const sleeve = p.cover
     ? `<picture>${p.coverWebp ? `<source srcset="${esc(p.coverWebp)}" type="image/webp">` : ''}
         <img src="${esc(p.cover)}" alt="${esc(p.coverAlt ? t(p.coverAlt) : p.t + ' — ' + t(p.c))}"
-             width="1200" height="750" decoding="async"></picture>`
+             width="${p.coverW || 1200}" height="${p.coverH || 750}" decoding="async"></picture>`
     : `<span class="rec__type"><small>${esc(t(p.c))}</small><b>${esc(p.t)}</b>
         <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#${esc(p.doodle || 'd-spark')}"/></svg></span>`;
 

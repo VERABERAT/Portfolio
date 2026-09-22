@@ -120,8 +120,9 @@ dilden bağımsız alanlar düz string.
   y: "2025",
   color: "navy",                       // plak etiketi: yellow|navy|mint|sky|forest|mono
   doodle: "d-type",                    // doodles.js'teki id
-  cover: "images/vera/cover.jpg",      // opsiyonel; yoksa tipografik kılıf
+  cover: "images/vera/cover.jpg",      // foto kapak ya da images/<slug>/sleeve.svg
   coverWebp: "images/vera/cover.webp", // opsiyonel; varsa <picture> önce bunu dener
+  coverW: 1200, coverH: 750,           // gerçek oran — foto 16:10, tasarlanmış kılıf 1:1
   coverAlt: { tr: "...", en: "..." },  // opsiyonel; yoksa başlık + kategoriden üretilir
   desc: { tr: "...", en: "..." },
   tags: ["typography", "display"],
