@@ -9,14 +9,22 @@
   --display: 'Instrument Serif', 'Times New Roman', Georgia, serif;
   --sans: 'Inter Tight', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  /* --- surface --- */
-  --paper:  #EFEDE8;
-  --ink:    #141414;
-  --accent: #B2422D;
+  /* --- surface: pure black and pure white, no warm cast ---
+     Light is the default; dark inverts it below. Everything is
+     derived from --paper / --ink, so the two themes are one
+     token block each and nothing else in the file changes. */
+  --paper:  #FFFFFF;
+  --ink:    #000000;
+  /* #E5261A is the one red that clears AA on BOTH grounds:
+     4.54:1 on white, 4.62:1 on black. The old terracotta was
+     5.66 on white but only 3.71 on black. */
+  --accent: #E5261A;
   --line:   color-mix(in srgb, var(--ink) 16%, transparent);
-  /* 64%, not 58%: at 58% this was 4.29:1 on paper and missed AA
-     for the body-size text it is used on. */
-  --muted:  color-mix(in srgb, var(--ink) 64%, var(--paper));
+  --muted:  #6C6C6C;            /* 5.25:1 on white */
+  --well:   #F4F4F4;            /* media backdrop, behind images */
+  --glass-edge: color-mix(in srgb, var(--ink) 10%, transparent);
+  --vinyl-rim: rgba(255,255,255,.07);
+  --shadow: 0 1.5rem 3rem -1rem color-mix(in srgb, var(--ink) 34%, transparent);
 
   /* --- record label palette (carried over from the old cards) --- */
   --yellow: #FFD93D;  --yellow-ink: #2B2B2B;
@@ -24,7 +32,7 @@
   --mint:   #AEEBD0;  --mint-ink:   #8B2E2E;
   --sky:    #6BC5F0;  --sky-ink:    #1B2B4A;
   --forest: #1B4D3E;  --forest-ink: #EDE5B6;
-  --cream:  #F3EFE6;  --cream-ink:  #2B2B2B;
+  --mono:   #FFFFFF;  --mono-ink:   #000000;
 
   /* --- motion ---
      One signature curve for everything that is not a spring.
@@ -34,6 +42,20 @@
   /* --- rhythm: rem so a bumped browser font size scales the layout --- */
   --gut:  clamp(1.4rem, 5vw, 5rem);
   --sec:  clamp(5rem, 13vh, 10rem);
+}
+
+/* Dark: the same page inverted. The label palette is untouched —
+   those are the project colours and they read on either ground. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #000000;
+    --ink:   #FFFFFF;
+    --muted: #909090;          /* 6.58:1 on black */
+    --well:  #0D0D0D;
+    --glass-edge: color-mix(in srgb, var(--ink) 22%, transparent);
+    --vinyl-rim: rgba(255,255,255,.22);   /* or the record vanishes */
+    --shadow: 0 1.5rem 3rem -1rem rgba(0,0,0,.9);
+  }
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -60,12 +82,11 @@ img, svg, video, iframe { display: block; max-width: 100%; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 ::selection { background: var(--accent); color: var(--paper); }
 
-/* paper grain — the one thing carried over untouched from the old site */
-body::after {
-  content: ""; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
-  opacity: .045; mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
+/* No paper grain. It was a warm-paper effect and it cannot survive a
+   pure black-and-white brief: at any visible opacity multiply pulls
+   the white to ~#F7F7F7, and in dark mode screen-blending black noise
+   over black is a no-op that only touches the artwork. To bring it
+   back, restore a body::after overlay with the noise data-URI. */
 
 /* ============================================================
    ACCESSIBILITY
@@ -94,7 +115,7 @@ body::after {
   background: color-mix(in srgb, var(--paper) 72%, transparent);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid color-mix(in srgb, #fff 45%, transparent);
+  border-bottom: 1px solid var(--glass-edge);
 }
 .nav__brand { font-family: var(--display); font-size: 1.4rem; letter-spacing: -.02em; }
 .nav__brand span { color: var(--accent); }
@@ -234,7 +255,7 @@ body::after {
   border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
   background: var(--sleeve, var(--ink));
   overflow: hidden;
-  box-shadow: 0 1.5rem 3rem -1rem color-mix(in srgb, var(--ink) 40%, transparent);
+  box-shadow: var(--shadow);
   z-index: 2;
 }
 .rec__sleeve img { width: 100%; height: 100%; object-fit: cover; }
@@ -262,7 +283,7 @@ body::after {
   background:
     repeating-radial-gradient(circle at 50% 50%,
       #191919 0 1px, #0d0d0d 1px 2.5px, #141414 2.5px 4px);
-  box-shadow: 0 1rem 2.5rem -.8rem rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.06);
+  box-shadow: 0 1rem 2.5rem -.8rem rgba(0,0,0,.55), inset 0 0 0 1px var(--vinyl-rim);
 }
 /* the sheen that reads as "this is vinyl, not a black circle" */
 .rec__vinyl::before {
@@ -367,8 +388,8 @@ body::after {
   transform: translate(-50%, -50%) scale(.9);
   transition: opacity .35s var(--energy), transform .55s var(--energy);
   border: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
-  box-shadow: 0 1.5rem 3rem -1rem rgba(0,0,0,.35);
-  overflow: hidden; background: var(--ink);
+  box-shadow: var(--shadow);
+  overflow: hidden; background: var(--well);
 }
 .idx__peek.on { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 .idx__peek img { width: 100%; height: 100%; object-fit: cover; }
@@ -520,7 +541,7 @@ body::after {
   font-family: var(--display); font-weight: 400; font-size: clamp(1.4rem, 3vw, 2.2rem);
   letter-spacing: -.02em; color: var(--muted); margin-bottom: .5rem;
 }
-.shot { border: 1px solid var(--line); background: var(--ink); overflow: hidden; }
+.shot { border: 1px solid var(--line); background: var(--well); overflow: hidden; }
 .shot img, .shot video { width: 100%; height: auto; }
 .shot--embed { position: relative; aspect-ratio: 16 / 9; }
 .shot--embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }

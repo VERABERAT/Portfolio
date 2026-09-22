@@ -30,11 +30,12 @@ Canlı: <https://beraterdogan.studio> — `main`'e her push Vercel'de otomatik d
 
 Tüm token'lar `style.css` içindeki `:root`'ta:
 
-| Token | Değer | Not |
-|---|---|---|
-| `--paper` / `--ink` | `#EFEDE8` / `#141414` | 15.75:1 |
-| `--accent` | `#B2422D` | 4.84:1, AA |
-| `--muted` | `ink %64` | 5.21:1, AA |
+| Token | Açık | Koyu | Not |
+|---|---|---|---|
+| `--paper` / `--ink` | `#FFFFFF` / `#000000` | `#000000` / `#FFFFFF` | 21:1 |
+| `--accent` | `#E5261A` | `#E5261A` | 4.54:1 / 4.62:1 — AA, her iki zeminde |
+| `--muted` | `#6C6C6C` | `#909090` | 5.25:1 / 6.58:1 — AA |
+| `--well` | `#F4F4F4` | `#0D0D0D` | görsel arkası |
 | `--display` | Instrument Serif | başlıklar |
 | `--sans` | Inter Tight | metin |
 | `--energy` | `cubic-bezier(0.32, 0.72, 0, 1)` | yay olmayan her geçiş |
@@ -43,8 +44,18 @@ Tüm token'lar `style.css` içindeki `:root`'ta:
 Tipografi kuralı: **büyüdükçe tracking sıkışır** (`-.04em` başlıkta, `0` gövdede),
 **büyüdükçe leading sıkışır** (`.92` başlıkta, `1.55` gövdede).
 
-Eski kart paleti (`--yellow`, `--navy`, `--mint`, `--sky`, `--forest`, `--cream`)
-duruyor — artık plak etiketi renkleri. Hepsi kendi ink'iyle AA geçiyor.
+Saf siyah/beyaz. Kağıt grain yok — sıcak kağıt efektiydi, `multiply` beyazı
+`#F7F7F7`'ye çekiyordu, siyahta `screen` ile hiçbir şey yapmıyordu. Geri
+istersen `style.css`'teki nota bak.
+
+**Koyu tema** `prefers-color-scheme: dark` ile otomatik; sadece `:root`
+token'ları değişiyor, başka hiçbir kural dokunmuyor. Tek temaya kilitlemek
+için o `@media` bloğunu sil (açıkta kalır) ya da içindeki değerleri `:root`'a
+taşı (koyuda kalır).
+
+Eski kart paleti (`--yellow`, `--navy`, `--mint`, `--sky`, `--forest`, `--mono`)
+duruyor — artık plak etiketi renkleri, ikisinde de okunuyor. Hepsi kendi
+ink'iyle AA geçiyor.
 
 ## Hareket
 
@@ -86,7 +97,7 @@ dilden bağımsız alanlar düz string.
   t: "vera",                           // başlık
   c: { tr: "tipografi", en: "typography" },  // kategori — dizin filtresi buradan toplanır
   y: "2025",
-  color: "navy",                       // plak etiketi: yellow|navy|mint|sky|forest|cream
+  color: "navy",                       // plak etiketi: yellow|navy|mint|sky|forest|mono
   doodle: "d-type",                    // doodles.js'teki id
   cover: "images/vera/cover.jpg",      // opsiyonel; yoksa tipografik kılıf
   coverWebp: "images/vera/cover.webp", // opsiyonel; varsa <picture> önce bunu dener

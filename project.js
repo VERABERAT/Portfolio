@@ -92,7 +92,7 @@
   const desc = t(p.desc);
   if (desc) document.querySelector('meta[name="description"]').setAttribute('content', desc);
 
-  const col = p.color || 'cream';
+  const col = p.color || 'mono';
   const media = (p.media || []).map((m, i) => mediaHTML(m, i + 1)).join('');
   const ext = (p.link && p.link !== '#')
     ? `<a class="ulink phero__cta" href="${esc(p.link)}" target="_blank" rel="noopener">${esc(t(UI.fullCase))} <i>↗</i></a>` : '';

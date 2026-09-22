@@ -83,7 +83,7 @@
   // accessibility tree together. aria-hidden alone would have hidden
   // links that were still focusable, which is worse than doing nothing.
   stage.innerHTML = projects.map((p, i) => {
-    const col = p.color || 'cream';
+    const col = p.color || 'mono';
     return `<article class="rec" id="rec-${i}"${i === 0 ? '' : ' inert'}
         style="--label:var(--${col}); --labelink:var(--${col}-ink); --sleeve:var(--${col}); --sleeveink:var(--${col}-ink)">
       <span class="rec__vinyl" aria-hidden="true">
