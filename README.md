@@ -30,28 +30,33 @@ Canlı: <https://beraterdogan.studio> — `main`'e her push Vercel'de otomatik d
 
 Tüm token'lar `style.css` içindeki `:root`'ta:
 
-| Token | Açık | Koyu | Not |
-|---|---|---|---|
-| `--paper` / `--ink` | `#FFFFFF` / `#000000` | `#000000` / `#FFFFFF` | 21:1 |
-| `--accent` | `#E5261A` | `#E5261A` | 4.54:1 / 4.62:1 — AA, her iki zeminde |
-| `--muted` | `#6C6C6C` | `#909090` | 5.25:1 / 6.58:1 — AA |
-| `--well` | `#F4F4F4` | `#0D0D0D` | görsel arkası |
-| `--display` | Instrument Serif | başlıklar |
-| `--sans` | Inter Tight | metin |
+| Token | Değer | Not |
+|---|---|---|
+| `--paper` / `--ink` | `#FFFFFF` / `#000000` | saf beyaz üzerine saf siyah, 21:1 |
+| `--accent` | `#E5261A` | 4.54:1 — AA |
+| `--muted` | `#6C6C6C` | 5.25:1 — AA |
+| `--well` | `#F4F4F4` | görsel arkası |
+| `--display` | Helvetica Now Display | başlıklar, 700 |
+| `--sans` | Helvetica Now Text | metin, 400/500 |
 | `--energy` | `cubic-bezier(0.32, 0.72, 0, 1)` | yay olmayan her geçiş |
 | `--gut` / `--sec` | `rem` tabanlı | kullanıcı yazı boyutunu büyütünce layout birlikte ölçeklenir |
+
+**Helvetica Now ticari bir font** (Monotype). Repoda yok, dışarıdan da
+çekilmiyor — site sıfır dış font isteği yapıyor. Lisanslı `woff2`
+dosyalarını `fonts/` içine koyup `style.css`'in başındaki `@font-face`
+bloğunun yorumunu kaldırınca devreye giriyor; detay `fonts/README.md`'de.
+O zamana kadar stack `Helvetica Neue` → `Helvetica` → `Arial` sırasıyla
+düşüyor. Üçü de metrik uyumlu, düzen kaymıyor.
 
 Tipografi kuralı: **büyüdükçe tracking sıkışır** (`-.04em` başlıkta, `0` gövdede),
 **büyüdükçe leading sıkışır** (`.92` başlıkta, `1.55` gövdede).
 
-Saf siyah/beyaz. Kağıt grain yok — sıcak kağıt efektiydi, `multiply` beyazı
-`#F7F7F7`'ye çekiyordu, siyahta `screen` ile hiçbir şey yapmıyordu. Geri
+Tek tema: saf beyaz zemin, saf siyah yazı. Koyu varyant yok. Kağıt grain de
+yok — sıcak kağıt efektiydi, `multiply` beyazı `#F7F7F7`'ye çekiyordu. Geri
 istersen `style.css`'teki nota bak.
 
-**Koyu tema** `prefers-color-scheme: dark` ile otomatik; sadece `:root`
-token'ları değişiyor, başka hiçbir kural dokunmuyor. Tek temaya kilitlemek
-için o `@media` bloğunu sil (açıkta kalır) ya da içindeki değerleri `:root`'a
-taşı (koyuda kalır).
+Her kural hâlâ `--paper` / `--ink` üzerinden türüyor, yani ileride tersine
+çevirmek istenirse iki token'lık iş.
 
 Eski kart paleti (`--yellow`, `--navy`, `--mint`, `--sky`, `--forest`, `--mono`)
 duruyor — artık plak etiketi renkleri, ikisinde de okunuyor. Hepsi kendi
@@ -68,8 +73,12 @@ Kütüphane yok. `motion.js` şunları verir:
 - **`Motion.smoothScroll`** — `lerp 0.165`. Sadece fine-pointer cihazlarda.
 - **`Motion.reveal`** — satırlar kendi taşmalarından `120% → 0` yükselir,
   `0.7s`, `0.06s` arayla. Resize'da yeniden bölünür.
-- Sayfa geçişi **View Transitions API** ile; desteklenmeyen tarayıcıda sessizce
-  normal navigasyona düşer.
+- **Sayfa geçişi**: cross-document View Transitions. Açılan plak sandıktan
+  proje sayfasının hero'suna morph ediyor — GSAP Flip'in yaptığı işi tarayıcı
+  0 KB'a yapıyor. Aktif plağa `view-transition-name` veriliyor (bir isim
+  belgede tekil olmak zorunda), proje sayfasındaki hero plak aynı ismi
+  taşıyor. Desteklenmeyen tarayıcıda sessizce normal navigasyona düşer.
+  Geri dönüşte sandık, çıkılan plakta açılıyor (`sessionStorage`).
 - `prefers-reduced-motion: reduce` altında hepsi 200ms opacity cross-fade olur.
 
 ## Plak galerisi (`vinyl.js`)

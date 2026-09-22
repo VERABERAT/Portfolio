@@ -161,8 +161,13 @@
     // `target` is where the crate is heading, `index` is where it has
     // settled. Transport buttons must read `target`, or a second click
     // before the spring lands re-issues the move it just made.
+    // jumpTo lands on a record with no animation — used when the page
+    // opens on the record the visitor last looked at.
+    function jumpTo(i) { spring.jump(clamp(i, 0, last)); }
+
     return {
       goTo,
+      jumpTo,
       get index() { return active; },
       get target() { return Math.round(spring.target); }
     };
