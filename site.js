@@ -275,6 +275,23 @@
     .map(([k, v]) => `<li><a href="${esc(v)}" target="_blank" rel="noopener">${esc(k)}</a></li>`).join('');
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  /* ---------- wayfinding: which section am I in ---------- */
+  const navLinks = [...document.querySelectorAll('.nav__links a')];
+  const sectionIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      navLinks.forEach(a => a.setAttribute('aria-current',
+        String(a.getAttribute('href') === '#' + e.target.id)));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });      // the section crossing the middle of the screen
+  ['work', 'index', 'about', 'contact'].forEach(id => {
+    const el = document.getElementById(id); if (el) sectionIO.observe(el);
+  });
+
+  // iOS Safari only applies :active if some touchstart listener exists.
+  // Without this every press-feedback rule is dead on iPhone.
+  document.addEventListener('touchstart', () => {}, { passive: true });
+
   /* ---------- motion ---------- */
   document.querySelectorAll('.counters dt').forEach(el => window.Motion.countUp(el));
 
@@ -376,12 +393,36 @@
   if (profile.reel && profile.reel.src && reel.showModal) {
     reelBtn.hidden = false;
     if (profile.reel.poster) reelVideo.poster = profile.reel.poster;
+    // Spatial consistency: the reel grows out of the button that opened
+    // it, and shrinks back into that same button when it closes — one
+    // path, both ways, same curve reversed.
+    const ease = 'cubic-bezier(0.32, 0.72, 0, 1)';
+    const fromButton = () => {
+      const b = reelBtn.getBoundingClientRect(), v = reelVideo.getBoundingClientRect();
+      const dx = (b.left + b.width / 2) - (v.left + v.width / 2);
+      const dy = (b.top + b.height / 2) - (v.top + v.height / 2);
+      return [{ transform: `translate(${dx}px, ${dy}px) scale(${Math.max(b.width / v.width, .08)})`, opacity: 0 },
+              { transform: 'none', opacity: 1 }];
+    };
     reelBtn.addEventListener('click', () => {
       if (!reelVideo.src) reelVideo.src = profile.reel.src;
       reel.showModal();
+      if (window.Motion.reduced.matches) reelVideo.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200 });
+      else reelVideo.animate(fromButton(), { duration: 560, easing: ease });
       reelVideo.play().catch(() => {});
     });
-    const close = () => { reelVideo.pause(); reel.close(); };
+    let closing = false;
+    const close = () => {
+      if (closing || !reel.open) return;
+      closing = true;
+      reelVideo.pause();
+      reel.classList.add('is-closing');
+      const kf = window.Motion.reduced.matches ? [{ opacity: 1 }, { opacity: 0 }] : fromButton().reverse();
+      const a = reelVideo.animate(kf, { duration: window.Motion.reduced.matches ? 200 : 440, easing: ease, fill: 'forwards' });
+      a.onfinish = () => { reel.close(); reel.classList.remove('is-closing'); a.cancel(); closing = false; reelBtn.focus(); };
+    };
+    // Esc fires `cancel`; take it over so the exit animates too
+    reel.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
     document.getElementById('reelClose').addEventListener('click', close);
     reel.addEventListener('click', (e) => { if (e.target === reel) close(); });
     reel.addEventListener('close', () => reelVideo.pause());

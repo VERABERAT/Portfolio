@@ -423,6 +423,30 @@ Kaydırmaya bağlı her şey tarayıcının kendi `animation-timeline`'ı ile ç
 JS yok, compositor thread'de. Desteklemeyen tarayıcıda her şey yerinde durur.
 **Parallax ve scroll-jacking yok**; kaydırma okuyucunundur.
 
+### Fluid interaction — Apple, *Designing Fluid Interfaces*
+
+Sürüklenebilir her şey bu kurallara uyar. Değerler ölçüldü, göz kararı değil.
+
+| Kural | Uygulama |
+|---|---|
+| Hareketin ortasında yakalanabilir | `pointerdown` yayı durdurur, sürükleme **ekrandaki** değerden başlar |
+| 1:1 takip, tutulan yerden | `startPos − (x − startX) / gap`, pointer capture ile |
+| Hız son olaydan değil, geçmişten | son 90ms'deki örnekler; parmak durduysa hız 0 — hareketsiz bırakılan plak fırlamaz |
+| Momentum izdüşümü | Apple'ın fonksiyonu: `(v/1000)·d/(1−d)`, `d = 0.995` → sert fırlatma 1–2 plak |
+| **Hız devri** | bırakma hızı yaya başlangıç hızı olarak verilir; ilk kare `v/60` kadar ilerler, dikiş yok |
+| Taşma sadece momentumla | fırlatılırsa `damping 0.8`, düğme/tuşla `1.0` |
+| Kenarlarda lastik bant | `(x·d·c)/(d + c·|x|)`, `d = 0.6`, `c = 0.55` — kademeli, asla sert durmaz |
+| Basınca tepki | `:active` → `scale .975`, 100ms ease-out; bırakınca `--energy` ile geri. `scale` ayrı özellik, yayın `transform`'unu ezmez. iOS için boş `touchstart` dinleyicisi şart |
+| Açıldığı yere kapanır | reel butondan büyür, Esc/kapat ile aynı butona küçülür, odak butona döner |
+| Neredeyim? | nav aktif bölümü `aria-current` ile gösterir |
+| Kenar etkisi, sabit çizgi değil | nav'ın camı ve alt çizgisi yalnızca içerik altından geçince belirir |
+| Cam üstünde canlı yazı | nav linkleri düz gri değil, mürekkep %80 |
+
+**Bulunan ve düzeltilen hata:** yay saati `performance.now()` ile başlıyordu; bir
+sonraki `requestAnimationFrame` damgası karenin *başlangıcı* olduğu için ilk `dt`
+negatif çıkıyor ve **her yay bir kare geriye seğiriyordu**. Artık ilk kare nominal
+1/60 adımla başlar, `dt` asla negatif olmaz.
+
 ### Reduced motion
 
 ```css
@@ -474,6 +498,11 @@ doğrudan hedefe geçer, `smoothScroll()` hiç kurulmaz.
 10. **Doodle'ların `stroke-dashoffset` çizimine dokunma.** İyi çalışıyor.
 
 ---
+
+### prefers-contrast: more
+
+Cam kalkar (düz beyaz nav), `--muted` `#3A3A3A`'ya (11.6:1), `--line` mürekkep %45'e
+koyulaşır, nav'a tam siyah alt çizgi gelir.
 
 ## 9. Responsive Behavior
 

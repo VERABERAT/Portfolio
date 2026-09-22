@@ -25,15 +25,24 @@
     this._last = 0;
   }
 
-  Spring.prototype.set = function (target) {
+  // `velocity` (units/s) hands the gesture's speed to the spring, so a
+  // release continues at the finger's pace instead of restarting from
+  // rest — the seam between dragging and animating disappears.
+  Spring.prototype.set = function (target, velocity) {
     this.target = target;
+    if (typeof velocity === 'number' && isFinite(velocity)) this.vel = velocity;
     if (reduced.matches) {                 // reduced motion: no spring at all
       this.v = target; this.vel = 0;
       this.onUpdate && this.onUpdate(this.v);
       this.onRest && this.onRest(this.v);
       return;
     }
-    if (!this._raf) { this._last = performance.now(); this._tick(this._last); }
+    // Start on the next frame, not synchronously with performance.now():
+    // a rAF timestamp marks the frame's *start*, so it is usually earlier
+    // than a now() read inside that frame — the first dt came out
+    // negative and every spring twitched backwards for one frame before
+    // moving. `_last = 0` means "first frame: use a nominal step".
+    if (!this._raf) { this._last = 0; this._raf = requestAnimationFrame((t) => this._tick(t)); }
   };
 
   // jump without animating (resize, first paint, teleport)
@@ -49,7 +58,8 @@
   };
 
   Spring.prototype._tick = function (now) {
-    const dt = Math.min((now - this._last) / 1000, 1 / 30);  // clamp: tab switches
+    // never negative, never more than two frames (tab switches)
+    const dt = this._last ? Math.max(0, Math.min((now - this._last) / 1000, 1 / 30)) : 1 / 60;
     this._last = now;
 
     const w = (2 * Math.PI) / this.response;   // angular frequency

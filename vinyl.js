@@ -84,17 +84,46 @@
       }
     }, { passive: false });
 
-    /* ---------- drag / swipe ---------- */
-    let dragging = false, startX = 0, startPos = 0, lastX = 0, lastT = 0, vel = 0, moved = 0;
+    /* ---------- drag / swipe ----------
+       Built to Apple's fluid-interface rules (Designing Fluid
+       Interfaces, WWDC 2018):
+       - grab from the presentation value, never the target
+       - track 1:1, respecting where the crate was grabbed
+       - velocity from a short history, not the last event
+       - progressive rubber-band past the ends
+       - project momentum forward with Apple's deceleration function
+       - hand the release velocity to the spring: no seam */
+    let dragging = false, startX = 0, startPos = 0, moved = 0;
+    let hist = [];                                   // [{x, t}] for velocity
+
+    // Apple's rubber band: the further past the edge, the less it follows.
+    // `dim` is how far (in records) it may ever stretch.
+    const rubber = (over, dim = 0.6, c = 0.55) =>
+      (over * dim * c) / (dim + c * Math.abs(over));
+
+    // Apple's momentum projection, from the WWDC sample code.
+    // 0.995 sits between scroll-feel (0.998) and snappy (0.99): a firm
+    // flick travels one to two records, not the whole crate.
+    const project = (v, d = 0.995) => v * d / (1 - d) / 1000;
+
+    function releaseVelocity() {
+      // only samples from the last 90ms count — a finger that stopped
+      // before lifting has no velocity, however fast it moved earlier
+      const now = performance.now();
+      const recent = hist.filter(h => now - h.t < 90);
+      if (recent.length < 2) return 0;
+      const a = recent[0], b = recent[recent.length - 1];
+      const dt = (b.t - a.t) / 1000;
+      return dt > 0 ? (b.x - a.x) / dt : 0;         // px/s
+    }
 
     root.addEventListener('pointerdown', (e) => {
       if (e.button != null && e.button !== 0) return;
       dragging = true; moved = 0;
-      startX = lastX = e.clientX;
+      startX = e.clientX;
       startPos = spring.v;                 // from where it IS, not where it was going
-      lastT = performance.now();
-      vel = 0;
-      spring.stop();
+      hist = [{ x: e.clientX, t: performance.now() }];
+      spring.stop();                       // catch it mid-flight
       root.setPointerCapture(e.pointerId);
       root.classList.add('is-dragging');
     });
@@ -102,17 +131,13 @@
     root.addEventListener('pointermove', (e) => {
       if (!dragging) return;
       const gap = spacing();
-      moved += Math.abs(e.clientX - lastX);
-      const now = performance.now();
-      const dt = Math.max(now - lastT, 1);
-      vel = ((e.clientX - lastX) / dt) / gap * 1000;   // index units per second
-      lastX = e.clientX; lastT = now;
-      // rubber-band past the ends instead of a hard stop
+      moved += Math.abs(e.clientX - hist[hist.length - 1].x);
+      hist.push({ x: e.clientX, t: performance.now() });
+      if (hist.length > 8) hist.shift();
       let p = startPos - (e.clientX - startX) / gap;
-      if (p < 0) p = p * 0.35;
-      if (p > last) p = last + (p - last) * 0.35;
-      paint(p);
-      spring.jump(p);
+      if (p < 0) p = rubber(p);
+      if (p > last) p = last + rubber(p - last);
+      spring.jump(p);                      // paints via onUpdate
     });
 
     function endDrag(e) {
@@ -120,9 +145,11 @@
       dragging = false;
       root.classList.remove('is-dragging');
       try { root.releasePointerCapture(e.pointerId); } catch (_) {}
-      // project the flick forward, then settle on the nearest record
-      const projected = spring.v - vel * 0.22;
-      goTo(Math.round(projected), { momentum: Math.abs(vel) > 0.6 });
+      const gap = spacing();
+      const v = -releaseVelocity() / gap;   // records per second; right drag = backwards
+      const target = clamp(Math.round(spring.v + project(v)), 0, last);
+      spring.damping = Math.abs(v) > 0.6 ? 0.8 : 1.0;   // bounce only if it was thrown
+      spring.set(target, v);                // velocity handoff
     }
     root.addEventListener('pointerup', endDrag);
     root.addEventListener('pointercancel', endDrag);

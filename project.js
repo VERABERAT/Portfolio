@@ -180,4 +180,6 @@
   requestAnimationFrame(() => document.documentElement.classList.add('is-loaded'));
   window.Motion.reveal(document);
   window.Motion.smoothScroll({ lerp: 0.165 });
+  // iOS only honours :active once a touchstart listener exists
+  document.addEventListener('touchstart', () => {}, { passive: true });
 })();
