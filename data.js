@@ -157,7 +157,9 @@ window.PORTFOLIO =
       "media": [
         {
           "type": "image",
-          "src": "images/smart-locker-interface/smart-locker-interface.jpg"
+          "src": "images/smart-locker-interface/case.webp",
+          "w": 1600,
+          "h": 4812
         }
       ]
     },
@@ -190,7 +192,9 @@ window.PORTFOLIO =
       "media": [
         {
           "type": "image",
-          "src": "images/i-mece-market-2025-production-finance/i-mece-market-2025-production-finance.jpg"
+          "src": "images/i-mece-market-2025-production-finance/case.webp",
+          "w": 1600,
+          "h": 8076
         },
         {
           "type": "embed",

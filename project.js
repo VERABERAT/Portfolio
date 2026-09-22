@@ -76,7 +76,10 @@
         title="${esc(p.t)} — ${n}" allow="autoplay; fullscreen; picture-in-picture"></iframe></figure>`;
     }
     const alt = t(UI.shot).replace('{p}', p.t).replace('{n}', n);
-    return `<figure class="shot"><img src="${esc(m.src)}" alt="${esc(alt)}" loading="lazy" decoding="async"></figure>`;
+    // declared size reserves the box, so a tall case study does not shove
+    // the page around while it streams in
+    const dim = (m.w && m.h) ? ` width="${m.w}" height="${m.h}"` : '';
+    return `<figure class="shot"><img src="${esc(m.src)}" alt="${esc(alt)}"${dim} loading="lazy" decoding="async"></figure>`;
   }
 
   if (!p) {
@@ -91,6 +94,11 @@
   document.title = p.t + ' — berat.';
   const desc = t(p.desc);
   if (desc) document.querySelector('meta[name="description"]').setAttribute('content', desc);
+  // crawlers that run JS (Google) pick these up; LinkedIn/X do not run JS
+  // and keep the static site card from project.html
+  const setMeta = (sel, v) => { const el = document.querySelector(sel); if (el && v) el.setAttribute('content', v); };
+  setMeta('meta[property="og:title"]', p.t + ' — berat.');
+  setMeta('meta[property="og:description"]', desc);
 
   const col = p.color || 'mono';
   const media = (p.media || []).map((m, i) => mediaHTML(m, i + 1)).join('');
