@@ -62,6 +62,13 @@ window.PORTFOLIO =
       "y": "2025",
       "color": "forest",
       "doodle": "d-sprout",
+      "cover": "images/ferm/sleeve.svg",
+      "coverW": 1200,
+      "coverH": 1200,
+      "coverAlt": {
+        "tr": "ferm kılıfı — kavanozda yükselen fermantasyon kabarcıkları",
+        "en": "ferm sleeve — fermentation bubbles rising in a jar"
+      },
       "desc": {
         "tr": "fermente ürün serisi için organik tipografi ve canlı bir ambalaj sistemi.",
         "en": "organic typography and a lively packaging system for a fermented product line."
@@ -97,6 +104,13 @@ window.PORTFOLIO =
       "y": "2024",
       "color": "yellow",
       "doodle": "d-box",
+      "cover": "images/nutripaw/sleeve.svg",
+      "coverW": 1200,
+      "coverH": 1200,
+      "coverAlt": {
+        "tr": "nutripaw kılıfı — baskı ızgarası üstünde pati işareti",
+        "en": "nutripaw sleeve — a paw mark over a print grid"
+      },
       "desc": {
         "tr": "organik pet food markası için uçtan uca kimlik, ambalaj ve kampanya.",
         "en": "holistic identity, packaging and campaign for an organic pet food brand."
@@ -143,7 +157,9 @@ window.PORTFOLIO =
       "media": [
         {
           "type": "image",
-          "src": "images/smart-locker-interface/smart-locker-interface.jpg"
+          "src": "images/smart-locker-interface/case.webp",
+          "w": 1600,
+          "h": 4812
         }
       ]
     },
@@ -176,7 +192,9 @@ window.PORTFOLIO =
       "media": [
         {
           "type": "image",
-          "src": "images/i-mece-market-2025-production-finance/i-mece-market-2025-production-finance.jpg"
+          "src": "images/i-mece-market-2025-production-finance/case.webp",
+          "w": 1600,
+          "h": 8076
         },
         {
           "type": "embed",
@@ -194,6 +212,13 @@ window.PORTFOLIO =
       "y": "2024",
       "color": "yellow",
       "doodle": "d-spark",
+      "cover": "images/miu-miu/sleeve.svg",
+      "coverW": 1200,
+      "coverH": 1200,
+      "coverAlt": {
+        "tr": "miu miu kılıfı — kampanya kurgularını anlatan kayan tipografi tekrarları",
+        "en": "miu miu sleeve — sliding typographic repeats standing for the campaign cuts"
+      },
       "desc": {
         "tr": "sezonluk kampanya için key visual ve motion kurgular.",
         "en": "key visuals and motion edits for a seasonal campaign."
@@ -207,9 +232,72 @@ window.PORTFOLIO =
       "media": [
         {
           "type": "video",
-          "src": "images/miu-miu/miu-miu.mp4"
+          "src": "images/miu-miu/film.mp4",
+          "poster": "images/miu-miu/poster.jpg",
+          "w": 848,
+          "h": 480
         }
-      ]
+      ],
+      "preview": {
+        "webm": "images/miu-miu/preview.webm",
+        "mp4": "images/miu-miu/preview.mp4"
+      },
+      "credits": [
+        {
+          "role": {
+            "tr": "prodüksiyon",
+            "en": "production"
+          },
+          "name": "Kasten Kolektif"
+        },
+        {
+          "role": {
+            "tr": "yönetmen",
+            "en": "directors"
+          },
+          "name": "Özhan Aydemir & Işıl Sevim"
+        },
+        {
+          "role": {
+            "tr": "görüntü yönetmeni",
+            "en": "director of photography"
+          },
+          "name": "Bahar Kılıç"
+        },
+        {
+          "role": {
+            "tr": "kreatif direktör",
+            "en": "creative direction"
+          },
+          "name": "Defne Ulusoy"
+        },
+        {
+          "role": {
+            "tr": "kurgu",
+            "en": "editing"
+          },
+          "name": "Özhan Aydemir & Özüm Mersin"
+        },
+        {
+          "role": {
+            "tr": "oyuncular",
+            "en": "talent"
+          },
+          "name": "Defne Ulusoy, Özüm Mersin, Petek Öztürk"
+        },
+        {
+          "role": {
+            "tr": "line producer",
+            "en": "line producer"
+          },
+          "name": "Berat Erdoğan",
+          "me": true
+        }
+      ],
+      "role": {
+        "tr": "line producer",
+        "en": "line producer"
+      }
     },
     {
       "slug": "kasten-meets-ankara",
@@ -221,6 +309,13 @@ window.PORTFOLIO =
       "y": "2024",
       "color": "sky",
       "doodle": "d-tent",
+      "cover": "images/kasten-meets-ankara/sleeve.svg",
+      "coverW": 1200,
+      "coverH": 1200,
+      "coverAlt": {
+        "tr": "kasten meets ankara kılıfı — kesişen iki daire",
+        "en": "kasten meets ankara sleeve — two intersecting circles"
+      },
       "desc": {
         "tr": "ankara için bir kültür kampanyasının instagram serisi — carousel + reels.",
         "en": "instagram series for a cultural campaign for ankara — carousel + reels."
@@ -248,6 +343,13 @@ window.PORTFOLIO =
       "y": "2025",
       "color": "forest",
       "doodle": "d-type",
+      "cover": "images/yazgiya-inat-yazi/sleeve.svg",
+      "coverW": 1200,
+      "coverH": 1200,
+      "coverAlt": {
+        "tr": "yazgıya inat yazı kılıfı — kenarlardan taşan brutalist tipografi",
+        "en": "yazgıya inat yazı sleeve — brutalist type bleeding off both edges"
+      },
       "desc": {
         "tr": "sergi kimliği ve poster serisi — tipografi odaklı, brutalist bir görsel dil.",
         "en": "exhibition identity and poster series — a typography-led, brutalist visual language."
@@ -276,6 +378,13 @@ window.PORTFOLIO =
       "y": "2024",
       "color": "yellow",
       "doodle": "d-spark",
+      "cover": "images/tus-bodrum/sleeve.svg",
+      "coverW": 1200,
+      "coverH": 1200,
+      "coverAlt": {
+        "tr": "tus bodrum kılıfı — ufukta batan güneş",
+        "en": "tus bodrum sleeve — a sun setting on the horizon"
+      },
       "desc": {
         "tr": "otel & restoran için sıfırdan görsel kimlik, logo ve menü tasarımı.",
         "en": "visual identity from scratch, logo and menu design for a hospitality brand."
@@ -363,6 +472,11 @@ window.PORTFOLIO =
       "behance": "https://www.behance.net/beraterdoan1",
       "instagram": "https://www.instagram.com/__bertab/?hl=tr",
       "linkedin": "https://www.linkedin.com/in/beraterdogan"
+    },
+    "reel": null,
+    "title": {
+      "tr": "motion designer & art director",
+      "en": "motion designer & art director"
     }
   },
   "experience": [

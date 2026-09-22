@@ -25,7 +25,15 @@
     prev:      { tr: 'önceki', en: 'prev' },
     next:      { tr: 'sonraki', en: 'next' },
     home:      { tr: 'ana sayfa', en: 'home' },
-    shot:      { tr: '{p} projesinden görsel {n}', en: 'image {n} from {p}' }
+    shot:      { tr: '{p} projesinden görsel {n}', en: 'image {n} from {p}' },
+    details:   { tr: 'künye', en: 'details' },
+    credits:   { tr: 'emeği geçenler', en: 'credits' },
+    role:      { tr: 'rolüm', en: 'my role' },
+    client:    { tr: 'müşteri', en: 'client' },
+    year:      { tr: 'yıl', en: 'year' },
+    category:  { tr: 'kategori', en: 'category' },
+    tools:     { tr: 'araçlar', en: 'tools' },
+    deliver:   { tr: 'teslimler', en: 'deliverables' }
   };
   document.querySelectorAll('[data-ui]').forEach(el => { const v = UI[el.dataset.ui]; if (v) el.textContent = t(v); });
 
@@ -69,14 +77,19 @@
   function mediaHTML(m, n) {
     if (!m || !m.src) return '';
     if (m.type === 'video') {
-      return `<figure class="shot"><video src="${esc(m.src)}" controls playsinline preload="metadata"></video></figure>`;
+      const poster = m.poster ? ` poster="${esc(m.poster)}"` : '';
+      const dim = (m.w && m.h) ? ` width="${m.w}" height="${m.h}"` : '';
+      return `<figure class="shot"><video src="${esc(m.src)}"${poster}${dim} controls playsinline preload="none"></video></figure>`;
     }
     if (m.type === 'embed') {
       return `<figure class="shot shot--embed"><iframe src="${esc(embedUrl(m.src))}" loading="lazy"
         title="${esc(p.t)} — ${n}" allow="autoplay; fullscreen; picture-in-picture"></iframe></figure>`;
     }
     const alt = t(UI.shot).replace('{p}', p.t).replace('{n}', n);
-    return `<figure class="shot"><img src="${esc(m.src)}" alt="${esc(alt)}" loading="lazy" decoding="async"></figure>`;
+    // declared size reserves the box, so a tall case study does not shove
+    // the page around while it streams in
+    const dim = (m.w && m.h) ? ` width="${m.w}" height="${m.h}"` : '';
+    return `<figure class="shot"><img src="${esc(m.src)}" alt="${esc(alt)}"${dim} loading="lazy" decoding="async"></figure>`;
   }
 
   if (!p) {
@@ -91,6 +104,11 @@
   document.title = p.t + ' — berat.';
   const desc = t(p.desc);
   if (desc) document.querySelector('meta[name="description"]').setAttribute('content', desc);
+  // crawlers that run JS (Google) pick these up; LinkedIn/X do not run JS
+  // and keep the static site card from project.html
+  const setMeta = (sel, v) => { const el = document.querySelector(sel); if (el && v) el.setAttribute('content', v); };
+  setMeta('meta[property="og:title"]', p.t + ' — berat.');
+  setMeta('meta[property="og:description"]', desc);
 
   const col = p.color || 'mono';
   const media = (p.media || []).map((m, i) => mediaHTML(m, i + 1)).join('');
@@ -100,9 +118,21 @@
   const sleeve = p.cover
     ? `<picture>${p.coverWebp ? `<source srcset="${esc(p.coverWebp)}" type="image/webp">` : ''}
         <img src="${esc(p.cover)}" alt="${esc(p.coverAlt ? t(p.coverAlt) : p.t + ' — ' + t(p.c))}"
-             width="1200" height="750" decoding="async"></picture>`
+             width="${p.coverW || 1200}" height="${p.coverH || 750}" decoding="async"></picture>`
     : `<span class="rec__type"><small>${esc(t(p.c))}</small><b>${esc(p.t)}</b>
         <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#${esc(p.doodle || 'd-spark')}"/></svg></span>`;
+
+  function metaHTML() {
+    const rows = [
+      [UI.role, t(p.role)], [UI.client, t(p.client)], [UI.category, t(p.c)],
+      [UI.year, p.y], [UI.tools, (p.tools || []).join(', ')], [UI.deliver, t(p.deliverables)]
+    ].filter(([, v]) => v);
+    const det = `<dl><p class="pmeta__h">${esc(t(UI.details))}</p>${rows.map(([k, v]) =>
+      `<div><dt>${esc(t(k))}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>`;
+    const cred = (p.credits || []).length ? `<dl><p class="pmeta__h">${esc(t(UI.credits))}</p>${p.credits.map(c =>
+      `<div><dt>${esc(t(c.role))}</dt><dd${c.me ? ' class="me"' : ''}>${esc(c.name)}</dd></div>`).join('')}</dl>` : '';
+    return `<section class="pmeta">${det}${cred}</section>`;
+  }
 
   const prev = projects[(idx - 1 + projects.length) % projects.length];
   const next = projects[(idx + 1) % projects.length];
@@ -116,7 +146,7 @@
     <section class="phero">
       <div class="phero__copy">
         <p class="phero__meta">${esc(t(p.c))} · ${esc(p.y || '')}</p>
-        <h1 class="phero__title" data-reveal="lines">${esc(p.t)}</h1>
+        <h1 class="phero__title kinetic" id="ptitle">${esc(p.t)}</h1>
         <p class="phero__desc" data-reveal="lines">${esc(desc)}</p>
         <ul class="phero__tags">${(p.tags || []).map(tag => `<li>${esc(tag)}</li>`).join('')}</ul>
         ${ext}
@@ -127,6 +157,8 @@
         <span class="rec__sleeve vt-sleeve">${sleeve}</span>
       </div>
     </section>
+
+    ${metaHTML()}
 
     ${media
       ? `<section class="gallery"><h2 class="gallery__h">${esc(t(UI.visuals))}</h2>${media}</section>`
@@ -144,6 +176,10 @@
 
   // so index.html opens on this record and the morph runs in reverse
   try { sessionStorage.setItem('portfolio_last_record', slugOf(p)); } catch (e) {}
+  window.Motion.splitChars(document.getElementById('ptitle'), { step: 0.035, from: 0.15 });
+  requestAnimationFrame(() => document.documentElement.classList.add('is-loaded'));
   window.Motion.reveal(document);
   window.Motion.smoothScroll({ lerp: 0.165 });
+  // iOS only honours :active once a touchstart listener exists
+  document.addEventListener('touchstart', () => {}, { passive: true });
 })();

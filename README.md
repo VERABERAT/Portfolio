@@ -120,12 +120,19 @@ dilden bağımsız alanlar düz string.
   y: "2025",
   color: "navy",                       // plak etiketi: yellow|navy|mint|sky|forest|mono
   doodle: "d-type",                    // doodles.js'teki id
-  cover: "images/vera/cover.jpg",      // opsiyonel; yoksa tipografik kılıf
+  cover: "images/vera/cover.jpg",      // foto kapak ya da images/<slug>/sleeve.svg
   coverWebp: "images/vera/cover.webp", // opsiyonel; varsa <picture> önce bunu dener
+  coverW: 1200, coverH: 750,           // gerçek oran — foto 16:10, tasarlanmış kılıf 1:1
   coverAlt: { tr: "...", en: "..." },  // opsiyonel; yoksa başlık + kategoriden üretilir
   desc: { tr: "...", en: "..." },
   tags: ["typography", "display"],
   link: "https://behance.net/...",     // opsiyonel dış bağlantı
+  role: { tr: "...", en: "..." },      // bu projede SENİN rolün — künyede gösterilir
+  client: { tr: "...", en: "..." },    // opsiyonel
+  tools: ["after effects", "c4d"],     // opsiyonel
+  deliverables: { tr: "...", en: "..." },
+  credits: [{ role: {tr,en}, name: "...", me: true }],  // me:true kırmızı vurgulanır
+  preview: { webm: "...", mp4: "..." },// 3–8 sn sessiz döngü: sandıkta ve dizinde oynar
   media: [                             // detay sayfası galerisi
     { type: "image", src: "images/vera/vera.jpg" },
     { type: "video", src: "images/x/x.mp4" },
@@ -161,6 +168,17 @@ python3 -m http.server 8000
    üret (< 100 KB). Dosya adı: küçük harf, tire, Türkçe karakter yok.
 2. `data.js`'e projeyi ekle — ya da `admin.html`'i açıp panelden gir.
 3. `sitemap.xml`'e `project.html?p=<slug>` girdisini ekle.
+
+## Showreel
+
+`data.js` → `profile.reel`:
+
+```js
+reel: { src: "images/reel/reel.mp4", poster: "images/reel/poster.jpg" }
+```
+
+Boşken hiçbir şey görünmez. Doluyken ismin altında "showreel'i izle" butonu çıkar
+ve reel sesli olarak native `<dialog>` içinde açılır.
 
 ## Deploy
 

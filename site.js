@@ -26,7 +26,8 @@
     nIndex:     { tr: 'dizin', en: 'index' },
     nAbout:     { tr: 'hakkında', en: 'about' },
     nContact:   { tr: 'iletişim', en: 'contact' },
-    heroKicker: { tr: 'art director · istanbul', en: 'art director · istanbul' },
+    heroKicker: { tr: 'portfolyo — istanbul', en: 'portfolio — istanbul' },
+    reelBtn:    { tr: "showreel'i izle", en: 'watch the showreel' },
     heroLede:   { tr: 'marka kimliği ile motion arasındaki boşluğu kapatırım. az sözle çok şey.',
                   en: 'i close the gap between brand identity and motion. much, said simply.' },
     heroWorks:  { tr: 'iş', en: 'works' },
@@ -64,12 +65,27 @@
   /* ---------- the crate ---------- */
   const stage = document.getElementById('crateStage');
 
+  // A project with a preview gets a 3–8s silent loop on its sleeve —
+  // research on motion portfolios is unanimous that the grid should
+  // move. The cover stays as the poster, so nothing flashes empty.
+  function loopHTML(p, cls) {
+    if (!p.preview) return '';
+    const poster = p.cover ? ` poster="${esc(p.cover)}"` : '';
+    return `<video class="${cls}" muted loop playsinline preload="none"${poster} aria-hidden="true">
+      ${p.preview.webm ? `<source src="${esc(p.preview.webm)}" type="video/webm">` : ''}
+      ${p.preview.mp4 ? `<source src="${esc(p.preview.mp4)}" type="video/mp4">` : ''}
+    </video>`;
+  }
+
   function sleeveHTML(p) {
     if (p.cover) {
       const webp = p.coverWebp ? `<source srcset="${p.coverWebp}" type="image/webp">` : '';
       const alt = p.coverAlt ? t(p.coverAlt) : fill(t(UI.sleeveOf), p);
+      // designed sleeves are square, photo covers are 16:10 — the real
+      // ratio has to be declared or the box shifts while loading
       return `<picture>${webp}<img src="${p.cover}" alt="${esc(alt)}"
-        width="1200" height="750" loading="lazy" decoding="async"></picture>`;
+        width="${p.coverW || 1200}" height="${p.coverH || 750}"
+        loading="lazy" decoding="async"></picture>`;
     }
     // no cover: a typographic sleeve, with the project's doodle as its mark
     return `<span class="rec__type">
@@ -89,7 +105,7 @@
       <span class="rec__vinyl" aria-hidden="true">
         <span class="rec__label"><small>berat. rec</small><b>${esc(p.t)}</b><small>${esc(p.y || '')}</small></span>
       </span>
-      <span class="rec__sleeve">${sleeveHTML(p)}</span>
+      <span class="rec__sleeve">${sleeveHTML(p)}${loopHTML(p, 'rec__loop')}</span>
       <span class="rec__meta" aria-hidden="true"><b>${esc(p.t)}</b><span>${esc(t(p.c))} · ${esc(p.y || '')}</span></span>
       <a href="${hrefOf(p)}" aria-label="${esc(fill(t(UI.openProj), p))}"></a>
     </article>`;
@@ -104,6 +120,11 @@
   const nextBtn = document.getElementById('nextRec');
   const nowPlaying = document.getElementById('nowPlaying');
 
+  // Declared before initVinyl on purpose: its onActive fires during
+  // construction and reaches for this — a `let` further down would
+  // still be in its temporal dead zone and throw.
+  let crateVisible = false;
+
   const gallery = window.initVinyl(crate, projects, {
     onOpen: (i, p) => go(hrefOf(p)),
     onActive: (i, p) => {
@@ -113,8 +134,21 @@
       nextBtn.disabled = i === projects.length - 1;
       nowPlaying.textContent = `${p.t} — ${t(p.c)}, ${p.y} (${i + 1}/${projects.length})`;
       tagRecord(i);   // whoever is active is the one that flies out next
+      syncLoops();
     }
   });
+
+  function syncLoops() {
+    stage.querySelectorAll('.rec').forEach((el) => {
+      const v = el.querySelector('.rec__loop');
+      if (!v) return;
+      const on = crateVisible && el.classList.contains('is-active') && !window.Motion.reduced.matches;
+      if (on) { v.play().then(() => el.classList.add('is-playing')).catch(() => {}); }
+      else { v.pause(); el.classList.remove('is-playing'); }
+    });
+  }
+  new IntersectionObserver(([e]) => { crateVisible = e.isIntersecting; syncLoops(); },
+    { threshold: 0.35 }).observe(crate);
   if (gallery) {
     prevBtn.addEventListener('click', () => gallery.goTo(gallery.target - 1));
     nextBtn.addEventListener('click', () => gallery.goTo(gallery.target + 1));
@@ -123,7 +157,8 @@
   /* ---------- dizin: list + filters + pointer preview ---------- */
   const idxList = document.getElementById('idxList');
   idxList.innerHTML = projects.map(p => `
-    <li class="idx__row" data-cat="${esc(t(p.c))}" data-cover="${esc(p.coverWebp || p.cover || '')}">
+    <li class="idx__row" data-cat="${esc(t(p.c))}" data-cover="${esc(p.coverWebp || p.cover || '')}"
+        data-loop-webm="${esc(p.preview?.webm || '')}" data-loop-mp4="${esc(p.preview?.mp4 || '')}">
       <a href="${hrefOf(p)}">
         <span class="idx__y">${esc(p.y || '')}</span>
         <span class="idx__t">${esc(p.t)}</span>
@@ -142,26 +177,78 @@
     if (!btn) return;
     const v = btn.dataset.v;
     filters.querySelectorAll('.filter').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
-    idxList.querySelectorAll('.idx__row').forEach(row => {
-      row.hidden = !(v === '*' || row.dataset.cat === v);
-    });
+    flipFilter(v);
   });
 
+  // FLIP: measure First, apply the change, measure Last, Invert, Play.
+  // Rows that leave fold shut; rows that stay glide to their new slot
+  // from where they visibly were — no jump cut.
+  function flipFilter(v) {
+    const rows = [...idxList.querySelectorAll('.idx__row')];
+    const want = (r) => v === '*' || r.dataset.cat === v;
+    if (window.Motion.reduced.matches || !rows[0].animate) {
+      rows.forEach(r => { r.hidden = !want(r); });
+      return;
+    }
+    const first = new Map(rows.filter(r => !r.hidden).map(r => [r, r.getBoundingClientRect().top]));
+    const leaving = rows.filter(r => !r.hidden && !want(r));
+    const entering = rows.filter(r => r.hidden && want(r));
+    const ease = 'cubic-bezier(0.32, 0.72, 0, 1)';
+
+    leaving.forEach(r => {
+      const h = r.offsetHeight;
+      r.animate([{ height: h + 'px', opacity: 1 }, { height: '0px', opacity: 0 }],
+                { duration: 380, easing: ease }).onfinish = () => { r.hidden = true; };
+    });
+    entering.forEach((r, i) => {
+      r.hidden = false;
+      r.animate([{ opacity: 0, transform: 'translateY(1.2rem)' }, { opacity: 1, transform: 'none' }],
+                { duration: 520, delay: 120 + i * 45, easing: ease, fill: 'backwards' });
+    });
+    requestAnimationFrame(() => {
+      first.forEach((top, r) => {
+        if (leaving.includes(r)) return;
+        const dy = top - r.getBoundingClientRect().top;
+        if (Math.abs(dy) < 1) return;
+        r.animate([{ transform: `translateY(${dy}px)` }, { transform: 'none' }],
+                  { duration: 520, easing: ease });
+      });
+    });
+  }
+
+  // The preview trails the pointer on a lerp instead of snapping to it,
+  // and leans into the direction of travel (capped at 7deg). A project
+  // with a loop plays it here too.
   const peek = document.getElementById('idxPeek');
-  let peekSrc = '';
+  let peekKey = '', px = 0, py = 0, tx = 0, ty = 0, tilt = 0, peekRaf = 0, peekOn = false;
+  function peekLoop() {
+    const dx = tx - px;
+    px += dx * 0.16; py += (ty - py) * 0.16;
+    tilt += (Math.max(-7, Math.min(7, dx * 0.12)) - tilt) * 0.12;
+    peek.style.transform = `translate3d(${px}px, ${py}px, 0) translate(-50%, -50%) rotate(${tilt}deg) scale(${peekOn ? 1 : .86})`;
+    if (peekOn || Math.abs(dx) > 0.5 || Math.abs(tilt) > 0.1) peekRaf = requestAnimationFrame(peekLoop);
+    else peekRaf = 0;
+  }
   idxList.addEventListener('pointermove', (e) => {
     if (e.pointerType !== 'mouse') return;
     const row = e.target.closest('.idx__row');
-    if (!row || !row.dataset.cover) { peek.classList.remove('on'); return; }
-    if (row.dataset.cover !== peekSrc) {
-      peekSrc = row.dataset.cover;
-      peek.innerHTML = `<img src="${esc(peekSrc)}" alt="" loading="lazy" decoding="async">`;
+    if (!row || !row.dataset.cover) { peekOn = false; peek.classList.remove('on'); return; }
+    const key = row.dataset.cover + row.dataset.loopWebm;
+    if (key !== peekKey) {
+      peekKey = key;
+      const webm = row.dataset.loopWebm, mp4 = row.dataset.loopMp4;
+      peek.innerHTML = (webm || mp4) && !window.Motion.reduced.matches
+        ? `<video muted loop playsinline autoplay poster="${esc(row.dataset.cover)}">
+             ${webm ? `<source src="${esc(webm)}" type="video/webm">` : ''}
+             ${mp4 ? `<source src="${esc(mp4)}" type="video/mp4">` : ''}</video>`
+        : `<img src="${esc(row.dataset.cover)}" alt="" decoding="async">`;
     }
-    peek.style.left = e.clientX + 'px';
-    peek.style.top = e.clientY + 'px';
-    peek.classList.add('on');
+    if (!peekOn) { px = e.clientX; py = e.clientY; }    // first frame: appear under the pointer
+    tx = e.clientX; ty = e.clientY;
+    peekOn = true; peek.classList.add('on');
+    if (!peekRaf) peekRaf = requestAnimationFrame(peekLoop);
   });
-  idxList.addEventListener('pointerleave', () => peek.classList.remove('on'));
+  idxList.addEventListener('pointerleave', () => { peekOn = false; peek.classList.remove('on'); });
 
   /* ---------- hakkında ---------- */
   document.getElementById('heroCount').textContent = String(projects.length).padStart(2, '0');
@@ -188,7 +275,30 @@
     .map(([k, v]) => `<li><a href="${esc(v)}" target="_blank" rel="noopener">${esc(k)}</a></li>`).join('');
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  /* ---------- wayfinding: which section am I in ---------- */
+  const navLinks = [...document.querySelectorAll('.nav__links a')];
+  const sectionIO = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      navLinks.forEach(a => a.setAttribute('aria-current',
+        String(a.getAttribute('href') === '#' + e.target.id)));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });      // the section crossing the middle of the screen
+  ['work', 'index', 'about', 'contact'].forEach(id => {
+    const el = document.getElementById(id); if (el) sectionIO.observe(el);
+  });
+
+  // iOS Safari only applies :active if some touchstart listener exists.
+  // Without this every press-feedback rule is dead on iPhone.
+  document.addEventListener('touchstart', () => {}, { passive: true });
+
   /* ---------- motion ---------- */
+  document.querySelectorAll('.counters dt').forEach(el => window.Motion.countUp(el));
+
+  const heroName = document.getElementById('heroName');
+  window.Motion.splitChars(heroName, { step: 0.04, from: 0.1 });
+  requestAnimationFrame(() => document.documentElement.classList.add('is-loaded'));
+
   window.Motion.reveal(document);
   const scroller = window.Motion.smoothScroll({ lerp: 0.165 });
 
@@ -250,14 +360,71 @@
 
   // Coming back: open on the record we left from and name it, so the
   // hero record on the project page morphs back into the crate.
-  let startAt = 0;
+  let startAt = 0, cameBack = false;
   try {
     const back = sessionStorage.getItem(LAST);
+    cameBack = !!back;
     const i = projects.findIndex(p => slugOf(p) === back);
     if (i > 0) startAt = i;
   } catch (_) {}
 
   if (gallery && startAt > 0) {
     gallery.jumpTo(startAt);   // onActive tags it
+  } else if (gallery && !cameBack && !window.Motion.reduced.matches) {
+    // First visit: the crate starts at the back and riffles forward to
+    // the first record as it comes into view — a thumb through a crate.
+    // Once only, and never when coming back from a project.
+    gallery.jumpTo(projects.length - 1);
+    const introIO = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      introIO.disconnect();
+      gallery.goTo(0);
+    }, { threshold: 0.45 });
+    introIO.observe(crate);
+  }
+
+  /* ---------- showreel ----------
+     Empty until profile.reel is set in data.js. When it is, a button
+     appears under the name and opens the reel with sound in a native
+     <dialog> — focus trap and Esc come free. */
+  const reelBtn = document.getElementById('reelBtn');
+  const reel = document.getElementById('reel');
+  const reelVideo = document.getElementById('reelVideo');
+  if (profile.reel && profile.reel.src && reel.showModal) {
+    reelBtn.hidden = false;
+    if (profile.reel.poster) reelVideo.poster = profile.reel.poster;
+    // Spatial consistency: the reel grows out of the button that opened
+    // it, and shrinks back into that same button when it closes — one
+    // path, both ways, same curve reversed.
+    const ease = 'cubic-bezier(0.32, 0.72, 0, 1)';
+    const fromButton = () => {
+      const b = reelBtn.getBoundingClientRect(), v = reelVideo.getBoundingClientRect();
+      const dx = (b.left + b.width / 2) - (v.left + v.width / 2);
+      const dy = (b.top + b.height / 2) - (v.top + v.height / 2);
+      return [{ transform: `translate(${dx}px, ${dy}px) scale(${Math.max(b.width / v.width, .08)})`, opacity: 0 },
+              { transform: 'none', opacity: 1 }];
+    };
+    reelBtn.addEventListener('click', () => {
+      if (!reelVideo.src) reelVideo.src = profile.reel.src;
+      reel.showModal();
+      if (window.Motion.reduced.matches) reelVideo.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200 });
+      else reelVideo.animate(fromButton(), { duration: 560, easing: ease });
+      reelVideo.play().catch(() => {});
+    });
+    let closing = false;
+    const close = () => {
+      if (closing || !reel.open) return;
+      closing = true;
+      reelVideo.pause();
+      reel.classList.add('is-closing');
+      const kf = window.Motion.reduced.matches ? [{ opacity: 1 }, { opacity: 0 }] : fromButton().reverse();
+      const a = reelVideo.animate(kf, { duration: window.Motion.reduced.matches ? 200 : 440, easing: ease, fill: 'forwards' });
+      a.onfinish = () => { reel.close(); reel.classList.remove('is-closing'); a.cancel(); closing = false; reelBtn.focus(); };
+    };
+    // Esc fires `cancel`; take it over so the exit animates too
+    reel.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
+    document.getElementById('reelClose').addEventListener('click', close);
+    reel.addEventListener('click', (e) => { if (e.target === reel) close(); });
+    reel.addEventListener('close', () => reelVideo.pause());
   }
 })();
