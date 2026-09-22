@@ -1,8 +1,8 @@
 # Berat Erdoğan — Portfolio
 
-El çizimi dilde, tek renk tam ekran kartlardan oluşan portfolyo sitesi.
+Editöryal düzen, plak sandığı galerisi, yay tabanlı hareket.
 **Statik HTML + vanilla JS.** Build adımı, paket yöneticisi, framework yok.
-Tek dış bağımlılık Google Fonts'tan gelen **Shantell Sans**.
+Tek dış bağımlılık Google Fonts (Instrument Serif + Inter Tight).
 
 Canlı: <https://beraterdogan.studio> — `main`'e her push Vercel'de otomatik deploy olur.
 
@@ -10,36 +10,86 @@ Canlı: <https://beraterdogan.studio> — `main`'e her push Vercel'de otomatik d
 
 ```
 .
-├── index.html     # ana sayfa: hero, işler grid'i, proje kartları, hakkında, deneyim, iletişim
-├── project.html   # proje detay sayfası — ?p=<slug> ile hangi projenin açılacağı belirlenir
-├── admin.html     # tarayıcıda çalışan içerik paneli (deploy edilir ama noindex)
-├── data.js        # TÜM içerik: projeler, profil, deneyim. tek kaynak.
-├── doodles.js     # paylaşılan el çizimi SVG doodle seti
-├── og.svg         # Open Graph paylaşım görseli (1200x630)
-├── vercel.json    # güvenlik başlıkları + görsel/font cache
+├── index.html    # hero · plak galerisi · dizin · hakkında · iletişim
+├── project.html  # proje detayı — ?p=<slug> hangi projenin açılacağını belirler
+├── admin.html    # tarayıcıda çalışan içerik paneli (deploy edilir ama noindex)
+├── style.css     # tüm tasarım sistemi; iki sayfa da bunu kullanır
+├── data.js       # TÜM içerik: projeler, profil, deneyim. tek kaynak.
+├── doodles.js    # paylaşılan el çizimi SVG doodle seti
+├── motion.js     # yay, smooth scroll, satır bölme, reveal
+├── vinyl.js      # plak sandığı galerisi
+├── site.js       # index.html davranışı
+├── project.js    # project.html davranışı
+├── og.svg        # Open Graph paylaşım görseli (1200x630)
+├── vercel.json   # güvenlik başlıkları + görsel/font cache
 ├── robots.txt / sitemap.xml
-└── images/        # proje kapakları ve galeri medyası
+└── images/       # proje kapakları ve galeri medyası
 ```
 
-### Dosyalar ne iş yapar
+## Tasarım sistemi
 
-**`data.js`** — sitenin tek içerik kaynağı. `window.PORTFOLIO` objesini
-`DATA-START` / `DATA-END` yorumları arasında JSON olarak tutar; üç sayfa da
-bunu okur. Çok dilli alanlar `{ "tr": "...", "en": "..." }` objesi,
-dilden bağımsız alanlar (slug, yıl, renk, doodle, tags) düz string.
+Tüm token'lar `style.css` içindeki `:root`'ta:
 
-Proje şeması:
+| Token | Değer | Not |
+|---|---|---|
+| `--paper` / `--ink` | `#EFEDE8` / `#141414` | 15.75:1 |
+| `--accent` | `#B2422D` | 4.84:1, AA |
+| `--muted` | `ink %64` | 5.21:1, AA |
+| `--display` | Instrument Serif | başlıklar |
+| `--sans` | Inter Tight | metin |
+| `--energy` | `cubic-bezier(0.32, 0.72, 0, 1)` | yay olmayan her geçiş |
+| `--gut` / `--sec` | `rem` tabanlı | kullanıcı yazı boyutunu büyütünce layout birlikte ölçeklenir |
+
+Tipografi kuralı: **büyüdükçe tracking sıkışır** (`-.04em` başlıkta, `0` gövdede),
+**büyüdükçe leading sıkışır** (`.92` başlıkta, `1.55` gövdede).
+
+Eski kart paleti (`--yellow`, `--navy`, `--mint`, `--sky`, `--forest`, `--cream`)
+duruyor — artık plak etiketi renkleri. Hepsi kendi ink'iyle AA geçiyor.
+
+## Hareket
+
+Kütüphane yok. `motion.js` şunları verir:
+
+- **`Motion.Spring`** — kritik sönümlü yay (`response 0.35`, `damping 1.0`).
+  Kural: animasyon **ekrandaki anlık değerden** başlar, hedeften değil. Kullanıcı
+  hareketin ortasında müdahale edince zıplama olmaz. Taşma (`damping 0.8`) sadece
+  momentum taşıyan etkileşimlerde — flick bırakma. Buton ve tuş hareketi taşmaz.
+- **`Motion.smoothScroll`** — `lerp 0.165`. Sadece fine-pointer cihazlarda.
+- **`Motion.reveal`** — satırlar kendi taşmalarından `120% → 0` yükselir,
+  `0.7s`, `0.06s` arayla. Resize'da yeniden bölünür.
+- Sayfa geçişi **View Transitions API** ile; desteklenmeyen tarayıcıda sessizce
+  normal navigasyona düşer.
+- `prefers-reduced-motion: reduce` altında hepsi 200ms opacity cross-fade olur.
+
+## Plak galerisi (`vinyl.js`)
+
+Konum tek bir sayı: `pos`, sandıktaki float indeks. x, dönüş, derinlik, ölçek ve
+opaklık hepsi `i - pos`'tan türer. Bir yay `pos`'u tutar; wheel, sürükleme, tık,
+ok tuşları ve focus aynı değeri iter, birbirini kesebilir.
+
+Plak düz bir daire olduğu için CSS 3D transform yetiyor — Three.js'e gerek yok.
+Kılıf kapak görselini taşır; kapağı olmayan proje tipografik kılıf alır,
+doodle'ı da işaret olarak kullanır.
+
+Erişilebilirlik: sahne dışındaki plaklar `inert` (hem tab sırasından hem
+erişilebilirlik ağacından çıkar), aktif olan `aria-live` ile duyurulur.
+
+## Veri (`data.js`)
+
+`window.PORTFOLIO` objesi `DATA-START` / `DATA-END` yorumları arasında JSON.
+Üç sayfa da bunu okur. Çok dilli alanlar `{ "tr": "...", "en": "..." }`,
+dilden bağımsız alanlar düz string.
 
 ```js
 {
   slug: "vera",                        // url: project.html?p=vera
   t: "vera",                           // başlık
-  c: { tr: "tipografi", en: "typography" },  // kategori — filtre buradan toplanır
-  y: "2025",                           // yıl
-  color: "navy",                       // kart paleti: yellow|navy|mint|sky|forest|cream
+  c: { tr: "tipografi", en: "typography" },  // kategori — dizin filtresi buradan toplanır
+  y: "2025",
+  color: "navy",                       // plak etiketi: yellow|navy|mint|sky|forest|cream
   doodle: "d-type",                    // doodles.js'teki id
-  cover: "images/vera/cover.jpg",      // opsiyonel kapak; yoksa doodle'a düşer
-  coverWebp: "images/vera/cover.webp", // opsiyonel; varsa <picture> ile önce bu denenir
+  cover: "images/vera/cover.jpg",      // opsiyonel; yoksa tipografik kılıf
+  coverWebp: "images/vera/cover.webp", // opsiyonel; varsa <picture> önce bunu dener
   coverAlt: { tr: "...", en: "..." },  // opsiyonel; yoksa başlık + kategoriden üretilir
   desc: { tr: "...", en: "..." },
   tags: ["typography", "display"],
@@ -52,21 +102,19 @@ Proje şeması:
 }
 ```
 
-**`doodles.js`** — el çizimi SVG doodle'ların ortak sözlüğü.
-`injectDoodleDefs()` hepsini gizli bir `<defs>` olarak sayfaya basar,
-sonra her yerde `<use href="#d-sun"/>` ile çağrılır. `doodleSVG(id)`
-admin önizlemesi için tek başına bir `<svg>` string'i döner.
+`c` (kategori) küçük ve ortak bir sette tutulur — tipografi, ambalaj, kimlik,
+kampanya, arayüz — ki dizin filtresinin gerçek kovaları olsun. Spesifik anlatım
+`tags` içinde yaşar.
 
-**`project.html`** — tek bir şablon, tüm projeler için. `?p=<slug>` ile
-`data.js`'ten projeyi bulur; hero + galeri + önceki/sonraki navigasyonunu
-çizer. Slug bulunamazsa "proje bulunamadı" ekranı gösterir.
+**`admin.html`** — build'siz içerik paneli. `data.js`'i düzenler ve sonucu
+`localStorage`'a (`portfolio_data`) yazar; diğer iki sayfa açılışta bu anahtarı
+okuyup üzerine yazar, böylece değişiklikler deploy etmeden canlı önizlenir.
+Kalıcı hale getirmek için panelden üretilen JSON `data.js` içine,
+`DATA-START`/`DATA-END` arasına yapıştırılır. Kaydederken proje objesi yerinde
+güncellenir, yani panelin bilmediği alanlar kaybolmaz. Arama motorlarına kapalı.
 
-**`admin.html`** — build'siz içerik paneli. `data.js`'i düzenler ve
-sonucu `localStorage`'a (`portfolio_data`) yazar; `index.html` ve
-`project.html` açılışta bu anahtarı okuyup üzerine yazar, böylece
-değişiklikler deploy etmeden canlı önizlenir. Kalıcı hale getirmek için
-panelden üretilen JSON `data.js` içine, `DATA-START`/`DATA-END` arasına
-yapıştırılır. Arama motorlarına kapalı (`noindex` + `robots.txt`).
+> Paneldeki parola `localStorage`'da tutulan bir kolaylık kilidi, güvenlik değil —
+> `data.js` zaten herkese açık. Gizli bir şey koyma.
 
 ## Yerelde çalıştırma
 
@@ -75,20 +123,15 @@ python3 -m http.server 8000
 # → http://localhost:8000
 ```
 
-`index.html`'e çift tıklamak da çalışır, ama `file://` üzerinde
-bazı tarayıcılar `data.js`/`doodles.js` yüklemesini kısıtlayabilir;
-yerel sunucu daha güvenli.
-
 ## İçerik ekleme
 
-1. `images/<slug>/` klasörü aç, kapak ve galeri dosyalarını koy.
-   Dosya adı: küçük harf, tire, Türkçe karakter yok.
-   Kapak için `webp` (+ `jpg` fallback), < 300 KB.
+1. `images/<slug>/` klasörü aç. Kapak için 1200×750 `cover.webp` + `cover.jpg`
+   üret (< 100 KB). Dosya adı: küçük harf, tire, Türkçe karakter yok.
 2. `data.js`'e projeyi ekle — ya da `admin.html`'i açıp panelden gir.
 3. `sitemap.xml`'e `project.html?p=<slug>` girdisini ekle.
 
 ## Deploy
 
 Vercel repo'ya bağlı: `main`'e push → otomatik production deploy.
-Ayarlar `vercel.json`'da (güvenlik başlıkları, görsel ve font için
-uzun `Cache-Control`).
+Ayarlar `vercel.json`'da (güvenlik başlıkları, görsel ve font için uzun
+`Cache-Control`).
