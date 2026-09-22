@@ -396,6 +396,33 @@ kırpmayı kaldırır, yoksa tarayıcı 3D döndürülmüş, kesilmiş bir kare 
 **3 · Dizin önizlemesi** — imleç satırların üzerinde gezerken kapak görseli takip eder.
 `(hover: none)` ve 860px altında tamamen kapalı.
 
+### Motion v2 — neden ve ne
+
+Motion designer portfolyoları üzerine araştırmanın (School of Motion, OlafMotion,
+Fastio) ortak kuralları: **uzmanlık ismin yanında söylenir, showreel ilk ekrandadır,
+grid hareket eder (3–8 sn sessiz döngüler), her proje rolünü ve künyesini açıkça
+yazar, animasyon işin önüne geçmez.** Bu sürüm bunlara göre kuruldu:
+
+| Hareket | Tetik | Nasıl |
+|---|---|---|
+| İsim harf harf maskesinden yükselir, 9°'den düzelir | yükleme | `splitChars` + `--d` gecikmesi, 40ms aralık |
+| Nokta en son düşer, **sayfadaki tek taşma** | yükleme | `cubic-bezier(.34,1.56,.64,1)` — düşen bir şey |
+| Uzmanlık satırı: motion designer ↔ art director | sürekli, 6 sn | CSS `roll`, ekran okuyucuya tam metin |
+| Okuma ilerlemesi çizgisi | kaydırma | `animation-timeline: scroll(root)` |
+| Bölüm başlıkları soldan silinerek gelir | görünüme giriş | `view()` + `clip-path` |
+| Dizin satırları tek tek gelir | görünüme giriş | her satır kendi `view()` zaman çizgisi |
+| Satır üstüne gelince mürekkeple dolar | hover | `scaleY` ile `::before` |
+| Önizleme imleci yayla takip eder, hıza göre eğilir (≤7°) | pointer | rAF lerp, döngü videosu varsa oynar |
+| Filtre değişince satırlar kapanır / kayar | tık | FLIP, Web Animations API |
+| Sandık ilk görünüşte arkadan öne karıştırılır | görünüme giriş | mevcut yay, bir kez, geri dönüşte asla |
+| Aktif plağın kılıfında sessiz döngü oynar | aktif + görünür | sadece o an görünüyorsa, aksi hâlde duraklatılır |
+| Galeri görselleri diyafram gibi açılır | görünüme giriş | `clip-path inset` + `scale 1.14 → 1` |
+| Sayaçlar sayar | görünüme giriş | quartic-out, genişlik sabit (titreme yok) |
+
+Kaydırmaya bağlı her şey tarayıcının kendi `animation-timeline`'ı ile çalışır —
+JS yok, compositor thread'de. Desteklemeyen tarayıcıda her şey yerinde durur.
+**Parallax ve scroll-jacking yok**; kaydırma okuyucunundur.
+
 ### Reduced motion
 
 ```css

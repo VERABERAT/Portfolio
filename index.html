@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>berat. — art director</title>
-  <meta name="description" content="berat erdoğan — art director. marka kimliği, motion grafik, sosyal medya, tipografi ve ai destekli üretim. istanbul." />
+  <title>berat erdoğan — motion designer & art director</title>
+  <meta name="description" content="berat erdoğan — motion designer & art director. motion grafik, marka kimliği, sosyal medya, tipografi ve ai destekli üretim. istanbul." />
   <meta name="author" content="Berat Erdoğan" />
   <meta name="theme-color" content="#FFFFFF" />
   <meta name="robots" content="index, follow" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="berat. — art director" />
+  <meta property="og:title" content="berat erdoğan — motion designer & art director" />
   <meta property="og:description" content="marka kimliği, ambalaj, kampanya, arayüz, tipografi." />
   <meta property="og:image" content="https://beraterdogan.studio/og.png" />
   <meta property="og:image:width" content="1200" />
@@ -29,7 +29,7 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Berat Erdoğan",
-    "jobTitle": ["Art Director", "Brand Designer"],
+    "jobTitle": ["Motion Designer", "Art Director"],
     "url": "https://beraterdogan.studio/",
     "address": { "@type": "PostalAddress", "addressLocality": "Istanbul", "addressCountry": "TR" },
     "alumniOf": "Bahçeşehir University",
@@ -44,6 +44,7 @@
   <a class="skip" href="#work">içeriğe atla</a>
 
   <header class="nav">
+    <span class="nav__progress" aria-hidden="true"></span>
     <a class="nav__brand" href="#top">berat<span>.</span></a>
     <nav class="nav__links" aria-label="bölümler">
       <a href="#work" data-ui="nWork">işler</a>
@@ -59,12 +60,19 @@
   <main id="top">
     <!-- ============ HERO ============ -->
     <section class="hero">
-      <p class="hero__kicker" data-reveal="lines" data-ui="heroKicker">art director · istanbul</p>
-      <h1 class="hero__name">
-        <span class="line"><span>berat</span></span>
-        <span class="line"><span>erdoğan<i>.</i></span></span>
-      </h1>
+      <p class="hero__kicker" data-ui="heroKicker">portfolyo — istanbul</p>
+      <h1 class="hero__name kinetic" id="heroName">berat<br>erdoğan<i>.</i></h1>
+      <!-- The specialty sits right under the name: the first thing a
+           recruiter should read. The roll is decoration; the sr text
+           is what assistive tech gets. -->
+      <p class="hero__role">
+        <span class="sr">motion designer &amp; art director</span>
+        <span class="roll" aria-hidden="true"><span>motion designer</span><span>art director</span><span>motion designer</span></span>
+      </p>
       <p class="hero__lede" data-reveal="lines" data-ui="heroLede">marka kimliği ile motion arasındaki boşluğu kapatırım. az sözle çok şey.</p>
+      <button class="reel-btn" id="reelBtn" type="button" hidden>
+        <span class="reel-btn__dot" aria-hidden="true"></span><span data-ui="reelBtn">showreel'i izle</span>
+      </button>
       <div class="hero__foot">
         <span class="hero__count"><b id="heroCount">0</b> <span data-ui="heroWorks">iş</span></span>
         <span class="hero__cue" data-ui="heroCue">plakları çevir →</span>
@@ -127,6 +135,11 @@
       <ul class="socials" id="socials"></ul>
     </section>
   </main>
+
+  <dialog class="reel" id="reel" aria-label="showreel">
+    <button class="reel__close" id="reelClose" type="button" aria-label="kapat">×</button>
+    <video id="reelVideo" controls playsinline preload="none"></video>
+  </dialog>
 
   <footer class="foot">
     <span>© <span id="year"></span> berat erdoğan</span>

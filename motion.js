@@ -161,5 +161,68 @@
     });
   }
 
-  window.Motion = { Spring, smoothScroll, reveal, splitLines, reduced };
+  /* ---------- split into characters ----------
+     Each character sits in its own mask so it can rise out of it.
+     Words stay unbroken (white-space: nowrap) so a line never wraps
+     mid-word, and the full text is kept for screen readers. */
+  function splitChars(el, { step = 0.035, from = 0 } = {}) {
+    if (el.dataset.split) return el.querySelectorAll('.ch > span').length;
+    el.dataset.split = '1';
+    // innerText, not textContent: a <br> has to read as a space, or
+    // "berat<br>erdoğan" is announced as one word
+    const label = (el.innerText || el.textContent).trim().replace(/\s+/g, ' ');
+    let i = 0;
+    const walk = (node) => {
+      [...node.childNodes].forEach(n => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(tok => {
+            if (!tok) return;
+            if (/^\s+$/.test(tok)) { frag.append(' '); return; }
+            const w = document.createElement('span'); w.className = 'wd';
+            [...tok].forEach(c => {
+              const ch = document.createElement('span'); ch.className = 'ch';
+              const inner = document.createElement('span');
+              inner.textContent = c;
+              inner.style.setProperty('--d', (from + i++ * step).toFixed(3) + 's');
+              ch.append(inner); w.append(ch);
+            });
+            frag.append(w);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && !n.classList.contains('sr')) walk(n);
+      });
+    };
+    walk(el);
+    el.setAttribute('aria-label', label);
+    [...el.children].forEach(c => c.setAttribute('aria-hidden', 'true'));
+    return i;
+  }
+
+  /* ---------- count a number up when it enters ----------
+     Keeps whatever surrounds the digits ("03+", "%40") and pads to
+     the original width so the layout never jitters while counting. */
+  function countUp(el, { dur = 1200 } = {}) {
+    const raw = el.textContent;
+    const m = raw.match(/\d+/);
+    if (!m || reduced.matches) return;
+    const end = +m[0], width = m[0].length;
+    const [pre, post] = [raw.slice(0, m.index), raw.slice(m.index + width)];
+    el.textContent = pre + '0'.padStart(width, '0') + post;
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      const t0 = performance.now();
+      const tick = (now) => {
+        const p = Math.min((now - t0) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 4);            // quartic out: fast, then settles
+        el.textContent = pre + String(Math.round(end * eased)).padStart(width, '0') + post;
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, { threshold: 0.6 });
+    io.observe(el);
+  }
+
+  window.Motion = { Spring, smoothScroll, reveal, splitLines, splitChars, countUp, reduced };
 })();
