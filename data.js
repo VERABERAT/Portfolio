@@ -1,8 +1,15 @@
 /* ============================================================
    PORTFOLIO DATA — single source of truth
    index.html · project.html · admin.html all read this.
-   Edited via admin.html. localStorage "portfolio_data" overrides
-   this at runtime for live in-browser preview.
+   Translatable fields are { "tr": "...", "en": "..." } objects;
+   resolve with t() in the pages. Language-neutral fields
+   (tags, skills, slug, year, color, doodle, email, socials)
+   stay as plain strings.
+   "c" is the category — kept to a small shared set (tipografi,
+   ambalaj, kimlik, kampanya, arayüz) so the index filter has real
+   buckets; the specific wording lives in each project "tags".
+   Admin panel rewrites the JSON between DATA-START / DATA-END.
+   localStorage "portfolio_data" overrides at runtime (live preview).
    ============================================================ */
 window.PORTFOLIO =
 /* DATA-START */
@@ -12,12 +19,18 @@ window.PORTFOLIO =
       "slug": "vera",
       "t": "vera",
       "c": {
-        "tr": "display tipografi",
-        "en": "display typeface"
+        "tr": "tipografi",
+        "en": "typography"
       },
       "y": "2025",
       "color": "navy",
       "doodle": "d-type",
+      "cover": "images/vera/cover.jpg",
+      "coverWebp": "images/vera/cover.webp",
+      "coverAlt": {
+        "tr": "vera display tipografisinin sıkışık, kalın harf serisi",
+        "en": "the condensed, heavy letterforms of the vera display typeface"
+      },
       "desc": {
         "tr": "sıkışık, kalın, keskin köşeli display tipografi. dikkat ister, dikkat alır.",
         "en": "a condensed, heavy, sharp-cornered display typeface. demands attention, earns it."
@@ -78,14 +91,14 @@ window.PORTFOLIO =
       "slug": "nutripaw",
       "t": "nutripaw",
       "c": {
-        "tr": "fmcg branding",
-        "en": "fmcg branding"
+        "tr": "ambalaj",
+        "en": "packaging"
       },
       "y": "2024",
       "color": "yellow",
       "doodle": "d-box",
       "desc": {
-        "tr": "organik pet food markası için bütüncül kimlik, ambalaj ve kampanya.",
+        "tr": "organik pet food markası için uçtan uca kimlik, ambalaj ve kampanya.",
         "en": "holistic identity, packaging and campaign for an organic pet food brand."
       },
       "tags": [
@@ -105,14 +118,20 @@ window.PORTFOLIO =
       "slug": "smart-locker",
       "t": "smart locker",
       "c": {
-        "tr": "ui / ux",
-        "en": "ui / ux"
+        "tr": "arayüz",
+        "en": "interface"
       },
       "y": "2024",
       "color": "sky",
       "doodle": "d-eye",
+      "cover": "images/smart-locker-interface/cover.jpg",
+      "coverWebp": "images/smart-locker-interface/cover.webp",
+      "coverAlt": {
+        "tr": "akıllı emanet dolabının dokunmatik ekran arayüzü",
+        "en": "the touchscreen interface of the smart locker"
+      },
       "desc": {
-        "tr": "akıllı kilit dolabı için dokunmatik arayüz konsepti. akış + ekranlar.",
+        "tr": "akıllı emanet dolabı için dokunmatik arayüz konsepti. akış + ekranlar.",
         "en": "touchscreen interface concept for a smart locker. flows + screens."
       },
       "tags": [
@@ -132,14 +151,20 @@ window.PORTFOLIO =
       "slug": "imece-market",
       "t": "imece market",
       "c": {
-        "tr": "marka sistemi",
-        "en": "brand system"
+        "tr": "kimlik",
+        "en": "identity"
       },
       "y": "2025",
       "color": "navy",
       "doodle": "d-box",
+      "cover": "images/i-mece-market-2025-production-finance/cover.jpg",
+      "coverWebp": "images/i-mece-market-2025-production-finance/cover.webp",
+      "coverAlt": {
+        "tr": "imece market marka sistemi ve dashboard ekranları",
+        "en": "the imece market brand system and dashboard screens"
+      },
       "desc": {
-        "tr": "üretim & finans platformu için marka sistemi ve dashboard arayüzü.",
+        "tr": "üretim ve finans platformu için marka sistemi ve dashboard arayüzü.",
         "en": "brand system and dashboard interface for a production & finance platform."
       },
       "tags": [
@@ -190,14 +215,14 @@ window.PORTFOLIO =
       "slug": "kasten-meets-ankara",
       "t": "kasten meets ankara",
       "c": {
-        "tr": "sanat yönetimi",
-        "en": "art direction"
+        "tr": "kampanya",
+        "en": "campaign"
       },
       "y": "2024",
       "color": "sky",
       "doodle": "d-tent",
       "desc": {
-        "tr": "ankara için kültürel kampanyanın instagram serisi — carousel + reels.",
+        "tr": "ankara için bir kültür kampanyasının instagram serisi — carousel + reels.",
         "en": "instagram series for a cultural campaign for ankara — carousel + reels."
       },
       "tags": [
@@ -217,8 +242,8 @@ window.PORTFOLIO =
       "slug": "yazgiya-inat-yazi",
       "t": "yazgıya inat yazı",
       "c": {
-        "tr": "sergi · poster",
-        "en": "exhibition · poster"
+        "tr": "tipografi",
+        "en": "typography"
       },
       "y": "2025",
       "color": "forest",
@@ -245,8 +270,8 @@ window.PORTFOLIO =
       "slug": "tus-bodrum",
       "t": "tus bodrum",
       "c": {
-        "tr": "marka kimliği · menü",
-        "en": "brand identity · menu"
+        "tr": "kimlik",
+        "en": "identity"
       },
       "y": "2024",
       "color": "yellow",
@@ -281,7 +306,7 @@ window.PORTFOLIO =
         "en": "<b>berat erdoğan</b> — an art director closing the gap between static branding and motion. integrates generative ai tools like midjourney and firefly into the creative workflow to speed production up."
       },
       {
-        "tr": "konsept geliştirmeden sosyal medya adaptasyonuna kadar uçtan uca kampanya tasarımı. teknik hassasiyet + modern, tipografik estetik. az sözle çok şey.",
+        "tr": "konsept geliştirmeden sosyal medya adaptasyonuna kadar uçtan uca kampanya tasarımı. teknik hassasiyet ve modern, tipografik bir estetik. az sözle çok şey.",
         "en": "end-to-end campaign design, from concept development to social media adaptation. technical precision + a modern, typographic aesthetic. much, said simply."
       }
     ],
@@ -331,7 +356,7 @@ window.PORTFOLIO =
     },
     "email": "losberat@icloud.com",
     "avail": {
-      "tr": "görsel tasarım, marka, motion ya da sosyal medya projen için açığım. <mark>full-time</mark> ve remote çalışmaya hazırım.",
+      "tr": "görsel tasarım, marka, motion ya da sosyal medya projelerine açığım. <mark>full-time</mark> ve remote çalışmaya hazırım.",
       "en": "open for visual, brand, motion or social media projects. available <mark>full-time</mark> and remote."
     },
     "socials": {
@@ -381,7 +406,7 @@ window.PORTFOLIO =
       }
     },
     {
-      "role": "Art",
+      "role": "digital designer",
       "org": "notivent app",
       "date": {
         "tr": "haz — eki 2023",

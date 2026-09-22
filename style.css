@@ -1,0 +1,571 @@
+/* ============================================================
+   berat. — design system
+   Editorial layout, record-crate gallery, spring motion.
+   Shared by index.html and project.html.
+   ============================================================ */
+
+:root {
+  /* --- type --- */
+  --display: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+  --sans: 'Inter Tight', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* --- surface: pure black and pure white, no warm cast ---
+     Light is the default; dark inverts it below. Everything is
+     derived from --paper / --ink, so the two themes are one
+     token block each and nothing else in the file changes. */
+  --paper:  #FFFFFF;
+  --ink:    #000000;
+  /* #E5261A is the one red that clears AA on BOTH grounds:
+     4.54:1 on white, 4.62:1 on black. The old terracotta was
+     5.66 on white but only 3.71 on black. */
+  --accent: #E5261A;
+  --line:   color-mix(in srgb, var(--ink) 16%, transparent);
+  --muted:  #6C6C6C;            /* 5.25:1 on white */
+  --well:   #F4F4F4;            /* media backdrop, behind images */
+  --glass-edge: color-mix(in srgb, var(--ink) 10%, transparent);
+  --vinyl-rim: rgba(255,255,255,.07);
+  --shadow: 0 1.5rem 3rem -1rem color-mix(in srgb, var(--ink) 34%, transparent);
+
+  /* --- record label palette (carried over from the old cards) --- */
+  --yellow: #FFD93D;  --yellow-ink: #2B2B2B;
+  --navy:   #1B1B3A;  --navy-ink:   #E8924A;
+  --mint:   #AEEBD0;  --mint-ink:   #8B2E2E;
+  --sky:    #6BC5F0;  --sky-ink:    #1B2B4A;
+  --forest: #1B4D3E;  --forest-ink: #EDE5B6;
+  --mono:   #FFFFFF;  --mono-ink:   #000000;
+
+  /* --- motion ---
+     One signature curve for everything that is not a spring.
+     Springs live in motion.js and are used for anything draggable. */
+  --energy: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* --- rhythm: rem so a bumped browser font size scales the layout --- */
+  --gut:  clamp(1.4rem, 5vw, 5rem);
+  --sec:  clamp(5rem, 13vh, 10rem);
+}
+
+/* Dark: the same page inverted. The label palette is untouched —
+   those are the project colours and they read on either ground. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #000000;
+    --ink:   #FFFFFF;
+    --muted: #909090;          /* 6.58:1 on black */
+    --well:  #0D0D0D;
+    --glass-edge: color-mix(in srgb, var(--ink) 22%, transparent);
+    --vinyl-rim: rgba(255,255,255,.22);   /* or the record vanishes */
+    --shadow: 0 1.5rem 3rem -1rem rgba(0,0,0,.9);
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--sans);
+  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  line-height: 1.55;                 /* body copy breathes */
+  letter-spacing: 0;                 /* tracking is set per size, not globally */
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+li { list-style: none; }
+img, svg, video, iframe { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+::selection { background: var(--accent); color: var(--paper); }
+
+/* No paper grain. It was a warm-paper effect and it cannot survive a
+   pure black-and-white brief: at any visible opacity multiply pulls
+   the white to ~#F7F7F7, and in dark mode screen-blending black noise
+   over black is a no-op that only touches the artwork. To bring it
+   back, restore a body::after overlay with the noise data-URI. */
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+:focus:not(:focus-visible) { outline: none; }
+
+.skip {
+  position: fixed; top: 0; left: 50%; transform: translate(-50%, -120%);
+  z-index: 10000; background: var(--ink); color: var(--paper);
+  padding: .7rem 1.2rem; font-size: .9rem; font-weight: 500;
+  transition: transform .25s var(--energy);
+}
+.skip:focus { transform: translate(-50%, 0); }
+
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 900;
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  padding: 1.1rem var(--gut);
+  font-size: .875rem; font-weight: 500; letter-spacing: .01em;
+  background: color-mix(in srgb, var(--paper) 72%, transparent);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--glass-edge);
+}
+.nav__brand { font-family: var(--display); font-size: 1.4rem; letter-spacing: -.02em; }
+.nav__brand span { color: var(--accent); }
+.nav__links { display: flex; gap: 1.6rem; }
+.nav__links a { position: relative; color: var(--muted); transition: color .3s var(--energy); }
+.nav__links a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -.28em; height: 1px;
+  background: currentColor; transform: scaleX(0); transform-origin: left;
+  transition: transform .5s var(--energy);
+}
+.nav__links a:hover { color: var(--ink); }
+.nav__links a:hover::after { transform: scaleX(1); }
+@media (max-width: 720px) { .nav__links { display: none; } }
+
+.lang {
+  display: inline-flex; align-items: center; gap: .35rem;
+  font-size: .8rem; font-weight: 500; text-transform: lowercase;
+  padding: .3rem .7rem; border-radius: 999px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper) 60%, transparent);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  transition: border-color .3s var(--energy);
+}
+.lang:hover { border-color: var(--ink); }
+.lang span[data-l] { color: var(--muted); transition: color .25s var(--energy); }
+.lang span[data-l].on { color: var(--ink); }
+.lang__sep { color: var(--line); }
+
+/* glass needs a real fallback — a translucent bar with no blur is unreadable */
+@supports not (backdrop-filter: blur(1px)) {
+  .nav, .lang { background: var(--paper); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .nav, .lang { background: var(--paper); backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+
+/* ============================================================
+   TYPE SCALE
+   Tracking tightens as size grows; leading loosens as size drops.
+   ============================================================ */
+.hero__name, .contact__h {
+  font-family: var(--display); font-weight: 400;
+  letter-spacing: -.04em; line-height: .92;
+}
+.sechead__h, .about__h {
+  font-family: var(--display); font-weight: 400;
+  letter-spacing: -.025em; line-height: 1.02;
+}
+.about__sub { font-family: var(--display); font-weight: 400; letter-spacing: -.015em; line-height: 1.1; }
+
+/* ============================================================
+   REVEAL — lines rise out of their own overflow
+   ============================================================ */
+[data-reveal] .line { display: block; overflow: hidden; }
+[data-reveal] .line > span {
+  display: block;
+  transform: translateY(120%);
+  transition: transform .7s var(--energy);
+}
+[data-reveal].is-in .line > span { transform: translateY(0); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 8rem var(--gut) var(--sec);
+}
+.hero__kicker {
+  font-size: .875rem; font-weight: 500; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem;
+}
+.hero__name { font-size: clamp(3.5rem, 15vw, 14rem); }
+.hero__name .line { display: block; overflow: hidden; }
+.hero__name .line > span { display: block; transform: translateY(110%); animation: rise .9s var(--energy) forwards; }
+.hero__name .line:nth-child(2) > span { animation-delay: .08s; }
+.hero__name i { color: var(--accent); font-style: normal; }
+@keyframes rise { to { transform: translateY(0); } }
+
+.hero__lede {
+  margin-top: 1.8rem; max-width: 30ch;
+  font-size: clamp(1.1rem, 2.2vw, 1.55rem); line-height: 1.4;
+  letter-spacing: -.01em; color: var(--muted);
+}
+.hero__foot {
+  margin-top: auto; padding-top: 3rem;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  font-size: .875rem; color: var(--muted); border-top: 1px solid var(--line);
+}
+.hero__count b { font-family: var(--display); font-size: 1.6rem; color: var(--ink); }
+.hero__cue { letter-spacing: .04em; }
+
+/* ============================================================
+   SECTION HEADS
+   ============================================================ */
+.sechead {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  flex-wrap: wrap; gap: 1.2rem;
+  padding: 0 var(--gut) 2.2rem;
+}
+.sechead__h { font-size: clamp(1.8rem, 5vw, 3.4rem); }
+.sechead__n { font-size: .82rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+
+/* ============================================================
+   PLAK GALERİSİ — the crate
+   ============================================================ */
+.work { padding: var(--sec) 0; }
+
+.crate {
+  position: relative;
+  height: clamp(300px, 52vh, 520px);
+  perspective: 1400px;
+  perspective-origin: 42% 44%;
+  touch-action: pan-y;                 /* vertical scroll stays native */
+  cursor: grab;
+  overflow: hidden;
+}
+.crate.is-dragging { cursor: grabbing; }
+.crate__stage { position: absolute; inset: 0; transform-style: preserve-3d; }
+
+.rec {
+  position: absolute; top: 44%; left: 50%;   /* lifted: the meta line sits below */
+  width: clamp(200px, 30vw, 330px);
+  margin: 0 0 0 calc(clamp(200px, 30vw, 330px) / -2);
+  aspect-ratio: 1;
+  margin-top: calc(clamp(200px, 30vw, 330px) / -2);
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  user-select: none;
+}
+
+/* the sleeve is the cover; the vinyl slides out from behind it */
+.rec__sleeve {
+  position: absolute; inset: 0;
+  border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+  background: var(--sleeve, var(--ink));
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  z-index: 2;
+}
+.rec__sleeve img { width: 100%; height: 100%; object-fit: cover; }
+
+/* projects with no cover get a typographic sleeve — record-store language */
+.rec__type {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 1.1rem; color: var(--sleeveink, var(--paper));
+}
+.rec__type b {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(1.5rem, 3.4vw, 2.3rem); line-height: .95; letter-spacing: -.03em;
+}
+.rec__type small { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
+.rec__type svg { width: 40%; align-self: flex-end; opacity: .45; }
+.rec__type .doodle { fill: none; stroke: currentColor; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+
+.rec__vinyl {
+  position: absolute; inset: 0; border-radius: 50%; z-index: 1;
+  overflow: hidden;   /* the sheen below is a square that rotates —
+                         unclipped, its corners sweep past the disc */
+  transform: translateX(22%);
+  transition: transform .8s var(--energy);
+  background:
+    repeating-radial-gradient(circle at 50% 50%,
+      #191919 0 1px, #0d0d0d 1px 2.5px, #141414 2.5px 4px);
+  box-shadow: 0 1rem 2.5rem -.8rem rgba(0,0,0,.55), inset 0 0 0 1px var(--vinyl-rim);
+}
+/* the sheen that reads as "this is vinyl, not a black circle" */
+.rec__vinyl::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from 210deg,
+    rgba(255,255,255,0) 0deg, rgba(255,255,255,.13) 32deg, rgba(255,255,255,0) 80deg,
+    rgba(255,255,255,0) 190deg, rgba(255,255,255,.09) 222deg, rgba(255,255,255,0) 270deg);
+}
+.rec__label {
+  position: absolute; inset: 32%; border-radius: 50%;
+  background: var(--label, var(--accent)); color: var(--labelink, var(--paper));
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: .1em; text-align: center; padding: .4rem;
+}
+.rec__label b {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(.8rem, 1.5vw, 1.05rem); line-height: 1; letter-spacing: -.02em;
+}
+.rec__label small { font-size: .55rem; letter-spacing: .14em; text-transform: uppercase; opacity: .8; }
+/* spindle hole */
+.rec__label::after {
+  content: ""; position: absolute; width: 9%; aspect-ratio: 1; border-radius: 50%;
+  background: var(--paper); box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
+}
+
+/* the active record pulls its vinyl out and spins it */
+.rec.is-active .rec__vinyl { transform: translateX(46%); }
+.rec.is-active .rec__vinyl::before { animation: spin 6s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.rec__meta {
+  position: absolute; top: 100%; left: 0; right: 0; padding-top: 1.1rem;
+  text-align: center; opacity: 0; transition: opacity .5s var(--energy);
+}
+.rec.is-active .rec__meta { opacity: 1; }
+.rec__meta b { display: block; font-family: var(--display); font-size: 1.3rem; letter-spacing: -.02em; }
+.rec__meta span { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+.rec a { display: block; position: absolute; inset: 0; }
+
+/* transport */
+.crate__ctrl {
+  display: flex; align-items: center; justify-content: center; gap: 1.2rem;
+  padding: 3.2rem var(--gut) 0;
+}
+.ctrl {
+  width: 2.75rem; height: 2.75rem; border-radius: 50%;
+  border: 1px solid var(--line); color: var(--muted);
+  display: grid; place-items: center;
+  transition: border-color .4s var(--energy), color .4s var(--energy), transform .4s var(--energy);
+}
+.ctrl:hover { border-color: var(--ink); color: var(--ink); }
+.ctrl:active { transform: scale(.94); transition: transform 100ms ease-out; }
+.ctrl[disabled] { opacity: .3; pointer-events: none; }
+.ticks { display: flex; gap: .45rem; align-items: center; }
+.tick {
+  width: .45rem; height: .45rem; border-radius: 50%;
+  background: color-mix(in srgb, var(--ink) 22%, transparent);
+  transition: background .4s var(--energy), transform .4s var(--energy);
+}
+.tick.on { background: var(--accent); transform: scale(1.5); }
+
+/* ============================================================
+   DİZİN — the full, filterable list
+   ============================================================ */
+.index { padding: var(--sec) 0; border-top: 1px solid var(--line); position: relative; }
+
+.filters { display: flex; flex-wrap: wrap; gap: .5rem; }
+.filter {
+  font-size: .8rem; font-weight: 500; letter-spacing: .02em;
+  padding: .4rem 1rem; border-radius: 999px;
+  border: 1px solid var(--line); color: var(--muted);
+  transition: color .35s var(--energy), border-color .35s var(--energy), background .35s var(--energy);
+}
+.filter:hover { color: var(--ink); border-color: var(--ink); }
+.filter[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.filter:active { transform: scale(.97); transition: transform 100ms ease-out; }
+
+.idx { padding: 0 var(--gut); }
+.idx__row { border-top: 1px solid var(--line); }
+.idx__row:last-child { border-bottom: 1px solid var(--line); }
+.idx__row a {
+  display: grid; grid-template-columns: 4.5rem 1fr auto; gap: 1.5rem; align-items: baseline;
+  padding: 1.15rem 0;
+  transition: padding-left .55s var(--energy), color .35s var(--energy);
+}
+.idx__row a:hover { padding-left: 1rem; }
+.idx__y { font-size: .82rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.idx__t {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(1.35rem, 3.5vw, 2.2rem); letter-spacing: -.025em; line-height: 1.05;
+}
+.idx__c { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+/* filtered out: collapse, don't just hide, so the list stays tidy */
+.idx__row { overflow: hidden; transition: opacity .3s var(--energy); }
+.idx__row[hidden] { display: none; }
+
+/* cover preview that follows the pointer over the list */
+.idx__peek {
+  position: fixed; top: 0; left: 0; width: 15rem; aspect-ratio: 1;
+  pointer-events: none; z-index: 800; opacity: 0;
+  transform: translate(-50%, -50%) scale(.9);
+  transition: opacity .35s var(--energy), transform .55s var(--energy);
+  border: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
+  box-shadow: var(--shadow);
+  overflow: hidden; background: var(--well);
+}
+.idx__peek.on { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.idx__peek img { width: 100%; height: 100%; object-fit: cover; }
+@media (hover: none), (max-width: 860px) { .idx__peek { display: none; } }
+
+/* ============================================================
+   HAKKINDA
+   ============================================================ */
+.about { padding: var(--sec) 0; border-top: 1px solid var(--line); }
+.about__grid {
+  display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(2rem, 6vw, 6rem);
+  padding: 0 var(--gut);
+}
+.about__h { font-size: clamp(1.6rem, 3.6vw, 2.6rem); margin-bottom: 1.6rem; max-width: 20ch; }
+.about__p { max-width: 46ch; margin-bottom: 1rem; color: var(--muted); }
+.about__p b { color: var(--ink); font-weight: 600; }
+.about__sub { font-size: 1.5rem; margin: 3rem 0 1.2rem; }
+
+.skills { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 2rem; }
+.skills li {
+  font-size: .78rem; letter-spacing: .02em; color: var(--muted);
+  padding: .3rem .8rem; border: 1px solid var(--line); border-radius: 999px;
+}
+
+.counters { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.6rem 1rem; }
+.counters div { border-top: 1px solid var(--line); padding-top: .7rem; }
+.counters dt { font-family: var(--display); font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1; letter-spacing: -.03em; }
+.counters dd { font-size: .78rem; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin-top: .35rem; }
+
+.exp li { border-top: 1px solid var(--line); padding: 1.1rem 0; }
+.exp b { font-size: 1.02rem; font-weight: 600; }
+.exp .at { color: var(--muted); font-weight: 400; }
+.exp time { display: block; font-size: .76rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: .2rem 0 .5rem; }
+.exp p { font-size: .92rem; color: var(--muted); max-width: 48ch; }
+
+@media (max-width: 860px) { .about__grid { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   İLETİŞİM
+   ============================================================ */
+.contact { padding: var(--sec) var(--gut); border-top: 1px solid var(--line); }
+.contact__h { font-size: clamp(2.2rem, 8vw, 6rem); max-width: 14ch; }
+.contact__mail {
+  display: inline-flex; align-items: baseline; gap: .6rem; margin-top: 2.5rem;
+  font-family: var(--display); font-size: clamp(1.3rem, 4vw, 2.6rem); letter-spacing: -.03em;
+  border-bottom: 1px solid var(--line);
+  transition: gap .5s var(--energy), border-color .4s var(--energy);
+}
+.contact__mail:hover { gap: 1.4rem; border-color: var(--ink); }
+.contact__mail i { font-style: normal; color: var(--accent); }
+.contact__mail:active { transform: scale(.985); transition: transform 100ms ease-out; }
+.contact__avail { margin-top: 1.8rem; max-width: 42ch; color: var(--muted); }
+.contact__avail mark { background: none; color: var(--accent); }
+.socials { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 2.2rem; font-size: .9rem; }
+.socials a { border-bottom: 1px solid var(--line); padding-bottom: .15rem; transition: border-color .35s var(--energy); }
+.socials a:hover { border-color: var(--ink); }
+
+.foot {
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: .6rem;
+  padding: 2rem var(--gut); border-top: 1px solid var(--line);
+  font-size: .78rem; letter-spacing: .04em; color: var(--muted);
+}
+
+/* ============================================================
+   REDUCED MOTION
+   Every new animation above is covered here. Where something
+   moved, it now cross-fades in 200ms instead.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 200ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hero__name .line > span,
+  [data-reveal] .line > span { transform: none; animation: none; }
+  [data-reveal] { opacity: 0; transition: opacity 200ms linear; }
+  [data-reveal].is-in { opacity: 1; }
+  .rec__vinyl, .rec.is-active .rec__vinyl { transform: translateX(34%); }
+  .rec.is-active .rec__vinyl::before { animation: none; }
+  .idx__peek { transition: opacity 200ms linear; transform: translate(-50%, -50%); }
+  .idx__peek.on { transform: translate(-50%, -50%); }
+}
+
+/* ============================================================
+   PROJE SAYFASI
+   ============================================================ */
+.proj .nav { justify-content: space-between; }
+.nav__brand.back { display: inline-flex; align-items: baseline; gap: .5rem; font-size: 1rem; font-family: var(--sans); }
+.nav__brand.back i { font-style: normal; color: var(--accent); transition: transform .5s var(--energy); display: inline-block; }
+.nav__brand.back:hover i { transform: translateX(-.35rem); }
+
+.phero {
+  display: grid; grid-template-columns: 1.25fr 1fr;
+  gap: clamp(2rem, 6vw, 5rem); align-items: center;
+  padding: 10rem var(--gut) var(--sec);
+}
+.phero__meta { font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+.phero__title {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(2.6rem, 8vw, 6.5rem); line-height: .94; letter-spacing: -.04em;
+}
+.phero__desc {
+  margin-top: 1.5rem; max-width: 44ch;
+  font-size: clamp(1.05rem, 2vw, 1.4rem); line-height: 1.45; letter-spacing: -.005em; color: var(--muted);
+}
+.phero__tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.8rem; }
+.phero__tags li {
+  font-size: .76rem; letter-spacing: .02em; color: var(--muted);
+  padding: .3rem .8rem; border: 1px solid var(--line); border-radius: 999px;
+}
+.phero__cta { margin-top: 2rem; }
+
+.ulink {
+  display: inline-flex; align-items: baseline; gap: .5rem;
+  font-weight: 500; border-bottom: 1px solid var(--line); padding-bottom: .15rem;
+  transition: gap .5s var(--energy), border-color .4s var(--energy);
+}
+.ulink:hover { gap: 1rem; border-color: var(--ink); }
+.ulink:active { transform: scale(.98); transition: transform 100ms ease-out; }
+.ulink i { font-style: normal; color: var(--accent); }
+
+/* the project's own record, sitting beside the title.
+   The box is wider than tall so the vinyl has somewhere to stick
+   out to — it used to slide past the viewport edge. */
+.phero__rec { position: relative; aspect-ratio: 1.32; max-width: 30rem; width: 100%; margin-left: auto; }
+.phero__rec .rec__sleeve,
+.phero__rec .rec__vinyl { position: absolute; top: 0; bottom: 0; width: auto; aspect-ratio: 1; inset-inline: auto; transform: none; }
+.phero__rec .rec__sleeve { left: 0; }
+.phero__rec .rec__vinyl { right: 0; }
+.phero__rec .rec__vinyl::before { animation: spin 9s linear infinite; }
+@media (max-width: 860px) {
+  .phero { grid-template-columns: 1fr; }
+  .phero__rec { order: -1; max-width: 22rem; margin: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phero__rec .rec__vinyl::before { animation: none; }
+}
+
+/* gallery */
+.gallery {
+  max-width: 68rem; margin: 0 auto;
+  padding: 0 var(--gut) var(--sec);
+  display: flex; flex-direction: column; gap: clamp(1.5rem, 4vw, 3.5rem);
+}
+.gallery__h {
+  font-family: var(--display); font-weight: 400; font-size: clamp(1.4rem, 3vw, 2.2rem);
+  letter-spacing: -.02em; color: var(--muted); margin-bottom: .5rem;
+}
+.shot { border: 1px solid var(--line); background: var(--well); overflow: hidden; }
+.shot img, .shot video { width: 100%; height: auto; }
+.shot--embed { position: relative; aspect-ratio: 16 / 9; }
+.shot--embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+.pempty {
+  max-width: 68rem; margin: 0 auto; padding: 0 var(--gut) var(--sec);
+  display: flex; flex-direction: column; align-items: flex-start; gap: 1.2rem;
+  color: var(--muted);
+}
+.proj .pempty:first-child { padding-top: 12rem; }
+
+/* prev / next */
+.pnav {
+  display: flex; justify-content: space-between; gap: 1.5rem;
+  padding: 0 var(--gut) var(--sec); border-top: 1px solid var(--line);
+  max-width: 68rem; margin: 0 auto;
+}
+.pnav a { padding-top: 1.6rem; max-width: 46%; transition: transform .55s var(--energy); }
+.pnav a:hover { transform: translateY(-.3rem); }
+.pnav small { display: block; font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.pnav small i { font-style: normal; color: var(--accent); }
+.pnav b {
+  display: block; margin-top: .35rem;
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(1.2rem, 3vw, 1.9rem); letter-spacing: -.025em; line-height: 1.05;
+}
+.pnav .next { text-align: right; margin-left: auto; }

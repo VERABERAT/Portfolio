@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, nofollow" />
   <title>admin — berat.</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23141414'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%23EFEDE8' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23B2422D'/%3E%3Ccircle cx='32' cy='32' r='1.6' fill='%23EFEDE8'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -12,12 +13,13 @@
     :root {
       --hand:'Shantell Sans','Comic Sans MS',cursive;
       --mono:'Space Mono',ui-monospace,monospace;
-      --cream:#F3EFE6; --ink:#2B2B2B; --line:#2B2B2B;
+      --paper:#FFFFFF; --ink:#000000; --line:#000000;
+      --monoc:#FFFFFF;   /* the 'mono' project label colour */
       --yellow:#FFD93D; --navy:#1B1B3A; --mint:#AEEBD0; --sky:#6BC5F0; --forest:#1B4D3E;
       --ok:#1B7A4B; --err:#B33;
     }
     * { box-sizing:border-box; margin:0; padding:0; }
-    body { font-family:var(--hand); background:var(--cream); color:var(--ink); line-height:1.45; }
+    body { font-family:var(--hand); background:var(--paper); color:var(--ink); line-height:1.45; }
     h1,h2,h3 { font-weight:800; letter-spacing:-.01em; }
     a { color:inherit; }
     button { font:inherit; cursor:pointer; }
@@ -26,7 +28,7 @@
 
     /* gate */
     .gate { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; }
-    .gate__box { width:100%; max-width:360px; border:3px solid var(--line); border-radius:16px; padding:30px; background:#fff; }
+    .gate__box { width:100%; max-width:360px; border:3px solid var(--line); border-radius:16px; padding:30px; background:var(--paper); }
     .gate__box h1 { font-size:32px; margin-bottom:6px; }
     .gate__box p { font-size:13px; opacity:.7; margin-bottom:18px; }
 
@@ -53,7 +55,7 @@
 
     .field { display:flex; flex-direction:column; gap:4px; margin-bottom:10px; }
     .field > label { font-weight:700; font-size:13px; }
-    .field input, .field textarea, .field select { border:2px solid var(--line); border-radius:8px; padding:8px 10px; background:var(--cream); outline:none; }
+    .field input, .field textarea, .field select { border:2px solid var(--line); border-radius:8px; padding:8px 10px; background:var(--paper); outline:none; }
     .field input:focus, .field textarea:focus, .field select:focus { background:var(--yellow); }
     .field textarea { min-height:70px; resize:vertical; }
     .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
@@ -62,7 +64,7 @@
 
     .btn { border:2.5px solid var(--line); border-radius:9px; padding:9px 14px; font-weight:800; font-size:13px; background:#fff; }
     .btn:hover { background:var(--yellow); }
-    .btn--ink { background:var(--ink); color:var(--cream); }
+    .btn--ink { background:var(--ink); color:var(--paper); }
     .btn--ink:hover { background:#000; color:var(--yellow); }
     .btn--sm { padding:5px 10px; font-size:12px; border-width:2px; }
     .btn--danger:hover { background:#fdd; border-color:var(--err); color:var(--err); }
@@ -73,7 +75,7 @@
     .swatch.sel { outline:3px solid var(--ink); outline-offset:2px; }
     .swatch[data-v=yellow]{background:var(--yellow);} .swatch[data-v=navy]{background:var(--navy);}
     .swatch[data-v=mint]{background:var(--mint);} .swatch[data-v=sky]{background:var(--sky);}
-    .swatch[data-v=forest]{background:var(--forest);} .swatch[data-v=cream]{background:var(--cream);}
+    .swatch[data-v=forest]{background:var(--forest);} .swatch[data-v=mono]{background:var(--monoc); box-shadow:inset 0 0 0 1px var(--line);}
 
     .doodlepick { display:flex; gap:6px; flex-wrap:wrap; }
     .doodlepick button { width:42px; height:42px; border:2px solid var(--line); border-radius:8px; background:#fff; padding:5px; }
@@ -188,7 +190,7 @@
   const LS_DATA = 'portfolio_data';
   const LS_HASH = 'portfolio_admin_hash';
   const LS_TOKEN = 'portfolio_gh_token';
-  const COLORS = ['yellow','navy','mint','sky','forest','cream'];
+  const COLORS = ['yellow','navy','mint','sky','forest','mono'];
 
   let data = null;
 
@@ -197,7 +199,15 @@
     try { const ov = localStorage.getItem(LS_DATA); if (ov) return JSON.parse(ov); } catch(e){}
     return deepClone(window.PORTFOLIO || { projects:[], profile:{}, experience:[] });
   }
-  function slugify(s){ return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+  // must stay in step with slugify() in site.js / project.js —
+  // without the transliteration "yazgıya inat yazı" became
+  // "yazg-ya-inat-yaz" and the detail page stopped resolving it
+  function slugify(s){
+    return (s||'').toLowerCase()
+      .replace(/[ıİ]/g,'i').replace(/[ğĞ]/g,'g').replace(/[üÜ]/g,'u')
+      .replace(/[şŞ]/g,'s').replace(/[öÖ]/g,'o').replace(/[çÇ]/g,'c')
+      .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  }
 
   /* ----- bilingual field helpers ({tr,en}) ----- */
   function tv(v,l){ return (v && typeof v==='object' && !Array.isArray(v)) ? (v[l]||'') : (l==='tr' ? (v==null?'':v) : ''); }
@@ -322,6 +332,13 @@
           <div class="field"><label>doodle</label><div class="doodlepick" id="f-doodle">${doodlePickHTML(p.doodle)}</div></div>
         </div>
 
+        <div class="grid2">
+          <div class="field"><label>kapak (jpg/png)</label><input id="f-cover" value="${escAttr(p.cover||'')}" placeholder="images/&lt;slug&gt;/cover.jpg"></div>
+          <div class="field"><label>kapak webp (opsiyonel)</label><input id="f-coverwebp" value="${escAttr(p.coverWebp||'')}" placeholder="images/&lt;slug&gt;/cover.webp"></div>
+        </div>
+        ${biInput('f-coveralt','kapak alt metni (ekran okuyucu)', p.coverAlt)}
+        <p class="hint">kapak yoksa plak kılıfı tipografik çizilir, doodle işaret olarak kullanılır.</p>
+
         <div class="field">
           <label>medya (resim / video / embed)</label>
           <div id="f-media"></div>
@@ -400,6 +417,13 @@
       p.desc = readBi('f-desc');
       p.tags = PE.querySelector('#f-tags').value.split(',').map(s=>s.trim()).filter(Boolean);
       p.color = color; p.doodle = doodle;
+      const cover = PE.querySelector('#f-cover').value.trim();
+      const coverWebp = PE.querySelector('#f-coverwebp').value.trim();
+      const coverAlt = readBi('f-coveralt');
+      // drop the keys entirely when blank so the sleeve falls back cleanly
+      if (cover) p.cover = cover; else delete p.cover;
+      if (coverWebp) p.coverWebp = coverWebp; else delete p.coverWebp;
+      if (coverAlt && (coverAlt.tr || coverAlt.en)) p.coverAlt = coverAlt; else delete p.coverAlt;
       p.media = media.filter(m=>m.src && m.src.trim());
       renderProjects();
       alert('proje hafızaya alındı. yayınlamayı unutma.');
