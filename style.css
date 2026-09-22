@@ -205,7 +205,7 @@ body::after {
 
 .crate {
   position: relative;
-  height: clamp(340px, 56vh, 520px);
+  height: clamp(300px, 52vh, 520px);
   perspective: 1400px;
   perspective-origin: 42% 44%;
   touch-action: pan-y;                 /* vertical scroll stays native */
@@ -451,3 +451,97 @@ body::after {
   .idx__peek { transition: opacity 200ms linear; transform: translate(-50%, -50%); }
   .idx__peek.on { transform: translate(-50%, -50%); }
 }
+
+/* ============================================================
+   PROJE SAYFASI
+   ============================================================ */
+.proj .nav { justify-content: space-between; }
+.nav__brand.back { display: inline-flex; align-items: baseline; gap: .5rem; font-size: 1rem; font-family: var(--sans); }
+.nav__brand.back i { font-style: normal; color: var(--accent); transition: transform .5s var(--energy); display: inline-block; }
+.nav__brand.back:hover i { transform: translateX(-.35rem); }
+
+.phero {
+  display: grid; grid-template-columns: 1.25fr 1fr;
+  gap: clamp(2rem, 6vw, 5rem); align-items: center;
+  padding: 10rem var(--gut) var(--sec);
+}
+.phero__meta { font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+.phero__title {
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(2.6rem, 8vw, 6.5rem); line-height: .94; letter-spacing: -.04em;
+}
+.phero__desc {
+  margin-top: 1.5rem; max-width: 44ch;
+  font-size: clamp(1.05rem, 2vw, 1.4rem); line-height: 1.45; letter-spacing: -.005em; color: var(--muted);
+}
+.phero__tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1.8rem; }
+.phero__tags li {
+  font-size: .76rem; letter-spacing: .02em; color: var(--muted);
+  padding: .3rem .8rem; border: 1px solid var(--line); border-radius: 999px;
+}
+.phero__cta { margin-top: 2rem; }
+
+.ulink {
+  display: inline-flex; align-items: baseline; gap: .5rem;
+  font-weight: 500; border-bottom: 1px solid var(--line); padding-bottom: .15rem;
+  transition: gap .5s var(--energy), border-color .4s var(--energy);
+}
+.ulink:hover { gap: 1rem; border-color: var(--ink); }
+.ulink:active { transform: scale(.98); transition: transform 100ms ease-out; }
+.ulink i { font-style: normal; color: var(--accent); }
+
+/* the project's own record, sitting beside the title.
+   The box is wider than tall so the vinyl has somewhere to stick
+   out to — it used to slide past the viewport edge. */
+.phero__rec { position: relative; aspect-ratio: 1.32; max-width: 30rem; width: 100%; margin-left: auto; }
+.phero__rec .rec__sleeve,
+.phero__rec .rec__vinyl { position: absolute; top: 0; bottom: 0; width: auto; aspect-ratio: 1; inset-inline: auto; transform: none; }
+.phero__rec .rec__sleeve { left: 0; }
+.phero__rec .rec__vinyl { right: 0; }
+.phero__rec .rec__vinyl::before { animation: spin 9s linear infinite; }
+@media (max-width: 860px) {
+  .phero { grid-template-columns: 1fr; }
+  .phero__rec { order: -1; max-width: 22rem; margin: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phero__rec .rec__vinyl::before { animation: none; }
+}
+
+/* gallery */
+.gallery {
+  max-width: 68rem; margin: 0 auto;
+  padding: 0 var(--gut) var(--sec);
+  display: flex; flex-direction: column; gap: clamp(1.5rem, 4vw, 3.5rem);
+}
+.gallery__h {
+  font-family: var(--display); font-weight: 400; font-size: clamp(1.4rem, 3vw, 2.2rem);
+  letter-spacing: -.02em; color: var(--muted); margin-bottom: .5rem;
+}
+.shot { border: 1px solid var(--line); background: var(--ink); overflow: hidden; }
+.shot img, .shot video { width: 100%; height: auto; }
+.shot--embed { position: relative; aspect-ratio: 16 / 9; }
+.shot--embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+.pempty {
+  max-width: 68rem; margin: 0 auto; padding: 0 var(--gut) var(--sec);
+  display: flex; flex-direction: column; align-items: flex-start; gap: 1.2rem;
+  color: var(--muted);
+}
+.proj .pempty:first-child { padding-top: 12rem; }
+
+/* prev / next */
+.pnav {
+  display: flex; justify-content: space-between; gap: 1.5rem;
+  padding: 0 var(--gut) var(--sec); border-top: 1px solid var(--line);
+  max-width: 68rem; margin: 0 auto;
+}
+.pnav a { padding-top: 1.6rem; max-width: 46%; transition: transform .55s var(--energy); }
+.pnav a:hover { transform: translateY(-.3rem); }
+.pnav small { display: block; font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.pnav small i { font-style: normal; color: var(--accent); }
+.pnav b {
+  display: block; margin-top: .35rem;
+  font-family: var(--display); font-weight: 400;
+  font-size: clamp(1.2rem, 3vw, 1.9rem); letter-spacing: -.025em; line-height: 1.05;
+}
+.pnav .next { text-align: right; margin-left: auto; }
