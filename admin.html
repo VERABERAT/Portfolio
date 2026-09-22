@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, nofollow" />
   <title>admin — berat.</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23141414'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%23EFEDE8' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23B2422D'/%3E%3Ccircle cx='32' cy='32' r='1.6' fill='%23EFEDE8'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -197,7 +198,15 @@
     try { const ov = localStorage.getItem(LS_DATA); if (ov) return JSON.parse(ov); } catch(e){}
     return deepClone(window.PORTFOLIO || { projects:[], profile:{}, experience:[] });
   }
-  function slugify(s){ return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+  // must stay in step with slugify() in site.js / project.js —
+  // without the transliteration "yazgıya inat yazı" became
+  // "yazg-ya-inat-yaz" and the detail page stopped resolving it
+  function slugify(s){
+    return (s||'').toLowerCase()
+      .replace(/[ıİ]/g,'i').replace(/[ğĞ]/g,'g').replace(/[üÜ]/g,'u')
+      .replace(/[şŞ]/g,'s').replace(/[öÖ]/g,'o').replace(/[çÇ]/g,'c')
+      .replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  }
 
   /* ----- bilingual field helpers ({tr,en}) ----- */
   function tv(v,l){ return (v && typeof v==='object' && !Array.isArray(v)) ? (v[l]||'') : (l==='tr' ? (v==null?'':v) : ''); }
@@ -322,6 +331,13 @@
           <div class="field"><label>doodle</label><div class="doodlepick" id="f-doodle">${doodlePickHTML(p.doodle)}</div></div>
         </div>
 
+        <div class="grid2">
+          <div class="field"><label>kapak (jpg/png)</label><input id="f-cover" value="${escAttr(p.cover||'')}" placeholder="images/&lt;slug&gt;/cover.jpg"></div>
+          <div class="field"><label>kapak webp (opsiyonel)</label><input id="f-coverwebp" value="${escAttr(p.coverWebp||'')}" placeholder="images/&lt;slug&gt;/cover.webp"></div>
+        </div>
+        ${biInput('f-coveralt','kapak alt metni (ekran okuyucu)', p.coverAlt)}
+        <p class="hint">kapak yoksa plak kılıfı tipografik çizilir, doodle işaret olarak kullanılır.</p>
+
         <div class="field">
           <label>medya (resim / video / embed)</label>
           <div id="f-media"></div>
@@ -400,6 +416,13 @@
       p.desc = readBi('f-desc');
       p.tags = PE.querySelector('#f-tags').value.split(',').map(s=>s.trim()).filter(Boolean);
       p.color = color; p.doodle = doodle;
+      const cover = PE.querySelector('#f-cover').value.trim();
+      const coverWebp = PE.querySelector('#f-coverwebp').value.trim();
+      const coverAlt = readBi('f-coveralt');
+      // drop the keys entirely when blank so the sleeve falls back cleanly
+      if (cover) p.cover = cover; else delete p.cover;
+      if (coverWebp) p.coverWebp = coverWebp; else delete p.coverWebp;
+      if (coverAlt && (coverAlt.tr || coverAlt.en)) p.coverAlt = coverAlt; else delete p.coverAlt;
       p.media = media.filter(m=>m.src && m.src.trim());
       renderProjects();
       alert('proje hafızaya alındı. yayınlamayı unutma.');

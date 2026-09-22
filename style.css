@@ -14,13 +14,15 @@
   --ink:    #141414;
   --accent: #B2422D;
   --line:   color-mix(in srgb, var(--ink) 16%, transparent);
-  --muted:  color-mix(in srgb, var(--ink) 58%, var(--paper));
+  /* 64%, not 58%: at 58% this was 4.29:1 on paper and missed AA
+     for the body-size text it is used on. */
+  --muted:  color-mix(in srgb, var(--ink) 64%, var(--paper));
 
   /* --- record label palette (carried over from the old cards) --- */
   --yellow: #FFD93D;  --yellow-ink: #2B2B2B;
   --navy:   #1B1B3A;  --navy-ink:   #E8924A;
-  --mint:   #AEEBD0;  --mint-ink:   #1F4438;
-  --sky:    #6BC5F0;  --sky-ink:    #12203A;
+  --mint:   #AEEBD0;  --mint-ink:   #8B2E2E;
+  --sky:    #6BC5F0;  --sky-ink:    #1B2B4A;
   --forest: #1B4D3E;  --forest-ink: #EDE5B6;
   --cream:  #F3EFE6;  --cream-ink:  #2B2B2B;
 
