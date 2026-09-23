@@ -1,155 +1,77 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>berat erdoğan — motion designer & art director</title>
-  <meta name="description" content="berat erdoğan — motion designer & art director. motion grafik, marka kimliği, sosyal medya, tipografi ve ai destekli üretim. istanbul." />
-  <meta name="author" content="Berat Erdoğan" />
-  <meta name="theme-color" content="#FFFFFF" />
-  <meta name="robots" content="index, follow" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="berat erdoğan — motion designer & art director" />
-  <meta property="og:description" content="marka kimliği, ambalaj, kampanya, arayüz, tipografi." />
-  <meta property="og:image" content="https://beraterdogan.studio/og.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="berat erdoğan — art director" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://beraterdogan.studio/og.png" />
-  <meta property="og:locale" content="tr_TR" />
-
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000000'/%3E%3Ccircle cx='32' cy='32' r='21' fill='none' stroke='%23FFFFFF' stroke-width='2'/%3E%3Ccircle cx='32' cy='32' r='7' fill='%23E5261A'/%3E%3Ccircle cx='32' cy='32' r='1.6' fill='%23FFFFFF'/%3E%3C/svg%3E" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="canonical" href="https://beraterdogan.studio/" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Berat Erdoğan",
-    "jobTitle": ["Motion Designer", "Art Director"],
-    "url": "https://beraterdogan.studio/",
-    "address": { "@type": "PostalAddress", "addressLocality": "Istanbul", "addressCountry": "TR" },
-    "alumniOf": "Bahçeşehir University",
-    "sameAs": ["https://www.behance.net/beraterdoan1","https://www.instagram.com/__bertab/"]
-  }
-  </script>
-
-
-  <link rel="stylesheet" href="style.css" />
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Berat Erdoğan — Tasarımcı & Art Director. Marka işleri ve kişisel projeler.">
+<meta name="theme-color" content="#ffffff"><title>Berat Erdoğan — Designer & Art Director</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Arial' font-weight='700' font-size='30' fill='%23fff'%3EBE%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/vendor/lenis.css">
+<link rel="stylesheet" href="assets/portfolio.css">
+<link rel="stylesheet" href="assets/vinyl.css">
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script src="assets/vendor/gsap.min.js" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="assets/vendor/Flip.min.js" defer></script>
+<script src="assets/vendor/CustomEase.min.js" defer></script>
+<script src="assets/vendor/SplitText.min.js" defer></script>
+<script src="assets/vendor/lenis.min.js" defer></script>
+<script src="assets/portfolio.js" defer></script>
 </head>
 <body>
-  <a class="skip" href="#work">içeriğe atla</a>
-
-  <header class="nav">
-    <span class="nav__progress" aria-hidden="true"></span>
-    <a class="nav__brand" href="#top">berat<span>.</span></a>
-    <nav class="nav__links" aria-label="bölümler">
-      <a href="#work" data-ui="nWork">işler</a>
-      <a href="#index" data-ui="nIndex">dizin</a>
-      <a href="#about" data-ui="nAbout">hakkında</a>
-      <a href="#contact" data-ui="nContact">iletişim</a>
-    </nav>
-    <button class="lang" id="langToggle" aria-label="dil / language">
-      <span data-l="tr">tr</span><span class="lang__sep">/</span><span data-l="en">en</span>
-    </button>
-  </header>
-
-  <main id="top">
-    <!-- ============ HERO ============ -->
-    <section class="hero">
-      <p class="hero__kicker" data-ui="heroKicker">portfolyo — istanbul</p>
-      <h1 class="hero__name kinetic" id="heroName">berat<br>erdoğan<i>.</i></h1>
-      <!-- The specialty sits right under the name: the first thing a
-           recruiter should read. The roll is decoration; the sr text
-           is what assistive tech gets. -->
-      <p class="hero__role">
-        <span class="sr">motion designer &amp; art director</span>
-        <span class="roll" aria-hidden="true"><span>motion designer</span><span>art director</span><span>motion designer</span></span>
-      </p>
-      <p class="hero__lede" data-reveal="lines" data-ui="heroLede">marka kimliği ile motion arasındaki boşluğu kapatırım. az sözle çok şey.</p>
-      <button class="reel-btn" id="reelBtn" type="button" hidden>
-        <span class="reel-btn__dot" aria-hidden="true"></span><span data-ui="reelBtn">showreel'i izle</span>
-      </button>
-      <div class="hero__foot">
-        <span class="hero__count"><b id="heroCount">0</b> <span data-ui="heroWorks">iş</span></span>
-        <span class="hero__cue" data-ui="heroCue">plakları çevir →</span>
-      </div>
-    </section>
-
-    <!-- ============ PLAK GALERİSİ ============ -->
-    <section class="work" id="work">
-      <div class="sechead">
-        <h2 class="sechead__h" data-ui="workHead">seçilmiş işler</h2>
-        <p class="sechead__n" data-ui="workHint">sürükle, kaydır ya da ok tuşlarını kullan</p>
-      </div>
-
-      <div class="crate" id="crate" tabindex="0" role="group"
-           aria-label="plak galerisi — sağ ve sol ok tuşlarıyla gezin">
-        <div class="crate__stage" id="crateStage"><!-- records rendered by JS --></div>
-      </div>
-
-      <p class="sr" id="nowPlaying" aria-live="polite"></p>
-
-      <div class="crate__ctrl">
-        <button class="ctrl" id="prevRec" aria-label="önceki">←</button>
-        <div class="ticks" id="ticks"></div>
-        <button class="ctrl" id="nextRec" aria-label="sonraki">→</button>
-      </div>
-    </section>
-
-    <!-- ============ DİZİN (filtreli tam liste) ============ -->
-    <section class="index" id="index">
-      <div class="sechead">
-        <h2 class="sechead__h" data-ui="indexHead">dizin</h2>
-        <div class="filters" id="filters" role="group" aria-label="kategori filtresi"></div>
-      </div>
-      <ul class="idx" id="idxList"></ul>
-      <div class="idx__peek" id="idxPeek" aria-hidden="true"></div>
-    </section>
-
-    <!-- ============ HAKKINDA ============ -->
-    <section class="about" id="about">
-      <div class="sechead"><h2 class="sechead__h" data-ui="aboutHead">hakkında</h2></div>
-      <div class="about__grid">
-        <div>
-          <h3 class="about__h" id="aboutH" data-reveal="lines"></h3>
-          <div id="aboutBio"></div>
-          <ul class="skills" id="skills"></ul>
-        </div>
-        <div>
-          <dl class="counters" id="counters"></dl>
-          <h3 class="about__sub" data-ui="expHead">nerelerde çalıştım</h3>
-          <ol class="exp" id="expList"></ol>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ İLETİŞİM ============ -->
-    <section class="contact" id="contact">
-      <h2 class="contact__h" id="contactH" data-reveal="lines"></h2>
-      <a class="contact__mail" id="mail" href="#"><span id="mailText"></span><i>→</i></a>
-      <p class="contact__avail" id="avail"></p>
-      <ul class="socials" id="socials"></ul>
-    </section>
-  </main>
-
-  <dialog class="reel" id="reel" aria-label="showreel">
-    <button class="reel__close" id="reelClose" type="button" aria-label="kapat">×</button>
-    <video id="reelVideo" controls playsinline preload="none"></video>
-  </dialog>
-
-  <footer class="foot">
-    <span>© <span id="year"></span> berat erdoğan</span>
-    <span data-ui="footNote">istanbul · full-time &amp; remote</span>
-  </footer>
-
-  <script src="doodles.js"></script>
-  <script src="data.js"></script>
-  <script src="motion.js"></script>
-  <script src="vinyl.js"></script>
-  <script src="site.js"></script>
-</body>
-</html>
+<a class="skip" href="#work" data-t="skip">İşlere geç</a>
+<div class="pointer" aria-hidden="true"><span>↗</span></div>
+<div class="reading-progress" aria-hidden="true"></div>
+<header class="nav">
+<a href="#top" class="wordmark" aria-label="Berat Erdoğan">BE<span>©</span></a>
+<span class="nav-role">DESIGNER &<br>ART DIRECTOR</span>
+<nav aria-label="Ana menü"><a href="#work" data-t="work">İşler</a><a href="#about" data-t="about">Hakkımda</a><a href="#contact" data-t="contact">İletişim</a></nav>
+<div class="languages" aria-label="Language"><button data-lang="tr" aria-pressed="true">TR</button><span>/</span><button data-lang="en" aria-pressed="false">EN</button></div>
+</header>
+<main id="top">
+<section class="intro">
+<div class="edition"><span data-t="edition">PORTFOLYO</span><span>İSTANBUL, TR — 2026</span></div>
+<h1 aria-label="Berat Erdoğan"><span class="name-line"><span class="hero-word">BERAT</span></span><span class="name-line"><span class="hero-word">ERDOĞAN.</span></span></h1>
+<div class="intro-bottom"><p data-t="intro">Tasarımcı & Art Director</p><a href="#work" class="round-action" aria-label="İşleri gör"><span>↘</span></a></div>
+</section>
+<section class="brand-work" id="work" aria-labelledby="brand-work-title">
+<div class="section-heading reveal"><span data-t="brandWork">Marka işleri</span><span>DESIGN / ART DIRECTION</span></div>
+<div class="brand-intro"><h2 id="brand-work-title" data-t="brandTitle">Çalıştığım<br> markalar</h2><div class="brand-context reveal"><a href="#independent" class="text-link" data-t="independentLink">Kişisel projeler ↓</a></div></div>
+<ul class="brand-list" aria-label="Markalar"><li class="reveal"><span class="brand-index" aria-hidden="true">01</span><span>Yatsan</span></li><li class="reveal"><span class="brand-index" aria-hidden="true">02</span><span>D’S Damat</span></li><li class="reveal"><span class="brand-index" aria-hidden="true">03</span><span>Trendyol</span></li><li class="reveal"><span class="brand-index" aria-hidden="true">04</span><span>Wella</span></li></ul>
+</section>
+<section class="gallery" id="independent" aria-label="Kişisel projeler">
+<div class="section-heading"><span data-t="selected">Uygulamalar & görsel denemeler</span><span>01 — 03</span></div>
+<div class="gallery-header"><h2 data-t="archive">Kişisel projeler</h2><div class="gallery-controls"><p class="drag-hint" data-t="drag">Sürükle</p><button class="motion-toggle" aria-pressed="false" aria-label="Plak hareketini durdur">Ⅱ</button><button class="arrow prev" aria-label="Önceki proje">←</button><button class="arrow next" aria-label="Sonraki proje">→</button></div></div>
+<div class="project-stage" tabindex="0" aria-label="Proje galerisi. Ok tuşlarıyla gezin, Enter ile açın.">
+<button class="project-card" data-project="0" aria-label="Kolpa AI"><span class="record-set"><span class="record-platter"><img class="record-texture" src="assets/vinyl/vinyl-record.webp" alt="Siyah vinil plak" draggable="false"><span class="record-label"><img src="assets/vinyl/kolpa-cover.webp" alt="" draggable="false"><span class="label-name">KOLPA AI</span><span class="spindle"></span></span></span><span class="sleeve"><span class="sleeve-top"><strong>Kolpa AI</strong><span>BE—001</span></span><img class="sleeve-art" src="assets/vinyl/kolpa-cover.webp" alt="Kolpa AI — plak kapağı" draggable="false"><span class="sleeve-bottom"><span data-t="apps">Kendi uygulamam</span><span>2026 / A</span></span></span><span class="record-index">01</span></span></button>
+<button class="project-card" data-project="1" aria-label="Lumio"><span class="record-set"><span class="record-platter"><img class="record-texture" src="assets/vinyl/vinyl-record.webp" alt="Siyah vinil plak" draggable="false"><span class="record-label"><img src="assets/vinyl/lumio-cover.webp" alt="" draggable="false"><span class="label-name">LUMIO</span><span class="spindle"></span></span></span><span class="sleeve"><span class="sleeve-top"><strong>Lumio</strong><span>BE—002</span></span><img class="sleeve-art" src="assets/vinyl/lumio-cover.webp" alt="Lumio — plak kapağı" draggable="false"><span class="sleeve-bottom"><span data-t="apps">Kendi uygulamam</span><span>2026 / A</span></span></span><span class="record-index">02</span></span></button>
+<button class="project-card" data-project="2" aria-label="Form & Motion"><span class="record-set"><span class="record-platter"><img class="record-texture" src="assets/vinyl/vinyl-record.webp" alt="Siyah vinil plak" draggable="false"><span class="record-label"><img src="assets/vinyl/form-motion-cover.webp" alt="" draggable="false"><span class="label-name">FORM & MOTION</span><span class="spindle"></span></span></span><span class="sleeve"><span class="sleeve-top"><strong>Form & Motion</strong><span>BE—003</span></span><img class="sleeve-art" src="assets/vinyl/form-motion-cover.webp" alt="Form & Motion — plak kapağı" draggable="false"><span class="sleeve-bottom"><span data-t="visualStudy">Görsel deneme</span><span>2026 / A</span></span></span><span class="record-index">03</span></span></button>
+</div>
+<div class="record-nav" aria-label="Proje seç"><button data-track="0" aria-label="Kolpa AI plağını seç" aria-pressed="true"><span>01</span> Kolpa AI</button><button data-track="1" aria-label="Lumio plağını seç" aria-pressed="false"><span>02</span> Lumio</button><button data-track="2" aria-label="Form & Motion plağını seç" aria-pressed="false"><span>03</span> Form & Motion</button></div>
+<div class="active-project" aria-live="polite"><div class="active-main"><span class="project-type"></span><button class="project-open"><h3>Kolpa AI</h3><span>↗</span></button></div><p class="project-summary"></p><span class="project-number">01 / 03</span></div>
+<div class="gallery-track" aria-hidden="true"><span></span></div>
+<p class="concept-note" data-t="note">Kapak görselleri yapay zekâ ile üretildi.</p>
+</section>
+<section class="about section" id="about">
+<div class="section-heading reveal"><span data-t="about">Hakkımda</span><span>01 / PROFILE</span></div>
+<h2 class="statement" data-t="statement">Tasarımcı &<br> Art Director</h2>
+<div class="about-copy reveal"><p data-t="bio">Altavia’da Junior Art Director olarak çalışıyorum. Görsel tasarım, yapay zekâ ile görsel üretimi ve video işleri yapıyorum.</p><p data-t="bio2">Kolpa AI ve Lumio, tasarlayıp geliştirdiğim kendi uygulamalarım.</p><a class="text-link" href="Berat-Erdogan-CV.pdf" download data-t="cv">Özgeçmişi indir ↗</a></div>
+</section>
+<section class="experience section">
+<div class="section-heading reveal"><span data-t="experience">Deneyim</span><span>02 / EXPERIENCE</span></div>
+<div class="career-row reveal"><span>2026—</span><h3>Altavia Dekatlon</h3><span>Junior Art Director</span></div>
+<div class="career-row reveal"><span>2024—25</span><h3>Kasten Kolektif</h3><span data-t="visual">Görsel Tasarımcı</span></div>
+<div class="career-row reveal"><span>2024</span><h3>Yup Agency</h3><span data-t="visual">Görsel Tasarımcı</span></div>
+<div class="career-row reveal"><span>2023</span><h3>Notivent App</h3><span data-t="digital">Dijital Tasarımcı</span></div>
+<div class="career-row reveal"><span>2023</span><h3>TUS Bodrum</h3><span data-t="brand">Freelance Marka Tasarımcısı</span></div>
+<p class="brand-note reveal" data-t="brands">Diğer marka işleri: Toshiba, Pek Food, Odeabank.</p>
+</section>
+<section class="practice section">
+<div class="section-heading reveal"><span data-t="practice">Çalışma alanları</span><span>03 / PRACTICE</span></div>
+<div class="practice-grid"><article class="reveal"><span>01</span><h3 data-t="art">Sanat yönetimi</h3><p data-t="p1">Kampanya ve sosyal medya tasarımı.</p></article><article class="reveal"><span>02</span><h3 data-t="ai">AI görsel üretimi</h3><p data-t="p2">Yapay zekâ ile görsel ve video üretimi.</p></article><article class="reveal"><span>03</span><h3 data-t="motion">Hareketli grafik & kurgu</h3><p data-t="p3">Hareketli grafik ve video kurgu.</p></article><article class="reveal"><span>04</span><h3 data-t="products">Uygulama tasarımı</h3><p data-t="p4">Arayüz tasarımı ve SwiftUI geliştirme.</p></article></div>
+<p class="tool-line">Higgsfield / Kling / Veo / Midjourney / Photoshop / Illustrator / After Effects / Premiere Pro / Figma</p>
+</section>
+<section class="contact section" id="contact"><div class="section-heading"><span data-t="contact">İletişim</span><span>04 / CONTACT</span></div><a href="mailto:losberat@icloud.com" class="contact-headline"><h2 data-t="hello">Bana yaz</h2><span class="contact-arrow" aria-hidden="true">↗</span></a><div class="contact-bottom"><a href="mailto:losberat@icloud.com">losberat@icloud.com ↗</a><a href="https://linkedin.com/in/beraterdogan" target="_blank" rel="noreferrer">LinkedIn ↗</a><a href="Berat-Erdogan-CV.pdf" download data-t="cvShort">Özgeçmiş ↓</a></div></section>
+</main>
+<footer><span>© 2026 Berat Erdoğan</span><span>Design / Art Direction / Motion</span><a href="#top" data-t="top">Başa dön ↑</a></footer>
+<dialog id="project-detail" aria-labelledby="detail-title" data-lenis-prevent><div class="detail-nav"><span>BERAT ERDOĞAN / KİŞİSEL PROJELER</span><button class="detail-close" data-t="close">Kapat ×</button></div><div class="detail-layout"><div class="detail-art"><div class="detail-vinyl"><img class="record-texture" src="assets/vinyl/vinyl-record.webp" alt="Siyah vinil plak"><span class="record-label"><img src="assets/vinyl/kolpa-cover.webp" alt=""><span class="spindle"></span></span></div><div class="detail-image sleeve"><span class="sleeve-top"><strong></strong><span></span></span><img class="sleeve-art" src="assets/vinyl/kolpa-cover.webp" alt=""><span class="sleeve-bottom"><span></span><span>2026 / A</span></span></div></div><div class="detail-copy"><span class="detail-meta"></span><h2 id="detail-title"></h2><p class="detail-description"></p><dl><dt data-t="roleLabel">Rolüm</dt><dd class="detail-role"></dd><dt data-t="focusLabel">Kapsam</dt><dd class="detail-focus"></dd></dl><p class="detail-note" data-t="note">Kapak görselleri yapay zekâ ile üretildi.</p><button class="detail-next" data-t="next">Sonraki proje →</button></div></div></dialog>
+</body></html>
