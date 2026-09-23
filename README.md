@@ -8,8 +8,9 @@ Canlı: https://beraterdogan.studio
 ## Güncel dosyalar
 
 - `index.html`: ana sayfa.
-- `assets/portfolio.js`: metinler, projeler, dil seçimi ve animasyonlar.
-- `assets/portfolio.css`, `assets/vinyl.css`: stiller.
+- `assets/archive.js`: metinler, projeler, dil seçimi, plak arşivi, proje görünümü ve animasyonlar.
+- `assets/portfolio.css`, `assets/vinyl.css`: temel stiller ve alt bölümler.
+- `assets/archive.css`: plak arşivi (ana galeri), yükleme ekranı ve proje görünümü.
 - `assets/vinyl/`: plak görseli ve proje kapakları.
 - `assets/vendor/`: GSAP, eklentileri ve Lenis.
 - `assets/fonts/`: Inter ve lisans dosyası.
@@ -43,4 +44,4 @@ Ardından http://localhost:8000 adresini aç.
 `images/` ve ilgili dosyaları aynı yollarında tutulur. Bu proje detayları
 mevcut bağlantılarla açılabilir. Eski admin paneli yalnızca bu arşivin
 `data.js` içeriğini düzenler; yeni ana sayfanın içeriği
-`assets/portfolio.js` içindedir.
+`assets/archive.js` içindedir.
