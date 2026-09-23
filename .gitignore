@@ -11,3 +11,8 @@ Thumbs.db
 # local-only
 .claude/
 *-backup.html
+.env.*
+!.env.example
+.openai/
+.sites-runtime/
+*.tar.gz
