@@ -9,20 +9,14 @@ const translations = {
     "edition": "PORTFOLYO",
     "intro": "Tasarımcı & Art Director",
     "selected": "Uygulamalar & görsel denemeler",
-    "archive": "Kişisel projeler",
+    "archive": "Projeler",
     "drag": "Sürükle",
     "note": "Kapak görselleri yapay zekâ ile üretildi.",
     "brandWork": "Marka işleri",
-    "dsCampaign": "Temmuz smokin kampanyası",
-    "dsTitle": "Smokin sezonu için<br> Instagram serisi",
-    "dsRole": "Art direction, AI görsel üretimi",
-    "dsScope": "4 reels, 12 post",
     "dsPosts": "Postlar",
     "dsReelsNote": "Oynatmak için kaydır; ses için hoparlöre dokun",
     "igFollow": "Takip et",
-    "agencyLabel": "Ajans",
-    "dsDesc": "Düğün ve davet sezonu için beyaz ve siyah smokinleri, saray salonları ve göl kenarı gibi sahnelerde anlatan bir seri. Her postta bir başlık ve el yazısı bir alt satır var; ürün detaylarını (kol düğmesi, papyon, yaka) yakın çekimlerle öne çıkardık.",
-    "dsNote": "Altavia’da D’S Damat için üretildi. Görseller yapay zekâ ile üretildi; 12 posttan 6’sı ve 4 reels.",
+    "dsNote": "Altavia’da D’S Damat için üretildi. Görseller ve videolar yapay zekâ ile üretildi; 12 posttan 6’sı ve 5 reels.",
     "brandTitle": "Çalıştığım<br> markalar",
     "independentLink": "Kişisel projeler ↓",
     "apps": "Kendi uygulamam",
@@ -61,20 +55,14 @@ const translations = {
     "edition": "PORTFOLIO",
     "intro": "Designer & Art Director",
     "selected": "Apps & visual studies",
-    "archive": "Personal projects",
+    "archive": "Projects",
     "drag": "Drag",
     "note": "Cover images were created with AI.",
     "brandWork": "Brand work",
-    "dsCampaign": "July tuxedo campaign",
-    "dsTitle": "An Instagram series<br> for tuxedo season",
-    "dsRole": "Art direction, AI image generation",
-    "dsScope": "4 reels, 12 posts",
     "dsPosts": "Posts",
     "dsReelsNote": "Scroll to play; tap the speaker for sound",
     "igFollow": "Follow",
-    "agencyLabel": "Agency",
-    "dsDesc": "A series for wedding and event season, placing white and black tuxedos in palace halls and lakeside terraces. Each post pairs a headline with a handwritten line, and close-ups bring the product details forward: cufflinks, bow tie, lapel.",
-    "dsNote": "Made for D’S Damat at Altavia. Images were created with AI; 6 of the 12 posts and all 4 reels.",
+    "dsNote": "Made for D’S Damat at Altavia. Images and videos were created with AI; 6 of the 12 posts and 5 reels.",
     "brandTitle": "Brands I’ve<br> worked with",
     "independentLink": "Personal projects ↓",
     "apps": "My own app",
@@ -107,6 +95,25 @@ const translations = {
   }
 };
 const projects = [
+  {
+    "title": "D’S Damat",
+    "image": "assets/vinyl/ds-damat-cover.webp",
+    "media": "ds-damat",
+    "tr": {
+      "type": "Marka işi · 2026",
+      "summary": "Temmuz smokin kampanyası için Instagram reels ve post serisi.",
+      "description": "Altavia’da D’S Damat için hazırladığım Temmuz smokin kampanyası. Beyaz ve siyah smokinleri saray salonları, göl kenarı ve taş duvar önü gibi sahnelerde anlatan reels ve postlar; kol düğmesi, papyon ve yaka gibi ürün detaylarını yakın çekimlerle öne çıkardık.",
+      "role": "Art direction, AI görsel ve video üretimi",
+      "focus": "5 reels, 12 post, Instagram"
+    },
+    "en": {
+      "type": "Brand work · 2026",
+      "summary": "An Instagram reels and post series for the July tuxedo campaign.",
+      "description": "The July tuxedo campaign I created for D’S Damat at Altavia. Reels and posts place white and black tuxedos in palace halls, lakeside terraces and against stone walls, with close-ups that bring the product details forward: cufflinks, bow tie, lapel.",
+      "role": "Art direction, AI image and video generation",
+      "focus": "5 reels, 12 posts, Instagram"
+    }
+  },
   {
     "title": "Kolpa AI",
     "image": "assets/vinyl/kolpa-cover.webp",
@@ -176,6 +183,7 @@ Object.assign(translations.en, {
   hint: '← → browse · Space flip · Enter open', flip: 'Flip'
 });
 const extra = [
+  { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Instagram’da yayınlandı', en: 'Published on Instagram' } },
   { kind: { tr: 'Kendi uygulamam', en: 'My own app' }, status: { tr: 'App Store’da yayında', en: 'Live on the App Store' } },
   { kind: { tr: 'Kendi uygulamam', en: 'My own app' }, status: { tr: 'App Store’da yayında', en: 'Live on the App Store' } },
   { kind: { tr: 'Görsel deneme', en: 'Visual study' }, status: { tr: 'Kişisel deneme', en: 'Personal study' } }
@@ -331,6 +339,7 @@ function fillProduction() {
   $('.p-image').src = p.image;
   $('.p-image').alt = p.title + (lang === 'tr' ? ' — plak kapağı' : ' — record cover');
   $('.p-desc').textContent = d.description;
+  $$('.p-media').forEach(m => { m.hidden = m.dataset.project !== p.media; if (m.hidden) $$('video', m).forEach(v => v.pause()); });
   $('.p-next-title').textContent = n.title;
   $('.p-next-label-art img').src = n.image;
   $('.p-next').setAttribute('aria-label', (lang === 'tr' ? 'Sıradaki proje: ' : 'Next project: ') + n.title);
@@ -359,7 +368,7 @@ function closeProduction() {
   if (!dialog.open || busy) return;
   busy = true;
   const done = () => {
-    dialog.close(); dialog.style.clipPath = ''; document.documentElement.style.overflow = '';
+    dialog.close(); dialog.style.clipPath = ''; stopReels(); document.documentElement.style.overflow = '';
     lenis?.start(); returnFocus?.focus({ preventScroll: true }); busy = false; syncSpin();
     try { history.replaceState(null, '', location.pathname + location.search); } catch {}
   };
@@ -367,6 +376,11 @@ function closeProduction() {
   else done();
 }
 $('.p-close').addEventListener('click', closeProduction);
+$$('[data-open]').forEach(b => b.addEventListener('click', () => {
+  const i = projects.findIndex(p => p.media === b.dataset.open);
+  if (i < 0 || dialog.open) return;
+  select(i, false); openProduction();
+}));
 dialog.addEventListener('cancel', e => { e.preventDefault(); closeProduction(); });
 $('.p-next').addEventListener('click', () => {
   if (busy) return; busy = true;
@@ -532,6 +546,9 @@ reels.forEach(v => {
   v.addEventListener('click', () => v.paused ? v.play().catch(() => {}) : v.pause());
 });
 $$('[data-lang]').forEach(b => b.addEventListener('click', () => reels.forEach(v => { const btn = v.parentElement.querySelector('.ig-sound'); setSound(btn, btn.getAttribute('aria-pressed') === 'true'); })));
+function stopReels() {
+  reels.forEach(v => { v.pause(); v.muted = true; setSound(v.parentElement.querySelector('.ig-sound'), false); });
+}
 const reelsObserver = new IntersectionObserver(es => es.forEach(({ target: v, isIntersecting }) => {
   if (isIntersecting && !reduce.matches) v.play().catch(() => {});
   else if (!isIntersecting) v.pause();
