@@ -16,10 +16,13 @@ const translations = {
     "dsCampaign": "Temmuz smokin kampanyası",
     "dsTitle": "Smokin sezonu için<br> Instagram serisi",
     "dsRole": "Art direction, AI görsel üretimi",
-    "dsScope": "12 post, 1080×1350",
+    "dsScope": "4 reels, 12 post",
+    "dsPosts": "Postlar",
+    "dsReelsNote": "Oynatmak için kaydır; ses için hoparlöre dokun",
+    "igFollow": "Takip et",
     "agencyLabel": "Ajans",
     "dsDesc": "Düğün ve davet sezonu için beyaz ve siyah smokinleri, saray salonları ve göl kenarı gibi sahnelerde anlatan bir seri. Her postta bir başlık ve el yazısı bir alt satır var; ürün detaylarını (kol düğmesi, papyon, yaka) yakın çekimlerle öne çıkardık.",
-    "dsNote": "Altavia’da D’S Damat için üretildi. Görseller yapay zekâ ile üretildi; seriden 12 posttan 6’sı.",
+    "dsNote": "Altavia’da D’S Damat için üretildi. Görseller yapay zekâ ile üretildi; 12 posttan 6’sı ve 4 reels.",
     "brandTitle": "Çalıştığım<br> markalar",
     "independentLink": "Kişisel projeler ↓",
     "apps": "Kendi uygulamam",
@@ -65,10 +68,13 @@ const translations = {
     "dsCampaign": "July tuxedo campaign",
     "dsTitle": "An Instagram series<br> for tuxedo season",
     "dsRole": "Art direction, AI image generation",
-    "dsScope": "12 posts, 1080×1350",
+    "dsScope": "4 reels, 12 posts",
+    "dsPosts": "Posts",
+    "dsReelsNote": "Scroll to play; tap the speaker for sound",
+    "igFollow": "Follow",
     "agencyLabel": "Agency",
     "dsDesc": "A series for wedding and event season, placing white and black tuxedos in palace halls and lakeside terraces. Each post pairs a headline with a handwritten line, and close-ups bring the product details forward: cufflinks, bow tie, lapel.",
-    "dsNote": "Made for D’S Damat at Altavia. Images were created with AI; 6 of the 12 posts in the series.",
+    "dsNote": "Made for D’S Damat at Altavia. Images were created with AI; 6 of the 12 posts and all 4 reels.",
     "brandTitle": "Brands I’ve<br> worked with",
     "independentLink": "Personal projects ↓",
     "apps": "My own app",
@@ -505,3 +511,29 @@ const navLinks = $$('.topbar-nav a');
     if (en.isIntersecting) navLinks.forEach(a => a.setAttribute('aria-current', String(a.getAttribute('href') === '#' + id)));
   }), { rootMargin: '-45% 0px -50% 0px' }).observe(el);
 });
+
+// Reels mockups: play muted while in view, speaker button toggles sound.
+const reels = $$('.ig-reel video');
+const soundLabel = on => on ? (lang === 'tr' ? 'Sesi kapat' : 'Mute') : (lang === 'tr' ? 'Sesi aç' : 'Unmute');
+function setSound(btn, on) {
+  btn.setAttribute('aria-pressed', String(on));
+  btn.setAttribute('aria-label', soundLabel(on));
+  btn.querySelector('use').setAttribute('href', on ? '#ig-sound' : '#ig-muted');
+}
+reels.forEach(v => {
+  const btn = v.parentElement.querySelector('.ig-sound');
+  setSound(btn, false);
+  btn.addEventListener('click', () => {
+    const on = v.muted;
+    reels.forEach(o => { if (o !== v) { o.muted = true; setSound(o.parentElement.querySelector('.ig-sound'), false); } });
+    v.muted = !on; setSound(btn, on);
+    if (on) v.play().catch(() => {});
+  });
+  v.addEventListener('click', () => v.paused ? v.play().catch(() => {}) : v.pause());
+});
+$$('[data-lang]').forEach(b => b.addEventListener('click', () => reels.forEach(v => { const btn = v.parentElement.querySelector('.ig-sound'); setSound(btn, btn.getAttribute('aria-pressed') === 'true'); })));
+const reelsObserver = new IntersectionObserver(es => es.forEach(({ target: v, isIntersecting }) => {
+  if (isIntersecting && !reduce.matches) v.play().catch(() => {});
+  else if (!isIntersecting) v.pause();
+}), { threshold: .6 });
+reels.forEach(v => reelsObserver.observe(v));
