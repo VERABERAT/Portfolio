@@ -11,12 +11,13 @@ const translations = {
     "selected": "Uygulamalar & görsel denemeler",
     "archive": "Projeler",
     "drag": "Sürükle",
-    "note": "Kapak görselleri yapay zekâ ile üretildi.",
+    "note": "D’S Damat, Kolpa AI, Lumio ve Form & Motion kapakları yapay zekâ ile üretildi.",
     "brandWork": "Marka işleri",
     "dsPosts": "Postlar",
     "dsReelsNote": "Oynatmak için kaydır; ses için hoparlöre dokun",
     "igFollow": "Takip et",
     "storeLink": "App Store’da indir",
+    "behanceLink": "Behance’te gör",
     "dsNote": "Altavia’da D’S Damat için üretildi. Görseller ve videolar yapay zekâ ile üretildi; 12 posttan 6’sı ve 5 reels.",
     "brandTitle": "Çalıştığım<br> markalar",
     "independentLink": "Kişisel projeler ↓",
@@ -58,12 +59,13 @@ const translations = {
     "selected": "Apps & visual studies",
     "archive": "Projects",
     "drag": "Drag",
-    "note": "Cover images were created with AI.",
+    "note": "The D’S Damat, Kolpa AI, Lumio and Form & Motion covers were created with AI.",
     "brandWork": "Brand work",
     "dsPosts": "Posts",
     "dsReelsNote": "Scroll to play; tap the speaker for sound",
     "igFollow": "Follow",
     "storeLink": "Download on the App Store",
+    "behanceLink": "View on Behance",
     "dsNote": "Made for D’S Damat at Altavia. Images and videos were created with AI; 6 of the 12 posts and 5 reels.",
     "brandTitle": "Brands I’ve<br> worked with",
     "independentLink": "Personal projects ↓",
@@ -155,6 +157,106 @@ const projects = [
     }
   },
   {
+    "title": "FERM",
+    "year": "2025",
+    "image": "assets/vinyl/ferm-cover.webp",
+    "media": "ferm",
+    "tr": {
+      "type": "Marka projesi · 2025",
+      "summary": "Kombucha markası için kimlik, ambalaj, uygulama ve web.",
+      "description": "Fermente içecek markası FERM için uçtan uca bir marka ekosistemi: organik tipografi ve canlı bir ambalaj sistemi, “Controlled Decay” adlı phygital uygulamanın UX/UI tasarımı ve markanın 360° deneyimini taşıyan web sitesi.",
+      "role": "Marka kimliği, ambalaj, UX/UI",
+      "focus": "Kimlik, ambalaj, uygulama, web, kampanya"
+    },
+    "en": {
+      "type": "Brand project · 2025",
+      "summary": "Identity, packaging, app and web for a kombucha brand.",
+      "description": "An end-to-end brand ecosystem for FERM, a fermented drinks brand: organic typography and a lively packaging system, the UX/UI of a phygital app called “Controlled Decay”, and a website that carries the brand’s 360° experience.",
+      "role": "Brand identity, packaging, UX/UI",
+      "focus": "Identity, packaging, app, web, campaign"
+    }
+  },
+  {
+    "title": "NutriPaw",
+    "year": "2024",
+    "image": "assets/vinyl/nutripaw-cover.webp",
+    "media": "nutripaw",
+    "tr": {
+      "type": "Bitirme projesi · 2024",
+      "summary": "Organik evcil hayvan maması markası için kimlik ve ambalaj.",
+      "description": "Bahçeşehir Üniversitesi İletişim ve Tasarım bölümündeki bitirme projem. Organik evcil hayvan maması markası NutriPaw için piksel harflere dayanan bir kimlik, ambalaj sistemi ve kampanya geliştirdim.",
+      "role": "Marka kimliği & ambalaj",
+      "focus": "Kimlik, ambalaj, kampanya"
+    },
+    "en": {
+      "type": "Graduation project · 2024",
+      "summary": "Identity and packaging for an organic pet food brand.",
+      "description": "My graduation project in Communication and Design at Bahçeşehir University. I developed a pixel-lettered identity, a packaging system and a campaign for NutriPaw, an organic pet food brand.",
+      "role": "Brand identity & packaging",
+      "focus": "Identity, packaging, campaign"
+    }
+  },
+  {
+    "title": "İmece Market",
+    "year": "2025",
+    "image": "assets/vinyl/imece-cover.webp",
+    "media": "imece",
+    "tr": {
+      "type": "Ajans işi · 2025",
+      "summary": "Bir etkinlik için marka sistemi ve üretim–finans vaka çalışması.",
+      "description": "Kasten Kolektif’te, 19–20 Temmuz 2025’te Ankara UNITE’ta düzenlenen İmece Market için hazırladığım üretim ve finans vaka çalışması. Etkinliğin marka sistemini ve süreci izleyen dashboard arayüzünü tasarladım.",
+      "role": "Marka sistemi & arayüz",
+      "focus": "Kimlik, dashboard, vaka çalışması"
+    },
+    "en": {
+      "type": "Agency work · 2025",
+      "summary": "A brand system and production–finance case study for an event.",
+      "description": "A production and finance case study I made at Kasten Kolektif for İmece Market, held at UNITE, Ankara on 19–20 July 2025. I designed the event’s brand system and the dashboard interface that tracks the process.",
+      "role": "Brand system & interface",
+      "focus": "Identity, dashboard, case study"
+    }
+  },
+  {
+    "title": "Smart Locker",
+    "year": "2024",
+    "image": "assets/vinyl/smart-locker-cover.webp",
+    "media": "smart-locker",
+    "tr": {
+      "type": "Arayüz projesi · 2024",
+      "summary": "Kargo teslim kiosku için UX sistemi.",
+      "description": "Kargo teslim kioskları için mantık odaklı bir UX sistemi. 1920×1080 endüstriyel dokunmatik panel için, hız, güvenlik ve güneş altında okunabilirlik gözetilerek hem kullanıcılar hem lojistik personeli için akışlar ve ekranlar tasarladım.",
+      "role": "UX mimarisi & arayüz",
+      "focus": "Akış, ekranlar, kiosk"
+    },
+    "en": {
+      "type": "Interface project · 2024",
+      "summary": "A UX system for a parcel kiosk.",
+      "description": "A logic-driven UX system for parcel management kiosks. For a 1920×1080 industrial touch panel, I designed flows and screens for the public and logistics staff, built for speed, security and readability in direct sunlight.",
+      "role": "UX architecture & interface",
+      "focus": "Flows, screens, kiosk"
+    }
+  },
+  {
+    "title": "VERA",
+    "year": "2025",
+    "image": "assets/vinyl/vera-cover.webp",
+    "media": "vera",
+    "tr": {
+      "type": "Yazı karakteri · 2025",
+      "summary": "Sıkışık, kalın bir display yazı karakteri.",
+      "description": "Güçlü görsel genişliğe sahip, sıkışık, kalın ve keskin köşeli bir display yazı karakteri. Başlıklar ve afişler için tasarladım; yalnızca büyük harflerden oluşuyor.",
+      "role": "Yazı karakteri tasarımı",
+      "focus": "Tipografi, display, büyük harf"
+    },
+    "en": {
+      "type": "Typeface · 2025",
+      "summary": "A condensed, heavy display typeface.",
+      "description": "A condensed, heavy, sharp-cornered display typeface with strong visual width. I designed it for headlines and posters; it is all caps.",
+      "role": "Type design",
+      "focus": "Typography, display, all caps"
+    }
+  },
+  {
     "title": "Form & Motion",
     "image": "assets/vinyl/form-motion-cover.webp",
     "tr": {
@@ -190,6 +292,11 @@ const extra = [
   { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Instagram’da yayınlandı', en: 'Published on Instagram' } },
   { kind: { tr: 'Kendi uygulamam', en: 'My own app' }, status: { tr: 'App Store’da yayında', en: 'Live on the App Store' } },
   { kind: { tr: 'Kendi uygulamam', en: 'My own app' }, status: { tr: 'App Store’da yayında', en: 'Live on the App Store' } },
+  { kind: { tr: 'Marka projesi', en: 'Brand project' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
+  { kind: { tr: 'Bitirme projesi', en: 'Graduation project' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
+  { kind: { tr: 'Ajans işi', en: 'Agency work' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
+  { kind: { tr: 'Arayüz projesi', en: 'Interface project' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
+  { kind: { tr: 'Yazı karakteri', en: 'Typeface' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
   { kind: { tr: 'Görsel deneme', en: 'Visual study' }, status: { tr: 'Kişisel deneme', en: 'Personal study' } }
 ];
 const RECORD = 'assets/vinyl/vinyl-record.webp';
@@ -226,7 +333,7 @@ const discs = projects.map((p, i) => {
     '<span class="disc-body">' +
       '<span class="disc-face disc-front"><span class="platter"><img src="' + RECORD + '" alt="" draggable="false">' +
         '<span class="disc-label"><img src="' + p.image + '" alt="" draggable="false"><b>' + p.title + '</b></span><span class="disc-hole"></span></span></span>' +
-      '<span class="disc-face disc-back"><img src="' + p.image + '" alt="" draggable="false"><span class="disc-index">BE—00' + (i + 1) + '</span><span class="disc-hole"></span></span>' +
+      '<span class="disc-face disc-back"><img src="' + p.image + '" alt="" draggable="false"><span class="disc-index">BE—' + String(i + 1).padStart(3, '0') + '</span><span class="disc-hole"></span></span>' +
     '</span>';
   stage.append(b);
   return b;
@@ -300,12 +407,13 @@ function fillArchive(animate) {
   const p = projects[current], d = p[lang], x = extra[current];
   $('.credits-title').textContent = p.title;
   $('.c-type').textContent = x.kind[lang];
+  $('.c-year').textContent = p.year || '2026';
   $('.c-role').textContent = d.role;
   $('.c-focus').textContent = d.focus;
   $('.n-summary').textContent = d.summary;
   $('.n-focus').textContent = d.role;
-  $('.count-now').textContent = '0' + (current + 1);
-  $('.count-all').textContent = '0' + projects.length;
+  $('.count-now').textContent = String(current + 1).padStart(2, '0');
+  $('.count-all').textContent = String(projects.length).padStart(2, '0');
   const flipped = discs[current].classList.contains('flipped');
   $('.flip-toggle').setAttribute('aria-pressed', String(flipped));
   stage.setAttribute('aria-label', (lang === 'tr' ? 'Proje galerisi: ' : 'Project gallery: ') + p.title + ', ' + (current + 1) + ' / ' + projects.length);
@@ -339,6 +447,7 @@ function fillProduction() {
   $('.p-role').textContent = d.role;
   $('.p-focus').textContent = d.focus;
   $('.p-type').textContent = x.kind[lang];
+  $('.p-year').textContent = p.year || '2026';
   $('.p-status').textContent = x.status[lang];
   $('.p-image').src = p.image;
   $('.p-image').alt = p.title + (lang === 'tr' ? ' — plak kapağı' : ' — record cover');

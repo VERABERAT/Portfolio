@@ -210,3 +210,10 @@ html:not(.js) .credits,html:not(.js) .notes,html:not(.js) .archive-controls{disp
 .store-link:hover,.store-link:focus-visible{background:#000;color:#fff}
 .store-link:hover i,.store-link:focus-visible i{transform:translate(3px,-3px)}
 @media(max-width:700px){.case-shots{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 12px}}
+.case-covers{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 20px}
+.case-cover{margin:0}
+.case-cover a{display:block}
+.case-cover img,.case-long img{display:block;width:100%;height:auto;border:1px solid #000;filter:none}
+.case-cover figcaption{padding-top:10px;font-size:13px}
+.case-long{margin:0}
+@media(max-width:700px){.case-covers{grid-template-columns:1fr}}
