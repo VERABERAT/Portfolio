@@ -155,3 +155,20 @@ html:not(.gsap) .disc.flipped .disc-body{transform:rotateY(180deg)}
 }
 .gsap .disc-body{transition:none}
 html:not(.js) .credits,html:not(.js) .notes,html:not(.js) .archive-controls{display:none}
+/* Marka vaka çalışması: D’S Damat */
+.case{margin-top:90px;border-top:1px solid #000;padding-top:40px}
+.case-head{display:grid;grid-template-columns:1.4fr 1fr;gap:24px 40px;align-items:end}
+.case-kicker{grid-column:1/-1;font-size:12px;letter-spacing:.03em;text-transform:uppercase}
+.case-title{font-size:clamp(38px,5vw,76px);line-height:1;letter-spacing:-.06em}
+.case-rows{margin:0;font-size:14px}
+.case-rows div{display:grid;grid-template-columns:70px 1fr;gap:14px;padding:9px 0;border-bottom:1px solid #000}
+.case-rows div:first-child{border-top:1px solid #000}
+.case-rows dd{margin:0}
+.case-desc{grid-column:1/-1;max-width:640px;font-size:18px;line-height:1.5;letter-spacing:-.02em;margin-top:12px}
+.case-grid{list-style:none;margin:48px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 20px}
+.case-grid figure{margin:0}
+.case-grid img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:#eee;filter:none}
+.case-grid figcaption{display:flex;gap:12px;padding-top:12px;font-size:14px;line-height:1.35}
+.case-grid figcaption span:first-child{font-variant-numeric:tabular-nums;flex-shrink:0}
+.case-note{margin-top:28px;font-size:12px;line-height:1.5}
+@media(max-width:800px){.case{margin-top:60px;padding-top:28px}.case-head{grid-template-columns:1fr}.case-desc{font-size:16px}.case-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px;margin-top:32px}.case-grid figcaption{font-size:13px;gap:8px}}
