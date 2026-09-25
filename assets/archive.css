@@ -165,10 +165,35 @@ html:not(.js) .credits,html:not(.js) .notes,html:not(.js) .archive-controls{disp
 .case-rows div:first-child{border-top:1px solid #000}
 .case-rows dd{margin:0}
 .case-desc{grid-column:1/-1;max-width:640px;font-size:18px;line-height:1.5;letter-spacing:-.02em;margin-top:12px}
-.case-grid{list-style:none;margin:48px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 20px}
-.case-grid figure{margin:0}
-.case-grid img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:#eee;filter:none}
-.case-grid figcaption{display:flex;gap:12px;padding-top:12px;font-size:14px;line-height:1.35}
-.case-grid figcaption span:first-child{font-variant-numeric:tabular-nums;flex-shrink:0}
 .case-note{margin-top:28px;font-size:12px;line-height:1.5}
-@media(max-width:800px){.case{margin-top:60px;padding-top:28px}.case-head{grid-template-columns:1fr}.case-desc{font-size:16px}.case-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px;margin-top:32px}.case-grid figcaption{font-size:13px;gap:8px}}
+.case-sub{display:flex;justify-content:space-between;gap:20px;margin:64px 0 24px;padding-top:14px;border-top:1px solid #000;font-size:14px;font-weight:400;letter-spacing:0}
+.case-sub span:last-child{font-size:12px}
+/* Instagram arayüzü: postlar ve reels */
+.ig-i{width:24px;height:24px;flex-shrink:0}
+.ig-avatar{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#000;color:#fff;font-size:9px;font-weight:700;letter-spacing:-.02em;flex-shrink:0;box-shadow:0 0 0 1.5px #fff,0 0 0 2.5px #000}
+.case-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 20px}
+.ig-post{margin:0;border:1px solid #000;background:#fff}
+.ig-head{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:13px;font-weight:600}
+.ig-head .ig-more{margin-left:auto;width:20px;height:20px}
+.ig-post img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:#eee;filter:none}
+.ig-actions{display:flex;gap:14px;padding:10px 12px 6px}
+.ig-actions .ig-save{margin-left:auto}
+.ig-post figcaption{padding:0 12px 14px;font-size:13px;line-height:1.4}
+.case-reels{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.ig-reel{margin:0}
+.ig-phone{position:relative;aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:#000;box-shadow:0 0 0 6px #000;margin:6px}
+.ig-phone video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:pointer}
+.ig-ui{position:absolute;inset:0;color:#fff;pointer-events:none;background:linear-gradient(transparent 86%,rgba(0,0,0,.45))}
+.ig-top{position:absolute;top:14px;left:14px;font-size:17px;font-weight:700;letter-spacing:-.02em}
+.ig-side{position:absolute;right:10px;bottom:58px;display:flex;flex-direction:column;gap:16px}
+.ig-side .ig-i{width:22px;height:22px}
+.ig-bottom{position:absolute;left:12px;right:46px;bottom:12px;font-size:12px;line-height:1.35}
+.ig-who{display:flex;align-items:center;gap:8px}
+.ig-who .ig-avatar{width:24px;height:24px;font-size:8px;box-shadow:0 0 0 1.5px #fff}
+.ig-follow{border:1px solid rgba(255,255,255,.8);border-radius:6px;padding:2px 7px;font-size:11px}
+.ig-sound{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;display:grid;place-items:center}
+.ig-sound .ig-i{width:18px;height:18px}
+.ig-reel figcaption{display:flex;flex-direction:column;gap:4px;padding-top:16px;font-size:13px;line-height:1.35}
+.ig-reel figcaption span:first-child{font-size:12px;font-variant-numeric:tabular-nums}
+@media(max-width:1000px){.case-reels{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 16px}}
+@media(max-width:800px){.case{margin-top:60px;padding-top:28px}.case-head{grid-template-columns:1fr}.case-desc{font-size:16px}.case-sub{margin:48px 0 20px;flex-wrap:wrap;gap:6px}.case-grid{grid-template-columns:1fr 1fr;gap:20px 12px}.ig-head{padding:8px;gap:7px;font-size:12px}.ig-avatar{width:22px;height:22px;font-size:7px}.ig-actions{gap:9px;padding:8px 8px 4px}.ig-actions .ig-i{width:19px;height:19px}.ig-post figcaption{padding:0 8px 10px;font-size:12px}.ig-phone{border-radius:16px;box-shadow:0 0 0 4px #000;margin:4px}.ig-top{font-size:14px;top:10px;left:10px}.ig-side{right:6px;gap:11px;bottom:44px}.ig-side .ig-i{width:18px;height:18px}.ig-bottom{left:8px;right:30px;bottom:8px;font-size:11px}.ig-follow{display:none}.ig-who{gap:6px}.ig-who .ig-avatar{width:20px;height:20px;font-size:7px}}
