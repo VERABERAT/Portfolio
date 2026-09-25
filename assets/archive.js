@@ -16,6 +16,7 @@ const translations = {
     "dsPosts": "Postlar",
     "dsReelsNote": "Oynatmak için kaydır; ses için hoparlöre dokun",
     "igFollow": "Takip et",
+    "storeLink": "App Store’da indir",
     "dsNote": "Altavia’da D’S Damat için üretildi. Görseller ve videolar yapay zekâ ile üretildi; 12 posttan 6’sı ve 5 reels.",
     "brandTitle": "Çalıştığım<br> markalar",
     "independentLink": "Kişisel projeler ↓",
@@ -62,6 +63,7 @@ const translations = {
     "dsPosts": "Posts",
     "dsReelsNote": "Scroll to play; tap the speaker for sound",
     "igFollow": "Follow",
+    "storeLink": "Download on the App Store",
     "dsNote": "Made for D’S Damat at Altavia. Images and videos were created with AI; 6 of the 12 posts and 5 reels.",
     "brandTitle": "Brands I’ve<br> worked with",
     "independentLink": "Personal projects ↓",
@@ -117,6 +119,7 @@ const projects = [
   {
     "title": "Kolpa AI",
     "image": "assets/vinyl/kolpa-cover.webp",
+    "media": "kolpa",
     "tr": {
       "type": "Kendi uygulamam · 2026",
       "summary": "Yapay zekâ destekli mesaj analizi.",
@@ -135,6 +138,7 @@ const projects = [
   {
     "title": "Lumio",
     "image": "assets/vinyl/lumio-cover.webp",
+    "media": "lumio",
     "tr": {
       "type": "Kendi uygulamam · 2026",
       "summary": "Yapay zekâ destekli günlük uygulaması.",
