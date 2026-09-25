@@ -201,3 +201,12 @@ html:not(.js) .credits,html:not(.js) .notes,html:not(.js) .archive-controls{disp
 .ig-follow{white-space:nowrap}
 @container (max-width:280px){.ig-follow{display:none}}
 .ig-post figcaption .ig-badge{margin:0 3px 0 2px;vertical-align:-2px;width:12px;height:12px}
+.case-shots{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:28px 20px}
+.app-shot{margin:0}
+.app-shot img{display:block;width:100%;height:auto;aspect-ratio:600/1300;border:1px solid #000;border-radius:14px;background:#000;filter:none}
+.app-shot figcaption{padding-top:10px;font-size:12px;font-variant-numeric:tabular-nums}
+.store-link{display:inline-flex;align-items:center;gap:.5em;margin-top:40px;padding:14px 22px;border:1px solid #000;border-radius:999px;font-size:15px;color:inherit;text-decoration:none;transition:background .3s,color .3s}
+.store-link i{font-style:normal;transition:transform .5s var(--ease)}
+.store-link:hover,.store-link:focus-visible{background:#000;color:#fff}
+.store-link:hover i,.store-link:focus-visible i{transform:translate(3px,-3px)}
+@media(max-width:700px){.case-shots{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 12px}}
