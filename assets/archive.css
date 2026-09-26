@@ -217,3 +217,17 @@ html:not(.js) .credits,html:not(.js) .notes,html:not(.js) .archive-controls{disp
 .case-cover figcaption{padding-top:10px;font-size:13px}
 .case-long{margin:0}
 @media(max-width:700px){.case-covers{grid-template-columns:1fr}}
+.ig-avatar--yatsan{background:#5b3a29;font-family:inherit;font-weight:700}
+.ig-avatar--yatsan span{border:0;padding:0}
+.case-reels--4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.web-pairs{list-style:none;margin:0;padding:0;display:grid;gap:48px}
+.web-pair{margin:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.3fr);gap:24px;align-items:end}
+.web-browser{border:1px solid #000;border-radius:10px;overflow:hidden;background:#fff}
+.web-bar{display:flex;align-items:center;gap:6px;padding:9px 12px;border-bottom:1px solid #000;font-size:11px}
+.web-bar i{width:9px;height:9px;border-radius:50%;border:1px solid #000}
+.web-bar span{margin:0 auto;padding:2px 14px;border-radius:999px;background:#f2f2f2}
+.web-browser img,.web-phone img{display:block;width:100%;height:auto;filter:none}
+.web-phone{border-radius:22px;overflow:hidden;box-shadow:0 0 0 6px #000;margin:6px;background:#000}
+.web-pair figcaption{grid-column:1/-1;font-size:13px}
+@media(max-width:1100px){.case-reels--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.web-pair{grid-template-columns:minmax(0,1fr) minmax(0,.42fr);gap:14px}.web-phone{border-radius:14px;box-shadow:0 0 0 4px #000;margin:4px}.web-bar{padding:6px 8px;font-size:9px}.web-bar i{width:7px;height:7px}}
