@@ -231,3 +231,17 @@ html:not(.js) .credits,html:not(.js) .notes,html:not(.js) .archive-controls{disp
 .web-pair figcaption{grid-column:1/-1;font-size:13px}
 @media(max-width:1100px){.case-reels--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.web-pair{grid-template-columns:minmax(0,1fr) minmax(0,.42fr);gap:14px}.web-phone{border-radius:14px;box-shadow:0 0 0 4px #000;margin:4px}.web-bar{padding:6px 8px;font-size:9px}.web-bar i{width:7px;height:7px}}
+.ig-avatar--koton{background:#000;font-family:inherit;font-weight:700}
+.ig-avatar--koton span{border:0;padding:0}
+.case-stories{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px}
+.story{margin:0}
+.story figcaption{padding-top:12px;font-size:12px;font-variant-numeric:tabular-nums}
+.case-film{margin:0}
+.case-film video{display:block;width:100%;height:auto;aspect-ratio:848/480;background:#000;border:1px solid #000}
+.case-credits{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px}
+.case-credits div{display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid #000;font-size:14px}
+.case-credits dt{font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.case-credits dd{margin:0;text-align:right}
+.case-credits .me dd{font-weight:600}
+@media(max-width:1100px){.case-stories{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){.case-credits{grid-template-columns:1fr}.case-stories{gap:16px 10px}}

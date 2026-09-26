@@ -19,6 +19,14 @@ const translations = {
     "storeLink": "App Store’da indir",
     "behanceLink": "Behance’te gör",
     "webSliders": "Web sitesi slider’ları",
+    "film": "Film",
+    "credits": "Ekip",
+    "crProd": "Prodüksiyon",
+    "crDir": "Yönetmen",
+    "crDop": "Görüntü yönetmeni",
+    "crCd": "Kreatif direktör",
+    "crEdit": "Kurgu",
+    "crTalent": "Oyuncular",
     "yatsanNote": "Altavia’da Yatsan için üretildi. Bazı ürün sahneleri yapay zekâ ile üretildi.",
     "dsNote": "Altavia’da D’S Damat için üretildi. Görseller ve videolar yapay zekâ ile üretildi; 12 posttan 6’sı ve 5 reels.",
     "brandTitle": "Çalıştığım<br> markalar",
@@ -69,6 +77,14 @@ const translations = {
     "storeLink": "Download on the App Store",
     "behanceLink": "View on Behance",
     "webSliders": "Website sliders",
+    "film": "Film",
+    "credits": "Credits",
+    "crProd": "Production",
+    "crDir": "Directors",
+    "crDop": "Director of photography",
+    "crCd": "Creative direction",
+    "crEdit": "Editing",
+    "crTalent": "Talent",
     "yatsanNote": "Made for Yatsan at Altavia. Some product scenes were created with AI.",
     "dsNote": "Made for D’S Damat at Altavia. Images and videos were created with AI; 6 of the 12 posts and 5 reels.",
     "brandTitle": "Brands I’ve<br> worked with",
@@ -140,6 +156,26 @@ const projects = [
       "description": "Digital work I made for Yatsan at Altavia: yatsan.com sliders, Instagram reels and posts for products and campaigns such as Serta, Uykucu and Yatsan Maison. Every slider was composed separately for desktop and mobile, and some product scenes were created with AI.",
       "role": "Art direction, design, AI image generation",
       "focus": "4 reels, website sliders, posts"
+    }
+  },
+  {
+    "title": "Koton",
+    "year": "2026",
+    "image": "assets/vinyl/koton-cover.webp",
+    "media": "koton",
+    "tr": {
+      "type": "Marka işi · 2026",
+      "summary": "koton.sa açılışı için İngilizce ve Arapça post ve story serisi.",
+      "description": "Koton’un Suudi Arabistan web sitesi koton.sa’nın açılışı için hazırladığım “Now Live!” serisi. Sezon çekimlerini Instagram post ve story formatlarına uyarladım; tipografiyi İngilizce ve Arapça versiyonlarda aynı dengeyle kurdum.",
+      "role": "Tasarım & adaptasyon",
+      "focus": "3 post, 6 story, EN / AR"
+    },
+    "en": {
+      "type": "Brand work · 2026",
+      "summary": "An English and Arabic post and story series for the koton.sa launch.",
+      "description": "The “Now Live!” series I designed for the launch of koton.sa, Koton’s website for Saudi Arabia. I adapted the season’s shoot into Instagram post and story formats and set the typography with the same balance in English and Arabic.",
+      "role": "Design & adaptation",
+      "focus": "3 posts, 6 stories, EN / AR"
     }
   },
   {
@@ -281,6 +317,26 @@ const projects = [
     }
   },
   {
+    "title": "Miu Miu",
+    "year": "2024",
+    "image": "assets/vinyl/miu-miu-cover.webp",
+    "media": "miu-miu",
+    "tr": {
+      "type": "Film · 2024",
+      "summary": "Kasten Kolektif prodüksiyonu bir moda filmi.",
+      "description": "Kasten Kolektif’in prodüksiyonunu üstlendiği Miu Miu filmi. Kıyı kayalıkları, kuru otlar ve begonviller arasında geçen bir yaz hikâyesi; projede line producer olarak çekim planlamasından sete kadar prodüksiyonu yürüttüm.",
+      "role": "Line producer",
+      "focus": "Prodüksiyon, film"
+    },
+    "en": {
+      "type": "Film · 2024",
+      "summary": "A fashion film produced by Kasten Kolektif.",
+      "description": "A Miu Miu film produced by Kasten Kolektif: a summer story set among coastal rocks, dry grass and bougainvillea. As line producer I ran the production from shoot planning to set.",
+      "role": "Line producer",
+      "focus": "Production, film"
+    }
+  },
+  {
     "title": "Form & Motion",
     "image": "assets/vinyl/form-motion-cover.webp",
     "tr": {
@@ -315,6 +371,7 @@ Object.assign(translations.en, {
 const extra = [
   { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Instagram’da yayınlandı', en: 'Published on Instagram' } },
   { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'yatsan.com ve Instagram’da yayınlandı', en: 'Published on yatsan.com and Instagram' } },
+  { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'koton.sa açılış kampanyası', en: 'koton.sa launch campaign' } },
   { kind: { tr: 'Kendi uygulamam', en: 'My own app' }, status: { tr: 'App Store’da yayında', en: 'Live on the App Store' } },
   { kind: { tr: 'Kendi uygulamam', en: 'My own app' }, status: { tr: 'App Store’da yayında', en: 'Live on the App Store' } },
   { kind: { tr: 'Marka projesi', en: 'Brand project' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
@@ -322,6 +379,7 @@ const extra = [
   { kind: { tr: 'Ajans işi', en: 'Agency work' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
   { kind: { tr: 'Arayüz projesi', en: 'Interface project' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
   { kind: { tr: 'Yazı karakteri', en: 'Typeface' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
+  { kind: { tr: 'Film', en: 'Film' }, status: { tr: 'Kasten Kolektif prodüksiyonu', en: 'Produced by Kasten Kolektif' } },
   { kind: { tr: 'Görsel deneme', en: 'Visual study' }, status: { tr: 'Kişisel deneme', en: 'Personal study' } }
 ];
 const RECORD = 'assets/vinyl/vinyl-record.webp';
@@ -686,6 +744,7 @@ reels.forEach(v => {
 $$('[data-lang]').forEach(b => b.addEventListener('click', () => reels.forEach(v => { const btn = v.parentElement.querySelector('.ig-sound'); setSound(btn, btn.getAttribute('aria-pressed') === 'true'); })));
 function stopReels() {
   reels.forEach(v => { v.pause(); v.muted = true; setSound(v.parentElement.querySelector('.ig-sound'), false); });
+  $$('.case-film video').forEach(v => v.pause());
 }
 const reelsObserver = new IntersectionObserver(es => es.forEach(({ target: v, isIntersecting }) => {
   if (isIntersecting && !reduce.matches) v.play().catch(() => {});
