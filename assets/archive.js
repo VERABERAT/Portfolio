@@ -18,6 +18,8 @@ const translations = {
     "igFollow": "Takip et",
     "storeLink": "App Store’da indir",
     "behanceLink": "Behance’te gör",
+    "webSliders": "Web sitesi slider’ları",
+    "yatsanNote": "Altavia’da Yatsan için üretildi. Bazı ürün sahneleri yapay zekâ ile üretildi.",
     "dsNote": "Altavia’da D’S Damat için üretildi. Görseller ve videolar yapay zekâ ile üretildi; 12 posttan 6’sı ve 5 reels.",
     "brandTitle": "Çalıştığım<br> markalar",
     "independentLink": "Kişisel projeler ↓",
@@ -66,6 +68,8 @@ const translations = {
     "igFollow": "Follow",
     "storeLink": "Download on the App Store",
     "behanceLink": "View on Behance",
+    "webSliders": "Website sliders",
+    "yatsanNote": "Made for Yatsan at Altavia. Some product scenes were created with AI.",
     "dsNote": "Made for D’S Damat at Altavia. Images and videos were created with AI; 6 of the 12 posts and 5 reels.",
     "brandTitle": "Brands I’ve<br> worked with",
     "independentLink": "Personal projects ↓",
@@ -116,6 +120,26 @@ const projects = [
       "description": "The July tuxedo campaign I created for D’S Damat at Altavia. Reels and posts place white and black tuxedos in palace halls, lakeside terraces and against stone walls, with close-ups that bring the product details forward: cufflinks, bow tie, lapel.",
       "role": "Art direction, AI image and video generation",
       "focus": "5 reels, 12 posts, Instagram"
+    }
+  },
+  {
+    "title": "Yatsan",
+    "year": "2026",
+    "image": "assets/vinyl/yatsan-cover.webp",
+    "media": "yatsan",
+    "tr": {
+      "type": "Marka işi · 2026",
+      "summary": "Web sitesi slider’ları, reels ve sosyal medya içerikleri.",
+      "description": "Altavia’da Yatsan için hazırladığım dijital işler: Serta, Uykucu ve Yatsan Maison gibi ürün ve kampanyalar için yatsan.com slider’ları, Instagram reels’leri ve postlar. Her slider’ı masaüstü ve mobil için ayrı kurguladık; bazı ürün sahnelerinde yapay zekâ ile görsel üretimi kullandık.",
+      "role": "Art direction, tasarım, AI görsel üretimi",
+      "focus": "4 reels, web slider’ları, post"
+    },
+    "en": {
+      "type": "Brand work · 2026",
+      "summary": "Website sliders, reels and social media content.",
+      "description": "Digital work I made for Yatsan at Altavia: yatsan.com sliders, Instagram reels and posts for products and campaigns such as Serta, Uykucu and Yatsan Maison. Every slider was composed separately for desktop and mobile, and some product scenes were created with AI.",
+      "role": "Art direction, design, AI image generation",
+      "focus": "4 reels, website sliders, posts"
     }
   },
   {
@@ -290,6 +314,7 @@ Object.assign(translations.en, {
 });
 const extra = [
   { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Instagram’da yayınlandı', en: 'Published on Instagram' } },
+  { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'yatsan.com ve Instagram’da yayınlandı', en: 'Published on yatsan.com and Instagram' } },
   { kind: { tr: 'Kendi uygulamam', en: 'My own app' }, status: { tr: 'App Store’da yayında', en: 'Live on the App Store' } },
   { kind: { tr: 'Kendi uygulamam', en: 'My own app' }, status: { tr: 'App Store’da yayında', en: 'Live on the App Store' } },
   { kind: { tr: 'Marka projesi', en: 'Brand project' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
