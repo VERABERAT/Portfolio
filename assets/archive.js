@@ -179,6 +179,66 @@ const projects = [
     }
   },
   {
+    "title": "Tetra Pak",
+    "year": "2026",
+    "image": "assets/vinyl/tetra-pak-cover.webp",
+    "media": "tetra-pak",
+    "tr": {
+      "type": "Marka işi · 2026",
+      "summary": "Tetra Pak için hazırladığım marka işi.",
+      "description": "Tetra Pak’ın “İyi olanı korur” çatısı altında hazırladığım iş. Projenin tamamı Behance’teki sayfasında.",
+      "role": "Tasarım",
+      "focus": "Marka iletişimi"
+    },
+    "en": {
+      "type": "Brand work · 2026",
+      "summary": "Brand work I made for Tetra Pak.",
+      "description": "Work I made under Tetra Pak’s “protects what’s good” platform. The full project is on its Behance page.",
+      "role": "Design",
+      "focus": "Brand communication"
+    }
+  },
+  {
+    "title": "Derby",
+    "year": "2026",
+    "image": "assets/vinyl/derby-cover.webp",
+    "media": "derby",
+    "tr": {
+      "type": "AI video · 2026",
+      "summary": "Derby için Kling 3.0 ile üretilen video çalışması.",
+      "description": "Derby için Kling 3.0 ile ürettiğim yapay zekâ destekli video çalışması. Projenin tamamı Behance’teki sayfasında.",
+      "role": "AI video üretimi",
+      "focus": "Kling 3.0, video"
+    },
+    "en": {
+      "type": "AI video · 2026",
+      "summary": "A video piece made for Derby with Kling 3.0.",
+      "description": "An AI-assisted video piece I made for Derby with Kling 3.0. The full project is on its Behance page.",
+      "role": "AI video generation",
+      "focus": "Kling 3.0, video"
+    }
+  },
+  {
+    "title": "Aytaç",
+    "year": "2026",
+    "image": "assets/vinyl/aytac-cover.webp",
+    "media": "aytac",
+    "tr": {
+      "type": "Marka işi · 2026",
+      "summary": "Aytaç için yeni nesil içerik üretimi.",
+      "description": "Aytaç için yaptığım “Next-Gen Content Production” çalışması: yapay zekâ destekli yeni nesil içerik üretimi. Projenin tamamı Behance’teki sayfasında.",
+      "role": "AI içerik üretimi",
+      "focus": "İçerik üretimi"
+    },
+    "en": {
+      "type": "Brand work · 2026",
+      "summary": "Next-gen content production for Aytaç.",
+      "description": "“Next-Gen Content Production”, my work for Aytaç: AI-assisted, next-generation content production. The full project is on its Behance page.",
+      "role": "AI content production",
+      "focus": "Content production"
+    }
+  },
+  {
     "title": "Kolpa AI",
     "image": "assets/vinyl/kolpa-cover.webp",
     "media": "kolpa",
@@ -234,26 +294,6 @@ const projects = [
       "description": "An end-to-end brand ecosystem for FERM, a fermented drinks brand: organic typography and a lively packaging system, the UX/UI of a phygital app called “Controlled Decay”, and a website that carries the brand’s 360° experience.",
       "role": "Brand identity, packaging, UX/UI",
       "focus": "Identity, packaging, app, web, campaign"
-    }
-  },
-  {
-    "title": "NutriPaw",
-    "year": "2024",
-    "image": "assets/vinyl/nutripaw-cover.webp",
-    "media": "nutripaw",
-    "tr": {
-      "type": "Bitirme projesi · 2024",
-      "summary": "Organik evcil hayvan maması markası için kimlik ve ambalaj.",
-      "description": "Bahçeşehir Üniversitesi İletişim ve Tasarım bölümündeki bitirme projem. Organik evcil hayvan maması markası NutriPaw için piksel harflere dayanan bir kimlik, ambalaj sistemi ve kampanya geliştirdim.",
-      "role": "Marka kimliği & ambalaj",
-      "focus": "Kimlik, ambalaj, kampanya"
-    },
-    "en": {
-      "type": "Graduation project · 2024",
-      "summary": "Identity and packaging for an organic pet food brand.",
-      "description": "My graduation project in Communication and Design at Bahçeşehir University. I developed a pixel-lettered identity, a packaging system and a campaign for NutriPaw, an organic pet food brand.",
-      "role": "Brand identity & packaging",
-      "focus": "Identity, packaging, campaign"
     }
   },
   {
@@ -372,10 +412,12 @@ const extra = [
   { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Instagram’da yayınlandı', en: 'Published on Instagram' } },
   { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'yatsan.com ve Instagram’da yayınlandı', en: 'Published on yatsan.com and Instagram' } },
   { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'koton.sa açılış kampanyası', en: 'koton.sa launch campaign' } },
+  { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
+  { kind: { tr: 'AI video', en: 'AI video' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
+  { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
   { kind: { tr: 'Kendi uygulamam', en: 'My own app' }, status: { tr: 'App Store’da yayında', en: 'Live on the App Store' } },
   { kind: { tr: 'Kendi uygulamam', en: 'My own app' }, status: { tr: 'App Store’da yayında', en: 'Live on the App Store' } },
   { kind: { tr: 'Marka projesi', en: 'Brand project' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
-  { kind: { tr: 'Bitirme projesi', en: 'Graduation project' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
   { kind: { tr: 'Ajans işi', en: 'Agency work' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
   { kind: { tr: 'Arayüz projesi', en: 'Interface project' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
   { kind: { tr: 'Yazı karakteri', en: 'Typeface' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
