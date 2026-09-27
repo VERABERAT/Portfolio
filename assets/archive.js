@@ -125,7 +125,7 @@ const translations = {
 const projects = [
   {
     "title": "D’S Damat",
-    "image": "assets/vinyl/ds-damat-cover.webp",
+    "image": "assets/vinyl/ds-damat-cover.png",
     "media": "ds-damat",
     "tr": {
       "type": "Marka işi · 2026",
@@ -145,7 +145,7 @@ const projects = [
   {
     "title": "Yatsan",
     "year": "2026",
-    "image": "assets/vinyl/yatsan-cover.webp",
+    "image": "assets/vinyl/yatsan-cover.png",
     "media": "yatsan",
     "tr": {
       "type": "Marka işi · 2026",
@@ -165,7 +165,7 @@ const projects = [
   {
     "title": "Koton",
     "year": "2026",
-    "image": "assets/vinyl/koton-cover.webp",
+    "image": "assets/vinyl/koton-cover.png",
     "media": "koton",
     "tr": {
       "type": "Marka işi · 2026",
@@ -183,29 +183,9 @@ const projects = [
     }
   },
   {
-    "title": "Toshiba",
-    "year": "2026",
-    "image": "assets/vinyl/toshiba-cover.webp",
-    "media": "toshiba",
-    "tr": {
-      "type": "Marka işi · 2026",
-      "summary": "Toshiba klima için post, story ve banner.",
-      "description": "Toshiba klima için hazırladığım sosyal medya içerikleri: “Dekorasyonun en havalı parçası” Haori split klima kampanyası, salon tipi ticari klima tanıtımı ve Kadın Voleybol Millî Takımı’na tebrik story’si. Her kampanyayı post, story ve yatay formatlara uyarladım.",
-      "role": "Tasarım & art direction",
-      "focus": "3 post, 3 story, banner"
-    },
-    "en": {
-      "type": "Brand work · 2026",
-      "summary": "Posts, stories and a banner for Toshiba air conditioning.",
-      "description": "Social media content I made for Toshiba air conditioning: the “most stylish piece of your décor” campaign for the Haori split AC, an introduction to the commercial floor-standing unit and a congratulations story for the Turkish women’s national volleyball team. Each campaign was adapted to post, story and landscape formats.",
-      "role": "Design & art direction",
-      "focus": "3 posts, 3 stories, banner"
-    }
-  },
-  {
     "title": "Tetra Pak",
     "year": "2026",
-    "image": "assets/vinyl/tetra-pak-cover.webp",
+    "image": "assets/vinyl/tetra-pak-cover.png",
     "media": "tetra-pak",
     "tr": {
       "type": "Marka işi · 2026",
@@ -223,49 +203,9 @@ const projects = [
     }
   },
   {
-    "title": "Derby",
-    "year": "2026",
-    "image": "assets/vinyl/derby-cover.webp",
-    "media": "derby",
-    "tr": {
-      "type": "Marka işi · 2026",
-      "summary": "Tıraş kolonyası ambalajı ve Kling 3.0 ile video.",
-      "description": "Derby için Okyanus Esintisi tıraş kolonyasının ambalaj tasarımı ve Kling 3.0 ile ürettiğim yapay zekâ destekli video çalışması. Video Behance’teki proje sayfasında.",
-      "role": "Ambalaj, AI video",
-      "focus": "Ambalaj, Kling 3.0"
-    },
-    "en": {
-      "type": "Brand work · 2026",
-      "summary": "A shaving cologne pack and a video made with Kling 3.0.",
-      "description": "Packaging for Derby’s Ocean Breeze shaving cologne, plus an AI-assisted video I made with Kling 3.0. The video is on the Behance project page.",
-      "role": "Packaging, AI video",
-      "focus": "Packaging, Kling 3.0"
-    }
-  },
-  {
-    "title": "Aytaç",
-    "year": "2026",
-    "image": "assets/vinyl/aytac-cover.webp",
-    "media": "aytac",
-    "tr": {
-      "type": "Marka işi · 2026",
-      "summary": "Reels ve ambalaj: Aytaç lezzetleri.",
-      "description": "Aytaç için hazırladığım “Alarm Aytaç lezzetlerine çalıyor” reels’i ve Dana Döner Dürüm ambalajı. Yapay zekâ destekli içerik üretimi çalışmasının tamamı Behance’te.",
-      "role": "Tasarım, AI içerik üretimi",
-      "focus": "Reels, ambalaj"
-    },
-    "en": {
-      "type": "Brand work · 2026",
-      "summary": "Reels and packaging for Aytaç.",
-      "description": "The “Alarm rings for Aytaç flavours” reel and the Beef Döner Wrap pack I made for Aytaç. The full AI-assisted content production work is on Behance.",
-      "role": "Design, AI content production",
-      "focus": "Reels, packaging"
-    }
-  },
-  {
     "title": "Pek Food",
     "year": "2026",
-    "image": "assets/vinyl/pek-food-cover.webp",
+    "image": "assets/vinyl/pek-food-cover.png",
     "media": "pek-food",
     "tr": {
       "type": "AI video · 2026",
@@ -284,7 +224,7 @@ const projects = [
   },
   {
     "title": "Kolpa AI",
-    "image": "assets/vinyl/kolpa-cover.webp",
+    "image": "assets/vinyl/kolpa-cover.png",
     "media": "kolpa",
     "tr": {
       "type": "Kendi uygulamam · 2026",
@@ -303,7 +243,7 @@ const projects = [
   },
   {
     "title": "Lumio",
-    "image": "assets/vinyl/lumio-cover.webp",
+    "image": "assets/vinyl/lumio-cover.png",
     "media": "lumio",
     "tr": {
       "type": "Kendi uygulamam · 2026",
@@ -323,7 +263,7 @@ const projects = [
   {
     "title": "FERM",
     "year": "2025",
-    "image": "assets/vinyl/ferm-cover.webp",
+    "image": "assets/vinyl/ferm-cover.png",
     "media": "ferm",
     "tr": {
       "type": "Marka projesi · 2025",
@@ -343,7 +283,7 @@ const projects = [
   {
     "title": "İmece Market",
     "year": "2025",
-    "image": "assets/vinyl/imece-cover.webp",
+    "image": "assets/vinyl/imece-cover.png",
     "media": "imece",
     "tr": {
       "type": "Ajans işi · 2025",
@@ -363,7 +303,7 @@ const projects = [
   {
     "title": "Smart Locker",
     "year": "2024",
-    "image": "assets/vinyl/smart-locker-cover.webp",
+    "image": "assets/vinyl/smart-locker-cover.png",
     "media": "smart-locker",
     "tr": {
       "type": "Arayüz projesi · 2024",
@@ -383,7 +323,7 @@ const projects = [
   {
     "title": "VERA",
     "year": "2025",
-    "image": "assets/vinyl/vera-cover.webp",
+    "image": "assets/vinyl/vera-cover.png",
     "media": "vera",
     "tr": {
       "type": "Yazı karakteri · 2025",
@@ -403,7 +343,7 @@ const projects = [
   {
     "title": "Miu Miu",
     "year": "2024",
-    "image": "assets/vinyl/miu-miu-cover.webp",
+    "image": "assets/vinyl/miu-miu-cover.png",
     "media": "miu-miu",
     "tr": {
       "type": "Film · 2024",
@@ -422,7 +362,7 @@ const projects = [
   },
   {
     "title": "Form & Motion",
-    "image": "assets/vinyl/form-motion-cover.webp",
+    "image": "assets/vinyl/form-motion-cover.png",
     "tr": {
       "type": "Görsel deneme · Konsept",
       "summary": "Yapay zekâ ile görsel denemeler.",
@@ -453,22 +393,136 @@ Object.assign(translations.en, {
   hint: '← → browse · Space flip · Enter open', flip: 'Flip'
 });
 const extra = [
-  { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Instagram’da yayınlandı', en: 'Published on Instagram' } },
-  { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'yatsan.com ve Instagram’da yayınlandı', en: 'Published on yatsan.com and Instagram' } },
-  { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'koton.sa açılış kampanyası', en: 'koton.sa launch campaign' } },
-  { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Sosyal medyada yayınlandı', en: 'Published on social media' } },
-  { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
-  { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
-  { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
-  { kind: { tr: 'AI video', en: 'AI video' }, status: { tr: 'Yapay zekâ ile üretildi', en: 'Created with AI' } },
-  { kind: { tr: 'Kendi uygulamam', en: 'My own app' }, status: { tr: 'App Store’da yayında', en: 'Live on the App Store' } },
-  { kind: { tr: 'Kendi uygulamam', en: 'My own app' }, status: { tr: 'App Store’da yayında', en: 'Live on the App Store' } },
-  { kind: { tr: 'Marka projesi', en: 'Brand project' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
-  { kind: { tr: 'Ajans işi', en: 'Agency work' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
-  { kind: { tr: 'Arayüz projesi', en: 'Interface project' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
-  { kind: { tr: 'Yazı karakteri', en: 'Typeface' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
-  { kind: { tr: 'Film', en: 'Film' }, status: { tr: 'Kasten Kolektif prodüksiyonu', en: 'Produced by Kasten Kolektif' } },
-  { kind: { tr: 'Görsel deneme', en: 'Visual study' }, status: { tr: 'Kişisel deneme', en: 'Personal study' } }
+  {
+    "kind": {
+      "tr": "Marka işi",
+      "en": "Brand work"
+    },
+    "status": {
+      "tr": "Instagram’da yayınlandı",
+      "en": "Published on Instagram"
+    }
+  },
+  {
+    "kind": {
+      "tr": "Marka işi",
+      "en": "Brand work"
+    },
+    "status": {
+      "tr": "yatsan.com ve Instagram’da yayınlandı",
+      "en": "Published on yatsan.com and Instagram"
+    }
+  },
+  {
+    "kind": {
+      "tr": "Marka işi",
+      "en": "Brand work"
+    },
+    "status": {
+      "tr": "koton.sa açılış kampanyası",
+      "en": "koton.sa launch campaign"
+    }
+  },
+  {
+    "kind": {
+      "tr": "Marka işi",
+      "en": "Brand work"
+    },
+    "status": {
+      "tr": "Behance’te yayında",
+      "en": "Published on Behance"
+    }
+  },
+  {
+    "kind": {
+      "tr": "AI video",
+      "en": "AI video"
+    },
+    "status": {
+      "tr": "Yapay zekâ ile üretildi",
+      "en": "Created with AI"
+    }
+  },
+  {
+    "kind": {
+      "tr": "Kendi uygulamam",
+      "en": "My own app"
+    },
+    "status": {
+      "tr": "App Store’da yayında",
+      "en": "Live on the App Store"
+    }
+  },
+  {
+    "kind": {
+      "tr": "Kendi uygulamam",
+      "en": "My own app"
+    },
+    "status": {
+      "tr": "App Store’da yayında",
+      "en": "Live on the App Store"
+    }
+  },
+  {
+    "kind": {
+      "tr": "Marka projesi",
+      "en": "Brand project"
+    },
+    "status": {
+      "tr": "Behance’te yayında",
+      "en": "Published on Behance"
+    }
+  },
+  {
+    "kind": {
+      "tr": "Ajans işi",
+      "en": "Agency work"
+    },
+    "status": {
+      "tr": "Behance’te yayında",
+      "en": "Published on Behance"
+    }
+  },
+  {
+    "kind": {
+      "tr": "Arayüz projesi",
+      "en": "Interface project"
+    },
+    "status": {
+      "tr": "Behance’te yayında",
+      "en": "Published on Behance"
+    }
+  },
+  {
+    "kind": {
+      "tr": "Yazı karakteri",
+      "en": "Typeface"
+    },
+    "status": {
+      "tr": "Behance’te yayında",
+      "en": "Published on Behance"
+    }
+  },
+  {
+    "kind": {
+      "tr": "Film",
+      "en": "Film"
+    },
+    "status": {
+      "tr": "Kasten Kolektif prodüksiyonu",
+      "en": "Produced by Kasten Kolektif"
+    }
+  },
+  {
+    "kind": {
+      "tr": "Görsel deneme",
+      "en": "Visual study"
+    },
+    "status": {
+      "tr": "Kişisel deneme",
+      "en": "Personal study"
+    }
+  }
 ];
 const RECORD = 'assets/vinyl/vinyl-record.webp';
 
