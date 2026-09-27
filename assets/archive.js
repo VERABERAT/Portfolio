@@ -20,6 +20,8 @@ const translations = {
     "behanceLink": "Behance’te gör",
     "webSliders": "Web sitesi slider’ları",
     "film": "Film",
+    "banner": "Banner",
+    "packaging": "Ambalaj",
     "credits": "Ekip",
     "crProd": "Prodüksiyon",
     "crDir": "Yönetmen",
@@ -40,7 +42,7 @@ const translations = {
     "visual": "Görsel Tasarımcı",
     "digital": "Dijital Tasarımcı",
     "brand": "Freelance Marka Tasarımcısı",
-    "brands": "Diğer marka işleri: Toshiba, Pek Food, Odeabank.",
+    "brands": "Diğer marka işleri: Odeabank.",
     "practice": "Çalışma alanları",
     "art": "Sanat yönetimi",
     "ai": "AI görsel üretimi",
@@ -78,6 +80,8 @@ const translations = {
     "behanceLink": "View on Behance",
     "webSliders": "Website sliders",
     "film": "Film",
+    "banner": "Banner",
+    "packaging": "Packaging",
     "credits": "Credits",
     "crProd": "Production",
     "crDir": "Directors",
@@ -98,7 +102,7 @@ const translations = {
     "visual": "Visual Designer",
     "digital": "Digital Designer",
     "brand": "Freelance Brand Designer",
-    "brands": "Other brand work: Toshiba, Pek Food, Odeabank.",
+    "brands": "Other brand work: Odeabank.",
     "practice": "What I do",
     "art": "Art direction",
     "ai": "AI image creation",
@@ -179,23 +183,43 @@ const projects = [
     }
   },
   {
+    "title": "Toshiba",
+    "year": "2026",
+    "image": "assets/vinyl/toshiba-cover.webp",
+    "media": "toshiba",
+    "tr": {
+      "type": "Marka işi · 2026",
+      "summary": "Toshiba klima için post, story ve banner.",
+      "description": "Toshiba klima için hazırladığım sosyal medya içerikleri: “Dekorasyonun en havalı parçası” Haori split klima kampanyası, salon tipi ticari klima tanıtımı ve Kadın Voleybol Millî Takımı’na tebrik story’si. Her kampanyayı post, story ve yatay formatlara uyarladım.",
+      "role": "Tasarım & art direction",
+      "focus": "3 post, 3 story, banner"
+    },
+    "en": {
+      "type": "Brand work · 2026",
+      "summary": "Posts, stories and a banner for Toshiba air conditioning.",
+      "description": "Social media content I made for Toshiba air conditioning: the “most stylish piece of your décor” campaign for the Haori split AC, an introduction to the commercial floor-standing unit and a congratulations story for the Turkish women’s national volleyball team. Each campaign was adapted to post, story and landscape formats.",
+      "role": "Design & art direction",
+      "focus": "3 posts, 3 stories, banner"
+    }
+  },
+  {
     "title": "Tetra Pak",
     "year": "2026",
     "image": "assets/vinyl/tetra-pak-cover.webp",
     "media": "tetra-pak",
     "tr": {
       "type": "Marka işi · 2026",
-      "summary": "Tetra Pak için hazırladığım marka işi.",
-      "description": "Tetra Pak’ın “İyi olanı korur” çatısı altında hazırladığım iş. Projenin tamamı Behance’teki sayfasında.",
+      "summary": "Tetra Pak için sosyal medya içerikleri.",
+      "description": "Tetra Pak için hazırladığım sosyal medya içerikleri. Tetra Top® ambalajının %94 oranında yenilenebilir olduğunu orman içindeki bir sahneyle anlatan story bunlardan biri; projenin tamamı Behance’te.",
       "role": "Tasarım",
-      "focus": "Marka iletişimi"
+      "focus": "Story, sosyal medya"
     },
     "en": {
       "type": "Brand work · 2026",
-      "summary": "Brand work I made for Tetra Pak.",
-      "description": "Work I made under Tetra Pak’s “protects what’s good” platform. The full project is on its Behance page.",
+      "summary": "Social media content for Tetra Pak.",
+      "description": "Social media content I made for Tetra Pak. One of them is a story that tells, through a forest scene, how the Tetra Top® package is 94% renewable; the full project is on Behance.",
       "role": "Design",
-      "focus": "Brand communication"
+      "focus": "Story, social media"
     }
   },
   {
@@ -204,18 +228,18 @@ const projects = [
     "image": "assets/vinyl/derby-cover.webp",
     "media": "derby",
     "tr": {
-      "type": "AI video · 2026",
-      "summary": "Derby için Kling 3.0 ile üretilen video çalışması.",
-      "description": "Derby için Kling 3.0 ile ürettiğim yapay zekâ destekli video çalışması. Projenin tamamı Behance’teki sayfasında.",
-      "role": "AI video üretimi",
-      "focus": "Kling 3.0, video"
+      "type": "Marka işi · 2026",
+      "summary": "Tıraş kolonyası ambalajı ve Kling 3.0 ile video.",
+      "description": "Derby için Okyanus Esintisi tıraş kolonyasının ambalaj tasarımı ve Kling 3.0 ile ürettiğim yapay zekâ destekli video çalışması. Video Behance’teki proje sayfasında.",
+      "role": "Ambalaj, AI video",
+      "focus": "Ambalaj, Kling 3.0"
     },
     "en": {
-      "type": "AI video · 2026",
-      "summary": "A video piece made for Derby with Kling 3.0.",
-      "description": "An AI-assisted video piece I made for Derby with Kling 3.0. The full project is on its Behance page.",
-      "role": "AI video generation",
-      "focus": "Kling 3.0, video"
+      "type": "Brand work · 2026",
+      "summary": "A shaving cologne pack and a video made with Kling 3.0.",
+      "description": "Packaging for Derby’s Ocean Breeze shaving cologne, plus an AI-assisted video I made with Kling 3.0. The video is on the Behance project page.",
+      "role": "Packaging, AI video",
+      "focus": "Packaging, Kling 3.0"
     }
   },
   {
@@ -225,17 +249,37 @@ const projects = [
     "media": "aytac",
     "tr": {
       "type": "Marka işi · 2026",
-      "summary": "Aytaç için yeni nesil içerik üretimi.",
-      "description": "Aytaç için yaptığım “Next-Gen Content Production” çalışması: yapay zekâ destekli yeni nesil içerik üretimi. Projenin tamamı Behance’teki sayfasında.",
-      "role": "AI içerik üretimi",
-      "focus": "İçerik üretimi"
+      "summary": "Reels ve ambalaj: Aytaç lezzetleri.",
+      "description": "Aytaç için hazırladığım “Alarm Aytaç lezzetlerine çalıyor” reels’i ve Dana Döner Dürüm ambalajı. Yapay zekâ destekli içerik üretimi çalışmasının tamamı Behance’te.",
+      "role": "Tasarım, AI içerik üretimi",
+      "focus": "Reels, ambalaj"
     },
     "en": {
       "type": "Brand work · 2026",
-      "summary": "Next-gen content production for Aytaç.",
-      "description": "“Next-Gen Content Production”, my work for Aytaç: AI-assisted, next-generation content production. The full project is on its Behance page.",
-      "role": "AI content production",
-      "focus": "Content production"
+      "summary": "Reels and packaging for Aytaç.",
+      "description": "The “Alarm rings for Aytaç flavours” reel and the Beef Döner Wrap pack I made for Aytaç. The full AI-assisted content production work is on Behance.",
+      "role": "Design, AI content production",
+      "focus": "Reels, packaging"
+    }
+  },
+  {
+    "title": "Pek Food",
+    "year": "2026",
+    "image": "assets/vinyl/pek-food-cover.webp",
+    "media": "pek-food",
+    "tr": {
+      "type": "AI video · 2026",
+      "summary": "Pek Food için yapay zekâ ile üretilmiş karakter animasyonu.",
+      "description": "Pek Food için yapay zekâ ile ürettiğim kısa bir karakter animasyonu: domates, sarımsak ve fesleğen karakterleri harita üzerinde İtalya’ya doğru yola çıkıyor.",
+      "role": "AI video üretimi",
+      "focus": "Karakter animasyonu, 10 sn"
+    },
+    "en": {
+      "type": "AI video · 2026",
+      "summary": "An AI-generated character animation for Pek Food.",
+      "description": "A short character animation I created with AI for Pek Food: tomato, garlic and basil characters set off across a map towards Italy.",
+      "role": "AI video generation",
+      "focus": "Character animation, 10 s"
     }
   },
   {
@@ -412,9 +456,11 @@ const extra = [
   { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Instagram’da yayınlandı', en: 'Published on Instagram' } },
   { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'yatsan.com ve Instagram’da yayınlandı', en: 'Published on yatsan.com and Instagram' } },
   { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'koton.sa açılış kampanyası', en: 'koton.sa launch campaign' } },
+  { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Sosyal medyada yayınlandı', en: 'Published on social media' } },
   { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
-  { kind: { tr: 'AI video', en: 'AI video' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
   { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
+  { kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
+  { kind: { tr: 'AI video', en: 'AI video' }, status: { tr: 'Yapay zekâ ile üretildi', en: 'Created with AI' } },
   { kind: { tr: 'Kendi uygulamam', en: 'My own app' }, status: { tr: 'App Store’da yayında', en: 'Live on the App Store' } },
   { kind: { tr: 'Kendi uygulamam', en: 'My own app' }, status: { tr: 'App Store’da yayında', en: 'Live on the App Store' } },
   { kind: { tr: 'Marka projesi', en: 'Brand project' }, status: { tr: 'Behance’te yayında', en: 'Published on Behance' } },
