@@ -245,3 +245,9 @@ html:not(.js) .credits,html:not(.js) .notes,html:not(.js) .archive-controls{disp
 .case-credits .me dd{font-weight:600}
 @media(max-width:1100px){.case-stories{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:700px){.case-credits{grid-template-columns:1fr}.case-stories{gap:16px 10px}}
+.ig-avatar--toshiba{background:#e60012;font-family:inherit;font-weight:700}
+.ig-avatar--toshiba span,.ig-avatar--aytac span{border:0;padding:0}
+.ig-avatar--aytac{background:#2e1b4a;font-family:inherit;font-weight:700}
+.case-stories--few,.case-reels--few{grid-template-columns:repeat(3,minmax(0,1fr));max-width:820px}
+.case-narrow{max-width:460px}
+@media(max-width:700px){.case-stories--few,.case-reels--few{grid-template-columns:repeat(2,minmax(0,1fr))}}

@@ -1,47 +1,71 @@
 # Berat Erdoğan — Portfolio
 
 Statik HTML, CSS ve JavaScript portfolyo. Türkçe / İngilizce, siyah-beyaz tasarım,
-plak galerisi ve yerel animasyon kütüphaneleri içerir.
+plak arşivi ve yerel animasyon kütüphaneleri içerir. Kurulum ya da build adımı yoktur.
 
 Canlı: https://beraterdogan.studio
 
-## Güncel dosyalar
+## Klasör yapısı
 
-- `index.html`: ana sayfa.
-- `assets/archive.js`: metinler, projeler, dil seçimi, plak arşivi, proje görünümü ve animasyonlar.
-- `assets/portfolio.css`, `assets/vinyl.css`: temel stiller ve alt bölümler.
-- `assets/archive.css`: plak arşivi (ana galeri), yükleme ekranı ve proje görünümü.
-- `assets/vinyl/`: plak görseli ve proje kapakları.
-- `assets/vendor/`: GSAP, eklentileri ve Lenis.
-- `assets/fonts/`: Inter ve lisans dosyası.
-- `Berat-Erdogan-CV.pdf`: özgeçmiş.
-- `DESIGN.md`: güncel tasarım kuralları.
+```
+Portfolio/
+├── index.html              Ana sayfa (tek sayfa, tüm projeler burada)
+├── Berat-Erdogan-CV.pdf    Özgeçmiş
+├── assets/
+│   ├── archive.js          Projeler, TR/EN metinler, plak arşivi, proje penceresi
+│   ├── archive.css         Plak arşivi, proje penceresi ve mockup stilleri
+│   ├── portfolio.css       Temel stiller
+│   ├── vinyl.css           Alt bölümler
+│   ├── vinyl/              Plak görseli + her projenin plak kapağı (<anahtar>-cover.webp)
+│   ├── work/<anahtar>/     Her projenin görselleri ve videoları
+│   ├── vendor/             GSAP, ScrollTrigger, SplitText, CustomEase, Lenis
+│   └── fonts/              Inter ve lisansı
+├── docs/
+│   ├── plak-promptlari.md  Her proje için klasik plak etiketi promptları
+│   ├── DESIGN.md           Tasarım kuralları
+│   └── VERCEL.md           Yayın notları
+├── _arsiv/eski-site/       Önceki sitenin tüm dosyaları (yayına çıkmaz)
+├── vercel.json             Güvenlik başlıkları, önbellek, eski adres yönlendirmeleri
+└── .vercelignore           _arsiv ve docs yayına dahil edilmez
+```
 
-Ana sayfadaki Kolpa AI ve Lumio kişisel uygulamalardır. Form & Motion, yapay
-zekâ ile hazırlanmış ve bu şekilde etiketlenmiş bir görsel denemedir.
-Marka bölümü mevcut iş görselleri sağlandıkça genişletilebilir.
+Proje anahtarları (`assets/work/` ve `assets/vinyl/` altında aynı ad):
+`ds-damat`, `yatsan`, `koton`, `toshiba`, `tetra-pak`, `derby`, `aytac`, `pek-food`,
+`kolpa`, `lumio`, `ferm`, `imece`, `smart-locker`, `vera`, `miu-miu`, `form-motion`.
 
-Helvetica Now yalnızca ziyaretçinin cihazında varsa kullanılır. Dosyası
-dağıtılmaz; diğer cihazlarda projeye dahil edilen Inter kullanılır.
+## Bilgisayarında açmak
+
+1. Depoyu indir:
+   - Terminalle: `git clone https://github.com/VERABERAT/Portfolio.git`
+   - Ya da GitHub Desktop → File → Clone repository → `VERABERAT/Portfolio`
+   - Ya da GitHub sayfasında Code → Download ZIP
+2. Klasörde yerel sunucu başlat (herhangi biri):
+   ```sh
+   cd Portfolio
+   python3 -m http.server 8000
+   # veya
+   npx serve .
+   ```
+3. Tarayıcıda http://localhost:8000 adresini aç.
+
+`index.html` dosyasına çift tıklamak yerine yerel sunucu kullan; videolar ve
+bazı tarayıcı özellikleri `file://` üzerinden düzgün çalışmaz.
+
+## Yeni proje eklemek
+
+1. Görselleri `assets/work/<anahtar>/` içine koy (webp önerilir; videolar 720p mp4 + webm).
+2. Plak kapağını `assets/vinyl/<anahtar>-cover.webp` olarak ekle (kare, 800×800).
+3. `assets/archive.js` içinde:
+   - `projects` dizisine proje nesnesini ekle (`title`, `year`, `image`, `media: "<anahtar>"`, `tr`, `en`).
+   - `extra` dizisinde aynı sıraya `kind` ve `status` satırını ekle.
+4. `index.html` içinde, `#production` penceresine `<div class="p-media" data-project="<anahtar>" hidden>` bloğunu ekle.
+   Mevcut bloklar (reels, post, story, web slider, film) örnek olarak kullanılabilir.
+5. Marka listesinde tıklanabilir olsun istersen `data-open="<anahtar>"` butonu ekle.
 
 ## Yayın
 
-Vercel bu depoyu izler. `main` dalına gönderilen commit otomatik production
-yayını başlatır. `vercel.json` depo kökünü yayınlar; kurulum ve build adımı
-yoktur. Mevcut güvenlik başlıkları ve görsel/font önbellek ayarları korunmuştur.
+Vercel bu depoyu izler. `main` dalına gönderilen her commit otomatik olarak
+canlıya çıkar. Eski `project.html` ve `admin.html` adresleri ana sayfaya yönlendirilir.
 
-## Yerel önizleme
-
-```sh
-python3 -m http.server 8000
-```
-
-Ardından http://localhost:8000 adresini aç.
-
-## Mevcut proje arşivi
-
-Önceki sitenin `project.html`, `project.js`, `data.js`, `admin.html`,
-`images/` ve ilgili dosyaları aynı yollarında tutulur. Bu proje detayları
-mevcut bağlantılarla açılabilir. Eski admin paneli yalnızca bu arşivin
-`data.js` içeriğini düzenler; yeni ana sayfanın içeriği
-`assets/archive.js` içindedir.
+Helvetica Now yalnızca ziyaretçinin cihazında varsa kullanılır; diğer cihazlarda
+projeye dahil edilen Inter kullanılır.
