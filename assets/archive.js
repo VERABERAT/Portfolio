@@ -1,5 +1,7 @@
 'use strict';
-// Record archive homepage. Content (translations, projects) carried over from portfolio.js.
+// Record archive homepage.
+// Behance / App Store linki: her projede "link": { "type": "behance" | "store", "url": "" }.
+// url boşsa buton gizli kalır; linki yapıştırınca proje sayfasının üstünde ve ana sayfada görünür. Content (translations, projects) carried over from portfolio.js.
 const translations = {
   "tr": {
     "skip": "İşlere geç",
@@ -162,6 +164,10 @@ const projects = [
       "description": "The July tuxedo campaign I created for D’S Damat at Altavia. Reels and posts place white and black tuxedos in palace halls, lakeside terraces and against stone walls, with close-ups that bring the product details forward: cufflinks, bow tie, lapel.",
       "role": "Art direction, AI image and video generation",
       "focus": "5 reels, 12 posts, Instagram"
+    },
+    "link": {
+      "type": "behance",
+      "url": ""
     }
   },
   {
@@ -182,6 +188,10 @@ const projects = [
       "description": "Digital work I made for Yatsan at Altavia: yatsan.com sliders, Instagram reels and posts for products and campaigns such as Serta, Uykucu and Yatsan Maison. Every slider was composed separately for desktop and mobile, and some product scenes were created with AI.",
       "role": "Art direction, design, AI image generation",
       "focus": "4 reels, website sliders, posts"
+    },
+    "link": {
+      "type": "behance",
+      "url": ""
     }
   },
   {
@@ -202,6 +212,10 @@ const projects = [
       "description": "The “Now Live!” series I designed for the launch of koton.sa, Koton’s website for Saudi Arabia. I adapted the season’s shoot into Instagram post and story formats and set the typography with the same balance in English and Arabic.",
       "role": "Design & adaptation",
       "focus": "3 posts, 6 stories, EN / AR"
+    },
+    "link": {
+      "type": "behance",
+      "url": ""
     }
   },
   {
@@ -222,6 +236,10 @@ const projects = [
       "description": "Social media content I made for Tetra Pak. One of them is a story that tells, through a forest scene, how the Tetra Top® package is 94% renewable; the full project is on Behance.",
       "role": "Design",
       "focus": "Story, social media"
+    },
+    "link": {
+      "type": "behance",
+      "url": "https://www.behance.net/gallery/249085323/Tetra-Pak"
     }
   },
   {
@@ -241,6 +259,10 @@ const projects = [
       "description": "My AI-powered message analysis app. I designed the interface, developed the app and created its launch visuals.",
       "role": "Design & development",
       "focus": "UX/UI, app development, launch visuals"
+    },
+    "link": {
+      "type": "store",
+      "url": "https://apps.apple.com/tr/app/kolpa-ai-red-flag-analyzer/id6759240698"
     }
   },
   {
@@ -260,6 +282,10 @@ const projects = [
       "description": "My AI journaling app. I worked on the interface design, SwiftUI development and launch visuals.",
       "role": "Design & development",
       "focus": "UX/UI, SwiftUI, launch visuals"
+    },
+    "link": {
+      "type": "store",
+      "url": "https://apps.apple.com/tr/app/lumio-ai-journal-diary/id6759867486"
     }
   },
   {
@@ -280,6 +306,10 @@ const projects = [
       "description": "A logic-driven UX system for parcel management kiosks. For a 1920×1080 industrial touch panel, I designed flows and screens for the public and logistics staff, built for speed, security and readability in direct sunlight.",
       "role": "UX architecture & interface",
       "focus": "Flows, screens, kiosk"
+    },
+    "link": {
+      "type": "behance",
+      "url": "https://www.behance.net/gallery/244282369/Smart-Locker-Ecosystem-Kiosk-UX-Architecture"
     }
   },
   {
@@ -300,6 +330,10 @@ const projects = [
       "description": "An end-to-end brand ecosystem for FERM, a fermented drinks brand: organic typography and a lively packaging system, the UX/UI of a phygital app called “Controlled Decay”, and a website that carries the brand’s 360° experience.",
       "role": "Brand identity, packaging, UX/UI",
       "focus": "Identity, packaging, app, web, campaign"
+    },
+    "link": {
+      "type": "behance",
+      "url": "https://www.behance.net/gallery/244632009/FERM-360-Brand-Ecosystem-Web-UIUX-Design"
     }
   },
   {
@@ -320,6 +354,10 @@ const projects = [
       "description": "A production and finance case study I made at Kasten Kolektif for İmece Market, held at UNITE, Ankara on 19–20 July 2025. I designed the event’s brand system and the dashboard interface that tracks the process.",
       "role": "Brand system & interface",
       "focus": "Identity, dashboard, case study"
+    },
+    "link": {
+      "type": "behance",
+      "url": "https://www.behance.net/gallery/242251305/MECE-MARKET-2025-Production-Finance-Management"
     }
   },
   {
@@ -340,6 +378,10 @@ const projects = [
       "description": "A condensed, heavy, sharp-cornered display typeface with strong visual width. I designed it for headlines and posters; it is all caps.",
       "role": "Type design",
       "focus": "Typography, display, all caps"
+    },
+    "link": {
+      "type": "behance",
+      "url": "https://www.behance.net/gallery/246607835/VERA-Condensed-Bold-Display-Typeface"
     }
   },
   {
@@ -360,6 +402,10 @@ const projects = [
       "description": "A Miu Miu film produced by Kasten Kolektif: a summer story set among coastal rocks, dry grass and bougainvillea. As line producer I ran the production from shoot planning to set.",
       "role": "Line producer",
       "focus": "Production, film"
+    },
+    "link": {
+      "type": "behance",
+      "url": ""
     }
   }
 ];
@@ -629,10 +675,18 @@ function drawScribble() {
 }
 
 /* ---------- Content ---------- */
+function setLink(el, p) {
+  const l = p.link || {};
+  el.hidden = !l.url;
+  if (!l.url) { el.removeAttribute('href'); return; }
+  el.href = l.url;
+  $('span', el).textContent = translations[lang][l.type === 'store' ? 'storeLink' : 'behanceLink'];
+}
 function fillArchive(animate) {
   const p = projects[current], d = p[lang], x = extra[current];
   $('.credits-title').textContent = p.title;
   $('.c-type').textContent = x.kind[lang];
+  setLink($('.c-link'), p);
   syncCats();
   $('.c-year').textContent = p.year || '2026';
   $('.c-role').textContent = d.role;
@@ -676,6 +730,7 @@ function fillProduction() {
   $('.p-type').textContent = x.kind[lang];
   $('.p-year').textContent = p.year || '2026';
   $('.p-status').textContent = x.status[lang];
+  setLink($('.p-cta'), p);
   $('.p-image').src = p.image;
   $('.p-image').alt = p.title + (lang === 'tr' ? ' — plak kapağı' : ' — record cover');
   $('.p-desc').textContent = d.description;

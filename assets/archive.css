@@ -261,3 +261,11 @@ html:not(.js) .credits,html:not(.js) .notes,html:not(.js) .archive-controls{disp
 .cat:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 @media(max-width:600px){.cat-nav{position:relative;top:auto;left:auto;transform:none;width:auto;max-width:none;order:1;flex-direction:row;flex-wrap:wrap;justify-content:flex-start;gap:0 16px;margin-top:4px;font-size:13px}.cat{min-height:44px}}
 @media(min-width:601px) and (max-width:900px){.cat-nav{left:auto;right:var(--pad);transform:none;flex-direction:column;align-items:flex-end;gap:0;max-width:none}}
+
+/* Behance / App Store link near the top */
+.p-cta{margin-top:28px}
+.c-link{display:inline-flex;align-items:center;gap:.4em;min-height:44px;margin-top:6px;font-size:14px;color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.c-link i{font-style:normal;transition:transform .5s var(--ease)}
+.c-link:hover i,.c-link:focus-visible i{transform:translate(3px,-3px)}
+.c-link:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.c-link[hidden],.p-cta[hidden]{display:none}
