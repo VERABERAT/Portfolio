@@ -251,3 +251,13 @@ html:not(.js) .credits,html:not(.js) .notes,html:not(.js) .archive-controls{disp
 .case-stories--few,.case-reels--few{grid-template-columns:repeat(3,minmax(0,1fr));max-width:820px}
 .case-narrow{max-width:460px}
 @media(max-width:700px){.case-stories--few,.case-reels--few{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Category chips */
+.cat-nav{position:absolute;z-index:6;top:66px;left:50%;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:0 24px;width:max-content;max-width:calc(100% - 2*var(--pad) - 2*min(320px,30vw) - 40px);font-size:14px}
+.cat{display:inline-flex;align-items:flex-start;gap:4px;min-height:32px;padding:4px 0;font:inherit;letter-spacing:-.01em;color:inherit;background:none;border:0;cursor:pointer;text-underline-offset:4px}
+.cat sup{font-size:10px;letter-spacing:.02em;line-height:1.6}
+.cat:hover .cat-name,.cat[aria-pressed="true"] .cat-name{text-decoration:underline;text-decoration-thickness:1px}
+.cat[aria-pressed="true"]::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;align-self:center;margin-right:4px}
+.cat:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+@media(max-width:600px){.cat-nav{position:relative;top:auto;left:auto;transform:none;width:auto;max-width:none;order:1;flex-direction:row;flex-wrap:wrap;justify-content:flex-start;gap:0 16px;margin-top:4px;font-size:13px}.cat{min-height:44px}}
+@media(min-width:601px) and (max-width:900px){.cat-nav{left:auto;right:var(--pad);transform:none;flex-direction:column;align-items:flex-end;gap:0;max-width:none}}

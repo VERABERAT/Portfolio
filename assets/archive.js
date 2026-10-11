@@ -11,7 +11,7 @@ const translations = {
     "selected": "Uygulamalar & görsel denemeler",
     "archive": "Projeler",
     "drag": "Sürükle",
-    "note": "D’S Damat, Kolpa AI, Lumio ve Form & Motion kapakları yapay zekâ ile üretildi.",
+    "note": "D’S Damat, Kolpa AI ve Lumio kapakları yapay zekâ ile üretildi.",
     "brandWork": "Marka işleri",
     "dsPosts": "Postlar",
     "dsReelsNote": "Oynatmak için kaydır; ses için hoparlöre dokun",
@@ -82,7 +82,7 @@ const translations = {
     "selected": "Apps & visual studies",
     "archive": "Projects",
     "drag": "Drag",
-    "note": "The D’S Damat, Kolpa AI, Lumio and Form & Motion covers were created with AI.",
+    "note": "The D’S Damat, Kolpa AI and Lumio covers were created with AI.",
     "brandWork": "Brand work",
     "dsPosts": "Posts",
     "dsReelsNote": "Scroll to play; tap the speaker for sound",
@@ -225,26 +225,6 @@ const projects = [
     }
   },
   {
-    "title": "Pek Food",
-    "year": "2026",
-    "image": "assets/vinyl/pek-food-cover.png",
-    "media": "pek-food",
-    "tr": {
-      "type": "AI video · 2026",
-      "summary": "Pek Food için yapay zekâ ile üretilmiş karakter animasyonu.",
-      "description": "Pek Food için yapay zekâ ile ürettiğim kısa bir karakter animasyonu: domates, sarımsak ve fesleğen karakterleri harita üzerinde İtalya’ya doğru yola çıkıyor.",
-      "role": "AI video üretimi",
-      "focus": "Karakter animasyonu, 10 sn"
-    },
-    "en": {
-      "type": "AI video · 2026",
-      "summary": "An AI-generated character animation for Pek Food.",
-      "description": "A short character animation I created with AI for Pek Food: tomato, garlic and basil characters set off across a map towards Italy.",
-      "role": "AI video generation",
-      "focus": "Character animation, 10 s"
-    }
-  },
-  {
     "title": "Kolpa AI",
     "image": "assets/vinyl/kolpa-cover.png",
     "media": "kolpa",
@@ -280,6 +260,26 @@ const projects = [
       "description": "My AI journaling app. I worked on the interface design, SwiftUI development and launch visuals.",
       "role": "Design & development",
       "focus": "UX/UI, SwiftUI, launch visuals"
+    }
+  },
+  {
+    "title": "Smart Locker",
+    "year": "2024",
+    "image": "assets/vinyl/smart-locker-cover.png",
+    "media": "smart-locker",
+    "tr": {
+      "type": "Arayüz projesi · 2024",
+      "summary": "Kargo teslim kiosku için UX sistemi.",
+      "description": "Kargo teslim kioskları için mantık odaklı bir UX sistemi. 1920×1080 endüstriyel dokunmatik panel için, hız, güvenlik ve güneş altında okunabilirlik gözetilerek hem kullanıcılar hem lojistik personeli için akışlar ve ekranlar tasarladım.",
+      "role": "UX mimarisi & arayüz",
+      "focus": "Akış, ekranlar, kiosk"
+    },
+    "en": {
+      "type": "Interface project · 2024",
+      "summary": "A UX system for a parcel kiosk.",
+      "description": "A logic-driven UX system for parcel management kiosks. For a 1920×1080 industrial touch panel, I designed flows and screens for the public and logistics staff, built for speed, security and readability in direct sunlight.",
+      "role": "UX architecture & interface",
+      "focus": "Flows, screens, kiosk"
     }
   },
   {
@@ -323,26 +323,6 @@ const projects = [
     }
   },
   {
-    "title": "Smart Locker",
-    "year": "2024",
-    "image": "assets/vinyl/smart-locker-cover.png",
-    "media": "smart-locker",
-    "tr": {
-      "type": "Arayüz projesi · 2024",
-      "summary": "Kargo teslim kiosku için UX sistemi.",
-      "description": "Kargo teslim kioskları için mantık odaklı bir UX sistemi. 1920×1080 endüstriyel dokunmatik panel için, hız, güvenlik ve güneş altında okunabilirlik gözetilerek hem kullanıcılar hem lojistik personeli için akışlar ve ekranlar tasarladım.",
-      "role": "UX mimarisi & arayüz",
-      "focus": "Akış, ekranlar, kiosk"
-    },
-    "en": {
-      "type": "Interface project · 2024",
-      "summary": "A UX system for a parcel kiosk.",
-      "description": "A logic-driven UX system for parcel management kiosks. For a 1920×1080 industrial touch panel, I designed flows and screens for the public and logistics staff, built for speed, security and readability in direct sunlight.",
-      "role": "UX architecture & interface",
-      "focus": "Flows, screens, kiosk"
-    }
-  },
-  {
     "title": "VERA",
     "year": "2025",
     "image": "assets/vinyl/vera-cover.png",
@@ -381,24 +361,6 @@ const projects = [
       "role": "Line producer",
       "focus": "Production, film"
     }
-  },
-  {
-    "title": "Form & Motion",
-    "image": "assets/vinyl/form-motion-cover.png",
-    "tr": {
-      "type": "Görsel deneme · Konsept",
-      "summary": "Yapay zekâ ile görsel denemeler.",
-      "description": "Bu portfolyo için yapay zekâ ile hazırlanmış kişisel bir görsel deneme. Işık ve yüzey dokularına odaklanıyor.",
-      "role": "AI ile görsel üretimi",
-      "focus": "Işık, doku, kompozisyon"
-    },
-    "en": {
-      "type": "Visual study · Concept",
-      "summary": "Visual studies made with AI.",
-      "description": "A personal visual study created with AI for this portfolio, focusing on light and surface textures.",
-      "role": "AI image creation",
-      "focus": "Light, texture, composition"
-    }
   }
 ];
 
@@ -423,7 +385,8 @@ const extra = [
     "status": {
       "tr": "Instagram’da yayınlandı",
       "en": "Published on Instagram"
-    }
+    },
+    "cat": "campaign"
   },
   {
     "kind": {
@@ -433,7 +396,8 @@ const extra = [
     "status": {
       "tr": "yatsan.com ve Instagram’da yayınlandı",
       "en": "Published on yatsan.com and Instagram"
-    }
+    },
+    "cat": "campaign"
   },
   {
     "kind": {
@@ -443,7 +407,8 @@ const extra = [
     "status": {
       "tr": "koton.sa açılış kampanyası",
       "en": "koton.sa launch campaign"
-    }
+    },
+    "cat": "campaign"
   },
   {
     "kind": {
@@ -453,17 +418,8 @@ const extra = [
     "status": {
       "tr": "Behance’te yayında",
       "en": "Published on Behance"
-    }
-  },
-  {
-    "kind": {
-      "tr": "AI video",
-      "en": "AI video"
     },
-    "status": {
-      "tr": "Yapay zekâ ile üretildi",
-      "en": "Created with AI"
-    }
+    "cat": "campaign"
   },
   {
     "kind": {
@@ -473,7 +429,8 @@ const extra = [
     "status": {
       "tr": "App Store’da yayında",
       "en": "Live on the App Store"
-    }
+    },
+    "cat": "ux"
   },
   {
     "kind": {
@@ -483,27 +440,8 @@ const extra = [
     "status": {
       "tr": "App Store’da yayında",
       "en": "Live on the App Store"
-    }
-  },
-  {
-    "kind": {
-      "tr": "Marka projesi",
-      "en": "Brand project"
     },
-    "status": {
-      "tr": "Behance’te yayında",
-      "en": "Published on Behance"
-    }
-  },
-  {
-    "kind": {
-      "tr": "Ajans işi",
-      "en": "Agency work"
-    },
-    "status": {
-      "tr": "Behance’te yayında",
-      "en": "Published on Behance"
-    }
+    "cat": "ux"
   },
   {
     "kind": {
@@ -513,7 +451,30 @@ const extra = [
     "status": {
       "tr": "Behance’te yayında",
       "en": "Published on Behance"
-    }
+    },
+    "cat": "ux"
+  },
+  {
+    "kind": {
+      "tr": "Marka projesi",
+      "en": "Brand project"
+    },
+    "status": {
+      "tr": "Behance’te yayında",
+      "en": "Published on Behance"
+    },
+    "cat": "identity"
+  },
+  {
+    "kind": {
+      "tr": "Ajans işi",
+      "en": "Agency work"
+    },
+    "status": {
+      "tr": "Behance’te yayında",
+      "en": "Published on Behance"
+    },
+    "cat": "identity"
   },
   {
     "kind": {
@@ -523,7 +484,8 @@ const extra = [
     "status": {
       "tr": "Behance’te yayında",
       "en": "Published on Behance"
-    }
+    },
+    "cat": "identity"
   },
   {
     "kind": {
@@ -533,19 +495,17 @@ const extra = [
     "status": {
       "tr": "Kasten Kolektif prodüksiyonu",
       "en": "Produced by Kasten Kolektif"
-    }
-  },
-  {
-    "kind": {
-      "tr": "Görsel deneme",
-      "en": "Visual study"
     },
-    "status": {
-      "tr": "Kişisel deneme",
-      "en": "Personal study"
-    }
+    "cat": "video"
   }
 ];
+const categories = [
+  { id: 'campaign', tr: 'Kampanya & AI', en: 'Campaign & AI' },
+  { id: 'ux', tr: 'UX/UI & Uygulama', en: 'UX/UI & Apps' },
+  { id: 'identity', tr: 'Marka & Tipografi', en: 'Identity & Type' },
+  { id: 'video', tr: 'Video & Film', en: 'Video & Film' }
+];
+
 const RECORD = 'assets/vinyl/vinyl-record.webp';
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -585,6 +545,25 @@ const discs = projects.map((p, i) => {
   stage.append(b);
   return b;
 });
+/* ---------- Category chips ---------- */
+const catNav = $('.cat-nav');
+const catButtons = categories.map(c => {
+  const first = extra.findIndex(x => x.cat === c.id);
+  const count = extra.filter(x => x.cat === c.id).length;
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'cat'; b.dataset.cat = c.id;
+  b.innerHTML = '<span class="cat-name"></span><sup>' + String(count).padStart(2, '0') + '</sup>';
+  b.addEventListener('click', () => { if (first > -1 && first !== current) select(first); });
+  catNav.append(b);
+  return b;
+});
+function syncCats() {
+  catNav.setAttribute('aria-label', lang === 'tr' ? 'Kategoriler' : 'Categories');
+  catButtons.forEach((b, k) => {
+    $('.cat-name', b).textContent = categories[k][lang];
+    b.setAttribute('aria-pressed', String(extra[current].cat === categories[k].id));
+  });
+}
 const spins = gs ? discs.map(d => gs.to($('.platter', d), { rotation: '+=360', duration: 24, repeat: -1, ease: 'none', paused: true })) : [];
 
 function syncSpin() {
@@ -654,6 +633,7 @@ function fillArchive(animate) {
   const p = projects[current], d = p[lang], x = extra[current];
   $('.credits-title').textContent = p.title;
   $('.c-type').textContent = x.kind[lang];
+  syncCats();
   $('.c-year').textContent = p.year || '2026';
   $('.c-role').textContent = d.role;
   $('.c-focus').textContent = d.focus;
@@ -810,7 +790,6 @@ function setLanguage(next) {
   $('.prev').setAttribute('aria-label', next === 'tr' ? 'Önceki proje' : 'Previous project');
   $('.next').setAttribute('aria-label', next === 'tr' ? 'Sonraki proje' : 'Next project');
   $('.topbar-nav').setAttribute('aria-label', next === 'tr' ? 'Ana menü' : 'Main navigation');
-  $('.brand-list').setAttribute('aria-label', next === 'tr' ? 'Markalar' : 'Brands');
   const labels = next === 'tr' ? ['01 / PROFİL', '02 / DENEYİM', '03 / ÜRETİM', '04 / LAB', '05 / İLETİŞİM'] : ['01 / PROFILE', '02 / EXPERIENCE', '03 / PRACTICE', '04 / LAB', '05 / CONTACT'];
   $$('.section .section-heading > span:last-child').forEach((el, i) => (el.textContent = labels[i]));
   fillArchive(false); layout(false); syncSpin();
