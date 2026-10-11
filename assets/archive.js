@@ -39,7 +39,7 @@ const translations = {
     "statement": "Tasarımcı &<br> Art Director",
     "bio": "Altavia’da Junior Art Director olarak çalışıyorum. Görsel tasarım, yapay zekâ ile görsel üretimi ve video işleri yapıyorum.",
     "bio2": "Kolpa AI ve Lumio, tasarlayıp geliştirdiğim kendi uygulamalarım.",
-    "cv": "Özgeçmişi indir ↗",
+    "cv": "Özgeçmişi indir ↗︎",
     "experience": "Deneyim",
     "visual": "Görsel Tasarımcı",
     "digital": "Dijital Tasarımcı",
@@ -110,7 +110,7 @@ const translations = {
     "statement": "Designer &<br> Art Director",
     "bio": "I work as a Junior Art Director at Altavia. My work includes visual design, AI-generated imagery and video.",
     "bio2": "Kolpa AI and Lumio are my own apps, which I design and develop.",
-    "cv": "Download résumé ↗",
+    "cv": "Download résumé ↗︎",
     "experience": "Experience",
     "visual": "Visual Designer",
     "digital": "Digital Designer",
@@ -841,6 +841,7 @@ new ResizeObserver(() => layout(false)).observe(stage);
 function setLanguage(next) {
   lang = next; document.documentElement.lang = next;
   $$('[data-t]').forEach(el => { const v = translations[next][el.dataset.t]; if (v) el.innerHTML = v; });
+  $$('[data-cv]').forEach(a => { a.href = next === 'en' ? 'Berat-Erdogan-CV-EN.pdf' : 'Berat-Erdogan-CV.pdf'; a.setAttribute('download', next === 'en' ? 'Berat-Erdogan-CV-EN.pdf' : 'Berat-Erdogan-CV.pdf'); });
   $$('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === next)));
   $('.prev').setAttribute('aria-label', next === 'tr' ? 'Önceki proje' : 'Previous project');
   $('.next').setAttribute('aria-label', next === 'tr' ? 'Sonraki proje' : 'Next project');
