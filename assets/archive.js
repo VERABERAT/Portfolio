@@ -53,6 +53,17 @@ const translations = {
     "p2": "Yapay zekâ ile görsel ve video üretimi.",
     "p3": "Hareketli grafik ve video kurgu.",
     "p4": "Arayüz tasarımı ve SwiftUI geliştirme.",
+    "lab": "Lab",
+    "labTitle": "Kendi<br> araçlarım",
+    "labIntro": "Ajanstaki üretimi hızlandırmak için yazdığım eklentiler ve araçlar.",
+    "lab1": "After Effects için yapay zekâ paneli. Türkçe yazılan isteği ExtendScript koduna çevirip seçili katmana uygular.",
+    "lab1t": "Geliştiriliyor",
+    "lab2": "Ajans kampanyaları için Photoshop eklentileri. Google Sheets’ten haftalık şablonlara metin ve görsel aktarır; post formatını Content-Aware Fill ile story’ye çevirir.",
+    "lab2t": "Ajansta kullanımda",
+    "lab3": "Kendi geliştirdiğim macOS temizlik ve bakım uygulaması.",
+    "lab3t": "Kişisel uygulama",
+    "lab4": "Yapay zekâ ile video ve görsel üretimi için 18 gruptan oluşan 304 komutluk prompt kütüphanesi ve komut seçerek prompt kuran araç.",
+    "lab4t": "Kişisel araç",
     "hello": "Bana yaz",
     "cvShort": "Özgeçmiş ↓",
     "top": "Başa dön ↑",
@@ -113,6 +124,17 @@ const translations = {
     "p2": "Images and video created with AI.",
     "p3": "Motion graphics and video editing.",
     "p4": "Interface design and SwiftUI development.",
+    "lab": "Lab",
+    "labTitle": "Tools<br> I build",
+    "labIntro": "Plugins and tools I write to speed up production at the agency.",
+    "lab1": "An AI panel for After Effects. It turns a plain-language request into ExtendScript and applies it to the selected layer.",
+    "lab1t": "In progress",
+    "lab2": "Photoshop plugins for agency campaigns. They pull copy and images from Google Sheets into weekly templates and turn post formats into stories with Content-Aware Fill.",
+    "lab2t": "In use at the agency",
+    "lab3": "A macOS cleaning and maintenance app I develop.",
+    "lab3t": "Personal app",
+    "lab4": "A 304-command prompt library in 18 groups for AI video and image generation, plus a tool that builds prompts from selected commands.",
+    "lab4t": "Personal tool",
     "hello": "Get in touch",
     "cvShort": "Résumé ↓",
     "top": "Back to top ↑",
@@ -789,7 +811,7 @@ function setLanguage(next) {
   $('.next').setAttribute('aria-label', next === 'tr' ? 'Sonraki proje' : 'Next project');
   $('.topbar-nav').setAttribute('aria-label', next === 'tr' ? 'Ana menü' : 'Main navigation');
   $('.brand-list').setAttribute('aria-label', next === 'tr' ? 'Markalar' : 'Brands');
-  const labels = next === 'tr' ? ['01 / PROFİL', '02 / DENEYİM', '03 / ÜRETİM', '04 / İLETİŞİM'] : ['01 / PROFILE', '02 / EXPERIENCE', '03 / PRACTICE', '04 / CONTACT'];
+  const labels = next === 'tr' ? ['01 / PROFİL', '02 / DENEYİM', '03 / ÜRETİM', '04 / LAB', '05 / İLETİŞİM'] : ['01 / PROFILE', '02 / EXPERIENCE', '03 / PRACTICE', '04 / LAB', '05 / CONTACT'];
   $$('.section .section-heading > span:last-child').forEach((el, i) => (el.textContent = labels[i]));
   fillArchive(false); layout(false); syncSpin();
   if (dialog.open) fillProduction();
@@ -856,7 +878,7 @@ reduce.addEventListener('change', () => { layout(false); syncSpin(); drawScribbl
 
 // Keep the nav's active dot in step with the section in view.
 const navLinks = $$('.topbar-nav a');
-['archive', 'about', 'contact'].forEach(id => {
+['archive', 'about', 'lab', 'contact'].forEach(id => {
   const el = document.getElementById(id);
   if (!el) return;
   new IntersectionObserver(es => es.forEach(en => {
