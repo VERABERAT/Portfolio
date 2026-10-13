@@ -152,293 +152,11 @@ const translations = {
     "focusLabel": "Scope"
   }
 };
-const projects = [
-  {
-    "title": "D’S Damat",
-    "image": "assets/vinyl/ds-damat-cover.png",
-    "media": "ds-damat",
-    "tr": {
-      "type": "Marka işi · 2026",
-      "summary": "Temmuz smokin kampanyası için Instagram reels ve post serisi.",
-      "description": "Altavia’da D’S Damat için hazırladığım Temmuz smokin kampanyası. Beyaz ve siyah smokinleri saray salonları, göl kenarı ve taş duvar önü gibi sahnelerde anlatan reels ve postlar; kol düğmesi, papyon ve yaka gibi ürün detaylarını yakın çekimlerle öne çıkardık.",
-      "role": "Art direction, AI görsel ve video üretimi",
-      "focus": "5 reels, 12 post, Instagram"
-    },
-    "en": {
-      "type": "Brand work · 2026",
-      "summary": "An Instagram reels and post series for the July tuxedo campaign.",
-      "description": "The July tuxedo campaign I created for D’S Damat at Altavia. Reels and posts place white and black tuxedos in palace halls, lakeside terraces and against stone walls, with close-ups that bring the product details forward: cufflinks, bow tie, lapel.",
-      "role": "Art direction, AI image and video generation",
-      "focus": "5 reels, 12 posts, Instagram"
-    },
-    "link": {
-      "type": "behance",
-      "url": ""
-    }
-  },
-  {
-    "title": "Yatsan",
-    "year": "2026",
-    "image": "assets/vinyl/yatsan-cover.png",
-    "media": "yatsan",
-    "tr": {
-      "type": "Marka işi · 2026",
-      "summary": "Web sitesi slider’ları, reels ve sosyal medya içerikleri.",
-      "description": "Altavia’da Yatsan için hazırladığım dijital işler: Serta, Uykucu ve Yatsan Maison gibi ürün ve kampanyalar için yatsan.com slider’ları, Instagram reels’leri ve postlar. Her slider’ı masaüstü ve mobil için ayrı kurguladık; bazı ürün sahnelerinde yapay zekâ ile görsel üretimi kullandık.",
-      "role": "Art direction, tasarım, AI görsel üretimi",
-      "focus": "4 reels, web slider’ları, post"
-    },
-    "en": {
-      "type": "Brand work · 2026",
-      "summary": "Website sliders, reels and social media content.",
-      "description": "Digital work I made for Yatsan at Altavia: yatsan.com sliders, Instagram reels and posts for products and campaigns such as Serta, Uykucu and Yatsan Maison. Every slider was composed separately for desktop and mobile, and some product scenes were created with AI.",
-      "role": "Art direction, design, AI image generation",
-      "focus": "4 reels, website sliders, posts"
-    },
-    "link": {
-      "type": "behance",
-      "url": ""
-    }
-  },
-  {
-    "title": "Koton",
-    "year": "2026",
-    "image": "assets/vinyl/koton-cover.png",
-    "media": "koton",
-    "tr": {
-      "type": "Marka işi · 2026",
-      "summary": "koton.sa açılışı için İngilizce ve Arapça post ve story serisi.",
-      "description": "Koton’un Suudi Arabistan web sitesi koton.sa’nın açılışı için hazırladığım “Now Live!” serisi. Sezon çekimlerini Instagram post ve story formatlarına uyarladım; tipografiyi İngilizce ve Arapça versiyonlarda aynı dengeyle kurdum.",
-      "role": "Tasarım & adaptasyon",
-      "focus": "3 post, 6 story, EN / AR"
-    },
-    "en": {
-      "type": "Brand work · 2026",
-      "summary": "An English and Arabic post and story series for the koton.sa launch.",
-      "description": "The “Now Live!” series I designed for the launch of koton.sa, Koton’s website for Saudi Arabia. I adapted the season’s shoot into Instagram post and story formats and set the typography with the same balance in English and Arabic.",
-      "role": "Design & adaptation",
-      "focus": "3 posts, 6 stories, EN / AR"
-    },
-    "link": {
-      "type": "behance",
-      "url": ""
-    }
-  },
-  {
-    "title": "Wella",
-    "year": "2026",
-    "image": "assets/vinyl/wella-cover.png",
-    "media": "wella",
-    "tr": {
-      "type": "Marka işi · 2026",
-      "summary": "Wella Professionals Türkiye için Instagram always-on içerik serisi.",
-      "description": "Altavia’da Wella Professionals için hazırladığım Instagram serisi. Ultimate Repair, Sun Care ve Oil Reflections ürünlerini “Çantamda ne var?”, “Öncesi / Sonrası” ve adım adım bakım rutini gibi tekrar eden formatlarla anlattık. Videolarda yapay zekâ ile ürettiğim sahneleri After Effects’te tipografi ve hareketle tamamladım.",
-      "role": "Konsept, AI görsel ve video, motion",
-      "focus": "4 reels, 5 post, Instagram"
-    },
-    "en": {
-      "type": "Brand work · 2026",
-      "summary": "An always-on Instagram series for Wella Professionals Turkey.",
-      "description": "An Instagram series I created for Wella Professionals at Altavia. We told the Ultimate Repair, Sun Care and Oil Reflections stories through recurring formats: “What’s in my bag?”, before/after and step-by-step care routines. I generated scenes with AI and finished the videos with type and motion in After Effects.",
-      "role": "Concept, AI image and video, motion",
-      "focus": "4 reels, 5 posts, Instagram"
-    },
-    "link": {
-      "type": "behance",
-      "url": ""
-    }
-  },
-  {
-    "title": "Tetra Pak",
-    "year": "2026",
-    "image": "assets/vinyl/tetra-pak-cover.png",
-    "media": "tetra-pak",
-    "tr": {
-      "type": "Marka işi · 2026",
-      "summary": "Tetra Pak için sosyal medya içerikleri.",
-      "description": "Tetra Pak için hazırladığım sosyal medya içerikleri. Tetra Top® ambalajının %94 oranında yenilenebilir olduğunu orman içindeki bir sahneyle anlatan story bunlardan biri; projenin tamamı Behance’te.",
-      "role": "Tasarım",
-      "focus": "Story, sosyal medya"
-    },
-    "en": {
-      "type": "Brand work · 2026",
-      "summary": "Social media content for Tetra Pak.",
-      "description": "Social media content I made for Tetra Pak. One of them is a story that tells, through a forest scene, how the Tetra Top® package is 94% renewable; the full project is on Behance.",
-      "role": "Design",
-      "focus": "Story, social media"
-    },
-    "link": {
-      "type": "behance",
-      "url": "https://www.behance.net/gallery/249085323/Tetra-Pak"
-    }
-  },
-  {
-    "title": "Kolpa AI",
-    "image": "assets/vinyl/kolpa-cover.png",
-    "media": "kolpa",
-    "tr": {
-      "type": "Kendi uygulamam · 2026",
-      "summary": "Yapay zekâ destekli mesaj analizi.",
-      "description": "Yapay zekâ destekli mesaj analiz uygulamam. Arayüzünü tasarladım, uygulamayı geliştirdim ve lansman görsellerini hazırladım.",
-      "role": "Tasarım & geliştirme",
-      "focus": "UX/UI, uygulama geliştirme, lansman görselleri"
-    },
-    "en": {
-      "type": "My own app · 2026",
-      "summary": "AI-powered message analysis.",
-      "description": "My AI-powered message analysis app. I designed the interface, developed the app and created its launch visuals.",
-      "role": "Design & development",
-      "focus": "UX/UI, app development, launch visuals"
-    },
-    "link": {
-      "type": "store",
-      "url": "https://apps.apple.com/tr/app/kolpa-ai-red-flag-analyzer/id6759240698"
-    }
-  },
-  {
-    "title": "Lumio",
-    "image": "assets/vinyl/lumio-cover.png",
-    "media": "lumio",
-    "tr": {
-      "type": "Kendi uygulamam · 2026",
-      "summary": "Yapay zekâ destekli günlük uygulaması.",
-      "description": "Yapay zekâ destekli günlük uygulamam. Arayüz tasarımı, SwiftUI geliştirmesi ve lansman görselleri üzerinde çalıştım.",
-      "role": "Tasarım & geliştirme",
-      "focus": "UX/UI, SwiftUI, lansman görselleri"
-    },
-    "en": {
-      "type": "My own app · 2026",
-      "summary": "An AI journaling app.",
-      "description": "My AI journaling app. I worked on the interface design, SwiftUI development and launch visuals.",
-      "role": "Design & development",
-      "focus": "UX/UI, SwiftUI, launch visuals"
-    },
-    "link": {
-      "type": "store",
-      "url": "https://apps.apple.com/tr/app/lumio-ai-journal-diary/id6759867486"
-    }
-  },
-  {
-    "title": "Smart Locker",
-    "year": "2024",
-    "image": "assets/vinyl/smart-locker-cover.png",
-    "media": "smart-locker",
-    "tr": {
-      "type": "Arayüz projesi · 2024",
-      "summary": "Kargo teslim kiosku için UX sistemi.",
-      "description": "Kargo teslim kioskları için mantık odaklı bir UX sistemi. 1920×1080 endüstriyel dokunmatik panel için, hız, güvenlik ve güneş altında okunabilirlik gözetilerek hem kullanıcılar hem lojistik personeli için akışlar ve ekranlar tasarladım.",
-      "role": "UX mimarisi & arayüz",
-      "focus": "Akış, ekranlar, kiosk"
-    },
-    "en": {
-      "type": "Interface project · 2024",
-      "summary": "A UX system for a parcel kiosk.",
-      "description": "A logic-driven UX system for parcel management kiosks. For a 1920×1080 industrial touch panel, I designed flows and screens for the public and logistics staff, built for speed, security and readability in direct sunlight.",
-      "role": "UX architecture & interface",
-      "focus": "Flows, screens, kiosk"
-    },
-    "link": {
-      "type": "behance",
-      "url": "https://www.behance.net/gallery/244282369/Smart-Locker-Ecosystem-Kiosk-UX-Architecture"
-    }
-  },
-  {
-    "title": "FERM",
-    "year": "2025",
-    "image": "assets/vinyl/ferm-cover.png",
-    "media": "ferm",
-    "tr": {
-      "type": "Marka projesi · 2025",
-      "summary": "Kombucha markası için kimlik, ambalaj, uygulama ve web.",
-      "description": "Fermente içecek markası FERM için uçtan uca bir marka ekosistemi: organik tipografi ve canlı bir ambalaj sistemi, “Controlled Decay” adlı phygital uygulamanın UX/UI tasarımı ve markanın 360° deneyimini taşıyan web sitesi.",
-      "role": "Marka kimliği, ambalaj, UX/UI",
-      "focus": "Kimlik, ambalaj, uygulama, web, kampanya"
-    },
-    "en": {
-      "type": "Brand project · 2025",
-      "summary": "Identity, packaging, app and web for a kombucha brand.",
-      "description": "An end-to-end brand ecosystem for FERM, a fermented drinks brand: organic typography and a lively packaging system, the UX/UI of a phygital app called “Controlled Decay”, and a website that carries the brand’s 360° experience.",
-      "role": "Brand identity, packaging, UX/UI",
-      "focus": "Identity, packaging, app, web, campaign"
-    },
-    "link": {
-      "type": "behance",
-      "url": "https://www.behance.net/gallery/244632009/FERM-360-Brand-Ecosystem-Web-UIUX-Design"
-    }
-  },
-  {
-    "title": "İmece Market",
-    "year": "2025",
-    "image": "assets/vinyl/imece-cover.png",
-    "media": "imece",
-    "tr": {
-      "type": "Ajans işi · 2025",
-      "summary": "Bir etkinlik için marka sistemi ve üretim–finans vaka çalışması.",
-      "description": "Kasten Kolektif’te, 19–20 Temmuz 2025’te Ankara UNITE’ta düzenlenen İmece Market için hazırladığım üretim ve finans vaka çalışması. Etkinliğin marka sistemini ve süreci izleyen dashboard arayüzünü tasarladım.",
-      "role": "Marka sistemi & arayüz",
-      "focus": "Kimlik, dashboard, vaka çalışması"
-    },
-    "en": {
-      "type": "Agency work · 2025",
-      "summary": "A brand system and production–finance case study for an event.",
-      "description": "A production and finance case study I made at Kasten Kolektif for İmece Market, held at UNITE, Ankara on 19–20 July 2025. I designed the event’s brand system and the dashboard interface that tracks the process.",
-      "role": "Brand system & interface",
-      "focus": "Identity, dashboard, case study"
-    },
-    "link": {
-      "type": "behance",
-      "url": "https://www.behance.net/gallery/242251305/MECE-MARKET-2025-Production-Finance-Management"
-    }
-  },
-  {
-    "title": "VERA",
-    "year": "2025",
-    "image": "assets/vinyl/vera-cover.png",
-    "media": "vera",
-    "tr": {
-      "type": "Yazı karakteri · 2025",
-      "summary": "Sıkışık, kalın bir display yazı karakteri.",
-      "description": "Güçlü görsel genişliğe sahip, sıkışık, kalın ve keskin köşeli bir display yazı karakteri. Başlıklar ve afişler için tasarladım; yalnızca büyük harflerden oluşuyor.",
-      "role": "Yazı karakteri tasarımı",
-      "focus": "Tipografi, display, büyük harf"
-    },
-    "en": {
-      "type": "Typeface · 2025",
-      "summary": "A condensed, heavy display typeface.",
-      "description": "A condensed, heavy, sharp-cornered display typeface with strong visual width. I designed it for headlines and posters; it is all caps.",
-      "role": "Type design",
-      "focus": "Typography, display, all caps"
-    },
-    "link": {
-      "type": "behance",
-      "url": "https://www.behance.net/gallery/246607835/VERA-Condensed-Bold-Display-Typeface"
-    }
-  },
-  {
-    "title": "Miu Miu",
-    "year": "2024",
-    "image": "assets/vinyl/miu-miu-cover.png",
-    "media": "miu-miu",
-    "tr": {
-      "type": "Film · 2024",
-      "summary": "Kasten Kolektif prodüksiyonu bir moda filmi.",
-      "description": "Kasten Kolektif’in prodüksiyonunu üstlendiği Miu Miu filmi. Kıyı kayalıkları, kuru otlar ve begonviller arasında geçen bir yaz hikâyesi; projede line producer olarak çekim planlamasından sete kadar prodüksiyonu yürüttüm.",
-      "role": "Line producer",
-      "focus": "Prodüksiyon, film"
-    },
-    "en": {
-      "type": "Film · 2024",
-      "summary": "A fashion film produced by Kasten Kolektif.",
-      "description": "A Miu Miu film produced by Kasten Kolektif: a summer story set among coastal rocks, dry grass and bougainvillea. As line producer I ran the production from shoot planning to set.",
-      "role": "Line producer",
-      "focus": "Production, film"
-    },
-    "link": {
-      "type": "behance",
-      "url": ""
-    }
-  }
-];
+// Proje verisi data/projects.js dosyasından gelir (admin paneli bu dosyayı düzenler).
+const DATA = window.PORTFOLIO || { categories: [], projects: [] };
+const projects = DATA.projects.filter(p => !p.hidden);
+const extra = projects.map(p => ({ kind: p.kind, status: p.status, cat: p.cat }));
+
 
 
 // Strings added for the record-archive homepage.
@@ -452,146 +170,8 @@ Object.assign(translations.en, {
   summaryLabel: 'Project', madeLabel: 'What I did', nextLabel: 'Up next',
   hint: '← → browse · Space flip · Enter open', flip: 'Flip'
 });
-const extra = [
-  {
-    "kind": {
-      "tr": "Marka işi",
-      "en": "Brand work"
-    },
-    "status": {
-      "tr": "Instagram’da yayınlandı",
-      "en": "Published on Instagram"
-    },
-    "cat": "campaign"
-  },
-  {
-    "kind": {
-      "tr": "Marka işi",
-      "en": "Brand work"
-    },
-    "status": {
-      "tr": "yatsan.com ve Instagram’da yayınlandı",
-      "en": "Published on yatsan.com and Instagram"
-    },
-    "cat": "campaign"
-  },
-  {
-    "kind": {
-      "tr": "Marka işi",
-      "en": "Brand work"
-    },
-    "status": {
-      "tr": "koton.sa açılış kampanyası",
-      "en": "koton.sa launch campaign"
-    },
-    "cat": "campaign"
-  },
-  {
-    "kind": {
-      "tr": "Marka işi",
-      "en": "Brand work"
-    },
-    "status": {
-      "tr": "Reels ve post serisi",
-      "en": "Reels and post series"
-    },
-    "cat": "campaign"
-  },
-  {
-    "kind": {
-      "tr": "Marka işi",
-      "en": "Brand work"
-    },
-    "status": {
-      "tr": "Behance’te yayında",
-      "en": "Published on Behance"
-    },
-    "cat": "campaign"
-  },
-  {
-    "kind": {
-      "tr": "Kendi uygulamam",
-      "en": "My own app"
-    },
-    "status": {
-      "tr": "App Store’da yayında",
-      "en": "Live on the App Store"
-    },
-    "cat": "ux"
-  },
-  {
-    "kind": {
-      "tr": "Kendi uygulamam",
-      "en": "My own app"
-    },
-    "status": {
-      "tr": "App Store’da yayında",
-      "en": "Live on the App Store"
-    },
-    "cat": "ux"
-  },
-  {
-    "kind": {
-      "tr": "Arayüz projesi",
-      "en": "Interface project"
-    },
-    "status": {
-      "tr": "Behance’te yayında",
-      "en": "Published on Behance"
-    },
-    "cat": "ux"
-  },
-  {
-    "kind": {
-      "tr": "Marka projesi",
-      "en": "Brand project"
-    },
-    "status": {
-      "tr": "Behance’te yayında",
-      "en": "Published on Behance"
-    },
-    "cat": "identity"
-  },
-  {
-    "kind": {
-      "tr": "Ajans işi",
-      "en": "Agency work"
-    },
-    "status": {
-      "tr": "Behance’te yayında",
-      "en": "Published on Behance"
-    },
-    "cat": "identity"
-  },
-  {
-    "kind": {
-      "tr": "Yazı karakteri",
-      "en": "Typeface"
-    },
-    "status": {
-      "tr": "Behance’te yayında",
-      "en": "Published on Behance"
-    },
-    "cat": "identity"
-  },
-  {
-    "kind": {
-      "tr": "Film",
-      "en": "Film"
-    },
-    "status": {
-      "tr": "Kasten Kolektif prodüksiyonu",
-      "en": "Produced by Kasten Kolektif"
-    },
-    "cat": "video"
-  }
-];
-const categories = [
-  { id: 'campaign', tr: 'Kampanya & AI', en: 'Campaign & AI' },
-  { id: 'ux', tr: 'UX/UI & Uygulama', en: 'UX/UI & Apps' },
-  { id: 'identity', tr: 'Marka & Tipografi', en: 'Identity & Type' },
-  { id: 'video', tr: 'Video & Film', en: 'Video & Film' }
-];
+
+const categories = DATA.categories.filter(c => extra.some(x => x.cat === c.id));
 
 const RECORD = 'assets/vinyl/vinyl-record.webp';
 
@@ -612,6 +192,7 @@ const ease = window.CustomEase ? 'energy' : 'power3.out';
 
 const stage = $('.stage');
 const dialog = $('#production');
+window.PortfolioMedia?.render(projects, $('.p-next', dialog));
 const scribble = $('.scribble path');
 let lang = 'tr', current = 0, lenis, busy = false, returnFocus, drag = null, blockClick = 0;
 let visible = true, paused = false;
@@ -664,8 +245,56 @@ function syncSpin() {
     : paused ? (lang === 'tr' ? 'Plak hareketini başlat' : 'Resume record motion')
     : (lang === 'tr' ? 'Plak hareketini durdur' : 'Pause record motion');
   btn.setAttribute('aria-label', label); btn.title = label;
+  syncMusic();
 }
 $('.motion-toggle').addEventListener('click', () => { paused = !paused; syncSpin(); });
+
+/* ---------- Spotify: plak dönerken projenin şarkısını çal ---------- */
+// Spotify iFrame API: https://developer.spotify.com/documentation/embeds/references/iframe-api
+const musicBtn = $('.music-toggle');
+const dock = $('.spotify-dock');
+let musicOn = false, spotify = null, spotifyReady = false, loadedUrl = '', musicPlaying = false;
+const hasMusic = projects.some(p => p.spotify);
+if (musicBtn) musicBtn.hidden = !hasMusic;
+function musicLabel() {
+  if (!musicBtn) return;
+  const l = musicOn ? (lang === 'tr' ? 'Müziği kapat' : 'Turn music off') : (lang === 'tr' ? 'Müziği aç' : 'Turn music on');
+  musicBtn.setAttribute('aria-pressed', String(musicOn)); musicBtn.setAttribute('aria-label', l); musicBtn.title = l;
+}
+function loadSpotify(cb) {
+  if (spotify) return cb();
+  window.onSpotifyIframeApiReady = api => {
+    const el = document.createElement('div'); $('.spotify-slot', dock).append(el);
+    api.createController(el, { url: projects[current].spotify || projects.find(p => p.spotify).spotify, width: '100%', height: 80 }, c => {
+      spotify = c;
+      c.addListener('ready', () => { spotifyReady = true; cb(); });
+      c.addListener('playback_update', e => { musicPlaying = !e.data.isPaused; });
+    });
+  };
+  const s = document.createElement('script'); s.src = 'https://open.spotify.com/embed/iframe-api/v1'; s.async = true;
+  s.onerror = () => { musicOn = false; dock.hidden = true; musicLabel(); };
+  document.head.append(s);
+}
+function syncMusic() {
+  if (!musicOn || !spotifyReady) return;
+  const url = projects[current].spotify;
+  const shouldPlay = !!url && visible && !paused && !document.hidden && !dialog.open;
+  if (!shouldPlay) { if (musicPlaying) { spotify.pause(); musicPlaying = false; } return; }
+  if (url !== loadedUrl) { loadedUrl = url; spotify.loadEntity(url); musicPlaying = true; setTimeout(() => { if (loadedUrl === url && musicPlaying) spotify.play(); }, 700); }
+  else if (!musicPlaying) { spotify.resume(); musicPlaying = true; }
+}
+if (musicBtn) musicBtn.addEventListener('click', () => {
+  musicOn = !musicOn; musicLabel();
+  if (musicOn) {
+    dock.hidden = false;
+    loadSpotify(() => { loadedUrl = ''; syncMusic(); });
+  } else {
+    if (spotify) spotify.pause();
+    musicPlaying = false;
+    dock.hidden = true;
+  }
+});
+musicLabel();
 new IntersectionObserver(e => { visible = e[0].isIntersecting; syncSpin(); }, { threshold: .05 }).observe(stage);
 document.addEventListener('visibilitychange', syncSpin);
 
@@ -882,6 +511,8 @@ new ResizeObserver(() => layout(false)).observe(stage);
 function setLanguage(next) {
   lang = next; document.documentElement.lang = next;
   $$('[data-t]').forEach(el => { const v = translations[next][el.dataset.t]; if (v) el.innerHTML = v; });
+  $$('[data-tr]').forEach(el => { el.textContent = next === 'en' ? el.dataset.en : el.dataset.tr; });
+  if (typeof musicLabel === 'function') musicLabel();
   $$('[data-cv]').forEach(a => { a.href = next === 'en' ? 'Berat-Erdogan-CV-EN.pdf' : 'Berat-Erdogan-CV.pdf'; a.setAttribute('download', next === 'en' ? 'Berat-Erdogan-CV-EN.pdf' : 'Berat-Erdogan-CV.pdf'); });
   $$('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === next)));
   $('.prev').setAttribute('aria-label', next === 'tr' ? 'Önceki proje' : 'Previous project');

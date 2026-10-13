@@ -281,3 +281,11 @@ body{font-variant-emoji:text}
 .wella-feed{margin:0;max-width:640px;margin-inline:auto}
 .wella-feed img{display:block;width:100%;height:auto}
 @media(prefers-reduced-motion:reduce){.wella-hair path{animation:none}}
+/* Spotify */
+.music-toggle svg{display:block}
+.music-toggle[aria-pressed="true"]{background:#000;color:#fff}
+.music-toggle[hidden]{display:none}
+.spotify-dock{position:absolute;z-index:7;left:var(--pad);bottom:64px;width:min(280px,calc(100% - 2*var(--pad)));border-radius:12px;overflow:hidden;background:#000}
+.spotify-dock[hidden]{display:none}
+.spotify-slot iframe{display:block;border:0}
+@media(max-width:600px){.spotify-dock{position:fixed;left:16px;right:16px;bottom:16px;width:auto;z-index:30}}

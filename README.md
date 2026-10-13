@@ -51,21 +51,24 @@ Proje anahtarları (`assets/work/` ve `assets/vinyl/` altında aynı ad):
 `index.html` dosyasına çift tıklamak yerine yerel sunucu kullan; videolar ve
 bazı tarayıcı özellikleri `file://` üzerinden düzgün çalışmaz.
 
-## Yeni proje eklemek
+## Projeleri yönetmek (admin paneli)
 
-1. Görselleri `assets/work/<anahtar>/` içine koy (webp önerilir; videolar 720p mp4 + webm).
-2. Plak kapağını `assets/vinyl/<anahtar>-cover.webp` olarak ekle (kare, 800×800).
-3. `assets/archive.js` içinde:
-   - `projects` dizisine proje nesnesini ekle (`title`, `year`, `image`, `media: "<anahtar>"`, `tr`, `en`).
-   - `extra` dizisinde aynı sıraya `kind` ve `status` satırını ekle.
-4. `index.html` içinde, `#production` penceresine `<div class="p-media" data-project="<anahtar>" hidden>` bloğunu ekle.
-   Mevcut bloklar (reels, post, story, web slider, film) örnek olarak kullanılabilir.
-5. Marka listesinde tıklanabilir olsun istersen `data-open="<anahtar>"` butonu ekle.
+Projeler `data/projects.js` dosyasında durur; site proje sayfalarını bu dosyadan üretir.
+En kolay yol admin paneli: **https://beraterdogan.studio/admin**
 
-## Yayın
+1. GitHub'da bir fine-grained token oluştur: Repository access → yalnızca `VERABERAT/Portfolio`,
+   Permissions → Contents: **Read and write**.
+2. `/admin` sayfasında bu anahtarla giriş yap (anahtar yalnızca o tarayıcıda saklanır).
+3. Proje ekle, sil, sırala, gizle; metinleri TR/EN düzenle; plak kapağı, reels, post, story,
+   uygulama ekranı, web slider, büyük görsel, film, ekip, not ve buton bölümleri ekle.
+4. **Kaydet ve yayınla**: yüklenen dosyalar ve `data/projects.js` tek bir commit olarak gider,
+   Vercel 1–2 dakikada yayına alır.
 
-Vercel bu depoyu izler. `main` dalına gönderilen her commit otomatik olarak
-canlıya çıkar. Eski `project.html` ve `admin.html` adresleri ana sayfaya yönlendirilir.
+Görseller tarayıcıda otomatik boyutlandırılır ve webp'ye çevrilir. Videolar olduğu gibi yüklenir;
+25 MB altı önerilir. Silinen projelerin dosyaları repoda kalır.
 
-Helvetica Now yalnızca ziyaretçinin cihazında varsa kullanılır; diğer cihazlarda
-projeye dahil edilen Inter kullanılır.
+## Spotify
+
+Her projeye admin panelinden bir Spotify şarkı linki eklenebilir. Ziyaretçi plak kontrollerindeki
+müzik düğmesine bastığında, öndeki plak dönerken o projenin şarkısı Spotify oynatıcısıyla çalar.
+Çoğu ziyaretçi şarkının 30 saniyelik önizlemesini duyar; tam şarkı genellikle yalnızca tarayıcıda Spotify Premium ile giriş yapılmışsa çalar.

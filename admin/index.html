@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Portfolyo Admin</title>
+<link rel="icon" href="../apple-touch-icon.png">
+<style>
+@font-face{font-family:Inter;src:url(../assets/fonts/inter-latin-ext.woff2) format("woff2");font-weight:100 900;unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Inter;src:url(../assets/fonts/inter-latin.woff2) format("woff2");font-weight:100 900}
+:root{--bg:#fff;--fg:#000;--muted:#6b6b6b;--line:#000;--soft:#f3f3f3;--ok:#0a7a33;--err:#b00020}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:15px/1.45 Inter,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--fg);letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:1px solid var(--line);border-radius:999px;padding:7px 14px;min-height:36px}
+button:hover{background:#000;color:#fff}
+button:disabled{opacity:.4;cursor:not-allowed;background:none;color:inherit}
+button.primary{background:#000;color:#fff}
+button.primary:hover{background:#333}
+button.ghost{border-color:transparent;padding:6px 8px}
+button.ghost:hover{background:var(--soft);color:inherit}
+button.danger{border-color:var(--err);color:var(--err)}
+button.danger:hover{background:var(--err);color:#fff}
+:focus-visible{outline:2px solid #000;outline-offset:2px}
+input[type=text],input[type=url],input[type=password],input[type=number],select,textarea{width:100%;border:1px solid #bbb;border-radius:6px;padding:8px 10px;background:#fff;min-height:38px}
+input:focus,select:focus,textarea:focus{border-color:#000;outline:none}
+textarea{min-height:90px;resize:vertical}
+label{display:block;font-size:12px;font-weight:500;letter-spacing:.02em;margin-bottom:4px}
+.hint{font-size:12px;color:var(--muted);margin-top:4px}
+header.bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:12px 20px;background:#fff;border-bottom:1px solid #000}
+.mark{font-weight:800;font-size:20px;letter-spacing:-.05em}
+.mark small{font-size:11px;font-weight:500;letter-spacing:.04em;margin-left:8px;vertical-align:middle}
+.bar .grow{flex:1}
+.status{font-size:13px;color:var(--muted)}
+.status.ok{color:var(--ok)}.status.err{color:var(--err)}
+.layout{display:grid;grid-template-columns:300px minmax(0,1fr);min-height:calc(100vh - 61px)}
+aside.list{border-right:1px solid #000;padding:16px;position:sticky;top:61px;height:calc(100vh - 61px);overflow:auto}
+aside.list h2{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;margin:4px 0 10px}
+.plist{list-style:none;display:grid;gap:6px}
+.pitem{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;padding:6px;border:1px solid #ddd;border-radius:8px;cursor:pointer;background:#fff}
+.pitem[aria-current=true]{border-color:#000;box-shadow:inset 0 0 0 1px #000}
+.pitem img{width:44px;height:44px;object-fit:cover;border-radius:50%;background:var(--soft)}
+.pitem b{display:block;font-size:14px;font-weight:600;line-height:1.2}
+.pitem span{font-size:11px;color:var(--muted)}
+.pitem.is-hidden{opacity:.5}
+.pitem .ord{display:flex;flex-direction:column}
+.pitem .ord button{min-height:20px;padding:0 6px;border:0;font-size:11px;border-radius:4px}
+.pitem .ord button:hover{background:var(--soft);color:inherit}
+main.edit{padding:24px 32px 120px;max-width:1100px}
+.empty{color:var(--muted);padding:60px 0;text-align:center}
+.head-row{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;border-bottom:1px solid #000;padding-bottom:16px;margin-bottom:24px}
+.head-row h1{font-size:clamp(32px,4vw,52px);font-weight:600;letter-spacing:-.05em;line-height:1;flex:1}
+fieldset{border:0;border-top:1px solid #000;padding:18px 0 8px;margin:0 0 18px}
+legend{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding-right:10px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.lang{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.lang>div>label::after{content:attr(data-lang);margin-left:6px;font-size:10px;border:1px solid #000;border-radius:3px;padding:0 4px}
+.cover{display:flex;gap:16px;align-items:center}
+.cover img{width:120px;height:120px;object-fit:cover;border-radius:50%;border:1px solid #000;background:var(--soft)}
+.file-btn{position:relative;overflow:hidden;display:inline-flex}
+.file-btn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.sec{border:1px solid #000;border-radius:10px;margin:0 0 16px;background:#fff}
+.sec-head{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid #000;background:var(--soft);border-radius:10px 10px 0 0}
+.sec-head b{font-size:13px;letter-spacing:.04em;text-transform:uppercase;flex:1}
+.sec-body{padding:14px;display:grid;gap:14px}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.item{border:1px solid #ccc;border-radius:8px;padding:10px;display:grid;gap:8px;align-content:start;background:#fff}
+.thumb{position:relative;background:var(--soft);border-radius:6px;overflow:hidden;aspect-ratio:4/5;display:grid;place-items:center;font-size:12px;color:var(--muted)}
+.thumb.v{aspect-ratio:9/16}.thumb.w{aspect-ratio:16/10}.thumb.t{aspect-ratio:9/19}
+.thumb img,.thumb video{width:100%;height:100%;object-fit:cover;display:block}
+.item-tools{display:flex;gap:4px;justify-content:flex-end}
+.item-tools button{min-height:28px;padding:2px 9px;font-size:12px}
+.add-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.badge{font-size:11px;border:1px solid #000;border-radius:999px;padding:1px 8px}
+.new{color:var(--ok);border-color:var(--ok)}
+.login{max-width:520px;margin:10vh auto;padding:0 20px}
+.login h1{font-size:44px;letter-spacing:-.05em;font-weight:650;margin-bottom:12px}
+.login ol{margin:16px 0 20px 18px;font-size:14px;display:grid;gap:6px}
+.login a{color:inherit}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.check{display:flex;gap:8px;align-items:center;font-size:14px}
+.check input{width:18px;height:18px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#000;color:#fff;padding:12px 18px;border-radius:10px;font-size:14px;max-width:min(560px,90vw);z-index:50;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+.toast a{color:#fff}
+.toast[hidden]{display:none}
+.overlay{position:fixed;inset:0;background:rgba(255,255,255,.75);display:grid;place-items:center;z-index:40}
+.overlay[hidden]{display:none}
+.overlay div{background:#fff;border:1px solid #000;border-radius:12px;padding:20px 24px;min-width:280px;font-size:14px}
+.progress{height:4px;background:var(--soft);border-radius:4px;margin-top:10px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:#000;transition:width .2s}
+details.adv summary{cursor:pointer;font-size:13px;color:var(--muted)}
+@media(max-width:860px){.layout{grid-template-columns:1fr}aside.list{position:static;height:auto;border-right:0;border-bottom:1px solid #000}main.edit{padding:20px 16px 120px}.g2,.g3,.g4,.lang{grid-template-columns:1fr}header.bar{flex-wrap:wrap;padding:10px 16px}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<div class="overlay" id="busy" hidden><div><b id="busy-title">Kaydediliyor…</b><div class="hint" id="busy-text"></div><div class="progress"><i id="busy-bar"></i></div></div></div>
+<script>
+'use strict';
+const REPO = { owner: 'VERABERAT', name: 'Portfolio', branch: 'main', dataPath: 'data/projects.js' };
+const SITE = '../';
+const TOKEN_KEY = 'pf-admin-token';
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const clone = o => JSON.parse(JSON.stringify(o));
+const slug = s => String(s || '').toLowerCase().replace(/[çÇ]/g, 'c').replace(/[ğĞ]/g, 'g').replace(/[ıİ]/g, 'i').replace(/[öÖ]/g, 'o').replace(/[şŞ]/g, 's').replace(/[üÜ]/g, 'u').replace(/[’'`]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+let token = null, data = null, original = '', baseSha = null, current = -1;
+const uploads = new Map(); // repo path -> { blob, url }
+
+const SECTION_TYPES = {
+  reels: { name: 'Reels (Instagram mockup)', item: 'video' },
+  posts: { name: 'Postlar (Instagram mockup)', item: 'post' },
+  stories: { name: 'Story (telefon mockup)', item: 'story' },
+  shots: { name: 'Uygulama ekranları', item: 'shot' },
+  covers: { name: 'Kapak kartları (linkli)', item: 'coverCard' },
+  sliders: { name: 'Web slider (masaüstü + mobil)', item: 'slider' },
+  image: { name: 'Büyük görsel / vaka çalışması' },
+  film: { name: 'Film (yatay video)' },
+  credits: { name: 'Ekip / künye' },
+  note: { name: 'Not' },
+  link: { name: 'Buton (dış link)' },
+  html: { name: 'Özel HTML' }
+};
+const IMG_SPECS = {
+  post: { w: 864, h: 1080 }, story: { w: 720, h: 1280 }, shot: { w: 600, h: 1300 },
+  coverCard: { w: 808, h: 632 }, cover: { w: 800, h: 800 }, desktop: { w: 1688, h: 854 }, mobile: { w: 828, h: 1316 },
+  long: { maxW: 1600 }, poster: { maxW: 720 }, filmPoster: { maxW: 1280 }, avatar: { w: 120, h: 120 }
+};
+
+/* ---------------- GitHub ---------------- */
+async function gh(path, opts = {}) {
+  const res = await fetch('https://api.github.com/repos/' + REPO.owner + '/' + REPO.name + path, {
+    ...opts,
+    headers: { Authorization: 'Bearer ' + token, Accept: opts.accept || 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28', ...(opts.body ? { 'Content-Type': 'application/json' } : {}) }
+  });
+  if (!res.ok) {
+    let msg = res.status + '';
+    try { msg += ' ' + (await res.json()).message; } catch {}
+    throw new Error(msg);
+  }
+  return opts.accept === 'application/vnd.github.raw+json' ? res.text() : res.json();
+}
+async function loadData() {
+  const meta = await gh('/contents/' + REPO.dataPath + '?ref=' + REPO.branch);
+  baseSha = meta.sha;
+  const text = await gh('/contents/' + REPO.dataPath + '?ref=' + REPO.branch, { accept: 'application/vnd.github.raw+json' });
+  const json = text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1);
+  data = JSON.parse(json);
+  original = JSON.stringify(data);
+}
+const b64 = buf => { let s = ''; const b = new Uint8Array(buf); for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000)); return btoa(s); };
+const utf8b64 = str => b64(new TextEncoder().encode(str));
+
+async function save() {
+  const errs = validate();
+  if (errs.length) { toast('Kaydedilemedi: ' + errs.join(' · '), true); return; }
+  busy(true, 'Kaydediliyor…', 'GitHub ile bağlantı kuruluyor');
+  try {
+    const remote = await gh('/contents/' + REPO.dataPath + '?ref=' + REPO.branch);
+    if (remote.sha !== baseSha && !confirmInline('Bu arada başka bir yerden değişiklik yapılmış. Üzerine yazılsın mı?')) { busy(false); return; }
+    const ref = await gh('/git/ref/heads/' + REPO.branch);
+    const head = ref.object.sha;
+    const commit = await gh('/git/commits/' + head);
+    const used = new Set(JSON.stringify(data).match(/assets\/[^"]+/g) || []);
+    const files = [...uploads.entries()].filter(([p]) => used.has(p));
+    const tree = [];
+    let i = 0;
+    for (const [path, u] of files) {
+      i++; busy(true, 'Medya yükleniyor', path + ' (' + i + '/' + files.length + ')', i / (files.length + 1));
+      const blob = await gh('/git/blobs', { method: 'POST', body: JSON.stringify({ content: b64(await u.blob.arrayBuffer()), encoding: 'base64' }) });
+      tree.push({ path, mode: '100644', type: 'blob', sha: blob.sha });
+    }
+    busy(true, 'Veri dosyası yazılıyor', REPO.dataPath, .95);
+    const body = '// Bu dosya admin paneli (/admin) tarafından düzenlenir. Elle de düzenlenebilir.\nwindow.PORTFOLIO = ' + JSON.stringify(data, null, 2) + ';\n';
+    const dblob = await gh('/git/blobs', { method: 'POST', body: JSON.stringify({ content: utf8b64(body), encoding: 'base64' }) });
+    tree.push({ path: REPO.dataPath, mode: '100644', type: 'blob', sha: dblob.sha });
+    const newTree = await gh('/git/trees', { method: 'POST', body: JSON.stringify({ base_tree: commit.tree.sha, tree }) });
+    const msg = 'Admin: portfolyo güncellendi' + (files.length ? ' (' + files.length + ' medya)' : '');
+    const nc = await gh('/git/commits', { method: 'POST', body: JSON.stringify({ message: msg, tree: newTree.sha, parents: [head] }) });
+    await gh('/git/refs/heads/' + REPO.branch, { method: 'PATCH', body: JSON.stringify({ sha: nc.sha }) });
+    const after = await gh('/contents/' + REPO.dataPath + '?ref=' + REPO.branch);
+    baseSha = after.sha; original = JSON.stringify(data);
+    files.forEach(([p]) => uploads.delete(p));
+    busy(false);
+    toast('Kaydedildi. Site 1–2 dakika içinde güncellenir. <a href="' + SITE + '" target="_blank" rel="noreferrer">Siteyi aç ↗</a>');
+    renderAll();
+  } catch (e) {
+    busy(false); toast('Hata: ' + e.message, true);
+  }
+}
+let confirmed = false;
+function confirmInline(q) { return window.confirm(q); }
+
+/* ---------------- Media processing ---------------- */
+function loadImage(file) {
+  return new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = URL.createObjectURL(file); });
+}
+function canvasBlob(c) {
+  return new Promise(res => c.toBlob(b => {
+    if (b && b.type === 'image/webp') res({ blob: b, ext: 'webp' });
+    else c.toBlob(j => res({ blob: j, ext: 'jpg' }), 'image/jpeg', .86);
+  }, 'image/webp', .84));
+}
+function drawCover(src, sw, sh, w, h) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  const g = c.getContext('2d'); const s = Math.max(w / sw, h / sh);
+  const dw = sw * s, dh = sh * s; g.drawImage(src, (w - dw) / 2, (h - dh) / 2, dw, dh); return c;
+}
+function drawFit(src, sw, sh, maxW) {
+  const s = Math.min(1, maxW / sw); const c = document.createElement('canvas');
+  c.width = Math.round(sw * s); c.height = Math.round(sh * s);
+  c.getContext('2d').drawImage(src, 0, 0, c.width, c.height); return c;
+}
+async function processImage(file, spec) {
+  const im = await loadImage(file);
+  const c = spec.maxW ? drawFit(im, im.naturalWidth, im.naturalHeight, spec.maxW) : drawCover(im, im.naturalWidth, im.naturalHeight, spec.w, spec.h);
+  const out = await canvasBlob(c); out.w = c.width; out.h = c.height; return out;
+}
+function videoPoster(file, maxW) {
+  return new Promise((res, rej) => {
+    const v = document.createElement('video'); v.muted = true; v.playsInline = true; v.preload = 'auto';
+    v.src = URL.createObjectURL(file);
+    v.onloadeddata = () => { v.currentTime = Math.min(1.5, (v.duration || 2) / 3); };
+    v.onseeked = async () => { const c = drawFit(v, v.videoWidth, v.videoHeight, maxW); const o = await canvasBlob(c); o.w = c.width; o.h = c.height; o.duration = v.duration; o.vw = v.videoWidth; o.vh = v.videoHeight; res(o); };
+    v.onerror = () => rej(new Error('Video okunamadı'));
+  });
+}
+const stamp = () => Date.now().toString(36);
+function addUpload(path, blob) { const url = URL.createObjectURL(blob); uploads.set(path, { blob, url }); return path; }
+const srcUrl = p => !p ? '' : uploads.has(p) ? uploads.get(p).url : /^https?:/.test(p) ? p : SITE + p;
+const proj = () => data.projects[current];
+const folder = () => 'assets/work/' + proj().media + '/';
+async function pickImage(spec, prefix) {
+  const file = await choose('image/*'); if (!file) return null;
+  busy(true, 'Görsel hazırlanıyor', file.name);
+  try { const o = await processImage(file, IMG_SPECS[spec]); const path = folder() + prefix + '-' + stamp() + '.' + o.ext; addUpload(path, o.blob); return { src: path, w: o.w, h: o.h }; }
+  finally { busy(false); }
+}
+async function pickVideo(posterSpec) {
+  const file = await choose('video/mp4,video/quicktime,video/webm'); if (!file) return null;
+  if (file.size > 40e6) toast('Uyarı: video ' + Math.round(file.size / 1e6) + ' MB. 25 MB altı önerilir; siteyi yavaşlatabilir.', true);
+  busy(true, 'Video hazırlanıyor', file.name);
+  try {
+    const p = await videoPoster(file, IMG_SPECS[posterSpec].maxW);
+    const id = stamp(); const ext = (file.name.split('.').pop() || 'mp4').toLowerCase();
+    const src = addUpload(folder() + 'video-' + id + '.' + (ext === 'webm' ? 'webm' : 'mp4'), file);
+    const poster = addUpload(folder() + 'video-' + id + '-poster.' + p.ext, p.blob);
+    const d = Math.round(p.duration || 0); return { src, poster, dur: Math.floor(d / 60) + ':' + String(d % 60).padStart(2, '0'), w: p.vw, h: p.vh };
+  } finally { busy(false); }
+}
+function choose(accept) {
+  return new Promise(res => { const i = document.createElement('input'); i.type = 'file'; i.accept = accept; i.onchange = () => res(i.files[0] || null); i.click(); });
+}
+
+/* ---------------- UI helpers ---------------- */
+function toast(html, err) {
+  const t = $('#toast'); t.innerHTML = html; t.hidden = false; t.style.background = err ? '#b00020' : '#000';
+  clearTimeout(toast.t); toast.t = setTimeout(() => (t.hidden = true), err ? 8000 : 6000);
+}
+function busy(on, title, text, frac) {
+  $('#busy').hidden = !on; if (!on) return;
+  $('#busy-title').textContent = title || ''; $('#busy-text').textContent = text || '';
+  $('#busy-bar').style.width = Math.round((frac || 0) * 100) + '%';
+}
+const dirty = () => JSON.stringify(data) !== original;
+function updateBar() {
+  const n = dirty(); const s = $('#save'); if (s) { s.disabled = !n; s.textContent = n ? 'Kaydet ve yayınla' : 'Kaydedildi'; }
+  const st = $('#state'); if (st) { st.textContent = n ? 'Kaydedilmemiş değişiklik var' : 'Güncel'; st.className = 'status ' + (n ? '' : 'ok'); }
+}
+window.addEventListener('beforeunload', e => { if (data && dirty()) { e.preventDefault(); e.returnValue = ''; } });
+
+// Generic two-way field binding: data-k="tr.summary" on inputs within editor
+function getPath(obj, path) { return path.split('.').reduce((o, k) => (o == null ? o : o[k]), obj); }
+function setPath(obj, path, val) { const ks = path.split('.'); const last = ks.pop(); const o = ks.reduce((a, k) => (a[k] = a[k] || {}), obj); o[last] = val; }
+const textOf = v => v == null ? '' : typeof v === 'string' ? v : v.text != null ? v.text : v.tr != null ? v.tr : '';
+
+/* ---------------- Render ---------------- */
+function renderLogin(msg) {
+  $('#app').innerHTML = '<div class="login"><h1>Portfolyo Admin</h1>'
+    + '<p>Projeleri eklemek, düzenlemek ve kaldırmak için GitHub erişim anahtarınla giriş yap. Anahtar sadece bu tarayıcıda saklanır.</p>'
+    + '<ol><li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noreferrer">GitHub → Fine-grained token</a> sayfasını aç.</li>'
+    + '<li>Repository access: <b>Only select repositories → VERABERAT/Portfolio</b>.</li>'
+    + '<li>Permissions → Repository → <b>Contents: Read and write</b>.</li>'
+    + '<li>Oluşan anahtarı aşağıya yapıştır.</li></ol>'
+    + '<form id="lf" class="grid"><div><label for="tk">GitHub anahtarı</label><input id="tk" type="password" autocomplete="off" required placeholder="github_pat_…"></div>'
+    + '<label class="check"><input type="checkbox" id="rem" checked> Bu cihazda hatırla</label>'
+    + '<div class="row"><button class="primary" type="submit">Giriş yap</button>' + (msg ? '<span class="status err">' + esc(msg) + '</span>' : '') + '</div></form></div>';
+  $('#lf').onsubmit = async e => {
+    e.preventDefault(); token = $('#tk').value.trim();
+    try { busy(true, 'Bağlanılıyor…'); await loadData(); busy(false);
+      try { ($('#rem').checked ? localStorage : sessionStorage).setItem(TOKEN_KEY, token); } catch {}
+      current = 0; renderAll();
+    } catch (err) { busy(false); token = null; renderLogin('Giriş başarısız: ' + err.message); }
+  };
+}
+
+function renderAll() {
+  $('#app').innerHTML = '<header class="bar"><span class="mark">BE©<small>ADMIN</small></span><span class="grow"></span>'
+    + '<span class="status" id="state"></span><a class="status" href="' + SITE + '" target="_blank" rel="noreferrer">Siteyi aç ↗</a>'
+    + '<button class="primary" id="save">Kaydet ve yayınla</button><button class="ghost" id="logout">Çıkış</button></header>'
+    + '<div class="layout"><aside class="list"><h2>Projeler</h2><ul class="plist" id="plist"></ul>'
+    + '<div class="row" style="margin-top:12px"><button id="add">+ Yeni proje</button></div>'
+    + '<p class="hint" style="margin-top:14px">Sıra, sitedeki plak sırasıdır. Gizli projeler sitede görünmez.</p></aside>'
+    + '<main class="edit" id="editor"></main></div>';
+  $('#save').onclick = save;
+  $('#logout').onclick = () => { if (dirty() && !confirm('Kaydedilmemiş değişiklikler silinecek. Çıkılsın mı?')) return; try { localStorage.removeItem(TOKEN_KEY); sessionStorage.removeItem(TOKEN_KEY); } catch {} token = null; data = null; renderLogin(); };
+  $('#add').onclick = addProject;
+  renderList(); renderEditor(); updateBar();
+}
+
+function renderList() {
+  const cats = Object.fromEntries(data.categories.map(c => [c.id, c.tr]));
+  $('#plist').innerHTML = data.projects.map((p, i) => '<li class="pitem' + (p.hidden ? ' is-hidden' : '') + '" data-i="' + i + '" aria-current="' + (i === current) + '" tabindex="0">'
+    + '<img src="' + esc(srcUrl(p.image)) + '" alt="">'
+    + '<div><b>' + esc(p.title || 'Adsız') + '</b><span>' + esc(cats[p.cat] || '') + (p.hidden ? ' · gizli' : '') + '</span></div>'
+    + '<div class="ord"><button data-up="' + i + '" aria-label="Yukarı">▲</button><button data-down="' + i + '" aria-label="Aşağı">▼</button></div></li>').join('');
+  $('#plist').onclick = e => {
+    const up = e.target.closest('[data-up]'), down = e.target.closest('[data-down]');
+    if (up || down) { e.stopPropagation(); const i = +(up || down).dataset[up ? 'up' : 'down']; const j = i + (up ? -1 : 1); if (j < 0 || j >= data.projects.length) return;
+      [data.projects[i], data.projects[j]] = [data.projects[j], data.projects[i]]; if (current === i) current = j; else if (current === j) current = i; renderList(); updateBar(); return; }
+    const li = e.target.closest('.pitem'); if (li) { current = +li.dataset.i; renderList(); renderEditor(); }
+  };
+  $('#plist').onkeydown = e => { if (e.key === 'Enter') { const li = e.target.closest('.pitem'); if (li) { current = +li.dataset.i; renderList(); renderEditor(); } } };
+}
+
+function addProject() {
+  const p = { id: '', title: 'Yeni proje', year: String(new Date().getFullYear()), image: '', media: 'proje-' + stamp(), cat: data.categories[0].id,
+    kind: { tr: 'Marka işi', en: 'Brand work' }, status: { tr: '', en: '' }, hidden: true, spotify: '',
+    tr: { type: '', summary: '', description: '', role: '', focus: '' }, en: { type: '', summary: '', description: '', role: '', focus: '' },
+    link: { type: 'behance', url: '' }, account: { user: '', avatar: '', avatarClass: '', verified: false, follow: true }, sections: [] };
+  p.id = p.media; data.projects.push(p); current = data.projects.length - 1; renderList(); renderEditor(); updateBar();
+  toast('Yeni proje eklendi. Hazır olunca “Sitede göster”i işaretle.');
+}
+
+function field(label, key, opts = {}) {
+  const v = getPath(proj(), key); const id = 'f-' + key.replace(/\./g, '-');
+  const input = opts.area ? '<textarea id="' + id + '" data-k="' + key + '">' + esc(v || '') + '</textarea>'
+    : '<input id="' + id + '" type="' + (opts.type || 'text') + '" data-k="' + key + '" value="' + esc(v || '') + '"' + (opts.ph ? ' placeholder="' + esc(opts.ph) + '"' : '') + '>';
+  return '<div><label for="' + id + '"' + (opts.lang ? ' data-lang="' + opts.lang + '"' : '') + '>' + esc(label) + '</label>' + input + (opts.hint ? '<p class="hint">' + opts.hint + '</p>' : '') + '</div>';
+}
+const pair = (label, base, area) => '<div class="lang">' + field(label, 'tr.' + base, { area, lang: 'TR' }) + field(label, 'en.' + base, { area, lang: 'EN' }) + '</div>';
+const pairObj = (label, base) => '<div class="lang">' + field(label, base + '.tr', { lang: 'TR' }) + field(label, base + '.en', { lang: 'EN' }) + '</div>';
+
+function renderEditor() {
+  const ed = $('#editor'); const p = proj();
+  if (!p) { ed.innerHTML = '<p class="empty">Soldan bir proje seç ya da yeni proje ekle.</p>'; return; }
+  const catOpts = data.categories.map(c => '<option value="' + c.id + '"' + (p.cat === c.id ? ' selected' : '') + '>' + esc(c.tr) + '</option>').join('');
+  const lt = (p.link && p.link.type) || 'behance';
+  const a = p.account || (p.account = { user: '', avatar: '' });
+  ed.innerHTML = '<div class="head-row"><h1>' + esc(p.title || 'Adsız') + '</h1>'
+    + '<label class="check"><input type="checkbox" id="vis"' + (p.hidden ? '' : ' checked') + '> Sitede göster</label>'
+    + '<button class="danger" id="del">Projeyi sil</button></div>'
+    + '<fieldset><legend>Temel bilgiler</legend><div class="grid g4">' + field('Başlık', 'title') + field('Yıl', 'year')
+    + '<div><label for="cat">Kategori</label><select id="cat">' + catOpts + '</select></div>'
+    + field('Klasör anahtarı', 'media', { hint: 'Dosyalar assets/work/<b>' + esc(p.media) + '</b>/ altına gider.' }) + '</div>'
+    + '<div class="cover" style="margin-top:16px"><img src="' + esc(srcUrl(p.image)) + '" alt="Plak kapağı"><div><label>Plak kapağı</label><button id="cover">Görsel seç</button><p class="hint">Kare kırpılır, 800×800.</p></div></div></fieldset>'
+    + '<fieldset><legend>Künye ve metinler</legend><div class="grid">' + pairObj('Tür', 'kind') + pairObj('Durum', 'status')
+    + pair('Rolüm', 'role') + pair('Kapsam', 'focus') + pair('Kısa özet', 'summary') + pair('Açıklama', 'description', true) + '</div></fieldset>'
+    + '<fieldset><legend>Linkler ve müzik</legend><div class="grid g3"><div><label for="lt">Buton</label><select id="lt">'
+    + [['behance', 'Behance’te gör'], ['store', 'App Store’da indir'], ['instagram', 'Instagram’da gör']].map(([v, t]) => '<option value="' + v + '"' + (lt === v ? ' selected' : '') + '>' + t + '</option>').join('')
+    + '</select></div>' + field('Link adresi', 'link.url', { type: 'url', ph: 'https://…', hint: 'Boş bırakırsan buton görünmez.' })
+    + field('Spotify şarkısı', 'spotify', { type: 'url', ph: 'https://open.spotify.com/track/…', hint: 'Plak dönerken çalar (ziyaretçi müziği açtıysa).' }) + '</div></fieldset>'
+    + '<fieldset><legend>Instagram mockup hesabı</legend><div class="grid g4">' + field('Kullanıcı adı', 'account.user', { ph: 'markaadi' })
+    + field('Avatar yazısı', 'account.avatar', { ph: 'W' }) + field('Avatar rengi', 'account.avatarBg', { ph: '#e3003b' })
+    + '<div><label>&nbsp;</label><label class="check"><input type="checkbox" id="ver"' + (a.verified ? ' checked' : '') + '> Onaylı rozeti</label></div></div></fieldset>'
+    + '<fieldset><legend>Proje sayfası bölümleri</legend><div id="secs"></div><div class="add-row"><select id="newsec">'
+    + Object.entries(SECTION_TYPES).map(([k, v]) => '<option value="' + k + '">' + v.name + '</option>').join('') + '</select><button id="addsec">+ Bölüm ekle</button></div></fieldset>';
+  ed.oninput = e => { const k = e.target.dataset.k; if (!k) return; setPath(p, k, e.target.value); if (k === 'title') { $('.head-row h1').textContent = p.title; renderList(); } if (k === 'media') { p.id = p.media = slug(e.target.value); } updateBar(); };
+  $('#cat').onchange = e => { p.cat = e.target.value; renderList(); updateBar(); };
+  $('#lt').onchange = e => { (p.link = p.link || {}).type = e.target.value; updateBar(); };
+  $('#vis').onchange = e => { p.hidden = !e.target.checked; renderList(); updateBar(); };
+  $('#ver').onchange = e => { a.verified = e.target.checked; updateBar(); };
+  $('#del').onclick = () => { if (!confirm('“' + p.title + '” silinsin mi? Kaydedene kadar geri alabilirsin (sayfayı yenile).')) return; data.projects.splice(current, 1); current = Math.min(current, data.projects.length - 1); renderList(); renderEditor(); updateBar(); };
+  $('#cover').onclick = async () => { const file = await choose('image/*'); if (!file) return; const o = await processImage(file, IMG_SPECS.cover); p.image = addUpload('assets/vinyl/' + p.media + '-cover-' + stamp() + '.' + o.ext, o.blob); renderEditor(); renderList(); updateBar(); };
+  $('#addsec').onclick = () => { const t = $('#newsec').value; p.sections.push(newSection(t)); renderSections(); updateBar(); };
+  renderSections();
+}
+
+function newSection(t) {
+  const s = { type: t };
+  if (['reels', 'posts', 'stories', 'shots', 'covers', 'sliders', 'credits'].includes(t)) s.items = [];
+  if (t === 'reels') { s.cols = 4; s.title = { left: 'Reels', right: { t: 'dsReelsNote', text: 'Oynatmak için kaydır; ses için hoparlöre dokun' } }; }
+  if (t === 'posts') s.title = { left: { t: 'dsPosts', text: 'Postlar' }, right: 'Instagram' };
+  if (t === 'stories') s.title = { left: 'Story', right: '' };
+  if (t === 'note') s.text = { tr: '', en: '' };
+  if (t === 'link') { s.href = ''; s.text = { t: 'behanceLink', text: 'Behance’te gör' }; }
+  if (t === 'html') s.html = '  <div></div>';
+  if (t === 'credits') s.title = { left: { t: 'credits', text: 'Ekip' }, right: '' };
+  if (t === 'film') s.title = { left: { t: 'film', text: 'Film' }, right: '' };
+  s.label = proj().title + ' ' + (SECTION_TYPES[t].name.split(' ')[0] || '').toLowerCase();
+  return s;
+}
+
+function titleRow(s, si) {
+  const L = textOf(s.title && s.title.left), Rt = textOf(s.title && s.title.right);
+  return '<div class="grid g2"><div><label>Bölüm başlığı (sol)</label><input type="text" data-s="' + si + '" data-f="tl" value="' + esc(L) + '"></div>'
+    + '<div><label>Başlık sağ notu</label><input type="text" data-s="' + si + '" data-f="tr" value="' + esc(Rt) + '"></div></div>';
+}
+function itemBox(si, ii, thumb, cls, fields) {
+  return '<div class="item"><div class="thumb ' + (cls || '') + '">' + thumb + '</div>' + fields
+    + '<div class="item-tools"><button data-s="' + si + '" data-i="' + ii + '" data-a="left" aria-label="Sola">←</button><button data-s="' + si + '" data-i="' + ii + '" data-a="right" aria-label="Sağa">→</button><button class="danger" data-s="' + si + '" data-i="' + ii + '" data-a="rm">Sil</button></div></div>';
+}
+const inp = (si, ii, f, v, ph) => '<input type="text" data-s="' + si + '" data-i="' + ii + '" data-f="' + f + '" value="' + esc(v || '') + '"' + (ph ? ' placeholder="' + esc(ph) + '"' : '') + '>';
+const im = (src, alt) => src ? '<img src="' + esc(srcUrl(src)) + '" alt="' + esc(alt || '') + '" loading="lazy">' : 'Görsel yok';
+
+function renderSections() {
+  const p = proj(); const box = $('#secs');
+  box.innerHTML = p.sections.map((s, si) => {
+    const T = SECTION_TYPES[s.type] || { name: s.type };
+    let body = '';
+    if (!['note', 'link'].includes(s.type)) body += titleRow(s, si);
+    if (s.type === 'reels') body += '<div class="items">' + s.items.map((it, ii) => itemBox(si, ii, '<video src="' + esc(srcUrl(it.src)) + '" poster="' + esc(srcUrl(it.poster)) + '" muted playsinline preload="none"></video>', 'v', '<label>Süre / etiket</label>' + inp(si, ii, 'meta', it.meta, 'Reels 01 · 0:12') + '<label>Açıklama</label>' + inp(si, ii, 'caption', textOf(it.caption)))).join('') + '</div><div class="add-row"><button data-s="' + si + '" data-a="addvideo">+ Video ekle</button><span class="hint">Kapak karesi otomatik alınır.</span></div>';
+    if (s.type === 'posts') body += '<div class="items">' + s.items.map((it, ii) => itemBox(si, ii, im(it.src, it.alt), '', '<label>Açıklama</label>' + inp(si, ii, 'caption', textOf(it.caption)) + '<label>Alt metin</label>' + inp(si, ii, 'alt', it.alt))).join('') + '</div><div class="add-row"><button data-s="' + si + '" data-a="addimg" data-spec="post">+ Post ekle</button><span class="hint">4:5 kırpılır.</span></div>';
+    if (s.type === 'stories' || s.type === 'shots') { const spec = s.type === 'stories' ? 'story' : 'shot'; body += '<div class="items">' + s.items.map((it, ii) => itemBox(si, ii, im(it.src, it.alt), 't', '<label>Etiket</label>' + inp(si, ii, 'caption', it.caption) + '<label>Alt metin</label>' + inp(si, ii, 'alt', it.alt))).join('') + '</div><div class="add-row"><button data-s="' + si + '" data-a="addimg" data-spec="' + spec + '">+ Görsel ekle</button></div>'; }
+    if (s.type === 'covers') body += '<div class="items">' + s.items.map((it, ii) => itemBox(si, ii, im(it.src, it.alt), 'w', '<label>Başlık</label>' + inp(si, ii, 'caption', it.caption) + '<label>Link</label>' + inp(si, ii, 'href', it.href, 'https://…') + '<label>Alt metin</label>' + inp(si, ii, 'alt', it.alt))).join('') + '</div><div class="add-row"><button data-s="' + si + '" data-a="addimg" data-spec="coverCard">+ Kart ekle</button></div>';
+    if (s.type === 'sliders') body += '<div class="items">' + s.items.map((it, ii) => itemBox(si, ii, im(it.desktop && it.desktop.src), 'w', '<button data-s="' + si + '" data-i="' + ii + '" data-a="slmob">Mobil görsel ' + (it.mobile && it.mobile.src ? '✓' : 'seç') + '</button><label>Başlık</label>' + inp(si, ii, 'caption', it.caption) + '<label>Alan adı</label>' + inp(si, ii, 'domain', it.domain, 'site.com'))).join('') + '</div><div class="add-row"><button data-s="' + si + '" data-a="addslider">+ Slider ekle (masaüstü görseli)</button></div>';
+    if (s.type === 'credits') body += '<div class="grid">' + s.items.map((it, ii) => '<div class="grid g3" style="align-items:end"><div><label>Görev</label>' + inp(si, ii, 'role', textOf(it.role)) + '</div><div><label>İsim</label>' + inp(si, ii, 'name', it.name) + '</div><div class="item-tools" style="justify-content:flex-start"><button class="danger" data-s="' + si + '" data-i="' + ii + '" data-a="rm">Sil</button></div></div>').join('') + '</div><div class="add-row"><button data-s="' + si + '" data-a="addcredit">+ Kişi ekle</button></div>';
+    if (s.type === 'image') body += '<div class="cover"><img style="border-radius:6px;width:220px;height:auto;max-height:200px;object-fit:cover" src="' + esc(srcUrl(s.src)) + '" alt=""><div class="grid"><button data-s="' + si + '" data-a="setimg">Görsel seç</button><div><label>Link (isteğe bağlı)</label><input type="url" data-s="' + si + '" data-f="href" value="' + esc(s.href || '') + '"></div><div><label>Alt metin</label><input type="text" data-s="' + si + '" data-f="alt" value="' + esc(s.alt || '') + '"></div></div></div>';
+    if (s.type === 'film') body += '<div class="cover"><video style="width:260px;border-radius:6px" src="' + esc(srcUrl(s.src)) + '" poster="' + esc(srcUrl(s.poster)) + '" controls preload="none"></video><button data-s="' + si + '" data-a="setfilm">Video seç</button></div>';
+    if (s.type === 'note') body += '<div class="lang"><div><label data-lang="TR">Not</label><textarea data-s="' + si + '" data-f="ntr">' + esc(typeof s.text === 'object' && s.text.tr != null ? s.text.tr : textOf(s.text)) + '</textarea></div><div><label data-lang="EN">Not</label><textarea data-s="' + si + '" data-f="nen">' + esc(typeof s.text === 'object' ? (s.text.en || '') : '') + '</textarea></div></div>' + (s.text && s.text.t ? '<p class="hint">Bu not sitedeki çeviri dosyasından geliyor; değiştirirsen buradaki metin kullanılır.</p>' : '');
+    if (s.type === 'link') body += '<div class="grid g2"><div><label>Buton yazısı</label><input type="text" data-s="' + si + '" data-f="ltext" value="' + esc(textOf(s.text)) + '"></div><div><label>Adres</label><input type="url" data-s="' + si + '" data-f="href" value="' + esc(s.href || '') + '"></div></div>';
+    if (s.type === 'html') body += '<details class="adv"' + (s.html.length < 40 ? ' open' : '') + '><summary>HTML’i düzenle (ileri düzey)</summary><textarea style="min-height:220px;font-family:ui-monospace,monospace;font-size:12px" data-s="' + si + '" data-f="html">' + esc(s.html) + '</textarea></details>';
+    return '<div class="sec"><div class="sec-head"><b>' + esc(T.name) + '</b>'
+      + '<button class="ghost" data-s="' + si + '" data-a="sup" aria-label="Yukarı">▲</button><button class="ghost" data-s="' + si + '" data-a="sdown" aria-label="Aşağı">▼</button><button class="danger" data-s="' + si + '" data-a="srm">Bölümü sil</button></div><div class="sec-body">' + body + '</div></div>';
+  }).join('') || '<p class="hint" style="margin-bottom:12px">Henüz bölüm yok. Aşağıdan reels, post, görsel vb. ekle.</p>';
+  box.oninput = onSectionInput; box.onclick = onSectionClick;
+}
+
+function onSectionInput(e) {
+  const t = e.target; if (t.dataset.s == null) return; e.stopPropagation();
+  const s = proj().sections[+t.dataset.s]; const f = t.dataset.f; const v = t.value;
+  if (t.dataset.i != null) {
+    const it = s.items[+t.dataset.i];
+    if (f === 'caption' && (s.type === 'reels' || s.type === 'posts')) it.caption = (it.caption && typeof it.caption === 'object') ? { ...it.caption, text: v } : v;
+    else if (f === 'role') it.role = v;
+    else it[f] = v;
+  } else if (f === 'tl' || f === 'tr') {
+    s.title = s.title || { left: '', right: '' };
+    const side = f === 'tl' ? 'left' : 'right'; const old = s.title[side];
+    s.title[side] = old && typeof old === 'object' && old.t && old.text === v ? old : v;
+    if (!s.title.left && !s.title.right) delete s.title;
+  } else if (f === 'ntr' || f === 'nen') {
+    const cur = s.text && typeof s.text === 'object' && !s.text.t ? s.text : { tr: textOf(s.text), en: '' };
+    cur[f === 'ntr' ? 'tr' : 'en'] = v; s.text = cur;
+  } else if (f === 'ltext') s.text = v;
+  else s[f] = v;
+  updateBar();
+}
+
+async function onSectionClick(e) {
+  const b = e.target.closest('button[data-a]'); if (!b) return;
+  const p = proj(); const si = +b.dataset.s; const s = p.sections[si]; const a = b.dataset.a; const ii = b.dataset.i != null ? +b.dataset.i : null;
+  const swap = (arr, i, j) => { if (j < 0 || j >= arr.length) return; [arr[i], arr[j]] = [arr[j], arr[i]]; };
+  if (a === 'sup') swap(p.sections, si, si - 1);
+  else if (a === 'sdown') swap(p.sections, si, si + 1);
+  else if (a === 'srm') { if (!confirm('Bu bölüm silinsin mi?')) return; p.sections.splice(si, 1); }
+  else if (a === 'left') swap(s.items, ii, ii - 1);
+  else if (a === 'right') swap(s.items, ii, ii + 1);
+  else if (a === 'rm') s.items.splice(ii, 1);
+  else if (a === 'addimg') { const spec = b.dataset.spec; const r = await pickImage(spec, spec); if (!r) return; s.items.push({ src: r.src, alt: '', w: r.w, h: r.h, caption: '' }); }
+  else if (a === 'addvideo') { const r = await pickVideo('poster'); if (!r) return; const n = s.items.length + 1; s.items.push({ src: r.src, poster: r.poster, label: p.title + ' reels ' + String(n).padStart(2, '0'), meta: 'Reels ' + String(n).padStart(2, '0') + ' · ' + r.dur, caption: '' }); }
+  else if (a === 'addslider') { const r = await pickImage('desktop', 'slider-desktop'); if (!r) return; s.items.push({ domain: '', desktop: { src: r.src, alt: '', w: r.w, h: r.h }, mobile: { src: '', alt: '', w: 828, h: 1316 }, caption: '' }); }
+  else if (a === 'slmob') { const r = await pickImage('mobile', 'slider-mobile'); if (!r) return; s.items[ii].mobile = { src: r.src, alt: '', w: r.w, h: r.h }; }
+  else if (a === 'addcredit') s.items.push({ role: '', name: '' });
+  else if (a === 'setimg') { const r = await pickImage('long', 'image'); if (!r) return; Object.assign(s, { src: r.src, w: r.w, h: r.h }); }
+  else if (a === 'setfilm') { const r = await pickVideo('filmPoster'); if (!r) return; Object.assign(s, { src: r.src, poster: r.poster, w: r.w || 848, h: r.h || 480, label: p.title + ' filmi' }); }
+  renderSections(); updateBar();
+}
+
+function validate() {
+  const errs = []; const seen = new Set();
+  data.projects.forEach(p => {
+    if (!p.title) errs.push('başlıksız proje var');
+    if (!p.media) errs.push(p.title + ': klasör anahtarı boş');
+    if (seen.has(p.media)) errs.push(p.title + ': klasör anahtarı başka projeyle aynı'); seen.add(p.media);
+    if (!p.hidden && !p.image) errs.push(p.title + ': plak kapağı yok');
+    (p.sections || []).forEach(s => { if (s.type === 'sliders') s.items.forEach(it => { if (!it.mobile || !it.mobile.src) errs.push(p.title + ': slider mobil görseli eksik'); }); });
+  });
+  return errs;
+}
+
+/* ---------------- Boot ---------------- */
+(async () => {
+  try { token = localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY); } catch {}
+  if (!token) return renderLogin();
+  try { busy(true, 'Yükleniyor…'); await loadData(); busy(false); current = 0; renderAll(); }
+  catch (e) { busy(false); renderLogin('Oturum geçersiz: ' + e.message); }
+})();
+</script>
+</body>
+</html>
