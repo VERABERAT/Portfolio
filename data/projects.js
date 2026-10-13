@@ -39,7 +39,7 @@ window.PORTFOLIO = {
         "en": "Published on Instagram"
       },
       "hidden": false,
-      "spotify": "",
+      "spotify": "https://open.spotify.com/intl-tr/track/6YffUZJ2R06kyxyK6onezL?si=88b1e684c9b547e2",
       "tr": {
         "type": "Marka işi · 2026",
         "summary": "Temmuz smokin kampanyası için Instagram reels ve post serisi.",
@@ -1088,7 +1088,11 @@ window.PORTFOLIO = {
             "text": "Behance’te gör"
           }
         }
-      ]
+      ],
+      "account": {
+        "user": "",
+        "avatar": ""
+      }
     },
     {
       "id": "ferm",
@@ -1225,7 +1229,11 @@ window.PORTFOLIO = {
             "text": "Behance’te gör"
           }
         }
-      ]
+      ],
+      "account": {
+        "user": "",
+        "avatar": ""
+      }
     },
     {
       "id": "vera",
@@ -1282,7 +1290,11 @@ window.PORTFOLIO = {
             "text": "Behance’te gör"
           }
         }
-      ]
+      ],
+      "account": {
+        "user": "",
+        "avatar": ""
+      }
     },
     {
       "id": "miu-miu",
@@ -1394,7 +1406,11 @@ window.PORTFOLIO = {
             "right": "Kasten Kolektif"
           }
         }
-      ]
+      ],
+      "account": {
+        "user": "",
+        "avatar": ""
+      }
     }
   ]
 };
