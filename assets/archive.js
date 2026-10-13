@@ -66,6 +66,9 @@ const translations = {
     "lab3t": "Kişisel uygulama",
     "lab4": "Yapay zekâ ile video ve görsel üretimi için 18 gruptan oluşan 304 komutluk prompt kütüphanesi ve komut seçerek prompt kuran araç.",
     "lab4t": "Kişisel araç",
+    "wellaFeed": "Profil görünümü",
+    "wellaNote": "Altavia’da Wella Professionals Türkiye için üretildi. Görseller ve videolar yapay zekâ ile üretildi; AI video, yayına girmeyen bir konsept çalışması.",
+    "instaLink": "Instagram’da gör",
     "hello": "Bana yaz",
     "cvShort": "Özgeçmiş ↓",
     "top": "Başa dön ↑",
@@ -137,6 +140,9 @@ const translations = {
     "lab3t": "Personal app",
     "lab4": "A 304-command prompt library in 18 groups for AI video and image generation, plus a tool that builds prompts from selected commands.",
     "lab4t": "Personal tool",
+    "wellaFeed": "Profile view",
+    "wellaNote": "Made for Wella Professionals Turkey at Altavia. Images and videos were created with AI; the AI video is an unpublished concept.",
+    "instaLink": "View on Instagram",
     "hello": "Get in touch",
     "cvShort": "Résumé ↓",
     "top": "Back to top ↑",
@@ -216,6 +222,30 @@ const projects = [
     "link": {
       "type": "behance",
       "url": ""
+    }
+  },
+  {
+    "title": "Wella",
+    "year": "2026",
+    "image": "assets/vinyl/wella-cover.png",
+    "media": "wella",
+    "tr": {
+      "type": "Marka işi · 2026",
+      "summary": "Wella Professionals Türkiye için Instagram always-on içerik serisi.",
+      "description": "Altavia’da Wella Professionals için hazırladığım Instagram serisi. Ultimate Repair, Sun Care ve Oil Reflections ürünlerini “Çantamda ne var?”, “Öncesi / Sonrası” ve adım adım bakım rutini gibi tekrar eden formatlarla anlattık. Videolarda yapay zekâ ile ürettiğim sahneleri After Effects’te tipografi ve hareketle tamamladım.",
+      "role": "Konsept, AI görsel ve video, motion",
+      "focus": "4 reels, 5 post, Instagram"
+    },
+    "en": {
+      "type": "Brand work · 2026",
+      "summary": "An always-on Instagram series for Wella Professionals Turkey.",
+      "description": "An Instagram series I created for Wella Professionals at Altavia. We told the Ultimate Repair, Sun Care and Oil Reflections stories through recurring formats: “What’s in my bag?”, before/after and step-by-step care routines. I generated scenes with AI and finished the videos with type and motion in After Effects.",
+      "role": "Concept, AI image and video, motion",
+      "focus": "4 reels, 5 posts, Instagram"
+    },
+    "link": {
+      "type": "instagram",
+      "url": "https://www.instagram.com/wellaprotr/"
     }
   },
   {
@@ -462,6 +492,17 @@ const extra = [
       "en": "Brand work"
     },
     "status": {
+      "tr": "Instagram’da yayınlandı",
+      "en": "Published on Instagram"
+    },
+    "cat": "campaign"
+  },
+  {
+    "kind": {
+      "tr": "Marka işi",
+      "en": "Brand work"
+    },
+    "status": {
       "tr": "Behance’te yayında",
       "en": "Published on Behance"
     },
@@ -680,7 +721,7 @@ function setLink(el, p) {
   el.hidden = !l.url;
   if (!l.url) { el.removeAttribute('href'); return; }
   el.href = l.url;
-  $('span', el).textContent = translations[lang][l.type === 'store' ? 'storeLink' : 'behanceLink'];
+  $('span', el).textContent = translations[lang][l.type === 'store' ? 'storeLink' : l.type === 'instagram' ? 'instaLink' : 'behanceLink'];
 }
 function fillArchive(animate) {
   const p = projects[current], d = p[lang], x = extra[current];

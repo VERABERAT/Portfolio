@@ -270,3 +270,14 @@ html:not(.js) .credits,html:not(.js) .notes,html:not(.js) .archive-controls{disp
 .c-link:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 .c-link[hidden],.p-cta[hidden]{display:none}
 body{font-variant-emoji:text}
+/* Wella */
+.ig-avatar--wella{background:#e3003b;font-family:inherit;font-weight:800;font-size:12px}
+.ig-avatar--wella span{border:0;padding:0}
+.wella-hair{margin:0 0 8px;border-top:1px solid #000;border-bottom:1px solid #000;overflow:hidden}
+.wella-hair svg{display:block;width:100%;height:clamp(160px,22vw,300px)}
+.wella-hair path{fill:none;stroke:#000;stroke-width:var(--w);stroke-linecap:round;transform-box:fill-box;transform-origin:0 50%;animation:hair-sway var(--d) ease-in-out var(--dl) infinite alternate}
+.wella-hair figcaption{display:flex;justify-content:space-between;gap:20px;padding:10px 0;font-size:12px;letter-spacing:.02em;border-top:1px solid #000}
+@keyframes hair-sway{0%{transform:skewY(-2.2deg) scaleY(.96)}50%{transform:skewY(.6deg) scaleY(1.03)}100%{transform:skewY(2.4deg) scaleY(.98)}}
+.wella-feed{margin:0;max-width:640px;margin-inline:auto}
+.wella-feed img{display:block;width:100%;height:auto}
+@media(prefers-reduced-motion:reduce){.wella-hair path{animation:none}}
