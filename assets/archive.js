@@ -67,7 +67,7 @@ const translations = {
     "lab4": "Yapay zekâ ile video ve görsel üretimi için 18 gruptan oluşan 304 komutluk prompt kütüphanesi ve komut seçerek prompt kuran araç.",
     "lab4t": "Kişisel araç",
     "wellaFeed": "Profil görünümü",
-    "wellaNote": "Altavia’da Wella Professionals Türkiye için üretildi. Görseller ve videolar yapay zekâ ile üretildi; AI video, yayına girmeyen bir konsept çalışması.",
+    "wellaNote": "Altavia’da Wella Professionals Türkiye için üretildi. Görseller ve videolar yapay zekâ ile üretildi.",
     "instaLink": "Instagram’da gör",
     "hello": "Bana yaz",
     "cvShort": "Özgeçmiş ↓",
@@ -141,7 +141,7 @@ const translations = {
     "lab4": "A 304-command prompt library in 18 groups for AI video and image generation, plus a tool that builds prompts from selected commands.",
     "lab4t": "Personal tool",
     "wellaFeed": "Profile view",
-    "wellaNote": "Made for Wella Professionals Turkey at Altavia. Images and videos were created with AI; the AI video is an unpublished concept.",
+    "wellaNote": "Made for Wella Professionals Turkey at Altavia. Images and videos were created with AI.",
     "instaLink": "View on Instagram",
     "hello": "Get in touch",
     "cvShort": "Résumé ↓",
@@ -244,8 +244,8 @@ const projects = [
       "focus": "4 reels, 5 posts, Instagram"
     },
     "link": {
-      "type": "instagram",
-      "url": "https://www.instagram.com/wellaprotr/"
+      "type": "behance",
+      "url": ""
     }
   },
   {
@@ -492,8 +492,8 @@ const extra = [
       "en": "Brand work"
     },
     "status": {
-      "tr": "Instagram’da yayınlandı",
-      "en": "Published on Instagram"
+      "tr": "Reels ve post serisi",
+      "en": "Reels and post series"
     },
     "cat": "campaign"
   },
