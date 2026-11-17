@@ -198,6 +198,13 @@ let lang = 'tr', current = 0, lenis, busy = false, returnFocus, drag = null, blo
 let visible = true, paused = false;
 try { const s = localStorage.getItem('portfolio-language'); if (s === 'tr' || s === 'en') lang = s; } catch {}
 
+/* Uppercase text in Turkish pages: English words would get a dotted İ ("DİRECTİON").
+   Wrap known English words and brand names in lang="en" so text-transform uses English rules. */
+const EN_WORD = /^(art|direction|directing|director|motion|ui|ux|ai|designer|identity|kinetic|campaign|production|creative|visual|visuals|fashion|print|social|media|instagram|editorial|illustration|animation|lumio|miu|studio|mobile|ios|liquid|interface|typography|collection|concept|film|digital|minimal|limited|edition|initiated|self|white|light|vision|i|it|is|in|with|this|identity,|direction,|motion,)$/i;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const upHTML = s => String(s).split(/(\s+|[\/,·()]+)/).map(w => EN_WORD.test(w.replace(/[.:;!?’']+$/, '')) ? '<span lang="en">' + esc(w) + '</span>' : esc(w)).join('');
+const setUp = (el, s) => { el.innerHTML = upHTML(s); };
+
 /* ---------- Build discs ---------- */
 const discs = projects.map((p, i) => {
   const b = document.createElement('button');
@@ -207,7 +214,7 @@ const discs = projects.map((p, i) => {
   b.innerHTML =
     '<span class="disc-body">' +
       '<span class="disc-face disc-front"><span class="platter"><img src="' + RECORD + '" alt="" draggable="false">' +
-        '<span class="disc-label"><img src="' + p.image + '" alt="" draggable="false"><b>' + p.title + '</b></span><span class="disc-hole"></span></span></span>' +
+        '<span class="disc-label"><img src="' + p.image + '" alt="" draggable="false"><b>' + upHTML(p.title) + '</b></span><span class="disc-hole"></span></span></span>' +
       '<span class="disc-face disc-back"><img src="' + p.image + '" alt="" draggable="false"><span class="disc-index">BE—' + String(i + 1).padStart(3, '0') + '</span><span class="disc-hole"></span></span>' +
     '</span>';
   stage.append(b);
@@ -354,15 +361,15 @@ function setLink(el, p) {
 }
 function fillArchive(animate) {
   const p = projects[current], d = p[lang], x = extra[current];
-  $('.credits-title').textContent = p.title;
+  setUp($('.credits-title'), p.title);
   $('.c-type').textContent = x.kind[lang];
   setLink($('.c-link'), p);
   syncCats();
-  $('.c-year').textContent = p.year || '2026';
+  $('.c-year').textContent = p.year || '—';
   $('.c-role').textContent = d.role;
   $('.c-focus').textContent = d.focus;
-  $('.n-summary').textContent = d.summary;
-  $('.n-focus').textContent = d.role;
+  setUp($('.n-summary'), d.summary);
+  setUp($('.n-focus'), d.role);
   $('.count-now').textContent = String(current + 1).padStart(2, '0');
   $('.count-all').textContent = String(projects.length).padStart(2, '0');
   const flipped = discs[current].classList.contains('flipped');
@@ -394,18 +401,18 @@ function fillProduction() {
   title.innerHTML = '';
   const words = p.title.split(' ');
   const lines = p.title.length <= 9 || words.length < 2 ? [p.title] : [words.slice(0, -1).join(' '), words.at(-1)];
-  lines.forEach((l, k) => { const o = document.createElement('span'), i = document.createElement('span'); o.className = 'line'; i.textContent = l + (k < lines.length - 1 ? ' ' : ''); o.append(i); title.append(o); });
+  lines.forEach((l, k) => { const o = document.createElement('span'), i = document.createElement('span'); o.className = 'line'; i.innerHTML = upHTML(l + (k < lines.length - 1 ? ' ' : '')); o.append(i); title.append(o); });
   $('.p-role').textContent = d.role;
   $('.p-focus').textContent = d.focus;
   $('.p-type').textContent = x.kind[lang];
-  $('.p-year').textContent = p.year || '2026';
+  $('.p-year').textContent = p.year || '—';
   $('.p-status').textContent = x.status[lang];
   setLink($('.p-cta'), p);
   $('.p-image').src = p.image;
   $('.p-image').alt = p.title + (lang === 'tr' ? ' — plak kapağı' : ' — record cover');
   $('.p-desc').textContent = d.description;
   $$('.p-media').forEach(m => { m.hidden = m.dataset.project !== p.media; if (m.hidden) $$('video', m).forEach(v => v.pause()); });
-  $('.p-next-title').textContent = n.title;
+  setUp($('.p-next-title'), n.title);
   $('.p-next-label-art img').src = n.image;
   $('.p-next').setAttribute('aria-label', (lang === 'tr' ? 'Sıradaki proje: ' : 'Next project: ') + n.title);
 }

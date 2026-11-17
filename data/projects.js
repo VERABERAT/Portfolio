@@ -26,7 +26,7 @@ window.PORTFOLIO = {
     {
       "id": "ds-damat",
       "title": "D’S Damat",
-      "year": "",
+      "year": "2026",
       "image": "assets/vinyl/ds-damat-label.webp",
       "media": "ds-damat",
       "cat": "campaign",
@@ -1031,143 +1031,9 @@ window.PORTFOLIO = {
       ]
     },
     {
-      "id": "aytac",
-      "title": "Aytaç",
-      "year": "2026",
-      "image": "assets/vinyl/aytac-cover.webp",
-      "media": "aytac",
-      "cat": "campaign",
-      "kind": {
-        "tr": "Marka içeriği",
-        "en": "Brand content"
-      },
-      "status": {
-        "tr": "Behance’te yayında",
-        "en": "Published on Behance"
-      },
-      "hidden": false,
-      "spotify": "",
-      "tr": {
-        "type": "Marka içeriği · 2026",
-        "summary": "Aytaç ürünleri için post ve story görselleri.",
-        "description": "Aytaç pizzalık, gurme ve köfte ürünleri için hazırladığım post ve story görselleri: aile mutfakları, piknik masaları ve ürün paketlerini bir araya getiren sahneler.",
-        "role": "Art direction, görsel üretimi",
-        "focus": "Post, story"
-      },
-      "en": {
-        "type": "Brand content · 2026",
-        "summary": "Post and story visuals for Aytaç products.",
-        "description": "Post and story visuals I made for Aytaç pizza, deli and meatball products: scenes that bring family kitchens, picnic tables and product packs together.",
-        "role": "Art direction, image production",
-        "focus": "Posts, stories"
-      },
-      "link": {
-        "type": "behance",
-        "url": "https://www.behance.net/gallery/249085407/Next-Gen-Content-Production"
-      },
-      "account": {
-        "user": "",
-        "avatar": ""
-      },
-      "sections": [
-        {
-          "type": "covers",
-          "label": "Aytaç post görselleri",
-          "items": [
-            {
-              "src": "assets/work/aytac/01.webp",
-              "alt": "Aytaç post görseli",
-              "w": 1080,
-              "h": 1350,
-              "caption": "Post"
-            },
-            {
-              "src": "assets/work/aytac/02.webp",
-              "alt": "Aytaç post görseli",
-              "w": 1080,
-              "h": 1350,
-              "caption": "Post"
-            },
-            {
-              "src": "assets/work/aytac/06.webp",
-              "alt": "Aytaç post görseli",
-              "w": 1080,
-              "h": 1920,
-              "caption": "Post"
-            },
-            {
-              "src": "assets/work/aytac/07.webp",
-              "alt": "Aytaç post görseli",
-              "w": 1080,
-              "h": 1350,
-              "caption": "Post"
-            },
-            {
-              "src": "assets/work/aytac/08.webp",
-              "alt": "Aytaç post görseli",
-              "w": 1080,
-              "h": 1350,
-              "caption": "Post"
-            },
-            {
-              "src": "assets/work/aytac/09.webp",
-              "alt": "Aytaç post görseli",
-              "w": 1080,
-              "h": 1350,
-              "caption": "Post"
-            }
-          ],
-          "title": {
-            "left": "Post",
-            "right": "4:5"
-          }
-        },
-        {
-          "type": "stories",
-          "label": "Aytaç story görselleri",
-          "items": [
-            {
-              "src": "assets/work/aytac/03.webp",
-              "alt": "Aytaç story görseli",
-              "w": 1080,
-              "h": 1350,
-              "caption": "Story"
-            },
-            {
-              "src": "assets/work/aytac/04.webp",
-              "alt": "Aytaç story görseli",
-              "w": 1080,
-              "h": 1920,
-              "caption": "Story"
-            },
-            {
-              "src": "assets/work/aytac/05.webp",
-              "alt": "Aytaç story görseli",
-              "w": 1080,
-              "h": 1920,
-              "caption": "Story"
-            }
-          ],
-          "few": true,
-          "title": {
-            "left": "Story",
-            "right": "9:16"
-          }
-        },
-        {
-          "type": "link",
-          "href": "https://www.behance.net/gallery/249085407/Next-Gen-Content-Production",
-          "text": {
-            "t": "behanceLink",
-            "text": "Behance’te gör"
-          }
-        }
-      ]
-    },
-    {
       "id": "kolpa",
       "title": "Kolpa AI",
-      "year": "",
+      "year": "2026",
       "image": "assets/vinyl/kolpa-label.webp",
       "media": "kolpa",
       "cat": "ux",
@@ -1258,7 +1124,7 @@ window.PORTFOLIO = {
     {
       "id": "lumio",
       "title": "Lumio",
-      "year": "",
+      "year": "2026",
       "image": "assets/vinyl/lumio-label.webp",
       "media": "lumio",
       "cat": "ux",
@@ -1944,7 +1810,7 @@ window.PORTFOLIO = {
     {
       "id": "tus-bodrum",
       "title": "TUS Bodrum",
-      "year": "",
+      "year": "2023",
       "image": "assets/vinyl/tus-bodrum-cover.webp",
       "media": "tus-bodrum",
       "cat": "identity",
@@ -1959,14 +1825,14 @@ window.PORTFOLIO = {
       "hidden": false,
       "spotify": "",
       "tr": {
-        "type": "Marka kimliği",
+        "type": "Marka kimliği · 2023",
         "summary": "Bodrum’da bir beach ve kokteyl bar için kimlik ve menü.",
         "description": "Bodrum Ortakent’teki TUS beach ve kokteyl bar için görsel kimlik ve menü tasarımı. Markanın sahibi ve tasarımcısı olarak elektronik müziğin enerjisiyle Ege kıyısının sakinliğini dengeleyen bir görsel dil kurdum.",
         "role": "Marka sahibi, tasarım",
         "focus": "Kimlik, menü"
       },
       "en": {
-        "type": "Brand identity",
+        "type": "Brand identity · 2023",
         "summary": "Identity and menu for a beach and cocktail bar in Bodrum.",
         "description": "Visual identity and menu design for TUS, a beach and cocktail bar in Ortakent, Bodrum. As the brand owner and designer, I built a visual language that balances the energy of electronic music with the calm of the Aegean coast.",
         "role": "Brand owner, design",
@@ -2117,67 +1983,6 @@ window.PORTFOLIO = {
         {
           "type": "link",
           "href": "https://www.behance.net/gallery/242240151/YAZGIYA-NAT-YAZI-Exhibition-Poster-Identity",
-          "text": {
-            "t": "behanceLink",
-            "text": "Behance’te gör"
-          }
-        }
-      ]
-    },
-    {
-      "id": "nutripaw",
-      "title": "NutriPaw",
-      "year": "",
-      "image": "assets/vinyl/nutripaw-cover.webp",
-      "media": "nutripaw",
-      "cat": "identity",
-      "kind": {
-        "tr": "Bitirme projesi",
-        "en": "Graduation project"
-      },
-      "status": {
-        "tr": "Behance’te yayında",
-        "en": "Published on Behance"
-      },
-      "hidden": false,
-      "spotify": "",
-      "tr": {
-        "type": "Bitirme projesi",
-        "summary": "Organik evcil hayvan maması için kurgusal marka kimliği.",
-        "description": "Bahçeşehir Üniversitesi İletişim ve Tasarım bölümü Bitirme Projesi 2 için tasarladığım kurgusal organik evcil hayvan maması markası. Kimlik, ambalaj ve baskı kampanyası.",
-        "role": "Marka kimliği, ambalaj",
-        "focus": "Logo, ambalaj, baskı kampanyası"
-      },
-      "en": {
-        "type": "Graduation project",
-        "summary": "A fictional organic pet food brand identity.",
-        "description": "A fictional organic pet food brand I designed for Graduation Project 2 at Bahçeşehir University, Communication and Design. Identity, packaging and a print campaign.",
-        "role": "Brand identity, packaging",
-        "focus": "Logo, packaging, print campaign"
-      },
-      "link": {
-        "type": "behance",
-        "url": "https://www.behance.net/gallery/242252719/NutriPaw-Organic-Pet-Food-Brand-Identity"
-      },
-      "account": {
-        "user": "",
-        "avatar": ""
-      },
-      "sections": [
-        {
-          "type": "image",
-          "src": "assets/work/nutripaw/case.webp",
-          "alt": "NutriPaw marka kimliği sunumu",
-          "w": 1600,
-          "h": 8601,
-          "title": {
-            "left": "Behance",
-            "right": "Case study"
-          }
-        },
-        {
-          "type": "link",
-          "href": "https://www.behance.net/gallery/242252719/NutriPaw-Organic-Pet-Food-Brand-Identity",
           "text": {
             "t": "behanceLink",
             "text": "Behance’te gör"
