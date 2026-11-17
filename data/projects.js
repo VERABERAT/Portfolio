@@ -2105,67 +2105,6 @@ window.PORTFOLIO = {
         "user": "",
         "avatar": ""
       }
-    },
-    {
-      "id": "intro-film",
-      "title": "Tools Change. Taste Doesn’t.",
-      "year": "2026",
-      "image": "assets/vinyl/intro-film-cover.webp",
-      "media": "intro-film",
-      "cat": "video",
-      "kind": {
-        "tr": "Kişisel tanıtım filmi",
-        "en": "Personal intro film"
-      },
-      "status": {
-        "tr": "Behance’te yayında",
-        "en": "Published on Behance"
-      },
-      "hidden": false,
-      "spotify": "",
-      "tr": {
-        "type": "Film · 2026",
-        "summary": "Kendimi anlattığım kısa kinetik tipografi filmi.",
-        "description": "Araçların değiştiği ama zevkin değişmediği fikri üzerine kurduğum kişisel tanıtım filmi. Filmin tamamı Behance’te.",
-        "role": "Konsept, motion, tasarım",
-        "focus": "Kinetik tipografi, motion"
-      },
-      "en": {
-        "type": "Film · 2026",
-        "summary": "A short kinetic type film about who I am.",
-        "description": "A personal intro film built on one idea: tools change, taste doesn’t. The full film is on Behance.",
-        "role": "Concept, motion, design",
-        "focus": "Kinetic type, motion"
-      },
-      "link": {
-        "type": "behance",
-        "url": "https://www.behance.net/gallery/257893379/Tools-Change-Taste-Doesnt-Personal-Intro-Film"
-      },
-      "account": {
-        "user": "",
-        "avatar": ""
-      },
-      "sections": [
-        {
-          "type": "image",
-          "src": "assets/work/intro-film/cover.webp",
-          "alt": "Tools Change. Taste Doesn’t. — film kapağı",
-          "w": 1616,
-          "h": 1264,
-          "title": {
-            "left": "Behance",
-            "right": "Film"
-          }
-        },
-        {
-          "type": "link",
-          "href": "https://www.behance.net/gallery/257893379/Tools-Change-Taste-Doesnt-Personal-Intro-Film",
-          "text": {
-            "t": "behanceLink",
-            "text": "Behance’te gör"
-          }
-        }
-      ]
     }
   ]
 };
