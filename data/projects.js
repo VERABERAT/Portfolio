@@ -27,7 +27,7 @@ window.PORTFOLIO = {
       "id": "ds-damat",
       "title": "D’S Damat",
       "year": "",
-      "image": "assets/vinyl/ds-damat-cover.png",
+      "image": "assets/vinyl/ds-damat-label.webp",
       "media": "ds-damat",
       "cat": "campaign",
       "kind": {
@@ -229,7 +229,7 @@ window.PORTFOLIO = {
       "id": "yatsan",
       "title": "Yatsan",
       "year": "2026",
-      "image": "assets/vinyl/yatsan-cover.png",
+      "image": "assets/vinyl/yatsan-label.webp",
       "media": "yatsan",
       "cat": "campaign",
       "kind": {
@@ -429,7 +429,7 @@ window.PORTFOLIO = {
       "id": "koton",
       "title": "Koton",
       "year": "2026",
-      "image": "assets/vinyl/koton-cover.png",
+      "image": "assets/vinyl/koton-label.webp",
       "media": "koton",
       "cat": "campaign",
       "kind": {
@@ -569,7 +569,7 @@ window.PORTFOLIO = {
       "id": "wella",
       "title": "Wella",
       "year": "2026",
-      "image": "assets/vinyl/wella-cover.png",
+      "image": "assets/vinyl/wella-label.webp",
       "media": "wella",
       "cat": "campaign",
       "kind": {
@@ -765,7 +765,7 @@ window.PORTFOLIO = {
       "id": "tetra-pak",
       "title": "Tetra Pak",
       "year": "2026",
-      "image": "assets/vinyl/tetra-pak-cover.png",
+      "image": "assets/vinyl/tetra-pak-label.webp",
       "media": "tetra-pak",
       "cat": "campaign",
       "kind": {
@@ -838,10 +838,337 @@ window.PORTFOLIO = {
       ]
     },
     {
+      "id": "reality",
+      "title": "REALITY.exe",
+      "year": "2026",
+      "image": "assets/vinyl/reality-cover.webp",
+      "media": "reality",
+      "cat": "campaign",
+      "kind": {
+        "tr": "Kişisel kampanya",
+        "en": "Self-initiated campaign"
+      },
+      "status": {
+        "tr": "Behance’te yayında",
+        "en": "Published on Behance"
+      },
+      "hidden": false,
+      "spotify": "",
+      "tr": {
+        "type": "Kampanya konsepti · 2026",
+        "summary": "Kıyafeti açılan bir sistem gibi ele alan moda kampanyası konsepti.",
+        "description": "“Wear your own reality.” Kendi başlattığım bir moda kampanyası. Uzun siyah bir palto, sinyal sarısı bir etiket ve alçak güneş altında kum rengi beton bir dünya.",
+        "role": "Konsept, art direction",
+        "focus": "Kampanya görselleri"
+      },
+      "en": {
+        "type": "Campaign concept · 2026",
+        "summary": "A fashion campaign concept about clothing as a system you boot.",
+        "description": "“Wear your own reality.” A self-initiated fashion campaign. One long black coat, one signal-yellow tag, one sand-concrete world under a low sun.",
+        "role": "Concept, art direction",
+        "focus": "Campaign visuals"
+      },
+      "link": {
+        "type": "behance",
+        "url": "https://www.behance.net/gallery/257371711/REALITYexe-Wear-Your-Own-Reality"
+      },
+      "account": {
+        "user": "",
+        "avatar": ""
+      },
+      "sections": [
+        {
+          "type": "covers",
+          "label": "REALITY.exe kampanya görselleri",
+          "items": [
+            {
+              "src": "assets/work/reality/01.webp",
+              "alt": "REALITY.exe görseli 01",
+              "w": 1400,
+              "h": 788,
+              "caption": "01"
+            },
+            {
+              "src": "assets/work/reality/02.webp",
+              "alt": "REALITY.exe görseli 02",
+              "w": 1400,
+              "h": 788,
+              "caption": "02"
+            },
+            {
+              "src": "assets/work/reality/03.webp",
+              "alt": "REALITY.exe görseli 03",
+              "w": 1400,
+              "h": 788,
+              "caption": "03"
+            },
+            {
+              "src": "assets/work/reality/04.webp",
+              "alt": "REALITY.exe görseli 04",
+              "w": 1400,
+              "h": 788,
+              "caption": "04"
+            },
+            {
+              "src": "assets/work/reality/05.webp",
+              "alt": "REALITY.exe görseli 05",
+              "w": 1400,
+              "h": 788,
+              "caption": "05"
+            },
+            {
+              "src": "assets/work/reality/06.webp",
+              "alt": "REALITY.exe görseli 06",
+              "w": 1400,
+              "h": 788,
+              "caption": "06"
+            },
+            {
+              "src": "assets/work/reality/07.webp",
+              "alt": "REALITY.exe görseli 07",
+              "w": 1400,
+              "h": 788,
+              "caption": "07"
+            },
+            {
+              "src": "assets/work/reality/08.webp",
+              "alt": "REALITY.exe görseli 08",
+              "w": 1400,
+              "h": 788,
+              "caption": "08"
+            },
+            {
+              "src": "assets/work/reality/09.webp",
+              "alt": "REALITY.exe görseli 09",
+              "w": 1400,
+              "h": 788,
+              "caption": "09"
+            },
+            {
+              "src": "assets/work/reality/10.webp",
+              "alt": "REALITY.exe görseli 10",
+              "w": 1400,
+              "h": 788,
+              "caption": "10"
+            },
+            {
+              "src": "assets/work/reality/11.webp",
+              "alt": "REALITY.exe görseli 11",
+              "w": 1400,
+              "h": 788,
+              "caption": "11"
+            },
+            {
+              "src": "assets/work/reality/12.webp",
+              "alt": "REALITY.exe görseli 12",
+              "w": 1400,
+              "h": 788,
+              "caption": "12"
+            },
+            {
+              "src": "assets/work/reality/13.webp",
+              "alt": "REALITY.exe görseli 13",
+              "w": 1400,
+              "h": 1181,
+              "caption": "13"
+            },
+            {
+              "src": "assets/work/reality/14.webp",
+              "alt": "REALITY.exe görseli 14",
+              "w": 1400,
+              "h": 788,
+              "caption": "14"
+            },
+            {
+              "src": "assets/work/reality/15.webp",
+              "alt": "REALITY.exe görseli 15",
+              "w": 1400,
+              "h": 788,
+              "caption": "15"
+            },
+            {
+              "src": "assets/work/reality/16.webp",
+              "alt": "REALITY.exe görseli 16",
+              "w": 1400,
+              "h": 788,
+              "caption": "16"
+            },
+            {
+              "src": "assets/work/reality/17.webp",
+              "alt": "REALITY.exe görseli 17",
+              "w": 1400,
+              "h": 788,
+              "caption": "17"
+            },
+            {
+              "src": "assets/work/reality/18.webp",
+              "alt": "REALITY.exe görseli 18",
+              "w": 1400,
+              "h": 788,
+              "caption": "18"
+            },
+            {
+              "src": "assets/work/reality/19.webp",
+              "alt": "REALITY.exe görseli 19",
+              "w": 1400,
+              "h": 788,
+              "caption": "19"
+            }
+          ],
+          "title": {
+            "left": "Behance",
+            "right": "19 görsel"
+          }
+        },
+        {
+          "type": "link",
+          "href": "https://www.behance.net/gallery/257371711/REALITYexe-Wear-Your-Own-Reality",
+          "text": {
+            "t": "behanceLink",
+            "text": "Behance’te gör"
+          }
+        }
+      ]
+    },
+    {
+      "id": "aytac",
+      "title": "Aytaç",
+      "year": "2026",
+      "image": "assets/vinyl/aytac-cover.webp",
+      "media": "aytac",
+      "cat": "campaign",
+      "kind": {
+        "tr": "Marka içeriği",
+        "en": "Brand content"
+      },
+      "status": {
+        "tr": "Behance’te yayında",
+        "en": "Published on Behance"
+      },
+      "hidden": false,
+      "spotify": "",
+      "tr": {
+        "type": "Marka içeriği · 2026",
+        "summary": "Aytaç ürünleri için post ve story görselleri.",
+        "description": "Aytaç pizzalık, gurme ve köfte ürünleri için hazırladığım post ve story görselleri: aile mutfakları, piknik masaları ve ürün paketlerini bir araya getiren sahneler.",
+        "role": "Art direction, görsel üretimi",
+        "focus": "Post, story"
+      },
+      "en": {
+        "type": "Brand content · 2026",
+        "summary": "Post and story visuals for Aytaç products.",
+        "description": "Post and story visuals I made for Aytaç pizza, deli and meatball products: scenes that bring family kitchens, picnic tables and product packs together.",
+        "role": "Art direction, image production",
+        "focus": "Posts, stories"
+      },
+      "link": {
+        "type": "behance",
+        "url": "https://www.behance.net/gallery/249085407/Next-Gen-Content-Production"
+      },
+      "account": {
+        "user": "",
+        "avatar": ""
+      },
+      "sections": [
+        {
+          "type": "covers",
+          "label": "Aytaç post görselleri",
+          "items": [
+            {
+              "src": "assets/work/aytac/01.webp",
+              "alt": "Aytaç post görseli",
+              "w": 1080,
+              "h": 1350,
+              "caption": "Post"
+            },
+            {
+              "src": "assets/work/aytac/02.webp",
+              "alt": "Aytaç post görseli",
+              "w": 1080,
+              "h": 1350,
+              "caption": "Post"
+            },
+            {
+              "src": "assets/work/aytac/06.webp",
+              "alt": "Aytaç post görseli",
+              "w": 1080,
+              "h": 1920,
+              "caption": "Post"
+            },
+            {
+              "src": "assets/work/aytac/07.webp",
+              "alt": "Aytaç post görseli",
+              "w": 1080,
+              "h": 1350,
+              "caption": "Post"
+            },
+            {
+              "src": "assets/work/aytac/08.webp",
+              "alt": "Aytaç post görseli",
+              "w": 1080,
+              "h": 1350,
+              "caption": "Post"
+            },
+            {
+              "src": "assets/work/aytac/09.webp",
+              "alt": "Aytaç post görseli",
+              "w": 1080,
+              "h": 1350,
+              "caption": "Post"
+            }
+          ],
+          "title": {
+            "left": "Post",
+            "right": "4:5"
+          }
+        },
+        {
+          "type": "stories",
+          "label": "Aytaç story görselleri",
+          "items": [
+            {
+              "src": "assets/work/aytac/03.webp",
+              "alt": "Aytaç story görseli",
+              "w": 1080,
+              "h": 1350,
+              "caption": "Story"
+            },
+            {
+              "src": "assets/work/aytac/04.webp",
+              "alt": "Aytaç story görseli",
+              "w": 1080,
+              "h": 1920,
+              "caption": "Story"
+            },
+            {
+              "src": "assets/work/aytac/05.webp",
+              "alt": "Aytaç story görseli",
+              "w": 1080,
+              "h": 1920,
+              "caption": "Story"
+            }
+          ],
+          "few": true,
+          "title": {
+            "left": "Story",
+            "right": "9:16"
+          }
+        },
+        {
+          "type": "link",
+          "href": "https://www.behance.net/gallery/249085407/Next-Gen-Content-Production",
+          "text": {
+            "t": "behanceLink",
+            "text": "Behance’te gör"
+          }
+        }
+      ]
+    },
+    {
       "id": "kolpa",
       "title": "Kolpa AI",
       "year": "",
-      "image": "assets/vinyl/kolpa-cover.png",
+      "image": "assets/vinyl/kolpa-label.webp",
       "media": "kolpa",
       "cat": "ux",
       "kind": {
@@ -932,7 +1259,7 @@ window.PORTFOLIO = {
       "id": "lumio",
       "title": "Lumio",
       "year": "",
-      "image": "assets/vinyl/lumio-cover.png",
+      "image": "assets/vinyl/lumio-label.webp",
       "media": "lumio",
       "cat": "ux",
       "kind": {
@@ -1034,10 +1361,128 @@ window.PORTFOLIO = {
       ]
     },
     {
+      "id": "dreamroll",
+      "title": "Dreamroll",
+      "year": "2026",
+      "image": "assets/vinyl/dreamroll-cover.webp",
+      "media": "dreamroll",
+      "cat": "ux",
+      "kind": {
+        "tr": "Konsept uygulama",
+        "en": "Concept app"
+      },
+      "status": {
+        "tr": "Behance’te yayında",
+        "en": "Published on Behance"
+      },
+      "hidden": false,
+      "spotify": "",
+      "tr": {
+        "type": "Konsept uygulama · 2026",
+        "summary": "Sabah anlatılan rüyayı 6 saniyelik bir filme çeviren uygulama konsepti.",
+        "description": "Uyanınca sesli anlatılan rüyayı 6 saniyelik gerçeküstü bir filme çeviren kurgusal bir uygulama. Siyah-beyaz, tek pembe vurgulu marka kimliği, Apple Liquid Glass tarzında arayüz, App Store görselleri ve lansman videoları. Konsept proje; yayınlanmış bir uygulama değil.",
+        "role": "Marka kimliği, UX/UI, motion",
+        "focus": "Logo, uygulama ekranları, store görselleri, video"
+      },
+      "en": {
+        "type": "Concept app · 2026",
+        "summary": "An app concept that turns a dream told in the morning into a 6-second film.",
+        "description": "A fictional app that turns the dream you say out loud when you wake up into a 6-second surreal film. A black-and-white identity with a single pink accent, an interface in Apple’s Liquid Glass style, App Store visuals and launch videos. Concept project, not a released app.",
+        "role": "Brand identity, UX/UI, motion",
+        "focus": "Logo, app screens, store visuals, video"
+      },
+      "link": {
+        "type": "behance",
+        "url": "https://www.behance.net/gallery/258620695/Dreamroll-Dream-to-Film-App-UXUI-Branding"
+      },
+      "account": {
+        "user": "",
+        "avatar": ""
+      },
+      "sections": [
+        {
+          "type": "film",
+          "src": "assets/work/dreamroll/film.mp4",
+          "poster": "assets/work/dreamroll/film-poster.webp",
+          "w": 1280,
+          "h": 720,
+          "label": "Dreamroll uygulama içi tanıtım videosu",
+          "title": {
+            "left": {
+              "t": "film",
+              "text": "Film"
+            },
+            "right": "0:21"
+          }
+        },
+        {
+          "type": "image",
+          "src": "assets/work/dreamroll/hero.webp",
+          "alt": "Dreamroll — Dreams, developed.",
+          "w": 1600,
+          "h": 1029,
+          "title": {
+            "left": "Behance",
+            "right": "Dreamroll"
+          }
+        },
+        {
+          "type": "image",
+          "src": "assets/work/dreamroll/phone.webp",
+          "alt": "Dreamroll ana ekranı iPhone üzerinde",
+          "w": 1600,
+          "h": 1143
+        },
+        {
+          "type": "image",
+          "src": "assets/work/dreamroll/tellmodule.webp",
+          "alt": "Dreamroll Tell ekranı: rüyayı sesli anlatma",
+          "w": 1600,
+          "h": 1257
+        },
+        {
+          "type": "image",
+          "src": "assets/work/dreamroll/developplay.webp",
+          "alt": "Dreamroll Develop ve Play ekranları",
+          "w": 1600,
+          "h": 1120
+        },
+        {
+          "type": "image",
+          "src": "assets/work/dreamroll/roll.webp",
+          "alt": "Dreamroll Roll ekranı: geçmiş rüyalar",
+          "w": 1600,
+          "h": 1143
+        },
+        {
+          "type": "image",
+          "src": "assets/work/dreamroll/icon.webp",
+          "alt": "Dreamroll uygulama ikonu",
+          "w": 1600,
+          "h": 1143
+        },
+        {
+          "type": "image",
+          "src": "assets/work/dreamroll/store.webp",
+          "alt": "Dreamroll App Store görselleri",
+          "w": 1600,
+          "h": 983
+        },
+        {
+          "type": "link",
+          "href": "https://www.behance.net/gallery/258620695/Dreamroll-Dream-to-Film-App-UXUI-Branding",
+          "text": {
+            "t": "behanceLink",
+            "text": "Behance’te gör"
+          }
+        }
+      ]
+    },
+    {
       "id": "smart-locker",
       "title": "Smart Locker",
       "year": "2024",
-      "image": "assets/vinyl/smart-locker-cover.png",
+      "image": "assets/vinyl/smart-locker-label.webp",
       "media": "smart-locker",
       "cat": "ux",
       "kind": {
@@ -1098,7 +1543,7 @@ window.PORTFOLIO = {
       "id": "ferm",
       "title": "FERM",
       "year": "2025",
-      "image": "assets/vinyl/ferm-cover.png",
+      "image": "assets/vinyl/ferm-label.webp",
       "media": "ferm",
       "cat": "identity",
       "kind": {
@@ -1178,7 +1623,7 @@ window.PORTFOLIO = {
       "id": "imece",
       "title": "İmece Market",
       "year": "2025",
-      "image": "assets/vinyl/imece-cover.png",
+      "image": "assets/vinyl/imece-label.webp",
       "media": "imece",
       "cat": "identity",
       "kind": {
@@ -1239,7 +1684,7 @@ window.PORTFOLIO = {
       "id": "vera",
       "title": "VERA",
       "year": "2025",
-      "image": "assets/vinyl/vera-cover.png",
+      "image": "assets/vinyl/vera-label.webp",
       "media": "vera",
       "cat": "identity",
       "kind": {
@@ -1297,10 +1742,454 @@ window.PORTFOLIO = {
       }
     },
     {
+      "id": "kakule",
+      "title": "KAKULE",
+      "year": "2026",
+      "image": "assets/vinyl/kakule-cover.webp",
+      "media": "kakule",
+      "cat": "identity",
+      "kind": {
+        "tr": "Kişisel marka projesi",
+        "en": "Self-initiated brand project"
+      },
+      "status": {
+        "tr": "Behance’te yayında",
+        "en": "Published on Behance"
+      },
+      "hidden": false,
+      "spotify": "",
+      "tr": {
+        "type": "Marka projesi · 2026",
+        "summary": "Ankara’da geçen bir kahve markası kimliği ve kampanya konsepti.",
+        "description": "“Şehre ara ver.” Kendi başlattığım bir kahve markası kimliği ve kampanya konsepti. Kobalt mavisi ve tereyağı sarısıyla ambalajı, mekânı, sokak uygulamalarını, dijital arayüzleri ve hareketli görselleri tek bir dilde topladım.",
+        "role": "Art direction, marka kimliği",
+        "focus": "Ambalaj, mekân, sokak, dijital, motion"
+      },
+      "en": {
+        "type": "Brand project · 2026",
+        "summary": "A coffee brand identity and campaign concept set in Ankara.",
+        "description": "“Take a break from the city.” A self-initiated coffee brand identity and campaign concept. Cobalt blue and butter yellow tie together packaging, spaces, street applications, digital interfaces and motion.",
+        "role": "Art direction, brand identity",
+        "focus": "Packaging, space, street, digital, motion"
+      },
+      "link": {
+        "type": "behance",
+        "url": "https://www.behance.net/gallery/257371769/KAKULE-Coffee-Brand-Identity-Motion"
+      },
+      "account": {
+        "user": "",
+        "avatar": ""
+      },
+      "sections": [
+        {
+          "type": "covers",
+          "label": "KAKULE marka kimliği",
+          "items": [
+            {
+              "src": "assets/work/kakule/01.webp",
+              "alt": "KAKULE görseli 01",
+              "w": 1400,
+              "h": 788,
+              "caption": "01"
+            },
+            {
+              "src": "assets/work/kakule/02.webp",
+              "alt": "KAKULE görseli 02",
+              "w": 1400,
+              "h": 788,
+              "caption": "02"
+            },
+            {
+              "src": "assets/work/kakule/03.webp",
+              "alt": "KAKULE görseli 03",
+              "w": 1400,
+              "h": 788,
+              "caption": "03"
+            },
+            {
+              "src": "assets/work/kakule/04.webp",
+              "alt": "KAKULE görseli 04",
+              "w": 1400,
+              "h": 788,
+              "caption": "04"
+            },
+            {
+              "src": "assets/work/kakule/05.webp",
+              "alt": "KAKULE görseli 05",
+              "w": 1400,
+              "h": 788,
+              "caption": "05"
+            },
+            {
+              "src": "assets/work/kakule/06.webp",
+              "alt": "KAKULE görseli 06",
+              "w": 1400,
+              "h": 788,
+              "caption": "06"
+            },
+            {
+              "src": "assets/work/kakule/07.webp",
+              "alt": "KAKULE görseli 07",
+              "w": 1400,
+              "h": 788,
+              "caption": "07"
+            },
+            {
+              "src": "assets/work/kakule/08.webp",
+              "alt": "KAKULE görseli 08",
+              "w": 1400,
+              "h": 788,
+              "caption": "08"
+            },
+            {
+              "src": "assets/work/kakule/09.webp",
+              "alt": "KAKULE görseli 09",
+              "w": 1400,
+              "h": 788,
+              "caption": "09"
+            },
+            {
+              "src": "assets/work/kakule/10.webp",
+              "alt": "KAKULE görseli 10",
+              "w": 1400,
+              "h": 788,
+              "caption": "10"
+            },
+            {
+              "src": "assets/work/kakule/11.webp",
+              "alt": "KAKULE görseli 11",
+              "w": 1400,
+              "h": 788,
+              "caption": "11"
+            },
+            {
+              "src": "assets/work/kakule/12.webp",
+              "alt": "KAKULE görseli 12",
+              "w": 1400,
+              "h": 788,
+              "caption": "12"
+            },
+            {
+              "src": "assets/work/kakule/13.webp",
+              "alt": "KAKULE görseli 13",
+              "w": 1400,
+              "h": 788,
+              "caption": "13"
+            },
+            {
+              "src": "assets/work/kakule/14.webp",
+              "alt": "KAKULE görseli 14",
+              "w": 1400,
+              "h": 788,
+              "caption": "14"
+            },
+            {
+              "src": "assets/work/kakule/15.webp",
+              "alt": "KAKULE görseli 15",
+              "w": 1400,
+              "h": 788,
+              "caption": "15"
+            },
+            {
+              "src": "assets/work/kakule/16.webp",
+              "alt": "KAKULE görseli 16",
+              "w": 1400,
+              "h": 962,
+              "caption": "16"
+            },
+            {
+              "src": "assets/work/kakule/17.webp",
+              "alt": "KAKULE görseli 17",
+              "w": 1400,
+              "h": 962,
+              "caption": "17"
+            },
+            {
+              "src": "assets/work/kakule/18.webp",
+              "alt": "KAKULE görseli 18",
+              "w": 1400,
+              "h": 962,
+              "caption": "18"
+            },
+            {
+              "src": "assets/work/kakule/19.webp",
+              "alt": "KAKULE görseli 19",
+              "w": 1400,
+              "h": 788,
+              "caption": "19"
+            },
+            {
+              "src": "assets/work/kakule/20.webp",
+              "alt": "KAKULE görseli 20",
+              "w": 1400,
+              "h": 788,
+              "caption": "20"
+            }
+          ],
+          "title": {
+            "left": "Behance",
+            "right": "20 görsel"
+          }
+        },
+        {
+          "type": "link",
+          "href": "https://www.behance.net/gallery/257371769/KAKULE-Coffee-Brand-Identity-Motion",
+          "text": {
+            "t": "behanceLink",
+            "text": "Behance’te gör"
+          }
+        }
+      ]
+    },
+    {
+      "id": "tus-bodrum",
+      "title": "TUS Bodrum",
+      "year": "",
+      "image": "assets/vinyl/tus-bodrum-cover.webp",
+      "media": "tus-bodrum",
+      "cat": "identity",
+      "kind": {
+        "tr": "Marka kimliği",
+        "en": "Brand identity"
+      },
+      "status": {
+        "tr": "Behance’te yayında",
+        "en": "Published on Behance"
+      },
+      "hidden": false,
+      "spotify": "",
+      "tr": {
+        "type": "Marka kimliği",
+        "summary": "Bodrum’da bir beach ve kokteyl bar için kimlik ve menü.",
+        "description": "Bodrum Ortakent’teki TUS beach ve kokteyl bar için görsel kimlik ve menü tasarımı. Markanın sahibi ve tasarımcısı olarak elektronik müziğin enerjisiyle Ege kıyısının sakinliğini dengeleyen bir görsel dil kurdum.",
+        "role": "Marka sahibi, tasarım",
+        "focus": "Kimlik, menü"
+      },
+      "en": {
+        "type": "Brand identity",
+        "summary": "Identity and menu for a beach and cocktail bar in Bodrum.",
+        "description": "Visual identity and menu design for TUS, a beach and cocktail bar in Ortakent, Bodrum. As the brand owner and designer, I built a visual language that balances the energy of electronic music with the calm of the Aegean coast.",
+        "role": "Brand owner, design",
+        "focus": "Identity, menu"
+      },
+      "link": {
+        "type": "behance",
+        "url": "https://www.behance.net/gallery/242243045/TUS-BODRUM-Brand-Identity-Menu-Design"
+      },
+      "account": {
+        "user": "",
+        "avatar": ""
+      },
+      "sections": [
+        {
+          "type": "image",
+          "src": "assets/work/tus-bodrum/case.webp",
+          "alt": "TUS Bodrum kimlik ve menü sunumu",
+          "w": 1600,
+          "h": 4343,
+          "title": {
+            "left": "Behance",
+            "right": "Case study"
+          }
+        },
+        {
+          "type": "link",
+          "href": "https://www.behance.net/gallery/242243045/TUS-BODRUM-Brand-Identity-Menu-Design",
+          "text": {
+            "t": "behanceLink",
+            "text": "Behance’te gör"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kasten",
+      "title": "Kasten Meets Ankara",
+      "year": "",
+      "image": "assets/vinyl/kasten-cover.webp",
+      "media": "kasten",
+      "cat": "identity",
+      "kind": {
+        "tr": "Etkinlik kimliği",
+        "en": "Event identity"
+      },
+      "status": {
+        "tr": "Behance’te yayında",
+        "en": "Published on Behance"
+      },
+      "hidden": false,
+      "spotify": "",
+      "tr": {
+        "type": "Etkinlik kimliği",
+        "summary": "Bir buluşma için kimlik ve basılı materyaller.",
+        "description": "“Kasten Meets Ankara” buluşması için görsel kimlik ve basılı materyaller. Kolektifin cesur, ham enerjisini kırmızı biberle simgeleyen tipografik afişler ve uygulamalar.",
+        "role": "Görsel kimlik",
+        "focus": "Afiş, basılı materyal"
+      },
+      "en": {
+        "type": "Event identity",
+        "summary": "Identity and printed matter for a gathering.",
+        "description": "Visual identity and printed collateral for the “Kasten Meets Ankara” gathering. Typographic posters and applications that symbolise the collective’s bold, raw energy with a red pepper.",
+        "role": "Visual identity",
+        "focus": "Posters, print"
+      },
+      "link": {
+        "type": "behance",
+        "url": "https://www.behance.net/gallery/242239553/KASTEN-MEETS-ANKARA-Event-Identity-Branding"
+      },
+      "account": {
+        "user": "",
+        "avatar": ""
+      },
+      "sections": [
+        {
+          "type": "image",
+          "src": "assets/work/kasten/case.webp",
+          "alt": "Kasten Meets Ankara kimlik sunumu",
+          "w": 1600,
+          "h": 4901,
+          "title": {
+            "left": "Behance",
+            "right": "Case study"
+          }
+        },
+        {
+          "type": "link",
+          "href": "https://www.behance.net/gallery/242239553/KASTEN-MEETS-ANKARA-Event-Identity-Branding",
+          "text": {
+            "t": "behanceLink",
+            "text": "Behance’te gör"
+          }
+        }
+      ]
+    },
+    {
+      "id": "yazgiya",
+      "title": "Yazgıya İnat Yazı",
+      "year": "2025",
+      "image": "assets/vinyl/yazgiya-cover.webp",
+      "media": "yazgiya",
+      "cat": "identity",
+      "kind": {
+        "tr": "Afiş önerisi",
+        "en": "Poster proposal"
+      },
+      "status": {
+        "tr": "Behance’te yayında",
+        "en": "Published on Behance"
+      },
+      "hidden": false,
+      "spotify": "",
+      "tr": {
+        "type": "Afiş ve kimlik · 2025",
+        "summary": "Bir sergi için afiş ve kimlik önerisi.",
+        "description": "Kült Kavaklıdere x Kasten Kolektif’in “Yazgıya İnat Yazı: Serpme Seçki” sergisi için afiş önerisi. Güçlü tipografi ve soyut formlarla sanatçı seçkisinin çağdaş yapısını yansıtan minimal bir yaklaşım.",
+        "role": "Afiş tasarımı",
+        "focus": "Afiş, tipografi"
+      },
+      "en": {
+        "type": "Poster & identity · 2025",
+        "summary": "A poster and identity proposal for an exhibition.",
+        "description": "A poster proposal for the “Yazgıya İnat Yazı: Serpme Seçki” exhibition by Kült Kavaklıdere x Kasten Kolektif. A minimal approach with bold typography and abstract forms that reflects the contemporary artist selection.",
+        "role": "Poster design",
+        "focus": "Poster, typography"
+      },
+      "link": {
+        "type": "behance",
+        "url": "https://www.behance.net/gallery/242240151/YAZGIYA-NAT-YAZI-Exhibition-Poster-Identity"
+      },
+      "account": {
+        "user": "",
+        "avatar": ""
+      },
+      "sections": [
+        {
+          "type": "image",
+          "src": "assets/work/yazgiya/case.webp",
+          "alt": "Yazgıya İnat Yazı afiş sunumu",
+          "w": 1600,
+          "h": 4725,
+          "title": {
+            "left": "Behance",
+            "right": "Case study"
+          }
+        },
+        {
+          "type": "link",
+          "href": "https://www.behance.net/gallery/242240151/YAZGIYA-NAT-YAZI-Exhibition-Poster-Identity",
+          "text": {
+            "t": "behanceLink",
+            "text": "Behance’te gör"
+          }
+        }
+      ]
+    },
+    {
+      "id": "nutripaw",
+      "title": "NutriPaw",
+      "year": "",
+      "image": "assets/vinyl/nutripaw-cover.webp",
+      "media": "nutripaw",
+      "cat": "identity",
+      "kind": {
+        "tr": "Bitirme projesi",
+        "en": "Graduation project"
+      },
+      "status": {
+        "tr": "Behance’te yayında",
+        "en": "Published on Behance"
+      },
+      "hidden": false,
+      "spotify": "",
+      "tr": {
+        "type": "Bitirme projesi",
+        "summary": "Organik evcil hayvan maması için kurgusal marka kimliği.",
+        "description": "Bahçeşehir Üniversitesi İletişim ve Tasarım bölümü Bitirme Projesi 2 için tasarladığım kurgusal organik evcil hayvan maması markası. Kimlik, ambalaj ve baskı kampanyası.",
+        "role": "Marka kimliği, ambalaj",
+        "focus": "Logo, ambalaj, baskı kampanyası"
+      },
+      "en": {
+        "type": "Graduation project",
+        "summary": "A fictional organic pet food brand identity.",
+        "description": "A fictional organic pet food brand I designed for Graduation Project 2 at Bahçeşehir University, Communication and Design. Identity, packaging and a print campaign.",
+        "role": "Brand identity, packaging",
+        "focus": "Logo, packaging, print campaign"
+      },
+      "link": {
+        "type": "behance",
+        "url": "https://www.behance.net/gallery/242252719/NutriPaw-Organic-Pet-Food-Brand-Identity"
+      },
+      "account": {
+        "user": "",
+        "avatar": ""
+      },
+      "sections": [
+        {
+          "type": "image",
+          "src": "assets/work/nutripaw/case.webp",
+          "alt": "NutriPaw marka kimliği sunumu",
+          "w": 1600,
+          "h": 8601,
+          "title": {
+            "left": "Behance",
+            "right": "Case study"
+          }
+        },
+        {
+          "type": "link",
+          "href": "https://www.behance.net/gallery/242252719/NutriPaw-Organic-Pet-Food-Brand-Identity",
+          "text": {
+            "t": "behanceLink",
+            "text": "Behance’te gör"
+          }
+        }
+      ]
+    },
+    {
       "id": "miu-miu",
       "title": "Miu Miu",
       "year": "2024",
-      "image": "assets/vinyl/miu-miu-cover.png",
+      "image": "assets/vinyl/miu-miu-label.webp",
       "media": "miu-miu",
       "cat": "video",
       "kind": {
@@ -1411,6 +2300,67 @@ window.PORTFOLIO = {
         "user": "",
         "avatar": ""
       }
+    },
+    {
+      "id": "intro-film",
+      "title": "Tools Change. Taste Doesn’t.",
+      "year": "2026",
+      "image": "assets/vinyl/intro-film-cover.webp",
+      "media": "intro-film",
+      "cat": "video",
+      "kind": {
+        "tr": "Kişisel tanıtım filmi",
+        "en": "Personal intro film"
+      },
+      "status": {
+        "tr": "Behance’te yayında",
+        "en": "Published on Behance"
+      },
+      "hidden": false,
+      "spotify": "",
+      "tr": {
+        "type": "Film · 2026",
+        "summary": "Kendimi anlattığım kısa kinetik tipografi filmi.",
+        "description": "Araçların değiştiği ama zevkin değişmediği fikri üzerine kurduğum kişisel tanıtım filmi. Filmin tamamı Behance’te.",
+        "role": "Konsept, motion, tasarım",
+        "focus": "Kinetik tipografi, motion"
+      },
+      "en": {
+        "type": "Film · 2026",
+        "summary": "A short kinetic type film about who I am.",
+        "description": "A personal intro film built on one idea: tools change, taste doesn’t. The full film is on Behance.",
+        "role": "Concept, motion, design",
+        "focus": "Kinetic type, motion"
+      },
+      "link": {
+        "type": "behance",
+        "url": "https://www.behance.net/gallery/257893379/Tools-Change-Taste-Doesnt-Personal-Intro-Film"
+      },
+      "account": {
+        "user": "",
+        "avatar": ""
+      },
+      "sections": [
+        {
+          "type": "image",
+          "src": "assets/work/intro-film/cover.webp",
+          "alt": "Tools Change. Taste Doesn’t. — film kapağı",
+          "w": 1616,
+          "h": 1264,
+          "title": {
+            "left": "Behance",
+            "right": "Film"
+          }
+        },
+        {
+          "type": "link",
+          "href": "https://www.behance.net/gallery/257893379/Tools-Change-Taste-Doesnt-Personal-Intro-Film",
+          "text": {
+            "t": "behanceLink",
+            "text": "Behance’te gör"
+          }
+        }
+      ]
     }
   ]
 };
